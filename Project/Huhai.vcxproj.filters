@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene">
+      <UniqueIdentifier>{a499e429-908e-4e3b-bb24-1a6829c105d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Base">
+      <UniqueIdentifier>{ef4f965f-8d90-401c-95ca-d924ec4698e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Manager">
+      <UniqueIdentifier>{0ef868ba-6ead-4d40-9049-f2441f35f973}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Timer">
+      <UniqueIdentifier>{8630de40-2f52-4e6c-9bf9-ffb62baee57e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Title">
+      <UniqueIdentifier>{7b3ce8ee-ea24-4f5c-b74d-d5e8f2816147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Play">
+      <UniqueIdentifier>{207d36cc-2547-4382-ac9e-4034c623eb41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Result">
+      <UniqueIdentifier>{d494d462-4d17-4384-8234-150bc706e628}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object">
+      <UniqueIdentifier>{90793a43-8fd9-4799-bbf6-20256fc217b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Math">
+      <UniqueIdentifier>{d5e2b02d-38f5-4dbb-8cb9-00e027dd323c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\Manager">
+      <UniqueIdentifier>{59c76929-8f26-40b7-94e0-bbb53f39b34d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\Base">
+      <UniqueIdentifier>{e89d980d-3056-4a8d-80c0-071c3213abad}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\SourceCode\Main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\SceneBase\SceneBase.cpp">
+      <Filter>ソース ファイル\Scene\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Time\TimeManager.cpp">
+      <Filter>ソース ファイル\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\SceneManager.cpp">
+      <Filter>ソース ファイル\Scene\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Title.cpp">
+      <Filter>ソース ファイル\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Play.cpp">
+      <Filter>ソース ファイル\Scene\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Result.cpp">
+      <Filter>ソース ファイル\Scene\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Math\Math.cpp">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\ObjManager.cpp">
+      <Filter>ソース ファイル\Object\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\ObjectBase\ObjectBase.cpp">
+      <Filter>ソース ファイル\Object\Base</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\SourceCode\SceneBase\SceneBase.h">
+      <Filter>ソース ファイル\Scene\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Time\TimeManager.h">
+      <Filter>ソース ファイル\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\SceneManager.h">
+      <Filter>ソース ファイル\Scene\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Title.h">
+      <Filter>ソース ファイル\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Play.h">
+      <Filter>ソース ファイル\Scene\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Result.h">
+      <Filter>ソース ファイル\Scene\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Math\Math.h">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\ObjManager.h">
+      <Filter>ソース ファイル\Object\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectBase.h">
+      <Filter>ソース ファイル\Object\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectTag.h">
+      <Filter>ソース ファイル\Object\Base</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
