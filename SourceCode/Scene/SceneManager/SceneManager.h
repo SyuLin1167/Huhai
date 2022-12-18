@@ -1,7 +1,7 @@
 #pragma once
 #include<DxLib.h>
-#include"SceneBase/SceneBase.h"
-#include"Time/TimeManager.h"
+#include"../SceneBase/SceneBase.h"
+#include"../../Time/TimeManager.h"
 
 
 /*シーンマネージャーのクラス*/

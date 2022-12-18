@@ -1,6 +1,6 @@
 #include "SceneManager.h"
-#include "Title.h"
-#include "Play.h"
+#include "../TitleScene/Title.h"
+#include "../PlayScene/Play.h"
 
 // @brief SceneManagerコンストラクター //
 

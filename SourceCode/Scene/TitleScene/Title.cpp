@@ -1,12 +1,12 @@
 #include "Title.h"
-#include "Play.h"
+#include "../PlayScene/Play.h"
 
 // @brief TitleSceneコンストラクター //
 
 Title::Title()
     :SceneBase()
 {
-    BgHandle = LoadGraph("SourceCode/Assets/BackGround/Title.png");
+    BgHandle = LoadGraph("../SourceCode/Assets/BackGround/Title.png");
 }
 
 // @brief TitleSceneデストラクター //

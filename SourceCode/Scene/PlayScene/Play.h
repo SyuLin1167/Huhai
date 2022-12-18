@@ -1,6 +1,6 @@
 #pragma once
 #include <DxLib.h>
-#include"SceneBase/SceneBase.h"
+#include"../SceneBase/SceneBase.h"
 
 const float CameraNear = 1.0f;       //ƒJƒƒ‰‚Ì•`‰æ”ÍˆÍ(‹ß)
 const float CameraFar = 2000.0f;     //ƒJƒƒ‰‚Ì•`‰æ”ÍˆÍ(‰“)

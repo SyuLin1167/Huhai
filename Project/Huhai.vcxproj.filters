@@ -46,69 +46,117 @@
     <Filter Include="ソース ファイル\Object\Base">
       <UniqueIdentifier>{e89d980d-3056-4a8d-80c0-071c3213abad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Collision">
+      <UniqueIdentifier>{4e17633e-357f-45d5-8901-9dfdb6742eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Asset">
+      <UniqueIdentifier>{678ad8b0-a4cb-47ec-a2ed-f43f5fdcd560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Asset\Manager">
+      <UniqueIdentifier>{77006290-f1a0-4da0-911d-1ae8fdb8bc38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Asset\Animation">
+      <UniqueIdentifier>{37e8efb2-1ef2-494f-ab24-fd904da31a91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\Player">
+      <UniqueIdentifier>{e98576d1-6521-411a-9d59-5e615fdcc343}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\Enemy">
+      <UniqueIdentifier>{f917cab7-6243-490e-9275-c8b63a4ab27b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SourceCode\Main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\SceneBase\SceneBase.cpp">
-      <Filter>ソース ファイル\Scene\Base</Filter>
-    </ClCompile>
     <ClCompile Include="..\SourceCode\Time\TimeManager.cpp">
       <Filter>ソース ファイル\Timer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\SceneManager.cpp">
-      <Filter>ソース ファイル\Scene\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\Title.cpp">
-      <Filter>ソース ファイル\Scene\Title</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\Play.cpp">
-      <Filter>ソース ファイル\Scene\Play</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\Result.cpp">
-      <Filter>ソース ファイル\Scene\Result</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\Math\Math.cpp">
-      <Filter>ソース ファイル\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\Object\ObjManager.cpp">
-      <Filter>ソース ファイル\Object\Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Object\ObjectBase\ObjectBase.cpp">
       <Filter>ソース ファイル\Object\Base</Filter>
     </ClCompile>
+    <ClCompile Include="..\SourceCode\Math\Math.cpp">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Collision\Collision.cpp">
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\ObjectManager\ObjManager.cpp">
+      <Filter>ソース ファイル\Object\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Scene\ResultScene\Result.cpp">
+      <Filter>ソース ファイル\Scene\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Scene\PlayScene\Play.cpp">
+      <Filter>ソース ファイル\Scene\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Scene\TitleScene\Title.cpp">
+      <Filter>ソース ファイル\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Scene\SceneManager\SceneManager.cpp">
+      <Filter>ソース ファイル\Scene\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Scene\SceneBase\SceneBase.cpp">
+      <Filter>ソース ファイル\Scene\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Asset\Animation\Animation.cpp">
+      <Filter>ソース ファイル\Asset\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\Player\Player.cpp">
+      <Filter>ソース ファイル\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\Enemy\Enemy.cpp">
+      <Filter>ソース ファイル\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Asset\AssetManager\AssetManager.cpp">
+      <Filter>ソース ファイル\Asset\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\SourceCode\SceneBase\SceneBase.h">
-      <Filter>ソース ファイル\Scene\Base</Filter>
-    </ClInclude>
     <ClInclude Include="..\SourceCode\Time\TimeManager.h">
       <Filter>ソース ファイル\Timer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\SceneManager.h">
-      <Filter>ソース ファイル\Scene\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\Title.h">
-      <Filter>ソース ファイル\Scene\Title</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\Play.h">
-      <Filter>ソース ファイル\Scene\Play</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\Result.h">
-      <Filter>ソース ファイル\Scene\Result</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\Math\Math.h">
-      <Filter>ソース ファイル\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\Object\ObjManager.h">
-      <Filter>ソース ファイル\Object\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectBase.h">
       <Filter>ソース ファイル\Object\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectTag.h">
       <Filter>ソース ファイル\Object\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Math\Math.h">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Collision\Collision.h">
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\ObjectManager\ObjManager.h">
+      <Filter>ソース ファイル\Object\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\ResultScene\Result.h">
+      <Filter>ソース ファイル\Scene\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\PlayScene\Play.h">
+      <Filter>ソース ファイル\Scene\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\TitleScene\Title.h">
+      <Filter>ソース ファイル\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\SceneManager\SceneManager.h">
+      <Filter>ソース ファイル\Scene\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\SceneBase\SceneBase.h">
+      <Filter>ソース ファイル\Scene\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Asset\Animation\Animation.h">
+      <Filter>ソース ファイル\Asset\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\Player\Player.h">
+      <Filter>ソース ファイル\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\Enemy\Enemy.h">
+      <Filter>ソース ファイル\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Asset\AssetManager\AssetManager.h">
+      <Filter>ソース ファイル\Asset\Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

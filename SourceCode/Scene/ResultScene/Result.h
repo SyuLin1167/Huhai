@@ -1,6 +1,6 @@
 #pragma once
 #include<DxLib.h>
-#include"SceneBase/SceneBase.h"
+#include"../SceneBase/SceneBase.h"
 
 /*リザルトシーンのクラス*/
 class Result :public SceneBase

@@ -1,12 +1,12 @@
 #include "Result.h"
-#include "Title.h"
+#include "../TitleScene/Title.h"
 
 // @brief ResultSceneコンストラクター //
 
 Result::Result()
     :SceneBase()
 {
-    BgHandle = LoadGraph("SourceCode/Assets/BackGround/Result.png");
+    BgHandle = LoadGraph("../SourceCode/Assets/BackGround/Result.png");
 }
 
 // @brief ResultSceneデストラクター //

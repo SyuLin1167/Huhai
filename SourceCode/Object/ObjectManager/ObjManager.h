@@ -3,8 +3,8 @@
 #include<map>
 #include<DxLib.h>
 
-#include"ObjectBase.h"
-#include"ObjectTag.h"
+#include"../ObjectBase/ObjectBase.h"
+#include"../ObjectBase/ObjectTag.h"
 
 using namespace std;
 

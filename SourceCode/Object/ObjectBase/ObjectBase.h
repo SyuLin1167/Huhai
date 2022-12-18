@@ -1,6 +1,6 @@
 #pragma once
 #include<DxLib.h>
-#include"Math/Math.h"
+#include"../../Math/Math.h"
 #include"ObjectTag.h"
 
 /*eƒNƒ‰ƒX*/

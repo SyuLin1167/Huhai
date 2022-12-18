@@ -1,8 +1,8 @@
 #include "Play.h"
-#include"ObjManager.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "Result.h"
+#include"../../Object/ObjectManager/ObjManager.h"
+#include "../../Object/Player/Player.h"
+#include "../../Object/Enemy/Enemy.h"
+#include "../ResultScene/Result.h"
 
 // @brief PlaySceneコンストラクター //
 
@@ -11,7 +11,7 @@ Play::Play()
     , cPos(VGet(0.0f, 40.0f, -70.0f))
     , cTarget(VGet(0.0f, 0.0f, 0.0f))
 {
-    BgHandle = LoadGraph("SourceCode/Assets/BackGround/Play.png");
+    BgHandle = LoadGraph("../SourceCode/Assets/BackGround/Play.png");
 
     SetCameraNearFar(CameraNear, CameraFar);                      //カメラの描画範囲設定
     SetCameraPositionAndTarget_UpVecY(cPos, cTarget);   //視点からターゲットを見る角度にカメラ設置
@@ -41,6 +41,20 @@ SceneBase* Play::Update(float deltaTime)
 {
 
     ObjManager::Update(deltaTime);
+
+
+    if (enemy != nullptr)                                              //インスタンスの中身が空でなければ
+    {
+        //---当たり判定球取得---//
+        Sphere sEmy, sPly;
+        sEmy = enemy->GetColSphere();                                  //アーチャーの当たり判定球取得
+        sPly = player->GetColSphere();                                    //プレイヤーの当たり判定球取得
+
+        if (CollisionPair(sEmy, sPly))                      //球体同士の当たり判定
+        {
+            enemy->SetAlive(false);                                //当たっていたら死亡
+        }
+    }
 
     if (CheckHitKey(KEY_INPUT_R))
     {

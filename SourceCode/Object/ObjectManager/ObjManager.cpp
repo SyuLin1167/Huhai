@@ -1,5 +1,4 @@
 #include "ObjManager.h"
-#include"ObjectBase.h"
 
 ObjManager* ObjManager::objInstance = nullptr;				//ObjManager実体へのポインタ定義
 

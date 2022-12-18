@@ -151,28 +151,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\SourceCode\Asset\Animation\Animation.cpp" />
+    <ClCompile Include="..\SourceCode\Asset\AssetManager\AssetManager.cpp" />
+    <ClCompile Include="..\SourceCode\Collision\Collision.cpp" />
     <ClCompile Include="..\SourceCode\Main.cpp" />
     <ClCompile Include="..\SourceCode\Math\Math.cpp" />
+    <ClCompile Include="..\SourceCode\Object\Enemy\Enemy.cpp" />
     <ClCompile Include="..\SourceCode\Object\ObjectBase\ObjectBase.cpp" />
-    <ClCompile Include="..\SourceCode\Object\ObjManager.cpp" />
-    <ClCompile Include="..\SourceCode\Play.cpp" />
-    <ClCompile Include="..\SourceCode\Result.cpp" />
-    <ClCompile Include="..\SourceCode\SceneBase\SceneBase.cpp" />
-    <ClCompile Include="..\SourceCode\SceneManager.cpp" />
+    <ClCompile Include="..\SourceCode\Object\ObjectManager\ObjManager.cpp" />
+    <ClCompile Include="..\SourceCode\Object\Player\Player.cpp" />
+    <ClCompile Include="..\SourceCode\Scene\PlayScene\Play.cpp" />
+    <ClCompile Include="..\SourceCode\Scene\ResultScene\Result.cpp" />
+    <ClCompile Include="..\SourceCode\Scene\SceneBase\SceneBase.cpp" />
+    <ClCompile Include="..\SourceCode\Scene\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="..\SourceCode\Scene\TitleScene\Title.cpp" />
     <ClCompile Include="..\SourceCode\Time\TimeManager.cpp" />
-    <ClCompile Include="..\SourceCode\Title.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\SourceCode\Asset\Animation\Animation.h" />
+    <ClInclude Include="..\SourceCode\Asset\AssetManager\AssetManager.h" />
+    <ClInclude Include="..\SourceCode\Collision\Collision.h" />
     <ClInclude Include="..\SourceCode\Math\Math.h" />
+    <ClInclude Include="..\SourceCode\Object\Enemy\Enemy.h" />
     <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectBase.h" />
     <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectTag.h" />
-    <ClInclude Include="..\SourceCode\Object\ObjManager.h" />
-    <ClInclude Include="..\SourceCode\Play.h" />
-    <ClInclude Include="..\SourceCode\Result.h" />
-    <ClInclude Include="..\SourceCode\SceneBase\SceneBase.h" />
-    <ClInclude Include="..\SourceCode\SceneManager.h" />
+    <ClInclude Include="..\SourceCode\Object\ObjectManager\ObjManager.h" />
+    <ClInclude Include="..\SourceCode\Object\Player\Player.h" />
+    <ClInclude Include="..\SourceCode\Scene\PlayScene\Play.h" />
+    <ClInclude Include="..\SourceCode\Scene\ResultScene\Result.h" />
+    <ClInclude Include="..\SourceCode\Scene\SceneBase\SceneBase.h" />
+    <ClInclude Include="..\SourceCode\Scene\SceneManager\SceneManager.h" />
+    <ClInclude Include="..\SourceCode\Scene\TitleScene\Title.h" />
     <ClInclude Include="..\SourceCode\Time\TimeManager.h" />
-    <ClInclude Include="..\SourceCode\Title.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
