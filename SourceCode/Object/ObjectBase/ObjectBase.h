@@ -66,13 +66,14 @@ public:
     virtual void Draw();
 
 protected:
-    ObjectTag objTag;       //オブジェクトの種類
-    int objHandle;        //モデルハンドル
-    VECTOR objPos;          //ワールド座標
-    VECTOR objDir;             //ワールド方向
+    ObjectTag objTag;           //オブジェクトの種類
+    int objHandle;              //モデルハンドル
+    VECTOR objPos;              //ワールド座標
+    VECTOR objDir;              //ワールド方向
+    VECTOR objScale;            //オブジェクトの大きさ
 
-    float objSpeed;
+    float objSpeed;             //オブジェクトの速度
 
-    bool isAlive;           //生死状態
+    bool isAlive;               //生死状態
 };
 

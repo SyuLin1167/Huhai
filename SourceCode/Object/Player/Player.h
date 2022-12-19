@@ -12,7 +12,6 @@ class Animation;
 /* Playerのクラス */
 class Player :public ObjectBase
 {
-	Animation* plyAnim = nullptr;				//アニメーション
 
 public:
 	/// <summary>
@@ -43,26 +42,40 @@ public:
 	Sphere GetColSphere() { return colSphere; }
 
 	/// <summary>
+	/// Camera更新処理
+	/// </summary>
+	/// <param name="deltaTime">:フレームレート</param>
+	void CameraUpdate(float deltTime);
+
+	/// <summary>
 	/// アニメーションステータス
 	/// </summary>
 	typedef enum Anim
 	{
-		IDLE = 0,						//待機
-		RUN,							//走り
-		ATACK							//攻撃
+		IDLE = 0,							//待機
+		RUN,								//走り
+		ATACK								//攻撃
 	};
 
 private:
-	VECTOR UP = { 0, 0, 0.9f };			//前方向
-	VECTOR DOWN = { 0, 0, -0.9f };		//後方向
-	VECTOR RIGHT = { 0.9f, 0, 0 };		//右方向
-	VECTOR LEFT = { -0.9f, 0, 0 };		//左方向
+	VECTOR UP;								//前方向
+	VECTOR DOWN;							//後方向
+	VECTOR RIGHT;							//右方向
+	VECTOR LEFT;							//左方向
 
-	VECTOR InputVec;					//合成ベクトル
-	bool KeyInput;						//キー入力判定
+	VECTOR InputVec;						//合成ベクトル
+	bool KeyInput;							//キー入力判定
 
-	Sphere colSphere;					//当たり判定球
+	Sphere colSphere;						//当たり判定球
 
-	Anim animType;						//アニメーション状態
+	//---アニメーション関連---//
+	Animation* plyAnim;						//アニメーション
+	Anim animType;							//アニメーション状態
+
+	//---カメラ関連---//
+	VECTOR cameraPos;						//カメラ位置
+	VECTOR cameraFront;						//カメラ正面方向
+	const float cameraRotSpeed;				//カメラ回転速度
+	const float cameraRad;					//カメラ回転半径
+	float cameraYaw;						//水平方向回転角
 };
-

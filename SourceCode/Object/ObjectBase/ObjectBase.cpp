@@ -5,8 +5,9 @@
 ObjectBase::ObjectBase(ObjectTag tag)
     :objTag(tag)
     , objHandle(-1)
-    , objPos(VGet(0.0f, 0.0f, 0.0f))
-    , objDir(VGet(0.0f, 0.0f, 0.0f))
+    , objPos{0,0,0}
+    , objDir{0,0,0}
+    ,objScale{0.1f,0.1f,0.1f}
     , objSpeed(0.0f)
     , isAlive(true)
 {
