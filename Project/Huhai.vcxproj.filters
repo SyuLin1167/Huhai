@@ -64,9 +64,6 @@
     <Filter Include="ソース ファイル\Object\Enemy">
       <UniqueIdentifier>{f917cab7-6243-490e-9275-c8b63a4ab27b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Object\Camera">
-      <UniqueIdentifier>{d81a0575-3a8d-46ad-b54a-7dedd606514f}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SourceCode\Main.cpp">

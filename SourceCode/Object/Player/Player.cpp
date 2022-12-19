@@ -56,6 +56,7 @@ void Player::Update(float deltaTime)
     plyAnim->AddAnimTime(deltaTime);                //現在のアニメーション再生を進める
 
     cameraFront = objPos - cameraPos;               //カメラの正面方向の位置ベクトルを計算
+    cameraFront.y = 0;
     cameraFront = VNorm(cameraFront);               //ベクトルを正規化
 
     UP = cameraFront;
@@ -146,5 +147,5 @@ void Player::CameraUpdate(float deltaTime)
     cameraPos.z = cameraRad * sinf(cameraYaw);                      //カメラのZ軸座標
 
     SetCameraPositionAndTarget_UpVecY(objPos + cameraPos,
-        objPos + VGet(0, 8, 0));                                   //(0,8,0)の視点からプレイヤーを見る角度にカメラ設置
+        objPos + VGet(0, 10, 0));                                   //(0,8,0)の視点からプレイヤーを見る角度にカメラ設置
 }

@@ -13,6 +13,7 @@ class Play :public SceneBase
 {
     Player* player = nullptr;                     //プレイヤー
     Enemy* enemy = nullptr;                       //エネミー
+
 public:
     /// <summary>
     /// コンストラクター
@@ -37,9 +38,6 @@ public:
     void Draw()override;
 
 private:
-    VECTOR cPos;            //カメラの視点位置
-    VECTOR cTarget;         //カメラの注視点位置
-
     //---地面グリッド描画関連---//(のちにゲームオブジェクトに移行)
     VECTOR p1;
     VECTOR p2;
