@@ -2,17 +2,18 @@
 #include <DxLib.h>
 #include"../SceneBase/SceneBase.h"
 
-const float CameraNear = 1.0f;       //カメラの描画範囲(近)
-const float CameraFar = 2000.0f;     //カメラの描画範囲(遠)
-
+class CameraFps;
 class Player;
 class Enemy;
+class Grid;
 
 /* プレイシーンのクラス */
 class Play :public SceneBase
 {
+    CameraFps* camFps = nullptr;
     Player* player = nullptr;                     //プレイヤー
     Enemy* enemy = nullptr;                       //エネミー
+    Grid* grid=nullptr;
 
 public:
     /// <summary>
@@ -37,11 +38,4 @@ public:
     /// </summary>
     void Draw()override;
 
-private:
-    //---地面グリッド描画関連---//(のちにゲームオブジェクトに移行)
-    VECTOR p1;
-    VECTOR p2;
-    const float GridAllSize = 100.0f;
-    const int DivideNum = 10;
-    const float GridSpace = GridAllSize / DivideNum;
 };

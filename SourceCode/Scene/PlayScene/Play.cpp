@@ -1,8 +1,10 @@
 #include "Play.h"
 #include"../../Object/ObjectManager/ObjManager.h"
+#include"../../Object/Camera/CameraFps.h"
 #include "../../Object/Player/Player.h"
 #include "../../Object/Enemy/Enemy.h"
 #include "../ResultScene/Result.h"
+#include"../../Grid/Grid.h"
 
 // @brief PlaySceneコンストラクター //
 
@@ -11,15 +13,18 @@ Play::Play()
 {
     BgHandle = LoadGraph("../SourceCode/Assets/BackGround/Play.png");
 
-    SetCameraNearFar(CameraNear, CameraFar);                      //カメラの描画範囲設定
-
     ObjManager::Init();
+
+    camFps = new CameraFps();
+    ObjManager::Entry(camFps);
 
     player = new Player();
     ObjManager::Entry(player);
 
     enemy = new Enemy();
     ObjManager::Entry(enemy);
+
+    grid = new Grid;
 }
 
 // @brief PlaySceneデストラクター //
@@ -55,7 +60,10 @@ SceneBase* Play::Update(float deltaTime)
 
     if (CheckHitKey(KEY_INPUT_R))
     {
+        ObjManager::ReleaceAllObj();
+        AssetManager::ReleaseAllAsset();
         return new Result();
+
     }
     return this;
 }
@@ -64,24 +72,10 @@ SceneBase* Play::Update(float deltaTime)
 
 void Play::Draw()
 {
-    //---地面グリッドを描画---//(のちにゲームオブジェクトに移行)
-    for (int ix = 0; ix < DivideNum + 1; ix++)
-    {
-        p1 = VGet(ix * GridSpace - GridAllSize * 0.5f, 0.0f, -GridAllSize * 0.5f);
-        p2 = VGet(ix * GridSpace - GridAllSize * 0.5f, 0.0f, GridAllSize * 0.5f);
-
-        DrawLine3D(p1, p2, GetColor(0, 255, 0));
-    }
-    for (int iy = 0; iy < DivideNum + 1; iy++)
-    {
-        p1 = VGet(-GridAllSize * 0.5f, 0.0f, iy * GridSpace - GridAllSize * 0.5f);
-        p2 = VGet(GridAllSize * 0.5f, 0.0f, iy * GridSpace - GridAllSize * 0.5f);
-
-        DrawLine3D(p1, p2, GetColor(0, 255, 0));
-    }//描画終わり
 
 
     ObjManager::Draw();
 
+    grid->DrawGrid(300, 30);
     DrawFormatString(0, 0, GetColor(255, 255, 255), "Play画面:RでResultシーンへ移行");
 }

@@ -9,6 +9,7 @@ ObjectBase::ObjectBase(ObjectTag tag)
     , objDir{0,0,0}
     ,objScale{0.1f,0.1f,0.1f}
     , objSpeed(0.0f)
+    ,isVisible(true)
     , isAlive(true)
 {
 }

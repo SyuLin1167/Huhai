@@ -6,7 +6,7 @@
 using namespace std;
 
 /* アセット管理クラス */
-class AssetManager
+class AssetManager final
 {
 public:
     /// <summary>

@@ -98,7 +98,16 @@ bool Animation::IsPlaying()
     return true;                                                                            //基本は再生中のtrueを返す
 }
 
+// @brief AnimDataコンストラクタ― //
 
+Animation::AnimData::AnimData()
+    :animHandle(-1)
+    , animIndex(-1)
+    , totalTime(-1.0f)
+    , animFps(0.0f)
+    , isLoop(false)
+{
+}
 
 
 

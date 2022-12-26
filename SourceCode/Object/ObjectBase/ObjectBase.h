@@ -22,13 +22,13 @@ public:
     /// 座標取得
     /// </summary>
     /// <returns>セットされた座標</returns>
-    const VECTOR& GetPosition()const { return objPos; }
+    const VECTOR& GetPos()const { return objPos; }
 
     /// <summary>
     /// 座標設定
     /// </summary>
     /// <param name="setPos">:座標にセットする値</param>
-    void SetPosition(const VECTOR setPos) { objPos = setPos; }
+    void SetPos(const VECTOR setPos) { objPos = setPos; }
 
     /// <summary>
     /// 方向取得
@@ -41,6 +41,18 @@ public:
     /// </summary>
     /// <param name="dir">:向きにセットする値</param>
     void SetDir(const VECTOR dir) { objDir = dir; }
+
+    /// <summary>
+    /// 可視化判定
+    /// </summary>
+    /// <returns>可視化状態</returns>
+    bool IsVisible() { return isVisible; }
+
+    /// <summary>
+    /// 可視化設定
+    /// </summary>
+    /// <param name="visible">見えるかどうか</param>
+    void SetVisible(bool visible) { isVisible = visible; }
 
     /// <summary>
     /// 生死判定
@@ -65,6 +77,12 @@ public:
     /// </summary>
     virtual void Draw();
 
+    /// <summary>
+    /// オブジェクトのタグ取得
+    /// </summary>
+    /// <returns>タグ種類</returns>
+    ObjectTag GetTag()const { return objTag; }
+
 protected:
     ObjectTag objTag;           //オブジェクトの種類
     int objHandle;              //モデルハンドル
@@ -74,6 +92,7 @@ protected:
 
     float objSpeed;             //オブジェクトの速度
 
+    bool isVisible;             //可視化状態
     bool isAlive;               //生死状態
 };
 

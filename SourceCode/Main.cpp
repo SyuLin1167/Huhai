@@ -33,6 +33,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		ScreenFlip();					//裏画面の内容を表描画に反映
 	}
 	ObjManager::Finalize();
+
 	AssetManager::Finalize();
 
 	DxLib_End();						//Dxライブラリの後処理

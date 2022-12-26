@@ -154,8 +154,10 @@
     <ClCompile Include="..\SourceCode\Asset\Animation\Animation.cpp" />
     <ClCompile Include="..\SourceCode\Asset\AssetManager\AssetManager.cpp" />
     <ClCompile Include="..\SourceCode\Collision\Collision.cpp" />
+    <ClCompile Include="..\SourceCode\Grid\Grid.cpp" />
     <ClCompile Include="..\SourceCode\Main.cpp" />
     <ClCompile Include="..\SourceCode\Math\Math.cpp" />
+    <ClCompile Include="..\SourceCode\Object\Camera\CameraFps.cpp" />
     <ClCompile Include="..\SourceCode\Object\Enemy\Enemy.cpp" />
     <ClCompile Include="..\SourceCode\Object\ObjectBase\ObjectBase.cpp" />
     <ClCompile Include="..\SourceCode\Object\ObjectManager\ObjManager.cpp" />
@@ -171,7 +173,9 @@
     <ClInclude Include="..\SourceCode\Asset\Animation\Animation.h" />
     <ClInclude Include="..\SourceCode\Asset\AssetManager\AssetManager.h" />
     <ClInclude Include="..\SourceCode\Collision\Collision.h" />
+    <ClInclude Include="..\SourceCode\Grid\Grid.h" />
     <ClInclude Include="..\SourceCode\Math\Math.h" />
+    <ClInclude Include="..\SourceCode\Object\Camera\CameraFps.h" />
     <ClInclude Include="..\SourceCode\Object\Enemy\Enemy.h" />
     <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectBase.h" />
     <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectTag.h" />

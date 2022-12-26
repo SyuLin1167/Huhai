@@ -64,6 +64,12 @@
     <Filter Include="ソース ファイル\Object\Enemy">
       <UniqueIdentifier>{f917cab7-6243-490e-9275-c8b63a4ab27b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Object\Camera">
+      <UniqueIdentifier>{80d483bb-6973-4737-85de-b4075b275aff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Grid">
+      <UniqueIdentifier>{f9bbd91f-5c1d-47fa-a217-85efabd3518e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SourceCode\Main.cpp">
@@ -111,6 +117,12 @@
     <ClCompile Include="..\SourceCode\Asset\AssetManager\AssetManager.cpp">
       <Filter>ソース ファイル\Asset\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\Camera\CameraFps.cpp">
+      <Filter>ソース ファイル\Object\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Grid\Grid.cpp">
+      <Filter>ソース ファイル\Grid</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SourceCode\Time\TimeManager.h">
@@ -157,6 +169,12 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\Asset\AssetManager\AssetManager.h">
       <Filter>ソース ファイル\Asset\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\Camera\CameraFps.h">
+      <Filter>ソース ファイル\Object\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Grid\Grid.h">
+      <Filter>ソース ファイル\Grid</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

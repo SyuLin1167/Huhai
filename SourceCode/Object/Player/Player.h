@@ -12,7 +12,6 @@ class Animation;
 /* Playerのクラス */
 class Player :public ObjectBase
 {
-
 public:
 	/// <summary>
 	/// Playerコンストラクター
@@ -36,16 +35,16 @@ public:
 	void Draw() override;
 
 	/// <summary>
+	/// 対象との当たり判定
+	/// </summary>
+	/// <param name="target"></param>
+	//void OnCollisionEnter(const ObjectBase* target)override;
+
+	/// <summary>
 	/// 当たり判定球取得
 	/// </summary>
 	/// <returns>当たり判定球</returns>
 	Sphere GetColSphere() { return colSphere; }
-
-	/// <summary>
-	/// Camera更新処理
-	/// </summary>
-	/// <param name="deltaTime">:フレームレート</param>
-	void CameraUpdate(float deltTime);
 
 	/// <summary>
 	/// アニメーションステータス
@@ -58,24 +57,34 @@ public:
 	};
 
 private:
+	/// <summary>
+	/// Player移動処理
+	/// </summary>
+	/// <param name="deltaTime">:フレームレート</param>
+	void Move(float deltaTime);
+
+	/// <summary>
+	/// Player回転処理
+	/// </summary>
+	void Rotate();
+
+	//---アニメーション関連---//
+	Animation* plyAnim;						//アニメーション
+	int animType;							//アニメーション状態
+
 	VECTOR UP;								//前方向
 	VECTOR DOWN;							//後方向
 	VECTOR RIGHT;							//右方向
 	VECTOR LEFT;							//左方向
 
-	VECTOR InputVec;						//合成ベクトル
-	bool KeyInput;							//キー入力判定
+	VECTOR inputVec;						//合成ベクトル
+	VECTOR inputVel;						//速度ベクトル
+	VECTOR aimDir;							//目標方向
+	bool inputKey;							//キー入力判定
+	bool nowRoted;							//現在回転中かどうか
 
 	Sphere colSphere;						//当たり判定球
 
-	//---アニメーション関連---//
-	Animation* plyAnim;						//アニメーション
-	Anim animType;							//アニメーション状態
-
 	//---カメラ関連---//
-	VECTOR cameraPos;						//カメラ位置
-	VECTOR cameraFront;						//カメラ正面方向
-	const float cameraRotSpeed;				//カメラ回転速度
-	const float cameraRad;					//カメラ回転半径
-	float cameraYaw;						//水平方向回転角
+	VECTOR camFront;
 };

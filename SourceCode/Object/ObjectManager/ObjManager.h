@@ -1,6 +1,6 @@
 #pragma once
 #include<vector>
-#include<map>
+#include<unordered_map>
 #include<DxLib.h>
 
 #include"../ObjectBase/ObjectBase.h"
@@ -51,6 +51,18 @@ public:
     static void Draw();
 
     /// <summary>
+    /// 当たり判定処理
+    /// </summary>
+    static void Collision();
+
+    /// <summary>
+    /// タグ種の最初のオブジェクト取得
+    /// </summary>
+    /// <param name="tag">:タグ</param>
+    /// <returns>タグ種の最初のオブジェクト</returns>
+    static ObjectBase* GetFirstObj(ObjectTag tag);
+
+    /// <summary>
     /// ObjManagerの解放
     /// </summary>
     static void Finalize();
@@ -68,6 +80,6 @@ private:
 
     static ObjManager* objInstance;     //ObjManagerの実態
     vector<ObjectBase*>holdObj;         //一時待機オブジェクト
-    vector<ObjectBase*>Object;          //Object[タグ種類][オブジェクト個数]
+    unordered_map<ObjectTag, vector<ObjectBase*>>Object;          //Object[タグ種類][オブジェクト個数]
 };
 

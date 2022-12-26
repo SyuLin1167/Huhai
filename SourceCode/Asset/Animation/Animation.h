@@ -55,6 +55,11 @@ public:
 	/* アニメーション１個分のデータ構造体 */
 	struct AnimData
 	{
+	public:
+		/// <summary>
+		/// AnimDataコンストラクタ―
+		/// </summary>
+		AnimData();
 		int animHandle;			//アニメーションハンドル
 		int animIndex;			//アタッチするアニメーション番号
 		float totalTime;		//総再生時間

@@ -4,18 +4,18 @@
 
 Player::Player()
     :ObjectBase(ObjectTag::Player)
-    ,UP{0,0,0}
-    ,DOWN{0,0,0}
-    ,RIGHT{0,0,0}
-    ,LEFT{0,0,0}
-    , InputVec{0,0,0}
-    , KeyInput(false)
-    ,plyAnim(nullptr)
+    , plyAnim(nullptr)
     , animType(IDLE)
-    ,cameraPos{0,58,0}
-    ,cameraFront{0,0,0}
-    ,cameraRotSpeed(0.5f)
-    ,cameraRad(-40.0f)
+    , UP{ 0,0,0 }
+    , DOWN{ 0,0,0 }
+    , RIGHT{ 0,0,0 }
+    , LEFT{ 0,0,0 }
+    , inputVec{ 0,0,0 }
+    , inputVel{ 0,0,0 }
+    , aimDir{ 0,0,0 }
+    , inputKey(false)
+    , nowRoted(false)
+    , camFront{ 0,0,0 }
 {
     //---モデル読み込み---//
     objHandle = AssetManager::GetMesh("../SourceCode/Assets/Player/PlayerModel.mv1");       //モデル読み込み
@@ -29,21 +29,22 @@ Player::Player()
     plyAnim->AddAnimation("../SourceCode/Assets/Player/PlayerModel_Atack.mv1", false);      //攻撃:2
 
     //---アニメーション状態セット---//
-    animType = IDLE;                                //アニメーションは待機モーション
-    plyAnim->StartAnim(IDLE);                       //待機モーションでアニメーション開始
-    objDir = VGet(0.0f, 0.0f, 1.0f);                //初期方向
-    objSpeed = 5.0f;                                //初期速度
+    plyAnim->StartAnim(animType);                       //待機モーションでアニメーション開始
+    objDir = VGet(0, 0, 1);                //初期方向
 
     //---当たり判定球設定---//
     colSphere.localCenter = VGet(0, 10, 0);			//ローカル座標
     colSphere.Radius = 5.0f;						//球半径
     colSphere.worldCenter = objPos;					//ワールド座標
+
+    objSpeed = 20.0f;                                //初期速度
 }
 
 // @brief Playerデストラクター //
 
 Player::~Player()
 {
+    
     delete plyAnim;                                 //アニメーション解放
 }
 
@@ -51,65 +52,21 @@ Player::~Player()
 
 void Player::Update(float deltaTime)
 {
-    CameraUpdate(deltaTime);                        //カメラ更新
+    ObjectBase* camFps = ObjManager::GetFirstObj(ObjectTag::Camera);
 
     plyAnim->AddAnimTime(deltaTime);                //現在のアニメーション再生を進める
 
-    cameraFront = objPos - cameraPos;               //カメラの正面方向の位置ベクトルを計算
-    cameraFront.y = 0;
-    cameraFront = VNorm(cameraFront);               //ベクトルを正規化
+    camFront = objPos - camFps->GetPos();               //カメラの正面方向の位置ベクトルを計算
+    camFront.y = 0;
+    camFront = VNorm(camFront);               //ベクトルを正規化
 
-    UP = cameraFront;
-    DOWN = VScale(cameraFront, -1.0f);
-    RIGHT = VCross(VGet(0, 1, 0), cameraFront);
-    LEFT = VScale(RIGHT, -1.0f);
+    UP = camFront;                               //カメラ方向に前進
+    DOWN = VScale(camFront, -1.0f);              //カメラ後方に前進
+    RIGHT = VCross(VGet(0, 1, 0), camFront);     //カメラ右方向に前進
+    LEFT = VScale(RIGHT, -1.0f);                    //カメラ左方向
+    Rotate();                                               //Player回転処理
+    Move(deltaTime);                                        //Player移動処理
 
-    //---キー入力判定処理---//
-    KeyInput = false;                               //未入力時は入力判定をFALSEに
-
-    if (CheckHitKey(KEY_INPUT_LEFT))                //左キー入力
-    {
-        InputVec += LEFT;                           //ベクトル加算
-        KeyInput = true;                            //入力判定をTRUEに
-    }
-    if (CheckHitKey(KEY_INPUT_RIGHT))               //右キー入力
-    {
-        InputVec += RIGHT;
-        KeyInput = true;
-    }
-    if (CheckHitKey(KEY_INPUT_UP))                  //上キー入力
-    {
-        InputVec += UP;
-        KeyInput = true;
-    }
-    if (CheckHitKey(KEY_INPUT_DOWN))                //下キー入力
-    {
-        InputVec += DOWN;
-        KeyInput = true;
-    }
-
-
-    //---移動処理---//
-    if (KeyInput)                                                   //移動キーが入力されたら
-    {
-        InputVec = VNorm(InputVec);                                 //ベクトルの方向成分を取得
-        objDir = InputVec;                                          //キャラの向きを取得
-        objPos += InputVec * objSpeed * deltaTime;                  //移動
-
-        if (animType != RUN)                                        //アニメーションが走るモーションでなければ
-        {
-            animType = RUN;                                         //アニメーションは走るモーション
-            plyAnim->StartAnim(RUN);                                //走るモーションでアニメーション開始
-        }
-    }
-    else
-    {
-        if (animType != IDLE)                                       //アニメーションが待機モーションでなければ
-        {
-            animType = IDLE;                                        //アニメーションは待機モーション
-            plyAnim->StartAnim(IDLE);                               //待機モーションでアニメーション開始
-        }
-    }
     MV1SetPosition(objHandle, objPos);                              //ポジションセット
 
     //---モデル回転処理---//
@@ -131,21 +88,99 @@ void Player::Draw()
     DrawSphere3D(colSphere.worldCenter, colSphere.Radius, 8, GetColor(0, 255, 255), 0, FALSE);
 }
 
-// @brief Camera更新処理 //
+// @brief Player移動処理 //
 
-void Player::CameraUpdate(float deltaTime)
+void Player::Move(float deltaTime)
 {
-    if (CheckHitKey(KEY_INPUT_Q))                                   //Qキーが押されたら
-    {
-        cameraYaw -= cameraRotSpeed * deltaTime;                    //回転角は負の方向
-    }
-    else if (CheckHitKey(KEY_INPUT_E))                              //Eキーが押されたら
-    {
-        cameraYaw += cameraRotSpeed * deltaTime;                    //回転角は正の方向
-    }
-    cameraPos.x = cameraRad * cosf(cameraYaw);                      //カメラのX軸座標
-    cameraPos.z = cameraRad * sinf(cameraYaw);                      //カメラのZ軸座標
+    //---キー入力判定処理---//
+    inputKey = false;                               //未入力時は入力判定をFALSEに
 
-    SetCameraPositionAndTarget_UpVecY(objPos + cameraPos,
-        objPos + VGet(0, 10, 0));                                   //(0,8,0)の視点からプレイヤーを見る角度にカメラ設置
+    if (CheckHitKey(KEY_INPUT_LEFT))                //左キー入力
+    {
+        inputVec += LEFT;                           //ベクトル加算
+        inputKey = true;                            //入力判定をTRUEに
+    }
+    if (CheckHitKey(KEY_INPUT_RIGHT))               //右キー入力
+    {
+        inputVec += RIGHT;
+        inputKey = true;
+    }
+    if (CheckHitKey(KEY_INPUT_UP))                  //上キー入力
+    {
+        inputVec += UP;
+        inputKey = true;
+    }
+    if (CheckHitKey(KEY_INPUT_DOWN))                //下キー入力
+    {
+        inputVec += DOWN;
+        inputKey = true;
+    }
+
+
+    //---移動処理---//
+    if (inputKey)                                                   //移動キーが入力されたら
+    {
+        if (VSquareSize(inputVec)==0)                               //左右・上下同時押しの際は無視
+        {
+            return;
+        }
+
+        inputVec = VNorm(inputVec);                                 //ベクトルの方向成分を取得
+        if (IsSameAngle(inputVec, objDir))                      //現在方向が入力方向と異なっていたら
+        {
+            objDir = inputVec;                                          //入力方向を取得
+        }
+        else
+        {
+            nowRoted = true;
+            aimDir = inputVec;
+        }
+
+        inputVel = inputVec * objSpeed * deltaTime;                  //移動速度設定
+
+        if (animType != RUN)                                        //アニメーションが走るモーションでなければ
+        {
+            animType = RUN;                                         //アニメーションは走るモーション
+            plyAnim->StartAnim(RUN);                                //走るモーションでアニメーション開始
+        }
+    }
+    else
+    {
+        inputVel *= 0.9f;                                           //徐々に減速
+        if (animType != IDLE)                                       //アニメーションが待機モーションでなければ
+        {
+            animType = IDLE;                                        //アニメーションは待機モーション
+            plyAnim->StartAnim(IDLE);                               //待機モーションでアニメーション開始
+        }
+    }
+    objPos += inputVel;                                             //移動
+}
+
+// @brief Player回転処理 //
+
+void Player::Rotate()
+{
+    if (nowRoted)                           //現在回転中だったら
+    {
+        if (IsSameAngle( objDir,aimDir))     //目標の角度に十分近づいていたら
+        {
+            objDir = aimDir;                        //角度を目標の角度にして
+            nowRoted = false;                       //回転停止
+        }
+        else
+        {
+            VECTOR rotDir = RotForAimY(objDir, aimDir, 10.0f);     //回転中の座標
+
+            VECTOR cross1 = VCross(objDir, aimDir);            //プレイヤーの角度と目標角の外積
+            VECTOR cross2 = VCross(rotDir, aimDir);            //回転中の角度と目標角の外積
+
+            if (cross1.y * cross2.y < 0.0f)                     //回転が目標角度を超えたら
+            {
+                rotDir = aimDir;                                //回転中の角度を目標の角度に設定
+                nowRoted = false;                               //回転停止
+            }
+            
+            objDir = rotDir;                                    // 目標角に10度近づけた角度
+        }
+    }
 }
