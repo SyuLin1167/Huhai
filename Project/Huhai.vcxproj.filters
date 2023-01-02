@@ -70,6 +70,15 @@
     <Filter Include="ソース ファイル\Grid">
       <UniqueIdentifier>{f9bbd91f-5c1d-47fa-a217-85efabd3518e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Map">
+      <UniqueIdentifier>{4d92cd9d-f4de-4472-87bc-d92b11c6f435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Map\Block">
+      <UniqueIdentifier>{ffb85d11-90ec-45f5-ae54-ec3ecb396f7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Map\Map">
+      <UniqueIdentifier>{a9c7cd32-58e9-4321-8165-4fa7eea83708}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SourceCode\Main.cpp">
@@ -123,6 +132,12 @@
     <ClCompile Include="..\SourceCode\Grid\Grid.cpp">
       <Filter>ソース ファイル\Grid</Filter>
     </ClCompile>
+    <ClCompile Include="..\SourceCode\Map\Block\Block.cpp">
+      <Filter>ソース ファイル\Map\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Map\Map\Map.cpp">
+      <Filter>ソース ファイル\Map\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SourceCode\Time\TimeManager.h">
@@ -175,6 +190,15 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\Grid\Grid.h">
       <Filter>ソース ファイル\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Map\Block\Block.h">
+      <Filter>ソース ファイル\Map\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Collision\CollisionType.h">
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Map\Map\Map.h">
+      <Filter>ソース ファイル\Map\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

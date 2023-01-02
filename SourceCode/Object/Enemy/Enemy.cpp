@@ -13,7 +13,8 @@ Enemy::Enemy()
     MV1SetScale(objHandle, VGet(0.01f, 0.01f, 0.01f));                             //モデルのサイズ設定
     
     emyAnim = new Animation(objHandle);                                         //アニメーションのインスタンス
-   
+    emyCol = new Collision();
+
     //---アニメーション読み込み---//
     emyAnim->AddAnimation("../SourceCode/Assets/Enemy/unityChanAnimIdle.mv1");      //待機:0
     emyAnim->AddAnimation("../SourceCode/Assets/Enemy/unityChanAnimRun.mv1");       //走る:1
@@ -65,6 +66,39 @@ void Enemy::Draw()
     //---当たり判定デバッグ描画(後で消す)---//
     DrawSphere3D(colSphere.worldCenter, colSphere.Radius, 8, GetColor(0, 255, 255), 0, FALSE);
 }
+
+// @brief Enemy衝突時処理 //
+
+void Enemy::OnCollisionEnter(const ObjectBase* other)
+{
+    ObjectTag tag = other->GetTag();
+
+    if (tag == ObjectTag::Map)                                      //マップとぶつかったら
+    {
+        int colModel = other->GetColModel();                        //モデル当たり判定取得
+
+        //---マップと境界球都の当たり判定---//
+        MV1_COLL_RESULT_POLY_DIM colInfo;                          //モデル当たり判定情報
+        if (emyCol->CollisionPair(colSphere, colModel, colInfo))
+        {
+            VECTOR pushBack = emyCol->CalcSpherePushBackFromMesh(colSphere, colInfo);   //押し戻し量算出
+            objPos += pushBack;                                                         //押し戻す
+            MV1CollResultPolyDimTerminate(colInfo);                        //当たり判定情報解放
+            ColUpdate();
+        }
+
+        //---マップと足元線分の当たり判定---//
+        MV1_COLL_RESULT_POLY colInfoLine;                           //線分当たり判定情報
+        if (emyCol->CollisionPair(colLine, colModel, colInfoLine))
+        {
+            objPos = colInfoLine.HitPosition;                       //足元を衝突時の座標に合わせる
+            ColUpdate();
+        }
+    }
+}
+
+
+// @brief Enemy移動処理 //
 
 void Enemy::Move(float deltaTime)
 {

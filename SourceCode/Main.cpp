@@ -3,40 +3,47 @@
 #include"Object/ObjectManager/ObjManager.h"
 #include"Asset/AssetManager/AssetManager.h"
 
-int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
+int WINAPI WinMain(_In_ HINSTANCE,_In_opt_ HINSTANCE,_In_ LPSTR,_In_ int)
 {
-	//---画面モードのセット---//
-	SetGraphMode(ScreenWidth, ScreenHeight, ColorBit);
-	ChangeWindowMode(TRUE);
+
+	SetGraphMode(ScreenWidth, ScreenHeight, ColorBit);		//画面モードのセット
+
 
 	//---DXライブラリ初期化---//
+	SetUseDirect3DVersion(DX_DIRECT3D_11);					//使用するDirect3Dのバージョン設定
+	ChangeWindowMode(TRUE);									//ウィンドウモードの変更
 	if (DxLib_Init() == -1)
 	{
-		return -1;				//エラーが起きたら終了
+		return -1;											//エラーが起きたら終了
 	}
 
+	//---Zバッファ設定---//
+	SetUseZBuffer3D(TRUE);									//Zバッファを有効にする
+	SetWriteZBuffer3D(TRUE);								//Zバッファ絵の書き込みを有効にする
+
 	//管理クラスの初期化処理//
+	SceneManager* sceneManager = new SceneManager();
 	ObjManager::Init();
 	AssetManager::Init();
 
-	SceneManager* sceneManager = new SceneManager();
 
 	//---シーンループ---//
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)		//ウィンドウが閉じられるか、ESCキーが押されるまで実行
 	{
 
 
-		sceneManager->Update();			//更新処理
-		ClearDrawScreen();				//画面を初期化
+		sceneManager->Update();								//更新処理
+		ClearDrawScreen();									//画面を初期化
 
-		sceneManager->Draw();			//描画処理
-		ScreenFlip();					//裏画面の内容を表描画に反映
+		sceneManager->Draw();								//描画処理
+		ScreenFlip();										//裏画面の内容を表描画に反映
 	}
-	ObjManager::Finalize();
 
+	//---管理クラスの後処理---//
+	ObjManager::Finalize();
 	AssetManager::Finalize();
 
-	DxLib_End();						//Dxライブラリの後処理
+	DxLib_End();											//Dxライブラリの後処理
 
-	return 0;							//ソフトの終了
+	return 0;												//ソフトの終了
 }

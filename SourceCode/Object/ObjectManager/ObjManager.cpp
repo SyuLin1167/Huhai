@@ -162,6 +162,21 @@ void ObjManager::Draw()
 	}
 }
 
+// @brief　当たり判定処理 //
+
+void ObjManager::Collision()
+{
+	//---当たり判定の組み合わせ---//
+	for (int plyNum = 0; plyNum < objInstance->Object[ObjectTag::Player].size(); ++plyNum)
+	{
+		for (int mapNum = 0; mapNum < objInstance->Object[ObjectTag::Map].size(); ++mapNum)
+		{
+			objInstance->Object[ObjectTag::Player][plyNum]->
+				OnCollisionEnter(objInstance->Object[ObjectTag::Map][mapNum]);
+		}
+	}
+}
+
 // @brief タグ種の最初のオブジェクト取得 //
 
 ObjectBase* ObjManager::GetFirstObj(ObjectTag tag)

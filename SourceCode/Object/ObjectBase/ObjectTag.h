@@ -5,6 +5,8 @@
 enum class ObjectTag :unsigned char
 {
     Camera,     //カメラ
+    Block,      //ブロック
+    Map,        //マップ
     Player,     //プレイヤー
     Enemy,      //エネミー
 };
@@ -13,6 +15,8 @@ enum class ObjectTag :unsigned char
 constexpr static ObjectTag ObjTagAll[] =
 {
     ObjectTag::Camera,
+    ObjectTag::Map,
+    ObjectTag::Block,
     ObjectTag::Player,
     ObjectTag::Enemy,
 };

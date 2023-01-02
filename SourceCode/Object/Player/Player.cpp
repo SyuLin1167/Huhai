@@ -19,9 +19,10 @@ Player::Player()
 {
     //---モデル読み込み---//
     objHandle = AssetManager::GetMesh("../SourceCode/Assets/Player/PlayerModel.mv1");       //モデル読み込み
-    MV1SetScale(objHandle, VGet(0.1f, 0.1f, 0.1f));                                         //モデルのサイズ設定
+    MV1SetScale(objHandle, objScale);                                         //モデルのサイズ設定
 
     plyAnim = new Animation(objHandle);                                                     //アニメーションのインスタンス
+    plyCol = new Collision();
 
     //---アニメーション読み込み---//
     plyAnim->AddAnimation("../SourceCode/Assets/Player/PlayerModel_Idle.mv1");              //待機:0
@@ -33,11 +34,14 @@ Player::Player()
     objDir = VGet(0, 0, 1);                //初期方向
 
     //---当たり判定球設定---//
-    colSphere.localCenter = VGet(0, 10, 0);			//ローカル座標
+    colType = CollisionType::Sphere;
+    colSphere.localCenter = VGet(0, 6, 0);			//ローカル座標
     colSphere.Radius = 5.0f;						//球半径
     colSphere.worldCenter = objPos;					//ワールド座標
 
-    objSpeed = 20.0f;                                //初期速度
+    //---当たり判定線分設定---//
+    colLine = Collision::Line(VGet(0.0f, 2.0f,0.0f), VGet(0.0f, -3.0f, 0.0f));
+
 }
 
 // @brief Playerデストラクター //
@@ -61,9 +65,10 @@ void Player::Update(float deltaTime)
     camFront = VNorm(camFront);               //ベクトルを正規化
 
     UP = camFront;                               //カメラ方向に前進
-    DOWN = VScale(camFront, -1.0f);              //カメラ後方に前進
+    DOWN = VScale(UP, -1.0f);              //カメラ後方に前進
     RIGHT = VCross(VGet(0, 1, 0), camFront);     //カメラ右方向に前進
     LEFT = VScale(RIGHT, -1.0f);                    //カメラ左方向
+
     Rotate();                                               //Player回転処理
     Move(deltaTime);                                        //Player移動処理
 
@@ -76,6 +81,7 @@ void Player::Update(float deltaTime)
     VGet(0.0f, 1.0f, 0.0f), 0.0f);                                  //モデル回転
 
     colSphere.Move(objPos);                                         //当たり判定の移動
+    ColUpdate();
 }
 
 // @brief Player描画処理 //
@@ -83,9 +89,39 @@ void Player::Update(float deltaTime)
 void Player::Draw()
 {
     MV1DrawModel(objHandle);                                        //モデル描画
-
+    ColDraw();
     //---当たり判定デバッグ描画(後で消す)---//
     DrawSphere3D(colSphere.worldCenter, colSphere.Radius, 8, GetColor(0, 255, 255), 0, FALSE);
+}
+
+// @brief Player衝突時処理 //
+
+void Player::OnCollisionEnter(const ObjectBase* other)
+{
+    ObjectTag tag = other->GetTag();
+
+    if (tag == ObjectTag::Map)                                      //マップとぶつかったら
+    {
+        int colModel = other->GetColModel();                        //モデル当たり判定取得
+
+        //---マップと境界球都の当たり判定---//
+        MV1_COLL_RESULT_POLY_DIM colInfo;                          //モデル当たり判定情報
+        if (plyCol->CollisionPair(colSphere, colModel, colInfo))
+        {
+            VECTOR pushBack = plyCol->CalcSpherePushBackFromMesh(colSphere, colInfo);   //押し戻し量算出
+            objPos += pushBack;                                                         //押し戻す
+            MV1CollResultPolyDimTerminate(colInfo);                        //当たり判定情報解放
+            ColUpdate();
+        }
+
+        //---マップと足元線分の当たり判定---//
+        MV1_COLL_RESULT_POLY colInfoLine;                           //線分当たり判定情報
+        if (plyCol->CollisionPair(colLine, colModel, colInfoLine))
+        {
+            objPos = colInfoLine.HitPosition;                       //足元を衝突時の座標に合わせる
+            ColUpdate();
+        }
+    }
 }
 
 // @brief Player移動処理 //
@@ -120,12 +156,14 @@ void Player::Move(float deltaTime)
     //---移動処理---//
     if (inputKey)                                                   //移動キーが入力されたら
     {
+
+        inputVec = VNorm(inputVec);                                 //ベクトルの方向成分を取得
+        
         if (VSquareSize(inputVec)==0)                               //左右・上下同時押しの際は無視
         {
             return;
         }
 
-        inputVec = VNorm(inputVec);                                 //ベクトルの方向成分を取得
         if (IsSameAngle(inputVec, objDir))                      //現在方向が入力方向と異なっていたら
         {
             objDir = inputVec;                                          //入力方向を取得
@@ -169,7 +207,7 @@ void Player::Rotate()
         }
         else
         {
-            VECTOR rotDir = RotForAimY(objDir, aimDir, 10.0f);     //回転中の座標
+            VECTOR rotDir = RotForAimY(objDir, aimDir, 10.0f);     //回転中のベクトル
 
             VECTOR cross1 = VCross(objDir, aimDir);            //プレイヤーの角度と目標角の外積
             VECTOR cross2 = VCross(rotDir, aimDir);            //回転中の角度と目標角の外積

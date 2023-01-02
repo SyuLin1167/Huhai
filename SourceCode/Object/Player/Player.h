@@ -7,8 +7,6 @@
 #include"../../Asset/Animation/Animation.h"
 #include"../../Collision/Collision.h"
 
-class Animation;
-
 /* Playerのクラス */
 class Player :public ObjectBase
 {
@@ -35,16 +33,10 @@ public:
 	void Draw() override;
 
 	/// <summary>
-	/// 対象との当たり判定
+	/// Player衝突時処理
 	/// </summary>
-	/// <param name="target"></param>
-	//void OnCollisionEnter(const ObjectBase* target)override;
-
-	/// <summary>
-	/// 当たり判定球取得
-	/// </summary>
-	/// <returns>当たり判定球</returns>
-	Sphere GetColSphere() { return colSphere; }
+	/// <param name="other">:オブジェクト</param>
+	void OnCollisionEnter(const ObjectBase* other)override;
 
 	/// <summary>
 	/// アニメーションステータス
@@ -69,7 +61,7 @@ private:
 	void Rotate();
 
 	//---アニメーション関連---//
-	Animation* plyAnim;						//アニメーション
+	class Animation* plyAnim;				//アニメーション
 	int animType;							//アニメーション状態
 
 	VECTOR UP;								//前方向
@@ -83,8 +75,10 @@ private:
 	bool inputKey;							//キー入力判定
 	bool nowRoted;							//現在回転中かどうか
 
-	Sphere colSphere;						//当たり判定球
+	//---当たり判定関連---//
+	class Collision* plyCol;				//コリジョン
+	Collision::Sphere colSphere;			//当たり判定球
 
 	//---カメラ関連---//
-	VECTOR camFront;
+	VECTOR camFront;						//カメラ前方向
 };

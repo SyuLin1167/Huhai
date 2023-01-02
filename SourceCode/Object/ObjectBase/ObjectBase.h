@@ -2,6 +2,8 @@
 #include<DxLib.h>
 #include"../../Math/Math.h"
 #include"ObjectTag.h"
+#include"../../Collision/Collision.h"
+#include"../../Collision/CollisionType.h"
 
 /*親クラス*/
 class ObjectBase
@@ -13,6 +15,13 @@ public:
     /// <param name="tag">:タグ</param>
     ObjectBase(ObjectTag tag);
 
+    /// <summary>
+    /// コンストラクタ―(位置セット)
+    /// </summary>
+    /// <param name="tag">:タグ</param>
+    /// <param name="pos">:座標</param>
+    ObjectBase(ObjectTag tag, VECTOR pos);
+    
     /// <summary>
     /// デストラクター
     /// </summary>
@@ -83,16 +92,77 @@ public:
     /// <returns>タグ種類</returns>
     ObjectTag GetTag()const { return objTag; }
 
+    //---当たり判定関連---//
+
+    /// <summary>
+    /// 衝突時処理
+    /// </summary>
+    /// <param name="other">:オブジェクト</param>
+    virtual void OnCollisionEnter(const ObjectBase*other){}
+
+    /// <summary>
+    /// オブジェクトとの当たり判定
+    /// </summary>
+    /// <param name="other">:オブジェクト</param>
+    virtual void ColWithOther(ObjectBase* other) {};
+
+    /// <summary>
+    /// オブジェクトの当たり判定種
+    /// </summary>
+    /// <returns>当たり判定種</returns>
+    CollisionType GetColType()const { return colType; }
+
+    /// <summary>
+    /// 線分当たり判定
+    /// </summary>
+    /// <returns>当たり判定Line</returns>
+    Collision::Line GetColLine()const { return colLine; }
+
+    /// <summary>
+    /// 球当たり判定
+    /// </summary>
+    /// <returns>当たり判定Sphere</returns>
+    Collision::Sphere GetColSphere()const { return colSphere; }
+
+    /// <summary>
+    /// カプセル当たり判定
+    /// </summary>
+    /// <returns>当たり判定Capsule</returns>
+    Collision::Capsule GetColCapsule()const { return colCapsule; }
+
+    /// <summary>
+    /// モデル当たり判定
+    /// </summary>
+    /// <returns>当たり判定Model</returns>
+    int GetColModel()const { return colModel; }
+
 protected:
-    ObjectTag objTag;           //オブジェクトの種類
-    int objHandle;              //モデルハンドル
-    VECTOR objPos;              //ワールド座標
-    VECTOR objDir;              //ワールド方向
-    VECTOR objScale;            //オブジェクトの大きさ
+    /// <summary>
+    /// Collision更新処理
+    /// </summary>
+    void ColUpdate();
 
-    float objSpeed;             //オブジェクトの速度
+    /// <summary>
+    /// Collision描画処理
+    /// </summary>
+    void ColDraw();
 
-    bool isVisible;             //可視化状態
-    bool isAlive;               //生死状態
+    ObjectTag objTag;                           //オブジェクトの種類
+    int objHandle;                              //モデルハンドル
+    VECTOR objPos;                              //ワールド座標
+    VECTOR objDir;                              //ワールド方向
+    VECTOR objScale;                            //オブジェクトの大きさ
+
+    float objSpeed;                             //オブジェクトの速度
+
+    bool isVisible;                             //可視化状態
+    bool isAlive;                               //生死状態
+
+    //---当たり判定関連---//
+    CollisionType colType;                      //当たり判定種
+    Collision::Line colLine;                    //当たり判定Line
+    Collision::Sphere colSphere;                //当たり判定Sphere
+    Collision::Capsule colCapsule;              //当たり判定Capsule
+    int colModel;                               //当たり判定Model
 };
 

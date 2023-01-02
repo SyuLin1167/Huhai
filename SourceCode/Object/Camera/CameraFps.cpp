@@ -8,7 +8,7 @@ CameraFps::CameraFps()
     ,camLookPos{0,0,0}
 {
     SetCameraNearFar(CameraNear, CameraFar);                      //ƒJƒƒ‰‚Ì•`‰æ”ÍˆÍİ’è
-    objPos = { -100,58,0 };
+    objPos = { -100,100,0 };
 }
 
 // @brief CameraFpsXVˆ— //

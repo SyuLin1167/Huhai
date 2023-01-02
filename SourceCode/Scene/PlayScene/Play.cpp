@@ -1,8 +1,9 @@
 #include "Play.h"
-#include"../../Object/ObjectManager/ObjManager.h"
 #include"../../Object/Camera/CameraFps.h"
 #include "../../Object/Player/Player.h"
 #include "../../Object/Enemy/Enemy.h"
+#include"../../Map/Block/Block.h"
+#include"../../Map/Map/Map.h"
 #include "../ResultScene/Result.h"
 #include"../../Grid/Grid.h"
 
@@ -24,7 +25,18 @@ Play::Play()
     enemy = new Enemy();
     ObjManager::Entry(enemy);
 
+    // ブロックを生成
+    ObjManager::Entry(new Block(VGet(60, 0, 0)));
+    ObjManager::Entry(new Block(VGet(70, 0, 10)));
+    ObjManager::Entry(new Block(VGet(90, 0, 30)));
+    ObjManager::Entry(new Block(VGet(50, 0, 10)));
+    ObjManager::Entry(new Block(VGet(90, 0, 20)));
+
+    // マップを生成
+    ObjManager::Entry(new Map(VGet(0, -25, 0)));
+
     grid = new Grid;
+
 }
 
 // @brief PlaySceneデストラクター //
@@ -43,29 +55,30 @@ SceneBase* Play::Update(float deltaTime)
 {
 
     ObjManager::Update(deltaTime);
+    ObjManager::Collision();
 
-
-    if (enemy != nullptr)                                              //インスタンスの中身が空でなければ
+    if (enemy != nullptr)                                       //インスタンスの中身が空でなければ
     {
         //---当たり判定球取得---//
-        Sphere sEmy, sPly;
-        sEmy = enemy->GetColSphere();                                  //アーチャーの当たり判定球取得
-        sPly = player->GetColSphere();                                    //プレイヤーの当たり判定球取得
+        Collision::Sphere sEmy, sPly;
+        sEmy = enemy->GetColSphere();               //アーチャーの当たり判定球取得
+        sPly = player->GetColSphere();              //プレイヤーの当たり判定球取得
 
-        if (CollisionPair(sEmy, sPly))                      //球体同士の当たり判定
+        if (col->CollisionPair(sEmy, sPly))         //球体同士の当たり判定
         {
-            enemy->SetAlive(false);                                //当たっていたら死亡
+            enemy->SetAlive(false);                 //当たっていたら死亡
+            ObjManager::Release(enemy);
         }
     }
 
-    if (CheckHitKey(KEY_INPUT_R))
+    if (CheckHitKey(KEY_INPUT_R))                               //Ｒキーが押されたら
     {
-        ObjManager::ReleaceAllObj();
-        AssetManager::ReleaseAllAsset();
-        return new Result();
-
+        ObjManager::ReleaceAllObj();                //全てのオブジェクトの開放
+        AssetManager::ReleaseAllAsset();            //全てのアセットの開放
+        return new Result();                        //リザルト画面へ
     }
-    return this;
+
+    return this;                                    //常にプレイシーンを返す
 }
 
 // @brief PlayScene描画処理 //

@@ -35,11 +35,19 @@ public:
     /// </summary>
     void Draw()override;
 
+
+    /// <summary>
+    /// Enemy衝突時処理
+    /// </summary>
+    /// <param name="other">:オブジェクト</param>
+    void OnCollisionEnter(const ObjectBase* other)override;
+
+
     /// <summary>
     /// 当たり判定球取得
     /// </summary>
     /// <returns>当たり判定球</returns>
-    Sphere GetColSphere() { return colSphere; }
+    Collision::Sphere GetColSphere() { return colSphere; }
 
     /// <summary>
     /// アニメーションステータス
@@ -61,6 +69,8 @@ private:
     Animation* emyAnim;						//アニメーション
     int animType;							//アニメーション状態
 
-    Sphere colSphere;			//当たり判定球
+    //---当たり判定関連---//
+    class Collision* emyCol;				//コリジョン
+    Collision::Sphere colSphere;			//当たり判定球
 };
 
