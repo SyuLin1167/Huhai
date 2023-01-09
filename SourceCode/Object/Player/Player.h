@@ -64,10 +64,10 @@ private:
 	class Animation* plyAnim;				//アニメーション
 	int animType;							//アニメーション状態
 
-	VECTOR UP;								//前方向
-	VECTOR DOWN;							//後方向
-	VECTOR RIGHT;							//右方向
-	VECTOR LEFT;							//左方向
+	VECTOR UP = { 0,0,0 };					//前方向
+	VECTOR DOWN = { 0,0,0 };				//後方向
+	VECTOR RIGHT = { 0,0,0 };				//右方向
+	VECTOR LEFT = { 0,0,0 };				//左方向
 
 	VECTOR inputVec;						//合成ベクトル
 	VECTOR inputVel;						//速度ベクトル

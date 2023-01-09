@@ -6,10 +6,6 @@ Player::Player()
     :ObjectBase(ObjectTag::Player)
     , plyAnim(nullptr)
     , animType(IDLE)
-    , UP{ 0,0,0 }
-    , DOWN{ 0,0,0 }
-    , RIGHT{ 0,0,0 }
-    , LEFT{ 0,0,0 }
     , inputVec{ 0,0,0 }
     , inputVel{ 0,0,0 }
     , aimDir{ 0,0,0 }
@@ -19,9 +15,10 @@ Player::Player()
 {
     //---モデル読み込み---//
     objHandle = AssetManager::GetMesh("../SourceCode/Assets/Player/PlayerModel.mv1");       //モデル読み込み
-    MV1SetScale(objHandle, objScale);                                         //モデルのサイズ設定
+    MV1SetScale(objHandle, objScale);                                                       //モデルのサイズ設定
 
-    plyAnim = new Animation(objHandle);                                                     //アニメーションのインスタンス
+    //---インスタンス---//
+    plyAnim = new Animation(objHandle);
     plyCol = new Collision();
 
     //---アニメーション読み込み---//
@@ -30,18 +27,17 @@ Player::Player()
     plyAnim->AddAnimation("../SourceCode/Assets/Player/PlayerModel_Atack.mv1", false);      //攻撃:2
 
     //---アニメーション状態セット---//
-    plyAnim->StartAnim(animType);                       //待機モーションでアニメーション開始
-    objDir = VGet(0, 0, 1);                //初期方向
+    plyAnim->StartAnim(animType);                                                           //待機モーションでアニメーション開始
+    objDir = VGet(0, 0, 1);                                                                 //初期方向
 
     //---当たり判定球設定---//
-    colType = CollisionType::Sphere;
-    colSphere.localCenter = VGet(0, 6, 0);			//ローカル座標
-    colSphere.Radius = 5.0f;						//球半径
-    colSphere.worldCenter = objPos;					//ワールド座標
+    colType = CollisionType::Sphere;                                                        //当たり判定は球体
+    colSphere.localCenter = VGet(0, 6, 0);			                                        //ローカル座標
+    colSphere.Radius = 5.0f;						                                        //球半径
+    colSphere.worldCenter = objPos;					                                        //ワールド座標
 
     //---当たり判定線分設定---//
-    colLine = Collision::Line(VGet(0.0f, 2.0f,0.0f), VGet(0.0f, -3.0f, 0.0f));
-
+    colLine = Collision::Line(VGet(0.0f, 2.0f, 0.0f), VGet(0.0f, -3.0f, 0.0f));             //線分設定
 }
 
 // @brief Playerデストラクター //
@@ -49,14 +45,14 @@ Player::Player()
 Player::~Player()
 {
     
-    delete plyAnim;                                 //アニメーション解放
+    delete plyAnim;                                                                         //アニメーション解放
 }
 
 //@brief Player更新処理//
 
 void Player::Update(float deltaTime)
 {
-    ObjectBase* camFps = ObjManager::GetFirstObj(ObjectTag::Camera);
+    ObjectBase* camFps = ObjManager::GetFirstObj(ObjectTag::Camera);                        
 
     plyAnim->AddAnimTime(deltaTime);                //現在のアニメーション再生を進める
 
