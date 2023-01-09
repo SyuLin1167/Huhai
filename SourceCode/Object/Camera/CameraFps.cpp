@@ -8,7 +8,7 @@ CameraFps::CameraFps()
     ,camLookPos{0,0,0}
 {
     SetCameraNearFar(CameraNear, CameraFar);                      //ƒJƒƒ‰‚Ì•`‰æ”ÍˆÍÝ’è
-    objPos = { -100,100,0 };
+    objPos = { 0,10,0 };
 }
 
 // @brief CameraFpsXVˆ— //
@@ -18,7 +18,12 @@ void CameraFps::Update(float deltaTime)
     ObjectBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
     if (player)
     {
+        GetMousePoint(&mouseX, &mouseY);
+        mouseX = mouseX - 1920 / 2;
+        mousePos.x = mouseX;
+        mouseY = 1920 / 2 - mouseY;
+        mousePos.y = mouseY;
         camLookPos = player->GetPos();
-        SetCameraPositionAndTarget_UpVecY(objPos+camLookPos, camLookPos);
+        SetCameraPositionAndTarget_UpVecY(objPos+camLookPos, mousePos);
     }
 }

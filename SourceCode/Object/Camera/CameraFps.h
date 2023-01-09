@@ -27,6 +27,9 @@ public:
     /// <param name="deltaTime"></param>
     void Update(float deltaTime)override;
 private:
+    int mouseX;
+    int mouseY;
+    VECTOR mousePos;
     VECTOR camLookPos;
 };
 
