@@ -24,12 +24,23 @@ public:
     /// <summary>
     /// CameraFps更新処理
     /// </summary>
-    /// <param name="deltaTime"></param>
+    /// <param name="deltaTime">:フレームレート</param>
     void Update(float deltaTime)override;
+
+    /// <summary>
+    /// CameraFps移動処理
+    /// </summary>
+    /// <param name="deltaTime">:フレームレート</param>
+    void Move(float deltaTime);
+
+
 private:
-    int mouseX;
-    int mouseY;
-    VECTOR mousePos;
-    VECTOR camLookPos;
+    int mouseX;             //マウス座標X
+    int mouseY;             //マウス座標Y
+    VECTOR movePos;         //移動座標
+
+    float cameraYaw;        //水平方向回転角
+    float cameraPitch;      //垂直方向回転角
+    VECTOR camLookPos;      //注視点
 };
 

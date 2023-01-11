@@ -30,6 +30,7 @@ void Map::Load()
 	//---マップモデル読み込み---//
 	objHandle = AssetManager::GetMesh("../SourceCode/Assets/Map/Map/HuhaiMap.mv1");
 	colModel = objHandle;
+	objPos = { 0,-5,0 };
 	MV1SetPosition(objHandle, objPos);
 	MV1SetScale(objHandle, objScale);
 	ColUpdate();

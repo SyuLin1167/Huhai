@@ -55,8 +55,7 @@ void Player::Update(float deltaTime)
     ObjectBase* camFps = ObjManager::GetFirstObj(ObjectTag::Camera);                        
 
     plyAnim->AddAnimTime(deltaTime);                //現在のアニメーション再生を進める
-
-    camFront = objPos - camFps->GetPos();               //カメラの正面方向の位置ベクトルを計算
+    camFront = camFps->GetDir();               //カメラの正面方向の位置ベクトルを計算
     camFront.y = 0;
     camFront = VNorm(camFront);               //ベクトルを正規化
 
@@ -84,7 +83,7 @@ void Player::Update(float deltaTime)
 
 void Player::Draw()
 {
-    MV1DrawModel(objHandle);                                        //モデル描画
+    //MV1DrawModel(objHandle);                                        //モデル描画
     ColDraw();
     //---当たり判定デバッグ描画(後で消す)---//
     DrawSphere3D(colSphere.worldCenter, colSphere.Radius, 8, GetColor(0, 255, 255), 0, FALSE);
