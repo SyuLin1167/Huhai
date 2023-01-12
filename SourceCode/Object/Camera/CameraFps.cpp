@@ -27,7 +27,7 @@ void CameraFps::Update(float deltaTime)
         objPos.y = 15;                                                                  //高さは目線の位置
 
         Move(deltaTime);
-        SetCameraPositionAndTarget_UpVecY(objPos,  objPos+camLookPos);      //プレイヤーの位置から注視点に向けてカメラをセット
+        SetCameraPositionAndTarget_UpVecY(objPos, objPos + camLookPos);      //プレイヤーの位置から注視点に向けてカメラをセット
         objDir = camLookPos;                                                   //カメラの正面方向ベクトル
     }
     SetMousePoint(ScreenWidth / 2, ScreenHeight / 2);                        //マウス座標を画面の中心にセット

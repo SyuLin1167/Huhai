@@ -31,11 +31,11 @@ public:
 	/// Block更新処理
 	/// </summary>
 	/// <param name="deltaTime">:フレームレート</param>
-	void Update(float deltaTime);
+	void Update(float deltaTime)override;
 	
 	/// <summary>
 	/// Block描画処理
 	/// </summary>
-	void Draw();
+	void Draw()override;
 };
 

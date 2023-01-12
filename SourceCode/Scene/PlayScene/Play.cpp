@@ -33,7 +33,7 @@ Play::Play()
     ObjManager::Entry(new Block(VGet(90, 0, 20)));
 
     // マップを生成
-    ObjManager::Entry(new Map(VGet(0, -25, 0)));
+    ObjManager::Entry(new Map(VGet(0, 0, 0)));
 
     grid = new Grid;
 
@@ -56,20 +56,6 @@ SceneBase* Play::Update(float deltaTime)
 
     ObjManager::Update(deltaTime);
     ObjManager::Collision();
-
-    if (enemy != nullptr)                                       //インスタンスの中身が空でなければ
-    {
-        //---当たり判定球取得---//
-        Collision::Sphere sEmy, sPly;
-        sEmy = enemy->GetColSphere();               //アーチャーの当たり判定球取得
-        sPly = player->GetColSphere();              //プレイヤーの当たり判定球取得
-
-        if (col->CollisionPair(sEmy, sPly))         //球体同士の当たり判定
-        {
-            enemy->SetAlive(false);                 //当たっていたら死亡
-            ObjManager::Release(enemy);
-        }
-    }
 
     if (CheckHitKey(KEY_INPUT_R))                               //Ｒキーが押されたら
     {

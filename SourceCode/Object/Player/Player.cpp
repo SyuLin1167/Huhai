@@ -24,7 +24,6 @@ Player::Player()
     //---アニメーション読み込み---//
     plyAnim->AddAnimation("../SourceCode/Assets/Player/PlayerModel_Idle.mv1");              //待機:0
     plyAnim->AddAnimation("../SourceCode/Assets/Player/PlayerModel_Run.mv1");               //走る:1
-    plyAnim->AddAnimation("../SourceCode/Assets/Player/PlayerModel_Atack.mv1", false);      //攻撃:2
 
     //---アニメーション状態セット---//
     plyAnim->StartAnim(animType);                                                           //待機モーションでアニメーション開始
@@ -32,12 +31,12 @@ Player::Player()
 
     //---当たり判定球設定---//
     colType = CollisionType::Sphere;                                                        //当たり判定は球体
-    colSphere.localCenter = VGet(0, 6, 0);			                                        //ローカル座標
+    colSphere.localCenter = VGet(0, 10, 0);			                                        //ローカル座標
     colSphere.Radius = 5.0f;						                                        //球半径
     colSphere.worldCenter = objPos;					                                        //ワールド座標
 
     //---当たり判定線分設定---//
-    colLine = Collision::Line(VGet(0.0f, 2.0f, 0.0f), VGet(0.0f, -3.0f, 0.0f));             //線分設定
+    colLine = Collision::Line(VGet(0.0f, 12.0f, 0.0f), VGet(0.0f, 7.0f, 0.0f));             //線分設定
 }
 
 // @brief Playerデストラクター //
@@ -63,6 +62,11 @@ void Player::Update(float deltaTime)
     DOWN = VScale(UP, -1.0f);              //カメラ後方に前進
     RIGHT = VCross(VGet(0, 1, 0), camFront);     //カメラ右方向に前進
     LEFT = VScale(RIGHT, -1.0f);                    //カメラ左方向
+
+    //UP = { 1,0,0 };
+    //DOWN = { -1,0,0 };
+    //LEFT = { 0,0,1 };
+    //RIGHT = { 0,0,-1 };
 
     Rotate();                                               //Player回転処理
     Move(deltaTime);                                        //Player移動処理
@@ -126,22 +130,22 @@ void Player::Move(float deltaTime)
     //---キー入力判定処理---//
     inputKey = false;                               //未入力時は入力判定をFALSEに
 
-    if (CheckHitKey(KEY_INPUT_LEFT))                //左キー入力
+    if (CheckHitKey(KEY_INPUT_A))                //左キー入力
     {
         inputVec += LEFT;                           //ベクトル加算
         inputKey = true;                            //入力判定をTRUEに
     }
-    if (CheckHitKey(KEY_INPUT_RIGHT))               //右キー入力
+    if (CheckHitKey(KEY_INPUT_D))               //右キー入力
     {
         inputVec += RIGHT;
         inputKey = true;
     }
-    if (CheckHitKey(KEY_INPUT_UP))                  //上キー入力
+    if (CheckHitKey(KEY_INPUT_W))                  //上キー入力
     {
         inputVec += UP;
         inputKey = true;
     }
-    if (CheckHitKey(KEY_INPUT_DOWN))                //下キー入力
+    if (CheckHitKey(KEY_INPUT_S))                //下キー入力
     {
         inputVec += DOWN;
         inputKey = true;

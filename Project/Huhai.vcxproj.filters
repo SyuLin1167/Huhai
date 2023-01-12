@@ -79,6 +79,9 @@
     <Filter Include="ソース ファイル\Map\Map">
       <UniqueIdentifier>{a9c7cd32-58e9-4321-8165-4fa7eea83708}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Map\Door">
+      <UniqueIdentifier>{0de4f457-917f-4fb0-8f73-1d56b393c1ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SourceCode\Main.cpp">
@@ -137,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="..\SourceCode\Map\Map\Map.cpp">
       <Filter>ソース ファイル\Map\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Map\Door\Door.cpp">
+      <Filter>ソース ファイル\Map\Door</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\Map\Map\Map.h">
       <Filter>ソース ファイル\Map\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Map\Door\Door.h">
+      <Filter>ソース ファイル\Map\Door</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

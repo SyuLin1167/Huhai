@@ -44,6 +44,5 @@ void Block::Update(float deltaTime)
 
 void Block::Draw()
 {
-	MV1SetPosition(objHandle, objPos);			//ポジションセット
 	MV1DrawModel(objHandle);						//モデル描画
 }

@@ -102,10 +102,5 @@ void Enemy::OnCollisionEnter(const ObjectBase* other)
 
 void Enemy::Move(float deltaTime)
 {
-    objPos += objDir * objSpeed * deltaTime;                //ˆÚ“®
-    if (animType != RUN)
-    {
-        animType = RUN;
-        emyAnim->StartAnim(animType);
-    }
+
 }

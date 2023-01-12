@@ -15,8 +15,8 @@ public:
 	/// <summary>
 	/// Mapコンストラクター(位置セット)
 	/// </summary>
-	/// <param name="pos">:座標</param>
-	Map(VECTOR pos);
+	/// <param name="mapPos">:マップのワールド座標</param>
+	Map(VECTOR mapPos);
 
 	/// <summary>
 	/// Mapデストラクター
@@ -37,6 +37,6 @@ public:
 	/// <summary>
 	/// Map描画処理
 	/// </summary>
-	void Draw();
+	void Draw()override;
 };
 
