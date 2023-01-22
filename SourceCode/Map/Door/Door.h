@@ -2,11 +2,14 @@
 #include<DxLib.h>
 #include"../../Asset/AssetManager/AssetManager.h"
 #include"../../Object/ObjectBase/ObjectBase.h"
+#include"../../Object/ObjectManager/ObjManager.h"
 #include"../../Asset/Animation/Animation.h"
+#include"../../Collision/Collision.h"
 
 /*Doorのクラス*/
 class Door:public ObjectBase
 {
+	ObjectBase* player;
 public:
 	/// <summary>
 	/// Doorコンストラクター
@@ -17,7 +20,8 @@ public:
 	/// Doorコンストラクター
 	/// </summary>
 	/// <param name="doorPos">:ドアのワールド座標</param>
-	Door(VECTOR doorPos);
+	/// <param name="doorAngle">:ドアの方向</param>
+	Door(VECTOR doorPos,VECTOR doorAngle);
 
 	/// <summary>
 	/// Doorデストラクター
@@ -40,7 +44,7 @@ public:
 	/// </summary>
 	void Draw()override;
 	
-	typedef enum Anim
+	enum Anim
 	{
 		IDLE=0,			//待機
 		OPEN,			//開
@@ -50,5 +54,7 @@ private:
 	//---アニメーション関連---//
 	class Animation* doorAnim;			//アニメーション
 	int animType;						//アニメーション状態
+
+	class Collision* doorCol;
 };
 

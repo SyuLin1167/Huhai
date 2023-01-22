@@ -174,6 +174,16 @@ void ObjManager::Collision()
 			objInstance->Object[ObjectTag::Player][plyNum]->
 				OnCollisionEnter(objInstance->Object[ObjectTag::Map][mapNum]);
 		}
+		for (int doorNum = 0; doorNum < objInstance->Object[ObjectTag::Door].size(); ++doorNum)
+		{
+			objInstance->Object[ObjectTag::Player][plyNum]->
+				OnCollisionEnter(objInstance->Object[ObjectTag::Door][doorNum]);
+		}
+		for (int furNum = 0; furNum < objInstance->Object[ObjectTag::Furniture].size(); ++furNum)
+		{
+			objInstance->Object[ObjectTag::Player][plyNum]->
+				OnCollisionEnter(objInstance->Object[ObjectTag::Furniture][furNum]);
+		}
 	}
 }
 

@@ -8,7 +8,7 @@ ObjectBase::ObjectBase(ObjectTag tag)
     , objPos{ 0,0,0 }
     , objDir{ 0,0,0 }
     , objScale{ 0.1f,0.1f,0.1f }
-    , objSpeed(40.0f)
+    , objSpeed(20.0f)
     , isVisible(true)
     , isAlive(true)
     , colType()
@@ -19,15 +19,15 @@ ObjectBase::ObjectBase(ObjectTag tag)
 {
 }
 
-// @brief コンストラクター(位置セット) //
+// @brief コンストラクター(位置・方向セット) //
 
-ObjectBase::ObjectBase(ObjectTag tag,VECTOR pos)
+ObjectBase::ObjectBase(ObjectTag tag,VECTOR pos,VECTOR angle)
     :objTag(tag)
     , objHandle(-1)
     , objPos(pos)
-    , objDir{ 0,0,0 }
+    , objDir(angle)
     , objScale{ 0.1f,0.1f,0.1f }
-    , objSpeed(40.0f)
+    , objSpeed(20.0f)
     , isVisible(true)
     , isAlive(true)
     , colType()
@@ -77,7 +77,7 @@ void ObjectBase::ColDraw()
 {
     //---全当たり判定種の描画処理---//
     DrawLine3D(colLine.worldStart, colLine.worldEnd, 
-        GetColor(255, 255, FALSE));
+        GetColor(255, 255, 0));
     DrawSphere3D(colSphere.worldCenter, colSphere.Radius, 10,
         GetColor(0, 255, 255),
         GetColor(0, 0, 0), FALSE);

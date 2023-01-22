@@ -2,9 +2,7 @@
 #include<DxLib.h>
 
 #include"../ObjectManager/ObjManager.h"
-#include"../../Asset/AssetManager/AssetManager.h"
 #include"../ObjectBase/ObjectBase.h"
-#include"../../Asset/Animation/Animation.h"
 #include"../../Collision/Collision.h"
 
 /* Playerのクラス */
@@ -37,16 +35,18 @@ public:
 	/// </summary>
 	/// <param name="other">:オブジェクト</param>
 	void OnCollisionEnter(const ObjectBase* other)override;
+	
+	/// <summary>
+	/// 球体の衝突時処理
+	/// </summary>
+	/// <param name="colmodel">:当たり判定モデル</param>
+	void CollHitSphere(int colmodel);
 
 	/// <summary>
-	/// アニメーションステータス
+	/// 線分の衝突時処理
 	/// </summary>
-	typedef enum Anim
-	{
-		IDLE = 0,							//待機
-		RUN,								//走り
-		ATACK								//攻撃
-	};
+	/// <param name="colmodel">:当たり判定モデル</param>
+	void ColHitLine(int colmodel);
 
 private:
 	/// <summary>
@@ -60,10 +60,6 @@ private:
 	/// </summary>
 	void Rotate();
 
-	//---アニメーション関連---//
-	class Animation* plyAnim;				//アニメーション
-	int animType;							//アニメーション状態
-
 	VECTOR UP = { 0,0,0 };					//前方向
 	VECTOR DOWN = { 0,0,0 };				//後方向
 	VECTOR RIGHT = { 0,0,0 };				//右方向
@@ -76,8 +72,7 @@ private:
 	bool nowRoted;							//現在回転中かどうか
 
 	//---当たり判定関連---//
-	class Collision* plyCol;				//コリジョン
-	Collision::Sphere colSphere;			//当たり判定球
+	Sphere colSphere;			//当たり判定球
 
 	//---カメラ関連---//
 	VECTOR camFront;						//カメラ前方向

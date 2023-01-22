@@ -69,7 +69,7 @@ int AssetManager::GetAnim(string animFileName)
         assetInstance->animMap.emplace(animFileName, animID);               //ファイルをIDと共に登録
     }
 
-    return animID;                                          //アニメーションIDを返す
+    return assetInstance->animMap[animFileName];                                         //アニメーションIDを返す
 }
 
 // @brief メッシュの削除 //

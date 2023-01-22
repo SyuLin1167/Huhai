@@ -28,12 +28,12 @@ Map::~Map()
 void Map::Load()
 {
 	//---マップモデル読み込み---//
-	objHandle = AssetManager::GetMesh("../SourceCode/Assets/Map/Map/HuhaiMap.mv1");
-	colModel = objHandle;
-	MV1SetPosition(objHandle, objPos);
-	MV1SetScale(objHandle, objScale);
-	ColUpdate();
+	objHandle = AssetManager::GetMesh("../SourceCode/Assets/Map/Map/map.mv1");			//モデル読み込み
+	colModel = objHandle;																	//当たり判定モデルはモデルに
+	MV1SetPosition(objHandle, objPos);														//位置セット
+	MV1SetScale(objHandle, objScale);														//スケールセット
 
+	MV1SetupCollInfo(colModel);																//当たり判定情報設定
 }
 
 // @brief Map更新処理 //
@@ -46,5 +46,5 @@ void Map::Update(float deltaTime)
 
 void Map::Draw()
 {
-	MV1DrawModel(objHandle);
+	MV1DrawModel(objHandle);																//モデル描画
 }

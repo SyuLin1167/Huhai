@@ -47,12 +47,12 @@ public:
     /// 当たり判定球取得
     /// </summary>
     /// <returns>当たり判定球</returns>
-    Collision::Sphere GetColSphere() { return colSphere; }
+    Sphere GetColSphere() { return colSphere; }
 
     /// <summary>
     /// アニメーションステータス
     /// </summary>
-    typedef enum Anim
+    enum Anim
     {
         IDLE = 0,							//待機
         RUN,								//走り
@@ -71,6 +71,6 @@ private:
 
     //---当たり判定関連---//
     class Collision* emyCol;				//コリジョン
-    Collision::Sphere colSphere;			//当たり判定球
+    Sphere colSphere;			//当たり判定球
 };
 

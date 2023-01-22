@@ -2,8 +2,9 @@
 #include"../../Object/Camera/CameraFps.h"
 #include "../../Object/Player/Player.h"
 #include "../../Object/Enemy/Enemy.h"
-#include"../../Map/Block/Block.h"
 #include"../../Map/Map/Map.h"
+#include"../../Map/Door/Door.h"
+#include"../../Map/Furniture/Furniture.h"
 #include "../ResultScene/Result.h"
 #include"../../Grid/Grid.h"
 
@@ -16,27 +17,26 @@ Play::Play()
 
     ObjManager::Init();
 
-    camFps = new CameraFps();
-    ObjManager::Entry(camFps);
+    //---カメラ生成---//
+    ObjManager::Entry(new CameraFps());
 
-    player = new Player();
-    ObjManager::Entry(player);
+    //---プレイヤー生成---//
+    ObjManager::Entry(new Player());
 
-    enemy = new Enemy();
-    ObjManager::Entry(enemy);
+    //---エネミー生成---//
+    ObjManager::Entry(new Enemy());
 
-    // ブロックを生成
-    ObjManager::Entry(new Block(VGet(60, 0, 0)));
-    ObjManager::Entry(new Block(VGet(70, 0, 10)));
-    ObjManager::Entry(new Block(VGet(90, 0, 30)));
-    ObjManager::Entry(new Block(VGet(50, 0, 10)));
-    ObjManager::Entry(new Block(VGet(90, 0, 20)));
-
-    // マップを生成
+    //---マップを生成---//
     ObjManager::Entry(new Map(VGet(0, 0, 0)));
 
-    grid = new Grid;
+    //---ドアを生成---//
+    ObjManager::Entry(new Door(VGet(40, 0, 0),VGet(0,0,0)));
+    ObjManager::Entry(new Door(VGet(120, 0, 0),VGet(0,0,0)));
 
+    //---家具を生成---//
+    ObjManager::Entry(new Furniture(VGet(0, 0, 0)));
+
+    grid = new Grid;
 }
 
 // @brief PlaySceneデストラクター //
@@ -75,6 +75,6 @@ void Play::Draw()
 
     ObjManager::Draw();
 
-    grid->DrawGrid(300, 30);
-    DrawFormatString(0, 0, GetColor(255, 255, 255), "Play画面:RでResultシーンへ移行");
+    //grid->DrawGrid(300, 30);
+    //DrawFormatString(0, 0, GetColor(255, 255, 255), "Play画面:RでResultシーンへ移行");
 }

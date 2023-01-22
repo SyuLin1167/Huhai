@@ -43,7 +43,7 @@ int Animation::AddAnimation(string animFileName, float animFps, bool animLoop)
 
     animData.push_back(anim);                                                           //末尾にアニメーションデータ追加
 
-    return static_cast<int>(animData.size());                                               //vectorに入る添え字番号を返す
+    return static_cast<int>(animData.size() - 1);                                               //vectorに入る添え字番号を返す
 }
 
 // @brief アニメーション時間セット //
@@ -73,7 +73,7 @@ void Animation::StartAnim(int animID)
 
         nowAnimType = animID;                                                               //以前のアニメーションとする
         attachedIndex = MV1AttachAnim(modelHandle, animData[animID].animIndex,
-            animData[animID].animHandle, TRUE);                          //アニメーションをアタッチ
+            animData[nowAnimType].animHandle, TRUE);                          //アニメーションをアタッチ
     }
 
     nowAnimTime = 0.0f;                                                                     //時間リセット

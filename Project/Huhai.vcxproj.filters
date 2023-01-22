@@ -73,14 +73,17 @@
     <Filter Include="ソース ファイル\Map">
       <UniqueIdentifier>{4d92cd9d-f4de-4472-87bc-d92b11c6f435}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Map\Block">
-      <UniqueIdentifier>{ffb85d11-90ec-45f5-ae54-ec3ecb396f7b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Map\Map">
       <UniqueIdentifier>{a9c7cd32-58e9-4321-8165-4fa7eea83708}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\Map\Door">
       <UniqueIdentifier>{0de4f457-917f-4fb0-8f73-1d56b393c1ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Map\Furniture">
+      <UniqueIdentifier>{29722970-cfa5-4c1c-8a31-945172bc3b89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Shader">
+      <UniqueIdentifier>{556a2d36-cb5d-4f5c-9dc1-dfbe70f1ca11}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -135,14 +138,17 @@
     <ClCompile Include="..\SourceCode\Grid\Grid.cpp">
       <Filter>ソース ファイル\Grid</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Map\Block\Block.cpp">
-      <Filter>ソース ファイル\Map\Block</Filter>
-    </ClCompile>
     <ClCompile Include="..\SourceCode\Map\Map\Map.cpp">
       <Filter>ソース ファイル\Map\Map</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Map\Door\Door.cpp">
       <Filter>ソース ファイル\Map\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Map\Furniture\Furniture.cpp">
+      <Filter>ソース ファイル\Map\Furniture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Shader\Shader.cpp">
+      <Filter>ソース ファイル\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -197,9 +203,6 @@
     <ClInclude Include="..\SourceCode\Grid\Grid.h">
       <Filter>ソース ファイル\Grid</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Map\Block\Block.h">
-      <Filter>ソース ファイル\Map\Block</Filter>
-    </ClInclude>
     <ClInclude Include="..\SourceCode\Collision\CollisionType.h">
       <Filter>ソース ファイル\Collision</Filter>
     </ClInclude>
@@ -208,6 +211,18 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\Map\Door\Door.h">
       <Filter>ソース ファイル\Map\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Map\Furniture\Furniture.h">
+      <Filter>ソース ファイル\Map\Furniture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Shader\VertexShader.h">
+      <Filter>ソース ファイル\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Shader\PixelShader.h">
+      <Filter>ソース ファイル\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Shader\Shader.h">
+      <Filter>ソース ファイル\Shader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

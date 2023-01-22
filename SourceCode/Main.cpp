@@ -26,9 +26,16 @@ int WINAPI WinMain(_In_ HINSTANCE,_In_opt_ HINSTANCE,_In_ LPSTR,_In_ int)
 	ObjManager::Init();
 	AssetManager::Init();
 
+	// 効果がわかり易いように標準ライトを無効化
+	SetLightEnable(FALSE);
+
+	// Ｘ軸にマイナス方向のディレクショナルタイプのライトの作成
+	int LightHandle = CreatePointLightHandle(VGet(0.0f, 40.0f, 0.0f),100.0f,0.0f,0.0f,0.002f);
+	
+	
 
 	//---シーンループ---//
-	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)		//ウィンドウが閉じられるか、ESCキーが押されるまで実行
+	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)			//ウィンドウが閉じられるか、ESCキーが押されるまで実行
 	{
 
 

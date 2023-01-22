@@ -20,11 +20,12 @@ public:
     ObjectBase(ObjectTag tag);
 
     /// <summary>
-    /// コンストラクタ―(位置セット)
+    /// コンストラクタ―(位置・方向セット)
     /// </summary>
     /// <param name="tag">:タグ</param>
     /// <param name="pos">:座標</param>
-    ObjectBase(ObjectTag tag, VECTOR pos);
+    /// <param name="angle">:方向</param>
+    ObjectBase(ObjectTag tag, VECTOR pos, VECTOR angle = { 0,0,0 });
     
     /// <summary>
     /// デストラクター
@@ -120,19 +121,19 @@ public:
     /// 線分当たり判定
     /// </summary>
     /// <returns>当たり判定Line</returns>
-    Collision::Line GetColLine()const { return colLine; }
+    Line GetColLine()const { return colLine; }
 
     /// <summary>
     /// 球当たり判定
     /// </summary>
     /// <returns>当たり判定Sphere</returns>
-    Collision::Sphere GetColSphere()const { return colSphere; }
+    Sphere GetColSphere()const { return colSphere; }
 
     /// <summary>
     /// カプセル当たり判定
     /// </summary>
     /// <returns>当たり判定Capsule</returns>
-    Collision::Capsule GetColCapsule()const { return colCapsule; }
+    Capsule GetColCapsule()const { return colCapsule; }
 
     /// <summary>
     /// モデル当たり判定
@@ -164,9 +165,10 @@ protected:
 
     //---当たり判定関連---//
     CollisionType colType;                      //当たり判定種
-    Collision::Line colLine;                    //当たり判定Line
-    Collision::Sphere colSphere;                //当たり判定Sphere
-    Collision::Capsule colCapsule;              //当たり判定Capsule
+    Line colLine;                    //当たり判定Line
+    Fan colFan;                      //当たり判定Fan
+    Sphere colSphere;                //当たり判定Sphere
+    Capsule colCapsule;              //当たり判定Capsule
     int colModel;                               //当たり判定Model
 };
 

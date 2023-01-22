@@ -156,8 +156,8 @@
     <ClCompile Include="..\SourceCode\Collision\Collision.cpp" />
     <ClCompile Include="..\SourceCode\Grid\Grid.cpp" />
     <ClCompile Include="..\SourceCode\Main.cpp" />
-    <ClCompile Include="..\SourceCode\Map\Block\Block.cpp" />
     <ClCompile Include="..\SourceCode\Map\Door\Door.cpp" />
+    <ClCompile Include="..\SourceCode\Map\Furniture\Furniture.cpp" />
     <ClCompile Include="..\SourceCode\Map\Map\Map.cpp" />
     <ClCompile Include="..\SourceCode\Math\Math.cpp" />
     <ClCompile Include="..\SourceCode\Object\Camera\CameraFps.cpp" />
@@ -170,6 +170,7 @@
     <ClCompile Include="..\SourceCode\Scene\SceneBase\SceneBase.cpp" />
     <ClCompile Include="..\SourceCode\Scene\SceneManager\SceneManager.cpp" />
     <ClCompile Include="..\SourceCode\Scene\TitleScene\Title.cpp" />
+    <ClCompile Include="..\SourceCode\Shader\Shader.cpp" />
     <ClCompile Include="..\SourceCode\Time\TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -178,8 +179,8 @@
     <ClInclude Include="..\SourceCode\Collision\Collision.h" />
     <ClInclude Include="..\SourceCode\Collision\CollisionType.h" />
     <ClInclude Include="..\SourceCode\Grid\Grid.h" />
-    <ClInclude Include="..\SourceCode\Map\Block\Block.h" />
     <ClInclude Include="..\SourceCode\Map\Door\Door.h" />
+    <ClInclude Include="..\SourceCode\Map\Furniture\Furniture.h" />
     <ClInclude Include="..\SourceCode\Map\Map\Map.h" />
     <ClInclude Include="..\SourceCode\Math\Math.h" />
     <ClInclude Include="..\SourceCode\Object\Camera\CameraFps.h" />
@@ -193,6 +194,9 @@
     <ClInclude Include="..\SourceCode\Scene\SceneBase\SceneBase.h" />
     <ClInclude Include="..\SourceCode\Scene\SceneManager\SceneManager.h" />
     <ClInclude Include="..\SourceCode\Scene\TitleScene\Title.h" />
+    <ClInclude Include="..\SourceCode\Shader\PixelShader.h" />
+    <ClInclude Include="..\SourceCode\Shader\Shader.h" />
+    <ClInclude Include="..\SourceCode\Shader\VertexShader.h" />
     <ClInclude Include="..\SourceCode\Time\TimeManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -10,25 +10,27 @@ CameraFps::CameraFps()
     ,mouseY(0)
     ,movePos{0,0,0}
     ,cameraYaw(0)
-    ,cameraPitch(0)
+    ,cameraPitch(-1)
 {
-    SetCameraNearFar(CameraNear, CameraFar);                                            //カメラの描画範囲設定
+    SetCameraNearFar(CameraNear, CameraFar);                                 //カメラの描画範囲設定
+    SetMouseDispFlag(FALSE);                                                 //マウスは非表示
+
 }
 
 // @brief CameraFps更新処理 //
 
 void CameraFps::Update(float deltaTime)
 {
-    ObjectBase* player = ObjManager::GetFirstObj(ObjectTag::Player);                    //プレイヤーオブジェクト取得
-    if (player)                                                                         //オブジェクトの中身が空でなければ
+    ObjectBase* player = ObjManager::GetFirstObj(ObjectTag::Player);         //プレイヤーオブジェクト取得
+    if (player)                                                              //オブジェクトの中身が空でなければ
     {
         //---カメラ座標設定---//
-        objPos = player->GetPos();                                                      //カメラの位置はプレイヤーの座標
-        objPos.y = 15;                                                                  //高さは目線の位置
+        objPos = player->GetPos();                                           //カメラの位置はプレイヤーの座標
+        objPos.y = 20;                                                       //高さは目線の位置
 
         Move(deltaTime);
         SetCameraPositionAndTarget_UpVecY(objPos, objPos + camLookPos);      //プレイヤーの位置から注視点に向けてカメラをセット
-        objDir = camLookPos;                                                   //カメラの正面方向ベクトル
+        objDir = camLookPos;                                                 //カメラの正面方向ベクトル
     }
     SetMousePoint(ScreenWidth / 2, ScreenHeight / 2);                        //マウス座標を画面の中心にセット
 }
@@ -37,20 +39,19 @@ void CameraFps::Update(float deltaTime)
 
 void CameraFps::Move(float deltaTime)
 {
-        GetMousePoint(&mouseX, &mouseY);                                        //マウス座標取得
-
         //---マウス座標からスクリーン座標の中心を引く---//
-        movePos.x = mouseX - ScreenWidth / 2;
-        movePos.y = mouseY - ScreenHeight / 2;
+        GetMousePoint(&mouseX, &mouseY);                                     //マウス座標取得
+        movePos.x = (float)mouseX - static_cast<float>(ScreenWidth) / 2;
+        movePos.y = (float)mouseY - static_cast<float>(ScreenHeight) / 2;
 
         //---視点移動--//
-        if (abs(movePos.x) > 0)                                                      //マウスカーソルX方向スライド時
+        if (abs(movePos.x) > 0)                                              //マウスカーソルX方向スライド時
         {
-            cameraYaw -= movePos.x *deltaTime* (float)DX_PI/30;                         //カーソルの移動量分水平方向に回転
+            cameraYaw -= movePos.x *deltaTime* DX_PI_F/30;                   //カーソルの移動量分水平方向に回転
         }
-        if (abs(movePos.y) > 0)                                                     //マウスカーソルY方向スライド時
+        if (abs(movePos.y) > 0)                                              //マウスカーソルY方向スライド時
         {
-            cameraPitch -= movePos.y * deltaTime * (float)DX_PI/30;                     //カーソルの移動領分垂直方向に回転
+            cameraPitch -= movePos.y * deltaTime * DX_PI_F/30;               //カーソルの移動量分垂直方向に回転
         }
 
         //---注視点処理---//
