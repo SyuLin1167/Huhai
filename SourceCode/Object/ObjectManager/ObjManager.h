@@ -63,6 +63,13 @@ public:
     static ObjectBase* GetFirstObj(ObjectTag tag);
 
     /// <summary>
+    /// タグ種のtagNum番目のオブジェクト取得
+    /// </summary>
+    /// <param name="tag">:タグ</param>
+    /// <returns>タグ種のtagNum番目のオブジェクト</returns>
+    static ObjectBase* GetObj(ObjectTag tag,int tagNum);
+    
+    /// <summary>
     /// ObjManagerの解放
     /// </summary>
     static void Finalize();

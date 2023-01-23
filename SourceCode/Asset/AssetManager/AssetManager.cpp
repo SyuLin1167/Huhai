@@ -93,13 +93,13 @@ void AssetManager::ReleaseMesh(int meshID)
 void AssetManager::ReleaseAllAsset()
 {
     //---アニメーション解放---//
-    for (auto anim : assetInstance->animMap)
+    for (auto& anim : assetInstance->animMap)
     {
         MV1DeleteModel(anim.second);
     }
 
     //---メッシュ解放---//
-    for (auto mesh : assetInstance->meshMap)
+    for (auto& mesh : assetInstance->meshMap)
     {
         MV1DeleteModel(mesh.second);
     }

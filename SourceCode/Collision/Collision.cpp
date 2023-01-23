@@ -29,34 +29,6 @@ void Line::Move(const VECTOR& pos)
     worldEnd = localEnd + pos;              //ワールド座標終点移動
 }
 
-//---扇型当たり判定関連---//
-// @brief Fanコンストラクター //
-
-Fan::Fan()
-    :localCenter()
-    , worldCenter()
-    , Range()
-    , Radius()
-{
-}
-
-// @brief Fanコンストラクター(引数付) //
-
-Fan::Fan(const VECTOR& center, float radius)
-    :localCenter(center)
-    , worldCenter(center)
-    , Range()
-    , Radius(radius)
-{
-}
-
-// @brief Fan移動処理 //
-
-void Fan::Move(const VECTOR& pos)
-{
-    worldCenter = localCenter + pos;        //ワールド中心座標移動
-}
-
 //---球体当たり判定関連---//
 // @brief Sphereコンストラクター //
 
@@ -145,24 +117,6 @@ bool CollisionPair(const Line& line, const int modelHandle, MV1_COLL_RESULT_POLY
         line.worldStart, line.worldEnd);
     return colInfo.HitFlag;
 }
-
-// @brief 扇型&座標当たり判定 //
-
-bool CollisionPair(const Fan& fan, const VECTOR& targetPos, const VECTOR& dir)
-{
-    VECTOR direction=targetPos - fan.worldCenter;
-    float targetLength = VSize(direction);
-    if (fan.Radius > targetLength)
-    {
-        float dot = VDot(direction, dir);
-        if (dot<dir.x * cosf(fan.Radius) && dot>dir.z * sinf(fan.Radius))
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
 // @brief モデル＆線分当たり判定 //
 
 bool CollisionPair( const int modelHandle,const Line& line, MV1_COLL_RESULT_POLY& colInfo)
@@ -187,7 +141,6 @@ bool CollisionPair(const Sphere& sphere, const int modelHandle, MV1_COLL_RESULT_
 VECTOR CalcSpherePushBackFromMesh(const Sphere& sphere, const MV1_COLL_RESULT_POLY_DIM& colInfo)
 {
     VECTOR planeNormal;                //平面法線
-    VECTOR pushOut;                    //押し出し
     VECTOR canditateCenter = sphere.worldCenter;                                           //球中心候補を球体の中心座標にする 
     float Rad = sphere.Radius;                                                            //球半径
 

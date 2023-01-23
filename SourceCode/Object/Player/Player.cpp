@@ -168,7 +168,7 @@ void Player::Move(float deltaTime)
     }
     else
     {
-        inputVel *= 0.9f;                                           //™X‚ÉŒ¸‘¬
+        inputVel *= 0;                                           //™X‚ÉŒ¸‘¬
     }
     objPos += inputVel;                                             //ˆÚ“®
 }

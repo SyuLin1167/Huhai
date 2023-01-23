@@ -91,10 +91,6 @@ void ObjManager::Update(float deltaTime)
 		{
 			objInstance->Object[tag][i]->Update(deltaTime);
 		}
-		//for (auto obj : objInstance->Object[tag])			//すべてのアクターの更新
-		//{
-		//	obj->Update(deltaTime);								//該当タグにあるすべてのオブジェクトを更新
-		//}
 	}
 	for (auto holding : objInstance->holdObj)		//一時保存中のオブジェクトをアクティブリストに追加
 	{
@@ -123,14 +119,6 @@ void ObjManager::Dead()
 					deadObj.emplace_back(objInstance->Object[tag][i]);
 				}
 			}
-			//if (alive->IsAlive())						//オブジェクトが生きていなかったら
-			//{
-			//	deadObj.emplace_back(objInstance->Object[tag]);		//死亡オブジェクトへ移動
-
-			//	objInstance->Object[tag].erase(
-			//		remove_if(objInstance->Object[tag].begin(), objInstance->Object[tag].end(),
-			//			[](ObjectBase* gObj) {return !gObj->IsAlive(); }), objInstance->Object[tag].cend());
-			//}
 		}
 	}
 
@@ -155,10 +143,6 @@ void ObjManager::Draw()
 				objInstance->Object[tag][i]->Draw();
 			}
 		}
-		//for (auto obj : objInstance->Object[tag])			//全てのアクターの描画
-		//{
-		//	obj->Draw();										//該当タグにある全てのオブジェクトを描画
-		//}
 	}
 }
 

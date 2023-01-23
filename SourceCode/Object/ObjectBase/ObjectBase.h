@@ -166,7 +166,6 @@ protected:
     //---“–‚½‚è”»’èŠÖ˜A---//
     CollisionType colType;                      //“–‚½‚è”»’èŽí
     Line colLine;                    //“–‚½‚è”»’èLine
-    Fan colFan;                      //“–‚½‚è”»’èFan
     Sphere colSphere;                //“–‚½‚è”»’èSphere
     Capsule colCapsule;              //“–‚½‚è”»’èCapsule
     int colModel;                               //“–‚½‚è”»’èModel

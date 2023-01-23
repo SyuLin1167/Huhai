@@ -21,16 +21,16 @@ int WINAPI WinMain(_In_ HINSTANCE,_In_opt_ HINSTANCE,_In_ LPSTR,_In_ int)
 	SetUseZBuffer3D(TRUE);									//Zバッファを有効にする
 	SetWriteZBuffer3D(TRUE);								//Zバッファ絵の書き込みを有効にする
 
-	//管理クラスの初期化処理//
+	//---管理クラスの初期化処理---//
 	SceneManager* sceneManager = new SceneManager();
 	ObjManager::Init();
 	AssetManager::Init();
 
-	// 効果がわかり易いように標準ライトを無効化
-	SetLightEnable(FALSE);
+	//標準ライトを無効化
+	//SetLightEnable(FALSE);
 
 	// Ｘ軸にマイナス方向のディレクショナルタイプのライトの作成
-	int LightHandle = CreatePointLightHandle(VGet(0.0f, 40.0f, 0.0f),100.0f,0.0f,0.0f,0.002f);
+	int LightHandle = CreatePointLightHandle(VGet(0.0f, 50.0f, 0.0f),100.0f,0.0f,0.0f,0.002f);
 	
 	
 

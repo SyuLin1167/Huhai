@@ -1,5 +1,7 @@
 #pragma once
 #include<DxLib.h>
+#include<vector>
+
 #include"../../Asset/AssetManager/AssetManager.h"
 #include"../../Object/ObjectBase/ObjectBase.h"
 #include"../../Object/ObjectManager/ObjManager.h"
@@ -55,6 +57,6 @@ private:
 	class Animation* doorAnim;			//アニメーション
 	int animType;						//アニメーション状態
 
-	class Collision* doorCol;
+	vector<int>doorObj{1,2,3};
 };
 

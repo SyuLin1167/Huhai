@@ -30,9 +30,11 @@ Play::Play()
     ObjManager::Entry(new Map(VGet(0, 0, 0)));
 
     //---ƒhƒA‚ğ¶¬---//
-    ObjManager::Entry(new Door(VGet(40, 0, 0),VGet(0,0,0)));
-    ObjManager::Entry(new Door(VGet(120, 0, 0),VGet(0,0,0)));
-
+    ObjManager::Entry(new Door(VGet(20, 0, 0),VGet(0,0,0)));
+    ObjManager::Entry(new Door(VGet(100, 0, 0),VGet(0,0,0)));
+    ObjManager::Entry(new Door(VGet(0, 0, 60), VGet(0, 0, 0)));
+    ObjManager::Entry(new Door(VGet(70, 0, 90), VGet(0, 90, 0)));
+    
     //---‰Æ‹ï‚ğ¶¬---//
     ObjManager::Entry(new Furniture(VGet(0, 0, 0)));
 

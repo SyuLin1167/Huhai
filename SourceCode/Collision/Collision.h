@@ -31,33 +31,6 @@
         VECTOR worldEnd;                    //線分のワールド座標終点
     };
 
-    /*扇型の構造体*/
-    struct Fan
-    {
-        /// <summary>
-        /// Fanコンストラクター
-        /// </summary>
-        Fan();
-
-        /// <summary>
-        /// Fanコンストラクター(引数付き)
-        /// </summary>
-        /// <param name="center">:中心座標</param>
-        /// <param name="radius">:半径</param>
-        Fan(const VECTOR& center,float radius);
-        
-        /// <summary>
-        /// Fan移動処理
-        /// </summary>
-        /// <param name="pos">:扇型の移動座標</param>
-        void Move(const VECTOR& pos);
-
-        VECTOR localCenter;                 //扇型のローカル中心座標
-        VECTOR worldCenter;                 //扇型のワールド中心座標
-        float Range;                        //扇型の範囲
-        float Radius;                       //扇型の半径
-    };
-
     /*球体の構造体*/
     struct Sphere
     {
@@ -145,14 +118,6 @@
     /// <param name="colInfo">:当たり判定情報</param>
     /// <returns>ぶつかっているかどうか</returns>
     bool CollisionPair(const Line& line, const int modelHandle,MV1_COLL_RESULT_POLY& colInfo);
-
-    /// <summary>
-    /// 扇型&座標当たり判定
-    /// </summary>
-    /// <param name="fan">:扇型</param>
-    /// <param name="targetPos">:ターゲット座標</param>
-    /// <returns>ぶつかっているかどうか</returns>
-    bool CollisionPair(const Fan& fan, const VECTOR& targetPos, const VECTOR& dir);
 
     /// <summary>
     /// モデル＆線分当たり判定
