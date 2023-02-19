@@ -58,32 +58,47 @@
     <Filter Include="ソース ファイル\Asset\Animation">
       <UniqueIdentifier>{37e8efb2-1ef2-494f-ab24-fd904da31a91}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Object\Player">
-      <UniqueIdentifier>{e98576d1-6521-411a-9d59-5e615fdcc343}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Object\Enemy">
-      <UniqueIdentifier>{f917cab7-6243-490e-9275-c8b63a4ab27b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Object\Camera">
-      <UniqueIdentifier>{80d483bb-6973-4737-85de-b4075b275aff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Grid">
       <UniqueIdentifier>{f9bbd91f-5c1d-47fa-a217-85efabd3518e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Map">
+    <Filter Include="ソース ファイル\MapObject">
       <UniqueIdentifier>{4d92cd9d-f4de-4472-87bc-d92b11c6f435}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Map\Map">
+    <Filter Include="ソース ファイル\MapObject\Map">
       <UniqueIdentifier>{a9c7cd32-58e9-4321-8165-4fa7eea83708}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Map\Door">
+    <Filter Include="ソース ファイル\MapObject\Door">
       <UniqueIdentifier>{0de4f457-917f-4fb0-8f73-1d56b393c1ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Map\Furniture">
+    <Filter Include="ソース ファイル\MapObject\Chair">
+      <UniqueIdentifier>{eb7850c5-e5bd-4350-8b80-e18522b23314}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MapObject\MapFurniture">
       <UniqueIdentifier>{29722970-cfa5-4c1c-8a31-945172bc3b89}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Shader">
-      <UniqueIdentifier>{556a2d36-cb5d-4f5c-9dc1-dfbe70f1ca11}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\MapObject\Light">
+      <UniqueIdentifier>{31d0ad34-f01f-452b-b4b6-8e6b4969cc4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Shade">
+      <UniqueIdentifier>{f9edbb69-2e09-49b9-892e-46156e1ed855}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Shade\Bloome">
+      <UniqueIdentifier>{146f558f-2ab1-4ec3-8b89-de79b6e057b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MapObject\Light\Base">
+      <UniqueIdentifier>{0d5baf56-9cae-4fd8-b28c-51a66e49556b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CharaObject">
+      <UniqueIdentifier>{3757061b-60df-484c-9b5b-17ec897e1d1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CharaObject\Player">
+      <UniqueIdentifier>{e98576d1-6521-411a-9d59-5e615fdcc343}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CharaObject\Enemy">
+      <UniqueIdentifier>{f917cab7-6243-490e-9275-c8b63a4ab27b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CharaObject\Camera">
+      <UniqueIdentifier>{80d483bb-6973-4737-85de-b4075b275aff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -123,32 +138,38 @@
     <ClCompile Include="..\SourceCode\Asset\Animation\Animation.cpp">
       <Filter>ソース ファイル\Asset\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Object\Player\Player.cpp">
-      <Filter>ソース ファイル\Object\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\Object\Enemy\Enemy.cpp">
-      <Filter>ソース ファイル\Object\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="..\SourceCode\Asset\AssetManager\AssetManager.cpp">
       <Filter>ソース ファイル\Asset\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\Object\Camera\CameraFps.cpp">
-      <Filter>ソース ファイル\Object\Camera</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Grid\Grid.cpp">
       <Filter>ソース ファイル\Grid</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Map\Map\Map.cpp">
-      <Filter>ソース ファイル\Map\Map</Filter>
+    <ClCompile Include="..\SourceCode\Shade\Bloom\Bloom.cpp">
+      <Filter>ソース ファイル\Shade\Bloome</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Map\Door\Door.cpp">
-      <Filter>ソース ファイル\Map\Door</Filter>
+    <ClCompile Include="..\SourceCode\Object\MapObject\Door\Door.cpp">
+      <Filter>ソース ファイル\MapObject\Door</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Map\Furniture\Furniture.cpp">
-      <Filter>ソース ファイル\Map\Furniture</Filter>
+    <ClCompile Include="..\SourceCode\Object\MapObject\Chair\Chair.cpp">
+      <Filter>ソース ファイル\MapObject\Chair</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Shader\Shader.cpp">
-      <Filter>ソース ファイル\Shader</Filter>
+    <ClCompile Include="..\SourceCode\Object\MapObject\Map\Map.cpp">
+      <Filter>ソース ファイル\MapObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\MapObject\Furniture\MapFur.cpp">
+      <Filter>ソース ファイル\MapObject\MapFurniture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\CharaObject\Camera\CameraFps.cpp">
+      <Filter>ソース ファイル\CharaObject\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\CharaObject\Enemy\Enemy.cpp">
+      <Filter>ソース ファイル\CharaObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\CharaObject\Player\Player.cpp">
+      <Filter>ソース ファイル\CharaObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\MapObject\Light\NomalLight\NomalLight.cpp">
+      <Filter>ソース ファイル\MapObject\Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -188,17 +209,8 @@
     <ClInclude Include="..\SourceCode\Asset\Animation\Animation.h">
       <Filter>ソース ファイル\Asset\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Object\Player\Player.h">
-      <Filter>ソース ファイル\Object\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\Object\Enemy\Enemy.h">
-      <Filter>ソース ファイル\Object\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="..\SourceCode\Asset\AssetManager\AssetManager.h">
       <Filter>ソース ファイル\Asset\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\Object\Camera\CameraFps.h">
-      <Filter>ソース ファイル\Object\Camera</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Grid\Grid.h">
       <Filter>ソース ファイル\Grid</Filter>
@@ -206,23 +218,32 @@
     <ClInclude Include="..\SourceCode\Collision\CollisionType.h">
       <Filter>ソース ファイル\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Map\Map\Map.h">
-      <Filter>ソース ファイル\Map\Map</Filter>
+    <ClInclude Include="..\SourceCode\Shade\Bloom\Bloom.h">
+      <Filter>ソース ファイル\Shade\Bloome</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Map\Door\Door.h">
-      <Filter>ソース ファイル\Map\Door</Filter>
+    <ClInclude Include="..\SourceCode\Object\MapObject\Door\Door.h">
+      <Filter>ソース ファイル\MapObject\Door</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Map\Furniture\Furniture.h">
-      <Filter>ソース ファイル\Map\Furniture</Filter>
+    <ClInclude Include="..\SourceCode\Object\MapObject\Chair\Chair.h">
+      <Filter>ソース ファイル\MapObject\Chair</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Shader\VertexShader.h">
-      <Filter>ソース ファイル\Shader</Filter>
+    <ClInclude Include="..\SourceCode\Object\MapObject\Map\Map.h">
+      <Filter>ソース ファイル\MapObject\Map</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Shader\PixelShader.h">
-      <Filter>ソース ファイル\Shader</Filter>
+    <ClInclude Include="..\SourceCode\Object\MapObject\Furniture\MapFur.h">
+      <Filter>ソース ファイル\MapObject\MapFurniture</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Shader\Shader.h">
-      <Filter>ソース ファイル\Shader</Filter>
+    <ClInclude Include="..\SourceCode\Object\CharaObject\Camera\CameraFps.h">
+      <Filter>ソース ファイル\CharaObject\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\CharaObject\Enemy\Enemy.h">
+      <Filter>ソース ファイル\CharaObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\CharaObject\Player\Player.h">
+      <Filter>ソース ファイル\CharaObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\MapObject\Light\NomalLight\NomalLight.h">
+      <Filter>ソース ファイル\MapObject\Light</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

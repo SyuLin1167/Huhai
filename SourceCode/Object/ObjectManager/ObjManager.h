@@ -46,7 +46,7 @@ public:
     static void Dead();
 
     /// <summary>
-    /// 全オブジェクトの描画処理
+    /// オブジェクトの描画処理
     /// </summary>
     static void Draw();
 
@@ -61,13 +61,6 @@ public:
     /// <param name="tag">:タグ</param>
     /// <returns>タグ種の最初のオブジェクト</returns>
     static ObjectBase* GetFirstObj(ObjectTag tag);
-
-    /// <summary>
-    /// タグ種のtagNum番目のオブジェクト取得
-    /// </summary>
-    /// <param name="tag">:タグ</param>
-    /// <returns>タグ種のtagNum番目のオブジェクト</returns>
-    static ObjectBase* GetObj(ObjectTag tag,int tagNum);
     
     /// <summary>
     /// ObjManagerの解放

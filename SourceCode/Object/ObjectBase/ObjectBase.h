@@ -5,8 +5,8 @@
 #include"../../Collision/Collision.h"
 #include"../../Collision/CollisionType.h"
 
-const int ScreenWidth = 1920;		//スクリーン幅指定
-const int ScreenHeight = 1080;		//スクリーン高さ指定
+#define SCREEN_WIDTH 1920       //スクリーン幅指定
+#define SCREEN_HEIGHT 1080      //スクリーン高さ指定
 //---スクリーンサイズの例: 640*480, 800*600, 1024*768, 1280*1024, 1280*720, 1920*1080---//
 
 /*親クラス*/
@@ -57,6 +57,12 @@ public:
     void SetDir(const VECTOR dir) { objDir = dir; }
 
     /// <summary>
+    /// 動くオブジェクト判定
+    /// </summary>
+    /// <returns></returns>
+    bool IsMove() { return moveModel; }
+
+    /// <summary>
     /// 可視化判定
     /// </summary>
     /// <returns>可視化状態</returns>
@@ -79,6 +85,7 @@ public:
     /// </summary>
     /// <param name="alive">:生きているかどうか</param>
     void SetAlive(bool alive) { isAlive = alive; }
+
 
     /// <summary>
     /// 更新処理
@@ -163,6 +170,7 @@ protected:
     bool isVisible;                             //可視化状態
     bool isAlive;                               //生死状態
 
+    bool moveModel;                             //動くオブジェクトかどうか
     //---当たり判定関連---//
     CollisionType colType;                      //当たり判定種
     Line colLine;                    //当たり判定Line

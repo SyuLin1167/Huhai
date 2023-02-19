@@ -91,7 +91,7 @@ void Animation::StopAnim()
 
 bool Animation::IsPlaying()
 {
-    if (animData[nowAnimType].isLoop && nowAnimTime > animData[nowAnimType].totalTime)      //ループ再生可能で、時刻が総再生時間を超えたら
+    if (animData[nowAnimType].isLoop || nowAnimTime > animData[nowAnimType].totalTime)      //ループ再生可能で、時刻が総再生時間を超えたら
     {
         return false;                                                                       //再生中でないfalseを返す
     }

@@ -129,6 +129,7 @@ void ObjManager::Dead()
 	deadObj.clear();											//全て削除し終わったら死亡オブジェクト内を空にする
 }
 
+
 // @brief オブジェクトの描画処理 //
 
 void ObjManager::Draw()
@@ -137,11 +138,13 @@ void ObjManager::Draw()
 	{
 		for (int i = 0; i < objInstance->Object[tag].size(); ++i)
 		{
-			// 描画可能なオブジェクトのみ描画
+
+
 			if (objInstance->Object[tag][i]->IsVisible())
 			{
 				objInstance->Object[tag][i]->Draw();
 			}
+
 		}
 	}
 }
@@ -162,6 +165,11 @@ void ObjManager::Collision()
 		{
 			objInstance->Object[ObjectTag::Player][plyNum]->
 				OnCollisionEnter(objInstance->Object[ObjectTag::Door][doorNum]);
+		}
+		for (int chairNum = 0; chairNum < objInstance->Object[ObjectTag::Chair].size(); ++chairNum)
+		{
+			objInstance->Object[ObjectTag::Player][plyNum]->
+				OnCollisionEnter(objInstance->Object[ObjectTag::Chair][chairNum]);
 		}
 		for (int furNum = 0; furNum < objInstance->Object[ObjectTag::Furniture].size(); ++furNum)
 		{

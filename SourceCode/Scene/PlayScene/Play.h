@@ -4,20 +4,15 @@
 #include"../../Object/ObjectManager/ObjManager.h"
 #include "../../Collision/Collision.h"
 
-class CameraFps;
-class Player;
-class Enemy;
-class Collision;
-class Grid;
-
+    class CameraFps;
+    class Player;
+    class Enemy;
+    class Collision;
 /* プレイシーンのクラス */
 class Play :public SceneBase
 {
-    CameraFps* camFps = nullptr;
-    Player* player = nullptr;                     //プレイヤー
-    Enemy* enemy = nullptr;                       //エネミー
-    Collision* col = nullptr;
-    Grid* grid=nullptr;
+    class Grid* grid = nullptr;
+
 
 public:
     /// <summary>

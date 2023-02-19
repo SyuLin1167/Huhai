@@ -6,7 +6,7 @@
 Title::Title()
     :SceneBase()
 {
-    BgHandle = LoadGraph("../SourceCode/Assets/BackGround/Title.png");
+    BgHandle = LoadGraph("../Assets/BackGround/Title.png");
 }
 
 // @brief TitleSceneデストラクター //

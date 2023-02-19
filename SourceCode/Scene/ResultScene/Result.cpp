@@ -6,7 +6,7 @@
 Result::Result()
     :SceneBase()
 {
-    BgHandle = LoadGraph("../SourceCode/Assets/BackGround/Result.png");
+    BgHandle = LoadGraph("../Assets/BackGround/Result.png");
 }
 
 // @brief ResultSceneデストラクター //
