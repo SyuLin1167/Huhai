@@ -70,11 +70,15 @@ SceneBase* Play::Update(float deltaTime)
     ObjectBase* man = ObjManager::GetFirstObj(ObjectTag::Man);
     if (man)                               //Ｒキーが押されたら
     {
-        if (!man->IsVisible())
+        ObjectBase* remarks = ObjManager::GetObj(ObjectTag::UI, 1);
+        if (remarks)
         {
-            AssetManager::ReleaseAllAsset();            //全てのアセットの開放
-            ObjManager::ReleaseAllObj();                //全てのオブジェクトの開放
-            return new Result();                        //リザルト画面へ
+            if (!remarks->IsAlive())
+            {
+                AssetManager::ReleaseAllAsset();            //全てのアセットの開放
+                ObjManager::ReleaseAllObj();                //全てのオブジェクトの開放
+                return new Result();                        //リザルト画面へ
+            }
         }
     }
 

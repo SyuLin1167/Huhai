@@ -5,6 +5,10 @@
 Player::Player()
     :ObjectBase(ObjectTag::Player)
     , inputVec{ 0,0,0 }
+    , UP{ 0,0,0 }
+    , DOWN{ 0,0,0 }
+    , LEFT{ 0,0,0 }
+    , RIGHT{ 0,0,0 }
     , inputVel{ 0,0,0 }
     , inputKey(false)
     , nowRoted(false)
