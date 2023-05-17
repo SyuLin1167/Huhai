@@ -152,16 +152,16 @@ VECTOR CalcSpherePushBackFromMesh(const Sphere& sphere, const MV1_COLL_RESULT_PO
     {
         //---衝突ポリゴンの辺---// 
         VECTOR edge1, edge2;                                                        //衝突ポリゴンの辺
-        edge1 = colInfo.Dim[i].Position[1] - colInfo.Dim[i].Position[0];            //辺pos0・pos1ベクトル
-        edge2 = colInfo.Dim[i].Position[2] - colInfo.Dim[i].Position[0];            //辺pos0・pos2ベクトル
+        edge1 = colInfo.Dim[i].Position[1] - colInfo.Dim[i].Position[0];            //辺(pos0・pos1)ベクトル
+        edge2 = colInfo.Dim[i].Position[2] - colInfo.Dim[i].Position[0];            //辺(pos0・pos2)ベクトル
 
         planeNormal = VCross(edge1, edge2);                                         //辺からポリゴン面の法線ベクトル算出
         planeNormal = VNorm(planeNormal);                                           //法線ベクトル正規化
 
         //---球中心に最も近いポリゴン平面の点を算出---//
-        VECTOR calc1, calc2;                                                        //算出
-        // 球中心に最も近いポリゴン平面の点を求める
-        calc1 = canditateCenter - colInfo.Dim[i].Position[0];                       //辺pos0・球中心ベクトル
+        VECTOR calc1, calc2;                                                        //算出ベクトル
+
+        calc1 = canditateCenter - colInfo.Dim[i].Position[0];                       //辺(pos0・球中心)ベクトル
         float  dot = VDot(planeNormal, calc1);                                      //法線と辺の内積
 
         VECTOR hitPos = canditateCenter - planeNormal * dot;                        //衝突点

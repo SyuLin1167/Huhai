@@ -6,6 +6,7 @@ ObjManager* ObjManager::objInstance = nullptr;				//ObjManager実体へのポインタ定
 
 ObjManager::ObjManager()
 	:Object()
+	,holdObj()
 {
 	objInstance = nullptr;
 }
@@ -14,7 +15,6 @@ ObjManager::ObjManager()
 
 ObjManager::~ObjManager()
 {
-	ReleaceAllObj();										//すべてのオブジェクトを削除
 }
 
 // @brief ObjManager初期化処理 //
@@ -62,7 +62,7 @@ void ObjManager::Release(ObjectBase* releaseObj)
 
 // @brief 全オブジェクト削除 //
 
-void ObjManager::ReleaceAllObj()
+void ObjManager::ReleaseAllObj()
 {
 	while (!objInstance->holdObj.empty())					//一時保存オブジェクト内が空になるまで
 	{
@@ -84,6 +84,7 @@ void ObjManager::ReleaceAllObj()
 
 void ObjManager::Update(float deltaTime)
 {
+	//すべてのタグ分以下の処理をする
 	for (auto& tag : ObjTagAll)
 	{
 		// 該当タグにあるすべてのオブジェクトを更新
@@ -109,24 +110,23 @@ void ObjManager::Dead()
 	vector<ObjectBase*>deadObj;										//死亡オブジェクト
 	for (auto& tag : ObjTagAll)
 	{
-		for (auto alive: objInstance->Object[tag])			//死亡しているオブジェクトを検索
-		{
 			// タグ内をすべて回り、死亡Objectを検索し、deadObjectsへ
-			for (int i = 0; i < objInstance->Object[tag].size(); ++i)
+		for (auto obj:objInstance->Object[tag])
+		{
+			if (!obj->IsAlive())
 			{
-				if (!objInstance->Object[tag][i]->IsAlive())
-				{
-					deadObj.emplace_back(objInstance->Object[tag][i]);
-				}
+				deadObj.emplace_back(obj);
 			}
 		}
+		objInstance->Object[tag].erase(remove_if(begin(objInstance->Object[tag]), end(objInstance->Object[tag]),
+			[](ObjectBase* dead) {return !dead->IsAlive(); }), cend(objInstance->Object[tag]));
 	}
 
-	for (auto dead : deadObj)							//死亡オブジェクトを削除
+	while (!deadObj.empty())
 	{
-		delete dead;											//削除
+		delete deadObj.back();
+		deadObj.pop_back();
 	}
-	deadObj.clear();											//全て削除し終わったら死亡オブジェクト内を空にする
 }
 
 
@@ -138,8 +138,6 @@ void ObjManager::Draw()
 	{
 		for (int i = 0; i < objInstance->Object[tag].size(); ++i)
 		{
-
-
 			if (objInstance->Object[tag][i]->IsVisible())
 			{
 				objInstance->Object[tag][i]->Draw();
@@ -154,22 +152,30 @@ void ObjManager::Draw()
 void ObjManager::Collision()
 {
 	//---当たり判定の組み合わせ---//
+	//---Ghost---//
+	for (int gstNum = 0; gstNum < objInstance->Object[ObjectTag::Ghost].size(); ++gstNum)
+	{
+
+		for (int mapNum = 0; mapNum < objInstance->Object[ObjectTag::Map].size(); ++mapNum)
+		{
+			objInstance->Object[ObjectTag::Ghost][gstNum]->
+				OnCollisionEnter(objInstance->Object[ObjectTag::Map][mapNum]);
+		}
+		for (int plyNum = 0; plyNum < objInstance->Object[ObjectTag::Player].size(); ++plyNum)
+		{
+			objInstance->Object[ObjectTag::Ghost][gstNum]->
+				OnCollisionEnter(objInstance->Object[ObjectTag::Player][plyNum]);
+		}
+
+	}
+
+	//---Player---//
 	for (int plyNum = 0; plyNum < objInstance->Object[ObjectTag::Player].size(); ++plyNum)
 	{
 		for (int mapNum = 0; mapNum < objInstance->Object[ObjectTag::Map].size(); ++mapNum)
 		{
 			objInstance->Object[ObjectTag::Player][plyNum]->
 				OnCollisionEnter(objInstance->Object[ObjectTag::Map][mapNum]);
-		}
-		for (int doorNum = 0; doorNum < objInstance->Object[ObjectTag::Door].size(); ++doorNum)
-		{
-			objInstance->Object[ObjectTag::Player][plyNum]->
-				OnCollisionEnter(objInstance->Object[ObjectTag::Door][doorNum]);
-		}
-		for (int chairNum = 0; chairNum < objInstance->Object[ObjectTag::Chair].size(); ++chairNum)
-		{
-			objInstance->Object[ObjectTag::Player][plyNum]->
-				OnCollisionEnter(objInstance->Object[ObjectTag::Chair][chairNum]);
 		}
 		for (int furNum = 0; furNum < objInstance->Object[ObjectTag::Furniture].size(); ++furNum)
 		{
@@ -190,11 +196,22 @@ ObjectBase* ObjManager::GetFirstObj(ObjectTag tag)
 	return objInstance->Object[tag][0];				//タグ種の最初のオブジェクトを返す
 }
 
+// @brief タグ種のtagNum番目のオブジェクト取得 //
+
+ObjectBase* ObjManager::GetObj(ObjectTag tag, int tagNum)
+{
+	if (objInstance->Object[tag].size() == 0)		//オブジェクトの数が0だったら
+	{
+		return nullptr;								//空なのでnullptrを返す
+	}
+	return objInstance->Object[tag][tagNum];		//タグ種のtagNum番目のオブジェクトを返す
+}
+
 // @birief ObjManagerの開放 //
 
 void ObjManager::Finalize()
 {
-	ReleaceAllObj();										//全てのオブジェクト開放
+	ReleaseAllObj();										//全てのオブジェクト開放
 	if (objInstance)										//objManagerに実態があったら
 	{
 		delete objInstance;									//削除

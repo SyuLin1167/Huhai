@@ -68,16 +68,16 @@ void Animation::StartAnim(int animID)
     {
         if (nowAnimType != -1)                                                              //現在のアニメーションが空じゃなかったら
         {
-            MV1DetachAnim(modelHandle, attachedIndex);                      //デタッチ
+            MV1DetachAnim(modelHandle, attachedIndex);                                      //デタッチ
         }
 
         nowAnimType = animID;                                                               //以前のアニメーションとする
         attachedIndex = MV1AttachAnim(modelHandle, animData[animID].animIndex,
-            animData[nowAnimType].animHandle, TRUE);                          //アニメーションをアタッチ
+            animData[nowAnimType].animHandle, TRUE);                                        //アニメーションをアタッチ
     }
 
     nowAnimTime = 0.0f;                                                                     //時間リセット
-    MV1SetAttachAnimTime(modelHandle, attachedIndex, nowAnimTime);          //アタッチしているアニメーションの時間設定
+    MV1SetAttachAnimTime(modelHandle, attachedIndex, nowAnimTime);                          //アタッチしているアニメーションの時間設定
 }
 
 // @brief アニメーション停止 //

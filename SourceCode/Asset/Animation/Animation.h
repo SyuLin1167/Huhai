@@ -11,22 +11,23 @@ class Animation
 {
 public:
 	/// <summary>
-	/// Animationコンストラクタ―
+	/// Animationコンストラクタ
 	/// </summary>
+	/// <param name="modelHandle">:モデルハンドル</param>
 	Animation(int modelHandle);
 
 	/// <summary>
-	/// Animationデストラクタ―
+	/// Animationデストラクタ
 	/// </summary>
 	~Animation();
 
 	/// <summary>
 	/// アニメーション追加処理
 	/// </summary>
-	/// <param name="fileName">:ファイル名</param>
+	/// <param name="animFileName">:アニメーションファイル名</param>
 	/// <param name="animFps">:再生フレームレート(デフォルト・30fps)</param>
 	/// <param name="animLoop">:ループ再生(デフォルト・ループさせる)</param>
-	/// <returns></returns>
+	/// <returns>animData配列の添え字番号</returns>
 	int AddAnimation(string animFileName, float animFps = 30.0f, bool animLoop = true);
 
 	/// <summary>
@@ -60,6 +61,7 @@ public:
 		/// AnimDataコンストラクタ―
 		/// </summary>
 		AnimData();
+
 		int animHandle;			//アニメーションハンドル
 		int animIndex;			//アタッチするアニメーション番号
 		float totalTime;		//総再生時間

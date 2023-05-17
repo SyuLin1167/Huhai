@@ -6,12 +6,11 @@ ObjectBase::ObjectBase(ObjectTag tag)
     :objTag(tag)
     , objHandle(-1)
     , objPos{ 0,0,0 }
-    , objDir{ 0,0,0 }
+    , objDir{ 1,0,0 }
     , objScale{ 0.1f,0.1f,0.1f }
     , objSpeed(20.0f)
     , isVisible(true)
     , isAlive(true)
-    , moveModel(false)
     , colType()
     , colLine()
     , colSphere()
@@ -31,7 +30,6 @@ ObjectBase::ObjectBase(ObjectTag tag, VECTOR pos, VECTOR angle)
     , objSpeed(20.0f)
     , isVisible(true)
     , isAlive(true)
-    , moveModel(false)
     , colType()
     , colLine()
     , colSphere()

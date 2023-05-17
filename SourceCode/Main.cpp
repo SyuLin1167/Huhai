@@ -1,4 +1,4 @@
-#include"DxLib.h"
+#include<DxLib.h>
 #include"Scene/SceneManager/SceneManager.h"
 #include"Object/ObjectManager/ObjManager.h"
 #include"Asset/AssetManager/AssetManager.h"
@@ -6,12 +6,14 @@
 int WINAPI WinMain(_In_ HINSTANCE,_In_opt_ HINSTANCE,_In_ LPSTR,_In_ int)
 {
 
-    SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, ColorBit);        //画面モードのセット
+    SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, ColorBit);    //画面モードのセット
+    SetWindowSizeExtendRate(1.0);
 
+    SetUseDirect3DVersion(DX_DIRECT3D_11);					//使用するDirect3Dのバージョン設定
+    ChangeWindowMode(TRUE);									//ウィンドウモードの変更
+    SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32);			//画面の解像度と色ビットと深度を設定
 
-	SetUseDirect3DVersion(DX_DIRECT3D_11);					//使用するDirect3Dのバージョン設定
-	ChangeWindowMode(TRUE);									//ウィンドウモードの変更
-	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32);			//画面の解像度と色ビットと深度を設定
+	SetFullSceneAntiAliasingMode(4, 2);                     //アンチエイリアスを設定
 
     //---DXライブラリ初期化---//
 	if (DxLib_Init() == -1)
@@ -27,8 +29,8 @@ int WINAPI WinMain(_In_ HINSTANCE,_In_opt_ HINSTANCE,_In_ LPSTR,_In_ int)
 
 	//---管理クラスの初期化処理---//
 	SceneManager* sceneManager = new SceneManager;
-	ObjManager::Init();
 	AssetManager::Init();
+	ObjManager::Init();
 
 	//標準ライトを無効化
 	SetLightEnable(FALSE);

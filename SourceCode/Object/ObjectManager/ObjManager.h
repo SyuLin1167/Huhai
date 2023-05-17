@@ -1,7 +1,6 @@
 #pragma once
 #include<vector>
 #include<unordered_map>
-#include<DxLib.h>
 
 #include"../ObjectBase/ObjectBase.h"
 #include"../ObjectBase/ObjectTag.h"
@@ -32,7 +31,7 @@ public:
     /// <summary>
     /// 全オブジェクト削除
     /// </summary>
-    static void ReleaceAllObj();
+    static void ReleaseAllObj();
 
     /// <summary>
     /// 全オブジェクトの更新処理
@@ -41,7 +40,7 @@ public:
     static void Update(float deltaTime);
 
     /// <summary>
-    /// オブジェクトの生死状況
+    /// オブジェクトの死亡処理
     /// </summary>
     static void Dead();
 
@@ -61,6 +60,14 @@ public:
     /// <param name="tag">:タグ</param>
     /// <returns>タグ種の最初のオブジェクト</returns>
     static ObjectBase* GetFirstObj(ObjectTag tag);
+
+    /// <summary>
+    /// タグ種のtagNum番目のオブジェクト取得
+    /// </summary>
+    /// <param name="tag">:タグ</param>
+    /// <param name="tagNum">:オブジェクト番号</param>
+    /// <returns>:タグ種のtagNum番目のオブジェクト</returns>
+    static ObjectBase* GetObj(ObjectTag tag,int tagNum);
     
     /// <summary>
     /// ObjManagerの解放
