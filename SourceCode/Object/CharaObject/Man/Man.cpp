@@ -1,5 +1,6 @@
 #include "Man.h"
 #include"../../../UI/Action/Action.h"
+#include"../../../Scene/Reamarks/Remarks.h"
 
 // @brief Manコンストラクタ //
 
@@ -56,7 +57,7 @@ void Man::Update(float deltaTime)
         Rotate();
         if (!rotateNow)
         {
-            isVisible = false;
+            ObjManager::Entry(new Remarks(TextType::ManSpeak));
         }
     }
     // モデルに回転をセットする
