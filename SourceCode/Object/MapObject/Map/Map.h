@@ -1,42 +1,49 @@
 #pragma once
-#include<DxLib.h>
 #include"../../ObjectBase/ObjectBase.h"
 #include"../../../Asset/AssetManager/AssetManager.h"
+#include"../../../Asset/Model/Model.h"
 
-/*Mapのクラス*/
+/*Mapクラス*/
 class Map:public ObjectBase
 {
 public:
-	/// <summary>
-	/// Mapコンストラクター
-	/// </summary>
-	Map();
+    /// <summary>
+    /// Mapコンストラクタ
+    /// </summary>
+    /// <param name="maptag">:マップタグ</param>
+    Map(int maptag);
 
-	/// <summary>
-	/// Mapコンストラクター(位置セット)
-	/// </summary>
-	/// <param name="mapPos">:マップのワールド座標</param>
-	Map(VECTOR mapPos);
+    /// <summary>
+    /// Mapデストラクター
+    /// </summary>
+    ~Map();
 
-	/// <summary>
-	/// Mapデストラクター
-	/// </summary>
-	~Map();
+    /// <summary>
+    /// Map読み込み処理
+    /// </summary>
+    /// <param name="maptag">:マップタグ</param>
+    void LoadModel(int maptag);
 
-	/// <summary>
-	/// Map読み込み処理
-	/// </summary>
-	void LoadModel();
+    /// <summary>
+    /// Map更新処理
+    /// </summary>
+    /// <param name="deltaTime">:フレームレート</param>
+    void Update(float deltaTime) override;
 
-	/// <summary>
-	/// Map更新処理
-	/// </summary>
-	/// <param name="deltaTime">:フレームレート</param>
-	void Update(float deltaTime) override;
+    /// <summary>
+    /// Map描画処理
+    /// </summary>
+    void Draw()override;
 
-	/// <summary>
-	/// Map描画処理
-	/// </summary>
-	void Draw()override;
+    enum MapName
+    {
+        TITLE=0,
+        ROOM,
+        STAGE,
+        Chase,
+    };
+
+private:
+    class Model* mapModel;
 };
 

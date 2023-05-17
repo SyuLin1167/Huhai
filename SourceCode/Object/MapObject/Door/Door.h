@@ -1,10 +1,10 @@
 #pragma once
 #include<DxLib.h>
 
-#include"../../../Asset/AssetManager/AssetManager.h"
 #include"../../ObjectBase/ObjectBase.h"
 #include"../../ObjectManager/ObjManager.h"
 #include"../../../Asset/Animation/Animation.h"
+#include"../../../Asset/Model/Model.h"
 #include"../../../Collision/Collision.h"
 
 /*Doorのクラス*/
@@ -41,6 +41,12 @@ public:
 	void Update(float deltaTime)override;
 
 	/// <summary>
+	/// Doorアニメーション処理
+	/// </summary>
+	/// <param name="animtype">:アニメーションタイプ</param>
+	void MoveAnim(int animtype);
+
+	/// <summary>
 	/// Door描画処理
 	/// </summary>
 	void Draw()override;
@@ -55,5 +61,7 @@ private:
 	//---アニメーション関連---//
 	class Animation* doorAnim;			//アニメーション
 	int animType;						//アニメーション状態
+
+	class Model* doorModel;
 };
 

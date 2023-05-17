@@ -1,7 +1,7 @@
 #pragma once
-#include<DxLib.h>
-#include"../../Object/ObjectBase/ObjectBase.h"
-#include"../../Asset/AssetManager/AssetManager.h"
+#include"../../ObjectBase/ObjectBase.h"
+#include"../../../Asset/AssetManager/AssetManager.h"
+#include"../../../Asset/Model/Model.h"
 
 /*Furnitureのクラス*/
 class Furniture :public ObjectBase
@@ -10,13 +10,8 @@ public:
 	/// <summary>
 	/// Furnitureコンストラクター
 	/// </summary>
-	Furniture();
-
-	/// <summary>
-	/// Furnitureコンストラクター(位置セット)
-	/// </summary>
-	/// <param name="FurniturePos">:マップのワールド座標</param>
-	Furniture(VECTOR FurniturePos);
+	/// <param name="furtag">:家具タグ</param>
+	Furniture(int furtag);
 
 	/// <summary>
 	/// Furnitureデストラクター
@@ -24,9 +19,10 @@ public:
 	~Furniture();
 
 	/// <summary>
-	/// Furniture読み込み処理
+	/// Furnitureモデル読み込み処理
 	/// </summary>
-	void Load();
+	/// <param name="furtag">:家具タグ</param>
+	void LoadModel(int furtag);
 
 	/// <summary>
 	/// Furniture更新処理
@@ -38,5 +34,15 @@ public:
 	/// Furniture描画処理
 	/// </summary>
 	void Draw()override;
+
+	enum FurName
+	{
+		Room=0,
+		Stage,
+	};
+
+private:
+	class Model* furModel;
+	class Model* furColModel;
 };
 

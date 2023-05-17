@@ -3,16 +3,7 @@
 // @brief Chairコンストラクター //
 
 Chair::Chair()
-	:ObjectBase(ObjectTag::Chair)
-	, ChairAnim(nullptr)
-{
-	Load();
-}
-
-// @brief Chairコンストラクター //
-
-Chair::Chair(VECTOR ChairPos, VECTOR ChairAngle)
-	:ObjectBase(ObjectTag::Chair, ChairPos, ChairAngle)
+	:ObjectBase(ObjectTag::Furniture)
 	, ChairAnim(nullptr)
 {
 	Load();
@@ -30,6 +21,9 @@ Chair::~Chair()
 
 void Chair::Load()
 {
+	objPos = { 66,0,4 };
+	objDir = { 0,-90,0 };
+
 	//---モデル読み込み---//
 	objHandle = AssetManager::GetMesh("../Assets/Map/Chair/Chair.mv1");            //モデル読み込み
 
@@ -47,6 +41,7 @@ void Chair::Load()
 	animType = IDLE;
 	ChairAnim->StartAnim(animType);
 
+	//---当たり判定---//
 	colType = CollisionType::Sphere;                                                         //当たり判定は球体
 
 	colSphere.localCenter = VGet(0, 5, 0);                                                 //ローカル座標

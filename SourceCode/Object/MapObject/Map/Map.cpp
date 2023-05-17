@@ -2,18 +2,11 @@
 
 // @brief Mapコンストラクター //
 
-Map::Map()
+Map::Map(int maptag)
 	:ObjectBase(ObjectTag::Map)
+	,mapModel(nullptr)
 {
-	LoadModel();
-}
-
-// @brief Mapコンストラクター(位置セット) //
-
-Map::Map(VECTOR mapPos)
-	:ObjectBase(ObjectTag::Map,mapPos)
-{
-	LoadModel();
+	LoadModel(maptag);
 }
 
 // @brief Mapデストラクター //
@@ -25,13 +18,18 @@ Map::~Map()
 
 // @brief Map読み込み処理 //
 
-void Map::LoadModel ()
+void Map::LoadModel (int maptag)
 {
 	//---マップモデル読み込み---//
-	objHandle = AssetManager::GetMesh("../Assets/Map/Map/map.mv1");			//モデル読み込み
+	mapModel = new Model;
+	mapModel->AddModel("../Assets/Map/Stage/Huhai.mv1");
+	mapModel->AddModel("../Assets/Map/Room/Room.mv1");						//モデル読み込み
+	mapModel->AddModel("../Assets/Map/Stage/StageDay1.mv1");						//モデル読み込み
+	objHandle = mapModel->SetModel(maptag);
+
 	colModel = objHandle;																	//当たり判定モデルはモデルに
 	MV1SetPosition(objHandle, objPos);														//位置セット
-	MV1SetScale(objHandle, VGet(0.11f,0.12f,0.11f));														//スケールセット
+	MV1SetScale(objHandle, VGet(0.11f,0.12f,0.11f));										//スケールセット
 
 	MV1SetupCollInfo(colModel);																//当たり判定情報設定
 }

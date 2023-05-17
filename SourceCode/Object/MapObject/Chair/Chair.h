@@ -1,6 +1,4 @@
 #pragma once
-#include<DxLib.h>
-
 #include"../../../Asset/AssetManager/AssetManager.h"
 #include"../../ObjectBase/ObjectBase.h"
 #include"../../ObjectManager/ObjManager.h"
@@ -15,14 +13,6 @@ public:
 	/// Chairコンストラクター
 	/// </summary>
 	Chair();
-
-	/// <summary>
-	/// Chairコンストラクター
-	/// </summary>
-	/// <param name="chairPos">:イスのワールド座標</param>
-	/// <param name="chairAngle">:イスの方向</param>
-	Chair(VECTOR chairPos, VECTOR chairAngle);
-
 
 	/// <summary>
 	/// Chairデストラクター
@@ -48,7 +38,7 @@ public:
 	enum Anim
 	{
 		IDLE = 0,			//待機
-	MOVE,
+		MOVE,
 	};
 private:
 	//---アニメーション関連---//
