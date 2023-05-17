@@ -1,42 +1,48 @@
 #pragma once
+#include<random>
+#include<time.h>
 
 #include"../LightBase/LightBase.h"
 
-/*NomalLightのクラス*/
-class NomalLight :public LightBase
+/*FlashLighitのクラス*/
+class FlashLight:public LightBase
 {
 public:
 	/// <summary>
-	/// NomalLightコンストラクタ
+	/// FlashLightコンストラクタ
 	/// </summary>
-	NomalLight();
+	FlashLight();
 
 	/// <summary>
-	/// NomalLightコントラクタ
+	/// FlashLightコンストラクタ
 	/// </summary>
 	/// <param name="lightPos">:ライトのワールド座標</param>
-	NomalLight(VECTOR lightPos);
-
+	FlashLight(VECTOR lightPos);
 
 	/// <summary>
-	/// NomalLightデストラクタ
+	/// FlashLightデストラクタ
 	/// </summary>
-	~NomalLight();
+	~FlashLight();
 
 	/// <summary>
-	/// NomalLight読み込み処理
+	/// FlashLight読み込み処理
 	/// </summary>
 	void Load();
 
 	/// <summary>
-	/// NomalLight更新処理
+	/// FlashLight更新処理
 	/// </summary>
 	/// <param name="deltaTime">:フレームレート</param>
 	void Update(float deltaTime)override;
 
-
 	/// <summary>
-	/// NomalLight描画処理
+	/// FlashLight描画処理
 	/// </summary>
 	void Draw()override;
+
+private:
+	float intervalTime;
+	float countTimer;
+	bool lightFlash;
 };
+
