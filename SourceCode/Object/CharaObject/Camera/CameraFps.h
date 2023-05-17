@@ -3,8 +3,8 @@
 #include"../../ObjectBase/ObjectBase.h"
 #include"../../ObjectManager/ObjManager.h"
 
-const float CameraNear = 1.0f;       //カメラの描画範囲(近)
-const float CameraFar = 200.0f;     //カメラの描画範囲(遠)
+constexpr float CameraNear = 0.1f;       //カメラの描画範囲(近)
+constexpr float CameraFar = 200.0f;     //カメラの描画範囲(遠)
 
 /*一人称視点のクラス*/
 class CameraFps:public ObjectBase
@@ -41,6 +41,5 @@ private:
     //---カメラ方向関連---//
     float cameraYaw;        //水平方向回転角
     float cameraPitch;      //垂直方向回転角
-    VECTOR camLookPos;      //注視点
 };
 

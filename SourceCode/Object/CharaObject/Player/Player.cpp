@@ -6,7 +6,6 @@ Player::Player()
     :ObjectBase(ObjectTag::Player)
     , inputVec{ 0,0,0 }
     , inputVel{ 0,0,0 }
-    , aimDir{ 0,0,0 }
     , inputKey(false)
     , nowRoted(false)
     , camFront{ 0,0,0 }
@@ -18,9 +17,9 @@ Player::Player()
 
     //---当たり判定球設定---//
     colType = CollisionType::Sphere;                                                        //当たり判定は球体
-    colSphere.localCenter = VGet(0,5, 0);			                                        //ローカル座標
-    colSphere.Radius = 3.0f;						                                        //球半径
-    colSphere.worldCenter = objPos;					                                        //ワールド座標
+    colSphere.localCenter = VGet(0, 5, 0);                                                  //ローカル座標
+    colSphere.Radius = 3.0f;                                                                //球半径
+    colSphere.worldCenter = objPos;                                                         //ワールド座標
 
     //---当たり判定線分設定---//
     colLine = Line(VGet(0.0f, 2.0f, 0.0f), VGet(0.0f, -3.0f, 0.0f));             //線分設定
@@ -44,21 +43,15 @@ void Player::Update(float deltaTime)
     camFront = VNorm(camFront);               //ベクトルを正規化
 
     UP = camFront;                               //カメラ方向に前進
-    DOWN = VScale(UP, -1.0f);              //カメラ後方に前進
-    RIGHT = VCross(VGet(0, 1, 0), camFront);     //カメラ右方向に前進
-    LEFT = VScale(RIGHT, -1.0f);                    //カメラ左方向
+    DOWN = VScale(UP, -1.0f);              //カメラ方向から後進
+    RIGHT = VCross(VGet(0, 1, 0), camFront);     //カメラ方向から右に前進
+    LEFT = VScale(RIGHT, -1.0f);                    //カメラ方向から左に前進
 
     objDir = camFront;
     Move(deltaTime);                                        //Player移動処理
 
     objPos.y = 0;
     MV1SetPosition(objHandle, objPos);                              //ポジションセット
-
-    //---モデル回転処理---//
-    MATRIX RotMatY = MGetRotY(180.0f * (float)(DX_PI / 180.0f));    //モデル反転行列
-    VECTOR negativeVec = VTransform(objDir, RotMatY);               //負のベクトル
-    MV1SetRotationZYAxis(objHandle, negativeVec,
-    VGet(0.0f, 1.0f, 0.0f), 0.0f);                                  //モデル回転
 
     colSphere.Move(objPos);                                         //当たり判定の移動
     ColUpdate();
@@ -78,8 +71,6 @@ void Player::OnCollisionEnter(const ObjectBase* other)
     ObjectTag tag = other->GetTag();
 
     if (tag == ObjectTag::Map||
-        tag == ObjectTag::Door||
-        tag == ObjectTag::Chair||
         tag == ObjectTag::Furniture)                                      //マップとぶつかったら
     {
         int mapColModel = other->GetColModel();                        //モデル当たり判定取得
@@ -161,7 +152,7 @@ void Player::Move(float deltaTime)
     }
     else
     {
-        inputVel *= 0;                                           //徐々に減速
+        inputVel *= 0.5f;                                           //徐々に減速
     }
     objPos += inputVel;                                             //移動
 }
