@@ -46,7 +46,7 @@ Play::Play()
     ObjManager::Entry(new GhostMoveGim);
 
 
-    remarks = new Remarks(TextType::Day1Stage);
+    ObjManager::Entry(new Remarks(TextType::Day1Stage));
 }
 
 // @brief PlaySceneデストラクタ //
@@ -65,7 +65,6 @@ SceneBase* Play::Update(float deltaTime)
 {
 
     ObjManager::Update(deltaTime);
-    remarks->Update(deltaTime);
     ObjManager::Collision();
 
     ObjectBase* man = ObjManager::GetFirstObj(ObjectTag::Man);
@@ -87,6 +86,5 @@ SceneBase* Play::Update(float deltaTime)
 void Play::Draw()
 {
     ObjManager::Draw();
-    remarks->Draw();
     DrawFormatString(0, 0, GetColor(255, 255, 255), "Play画面:RでResultシーンへ移行");
 }

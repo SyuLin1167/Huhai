@@ -105,7 +105,10 @@ void Remarks::Update(float deltaTime)
             }
         }
     }
-
+    if (eofFlag)
+    {
+        isAlive = false;
+    }
 }
 
 // @brief •¶š—ñæ“¾ˆ— //

@@ -115,9 +115,6 @@
     <Filter Include="ソース ファイル\Scene\Day1Room">
       <UniqueIdentifier>{b50aa5a5-e753-40ad-8de5-45562dd12299}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Scene\Remarks">
-      <UniqueIdentifier>{7911e8e5-15a8-441b-bbfb-d4b034f6e0bc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Asset\Model">
       <UniqueIdentifier>{5cffe36f-bfe5-4fdf-805e-30e7f5a35d70}</UniqueIdentifier>
     </Filter>
@@ -144,6 +141,9 @@
     </Filter>
     <Filter Include="ソース ファイル\CharaObject\Camera\MoveCamera">
       <UniqueIdentifier>{2fc0775a-47de-4de3-b7ae-56a2bb5626f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\Remarks">
+      <UniqueIdentifier>{7911e8e5-15a8-441b-bbfb-d4b034f6e0bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -235,7 +235,7 @@
       <Filter>ソース ファイル\MapObject\Light\FlashLight</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Scene\Reamarks\Remarks.cpp">
-      <Filter>ソース ファイル\Scene\Remarks</Filter>
+      <Filter>ソース ファイル\UI\Remarks</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Asset\Model\Model.cpp">
       <Filter>ソース ファイル\Asset\Model</Filter>
@@ -351,7 +351,7 @@
       <Filter>ソース ファイル\MapObject\Light\FlashLight</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Scene\Reamarks\Remarks.h">
-      <Filter>ソース ファイル\Scene\Remarks</Filter>
+      <Filter>ソース ファイル\UI\Remarks</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Asset\Model\Model.h">
       <Filter>ソース ファイル\Asset\Model</Filter>
@@ -375,7 +375,7 @@
       <Filter>ソース ファイル\CharaObject\Camera\MoveCamera</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Scene\Reamarks\TextType.h">
-      <Filter>ソース ファイル\Scene\Remarks</Filter>
+      <Filter>ソース ファイル\UI\Remarks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
