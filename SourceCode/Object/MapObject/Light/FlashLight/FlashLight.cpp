@@ -31,6 +31,7 @@ FlashLight::~FlashLight()
 
 void FlashLight::Load()
 {
+	MV1SetPosition(objHandle, objPos);
 	MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
 }
 
@@ -41,12 +42,12 @@ void FlashLight::Update(float deltaTime)
 
 	DeleteLightHandle(lightHandle);
 	lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2);
-	MV1SetPosition(objHandle, objPos);
+	
 	if (countTimer >= intervalTime)
 	{
 		countTimer = 0;
 		srand((unsigned int)time(NULL));
-		intervalTime = static_cast <float>(rand() % 3 + 1);
+		intervalTime = static_cast <float>(rand() % 4 + 1);
 	}
 
 	if (intervalTime <= 1)
@@ -75,5 +76,4 @@ void FlashLight::Update(float deltaTime)
 void FlashLight::Draw()
 {
 	MV1DrawModel(objHandle);						//ƒ‚ƒfƒ‹•`‰æ
-	DrawFormatString(10, 50, GetColor(255, 0, 0), "%f", intervalTime);
 }
