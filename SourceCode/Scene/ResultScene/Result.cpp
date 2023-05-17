@@ -34,6 +34,6 @@ SceneBase* Result::Update(float deltaTime)
 
 void Result::Draw()
 {
-    DrawGraph(BgX, BgY, BgHandle, TRUE);
+    DrawGraph3D((float)BgX, 0,0, BgHandle, TRUE);
     DrawFormatString(0, 0, GetColor(255, 255, 255), "Result‰æ–Ê:T‚ÅTitleƒV[ƒ“‚ÖˆÚs");
 }

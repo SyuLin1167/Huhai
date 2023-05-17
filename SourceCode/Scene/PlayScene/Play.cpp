@@ -1,58 +1,55 @@
 #include "Play.h"
 #include "../../Object/CharaObject/Camera/CameraFps.h"
 #include "../../Object/CharaObject/Player/Player.h"
-#include "../../Object/CharaObject/Enemy/Enemy.h"
+#include "../../Object/CharaObject/Ghost/Ghost.h"
+#include "../../Object/CharaObject/Ghost/MoveGimmic/GhostMoveGim.h"
 #include "../../Object/MapObject/Map/Map.h"
 #include "../../Object/MapObject/Door/Door.h"
 #include "../../Object/MapObject/Chair/Chair.h"
 #include "../../Object/MapObject/Light/NomalLight/NomalLight.h"
-#include "../../Object/MapObject/Furniture/MapFur.h"
+#include "../../Object/MapObject/Light/LightingLight/LitLight.h"
+#include "../../Object/MapObject/Furniture/Furniture.h"
 #include "../ResultScene/Result.h"
-#include "../../Grid/Grid.h"
+#include"../Reamarks/Remarks.h"
 
-// @brief PlaySceneコンストラクター //
+// @brief PlaySceneコンストラクタ //
 
 Play::Play()
     :SceneBase()
 {
-    BgHandle = LoadGraph("../Assets/BackGround/Play.png");
-
-    ObjManager::Init();
-
     ////---カメラ生成---//
     ObjManager::Entry(new CameraFps);
+
+    ////---マップを生成---//
+    ObjManager::Entry(new Map(Map::MapName::STAGE));
+
+    ////---家具を生成---//
+    ObjManager::Entry(new Furniture(Furniture::FurName::Stage));
+
+    ////---ドアを生成---//
+    ObjManager::Entry(new Door(VGet(22, 0, 0), VGet(0, 180, 0)));
+    ObjManager::Entry(new Door(VGet(110, 0, 0), VGet(0, 0, 0)));
+    ObjManager::Entry(new Door(VGet(0, 0, 66), VGet(0, 0, 0)));
+
+    ////---イスを生成---//
+    ObjManager::Entry(new Chair);
+
+    ////---照明を生成---//
+    ObjManager::Entry(new NomalLight(VGet(-10, 32, 0)));
+    ObjManager::Entry(new LitLight(VGet(65, 32, 0),50.0f));
+    ObjManager::Entry(new LitLight(VGet(120, 32, 20),40.0f));
 
     ////---プレイヤー生成---//
     ObjManager::Entry(new Player);
 
     ////---エネミー生成---//
-    //ObjManager::Entry(new Enemy());
+    ObjManager::Entry(new GhostMoveGim);
 
-    ////---マップを生成---//
-    ObjManager::Entry(new Map(VGet(0, 0, 0)));
 
-    ////---家具を生成---//
-    ObjManager::Entry(new MapFur(VGet(0, 0, 0)));
-
-    ////---ドアを生成---//
-    ObjManager::Entry(new Door(VGet(22, 0, 0), VGet(0, 0, 0)));
-    ObjManager::Entry(new Door(VGet(110, 0, 0), VGet(0, 0, 0)));
-    ObjManager::Entry(new Door(VGet(0, 0, 66), VGet(0, 0, 0)));
-    ObjManager::Entry(new Door(VGet(77, 0, 100), VGet(0, 90, 0)));
-
-    ////---イスを生成---//
-    ObjManager::Entry(new Chair(VGet(66,0,0),VGet(0,-90,0)));
-
-    ////---照明を生成---//
-    ObjManager::Entry(new Light(VGet(-10, 32, 0)));
-    ObjManager::Entry(new Light(VGet(60, 32, 0),true));
-    ObjManager::Entry(new Light(VGet(120, 32, 30),true));
-
-    grid = new Grid;
-
+    remarks = new Remarks(TextType::Day1Stage);
 }
 
-// @brief PlaySceneデストラクター //
+// @brief PlaySceneデストラクタ //
 
 Play::~Play()
 {
@@ -68,14 +65,18 @@ SceneBase* Play::Update(float deltaTime)
 {
 
     ObjManager::Update(deltaTime);
+    remarks->Update(deltaTime);
     ObjManager::Collision();
 
-
-    if (CheckHitKey(KEY_INPUT_R))                               //Ｒキーが押されたら
+    ObjectBase* man = ObjManager::GetFirstObj(ObjectTag::Man);
+    if (man)                               //Ｒキーが押されたら
     {
-        AssetManager::ReleaseAllAsset();            //全てのアセットの開放
-        ObjManager::ReleaceAllObj();                //全てのオブジェクトの開放
-        return new Result();                        //リザルト画面へ
+        if (!man->IsVisible())
+        {
+            AssetManager::ReleaseAllAsset();            //全てのアセットの開放
+            ObjManager::ReleaseAllObj();                //全てのオブジェクトの開放
+            return new Result();                        //リザルト画面へ
+        }
     }
 
     return this;                                    //常にプレイシーンを返す
@@ -86,6 +87,6 @@ SceneBase* Play::Update(float deltaTime)
 void Play::Draw()
 {
     ObjManager::Draw();
-    grid->DrawGrid(300, 30);
-    //DrawFormatString(0, 0, GetColor(255, 255, 255), "Play画面:RでResultシーンへ移行");
+    remarks->Draw();
+    DrawFormatString(0, 0, GetColor(255, 255, 255), "Play画面:RでResultシーンへ移行");
 }

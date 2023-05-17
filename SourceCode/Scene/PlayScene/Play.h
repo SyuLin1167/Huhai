@@ -1,18 +1,14 @@
 #pragma once
-#include <DxLib.h>
 #include"../SceneBase/SceneBase.h"
 #include"../../Object/ObjectManager/ObjManager.h"
 #include "../../Collision/Collision.h"
 
-    class CameraFps;
-    class Player;
-    class Enemy;
-    class Collision;
+
 /* プレイシーンのクラス */
 class Play :public SceneBase
 {
+    class Remarks* remarks = nullptr;
     class Grid* grid = nullptr;
-
 
 public:
     /// <summary>
