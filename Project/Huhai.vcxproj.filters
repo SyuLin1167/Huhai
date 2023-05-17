@@ -64,17 +64,11 @@
     <Filter Include="ソース ファイル\MapObject">
       <UniqueIdentifier>{4d92cd9d-f4de-4472-87bc-d92b11c6f435}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\MapObject\Map">
-      <UniqueIdentifier>{a9c7cd32-58e9-4321-8165-4fa7eea83708}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\MapObject\Door">
       <UniqueIdentifier>{0de4f457-917f-4fb0-8f73-1d56b393c1ea}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\MapObject\Chair">
       <UniqueIdentifier>{eb7850c5-e5bd-4350-8b80-e18522b23314}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\MapObject\MapFurniture">
-      <UniqueIdentifier>{29722970-cfa5-4c1c-8a31-945172bc3b89}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\MapObject\Light">
       <UniqueIdentifier>{31d0ad34-f01f-452b-b4b6-8e6b4969cc4a}</UniqueIdentifier>
@@ -94,11 +88,62 @@
     <Filter Include="ソース ファイル\CharaObject\Player">
       <UniqueIdentifier>{e98576d1-6521-411a-9d59-5e615fdcc343}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\CharaObject\Enemy">
-      <UniqueIdentifier>{f917cab7-6243-490e-9275-c8b63a4ab27b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\CharaObject\Camera">
       <UniqueIdentifier>{80d483bb-6973-4737-85de-b4075b275aff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MapObject\Light\NomalLight">
+      <UniqueIdentifier>{1f3cf8e6-7366-4b3b-ab48-7515e7d941b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MapObject\Light\LitLight">
+      <UniqueIdentifier>{0f77a94b-b104-457d-b256-7bc03f843849}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CharaObject\Ghost">
+      <UniqueIdentifier>{f917cab7-6243-490e-9275-c8b63a4ab27b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CharaObject\Ghost\Base">
+      <UniqueIdentifier>{37fef137-fa07-49ed-b4c0-bce1061d4b2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CharaObject\Ghost\GhostMoveGim">
+      <UniqueIdentifier>{a0fd39f9-91ee-422f-9309-cf2f4e51ce8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CharaObject\Man">
+      <UniqueIdentifier>{33e0c2ea-1b94-4e5b-8232-4644acdc7fc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MapObject\Light\FlashLight">
+      <UniqueIdentifier>{8162273c-8545-46cb-b527-a2fa0254e08a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Day1Room">
+      <UniqueIdentifier>{b50aa5a5-e753-40ad-8de5-45562dd12299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Remarks">
+      <UniqueIdentifier>{7911e8e5-15a8-441b-bbfb-d4b034f6e0bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Asset\Model">
+      <UniqueIdentifier>{5cffe36f-bfe5-4fdf-805e-30e7f5a35d70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\BlendMode">
+      <UniqueIdentifier>{77f50006-b03c-4b71-b631-7644e4897336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MapObject\Furniture">
+      <UniqueIdentifier>{29722970-cfa5-4c1c-8a31-945172bc3b89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MapObject\Bed">
+      <UniqueIdentifier>{21cf095b-2eec-42ce-a3c5-599448d22d90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MapObject\Map">
+      <UniqueIdentifier>{a9c7cd32-58e9-4321-8165-4fa7eea83708}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI">
+      <UniqueIdentifier>{e9cfa52e-e7b6-48c2-8ceb-14fdc5eef1d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\Select">
+      <UniqueIdentifier>{71447e9d-b861-4fb4-9d2c-c9424da167e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\Action">
+      <UniqueIdentifier>{dfdfc7f6-0f13-4a16-a8db-a2f4aa9f58bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CharaObject\Camera\MoveCamera">
+      <UniqueIdentifier>{2fc0775a-47de-4de3-b7ae-56a2bb5626f1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -153,23 +198,65 @@
     <ClCompile Include="..\SourceCode\Object\MapObject\Chair\Chair.cpp">
       <Filter>ソース ファイル\MapObject\Chair</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Object\MapObject\Map\Map.cpp">
-      <Filter>ソース ファイル\MapObject\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\Object\MapObject\Furniture\MapFur.cpp">
-      <Filter>ソース ファイル\MapObject\MapFurniture</Filter>
+    <ClCompile Include="..\SourceCode\Object\MapObject\Furniture\Furniture.cpp">
+      <Filter>ソース ファイル\MapObject\Furniture</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Object\CharaObject\Camera\CameraFps.cpp">
       <Filter>ソース ファイル\CharaObject\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Object\CharaObject\Enemy\Enemy.cpp">
-      <Filter>ソース ファイル\CharaObject\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="..\SourceCode\Object\CharaObject\Player\Player.cpp">
       <Filter>ソース ファイル\CharaObject\Player</Filter>
     </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\MapObject\Light\LightBase\LightBase.cpp">
+      <Filter>ソース ファイル\MapObject\Light\Base</Filter>
+    </ClCompile>
     <ClCompile Include="..\SourceCode\Object\MapObject\Light\NomalLight\NomalLight.cpp">
-      <Filter>ソース ファイル\MapObject\Light</Filter>
+      <Filter>ソース ファイル\MapObject\Light\NomalLight</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\MapObject\Light\LightingLight\LitLight.cpp">
+      <Filter>ソース ファイル\MapObject\Light\LitLight</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\CharaObject\Ghost\MoveGimmic\GhostMoveGim.cpp">
+      <Filter>ソース ファイル\CharaObject\Ghost\GhostMoveGim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\CharaObject\Ghost\Base\GhostBase.cpp">
+      <Filter>ソース ファイル\CharaObject\Ghost\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\CharaObject\Ghost\Ghost.cpp">
+      <Filter>ソース ファイル\CharaObject\Ghost</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\CharaObject\Man\Man.cpp">
+      <Filter>ソース ファイル\CharaObject\Man</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Scene\Day1Chase\Day1Room.cpp">
+      <Filter>ソース ファイル\Scene\Day1Room</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\MapObject\Light\FlashLight\FlashLight.cpp">
+      <Filter>ソース ファイル\MapObject\Light\FlashLight</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Scene\Reamarks\Remarks.cpp">
+      <Filter>ソース ファイル\Scene\Remarks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Asset\Model\Model.cpp">
+      <Filter>ソース ファイル\Asset\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\BlendMode\BlendMode.cpp">
+      <Filter>ソース ファイル\BlendMode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\MapObject\Bed\Bed.cpp">
+      <Filter>ソース ファイル\MapObject\Bed</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\MapObject\Map\Map.cpp">
+      <Filter>ソース ファイル\MapObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\UI\Select\Select.cpp">
+      <Filter>ソース ファイル\UI\Select</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\UI\Action\Action.cpp">
+      <Filter>ソース ファイル\UI\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\CharaObject\Camera\MoveCamera\MoveCamera.cpp">
+      <Filter>ソース ファイル\CharaObject\Camera\MoveCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,23 +314,68 @@
     <ClInclude Include="..\SourceCode\Object\MapObject\Chair\Chair.h">
       <Filter>ソース ファイル\MapObject\Chair</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Object\MapObject\Map\Map.h">
-      <Filter>ソース ファイル\MapObject\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\Object\MapObject\Furniture\MapFur.h">
-      <Filter>ソース ファイル\MapObject\MapFurniture</Filter>
+    <ClInclude Include="..\SourceCode\Object\MapObject\Furniture\Furniture.h">
+      <Filter>ソース ファイル\MapObject\Furniture</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Object\CharaObject\Camera\CameraFps.h">
       <Filter>ソース ファイル\CharaObject\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Object\CharaObject\Enemy\Enemy.h">
-      <Filter>ソース ファイル\CharaObject\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="..\SourceCode\Object\CharaObject\Player\Player.h">
       <Filter>ソース ファイル\CharaObject\Player</Filter>
     </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\MapObject\Light\LightBase\LightBase.h">
+      <Filter>ソース ファイル\MapObject\Light\Base</Filter>
+    </ClInclude>
     <ClInclude Include="..\SourceCode\Object\MapObject\Light\NomalLight\NomalLight.h">
-      <Filter>ソース ファイル\MapObject\Light</Filter>
+      <Filter>ソース ファイル\MapObject\Light\NomalLight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\MapObject\Light\LightingLight\LitLight.h">
+      <Filter>ソース ファイル\MapObject\Light\LitLight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\CharaObject\Ghost\MoveGimmic\GhostMoveGim.h">
+      <Filter>ソース ファイル\CharaObject\Ghost\GhostMoveGim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\CharaObject\Ghost\Base\GhostBase.h">
+      <Filter>ソース ファイル\CharaObject\Ghost\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\CharaObject\Ghost\Ghost.h">
+      <Filter>ソース ファイル\CharaObject\Ghost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\CharaObject\Man\Man.h">
+      <Filter>ソース ファイル\CharaObject\Man</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\Day1Chase\Day1Room.h">
+      <Filter>ソース ファイル\Scene\Day1Room</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\MapObject\Light\FlashLight\FlashLight.h">
+      <Filter>ソース ファイル\MapObject\Light\FlashLight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\Reamarks\Remarks.h">
+      <Filter>ソース ファイル\Scene\Remarks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Asset\Model\Model.h">
+      <Filter>ソース ファイル\Asset\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\BlendMode\BlendMode.h">
+      <Filter>ソース ファイル\BlendMode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\MapObject\Bed\Bed.h">
+      <Filter>ソース ファイル\MapObject\Bed</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\MapObject\Map\Map.h">
+      <Filter>ソース ファイル\MapObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\UI\Select\Select.h">
+      <Filter>ソース ファイル\UI\Select</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\UI\Action\Action.h">
+      <Filter>ソース ファイル\UI\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\CharaObject\Camera\MoveCamera\MoveCamera.h">
+      <Filter>ソース ファイル\CharaObject\Camera\MoveCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\Reamarks\TextType.h">
+      <Filter>ソース ファイル\Scene\Remarks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
