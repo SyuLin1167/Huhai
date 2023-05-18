@@ -29,85 +29,88 @@ Remarks::~Remarks()
 
 void Remarks::Update(float deltaTime)
 {
-    //～終了フラグが立っていなかったら～
-    if (!eofFlag)
+    if (isVisible)
     {
-        //～待機フラグが立っていたら～
-        if (waitKey)
+        //～終了フラグが立っていなかったら～
+        if (!eofFlag)
         {
-            //～マウスの左クリックが押されたら～
-            if ((GetMouseInput()&MOUSE_INPUT_LEFT))
+            //～待機フラグが立っていたら～
+            if (waitKey)
             {
-                waitKey = false;                                                    //待機フラグをfalseにする
-            }
-        }
-        //～待機フラグが立っていなかったら～
-        else
-        {
-            char Moji = GetText(Sn, Sp);                                            //1文字分取得
-            switch (Moji)
-            {
-                //～待機文字だったら～
-            case '/':
-                waitKey = true;                                                     //待機フラグを立てる
-                Sp++;                                                               //読み込み文字を1文字進める
-                break;
-
-                //～終了文字だったら～
-            case '^':
-                eofFlag = true;                                                     //終了フラグを立てる
-                Sp++;                                                               //読み込み文字を1文字進める
-                break;
-
-                //～クリア文字だったら～
-            case '|':
-                for (int i = 0; i < BUFHEIGHT; i++)
+                //～マウスの左クリックが押されたら～
+                if ((GetMouseInput() & MOUSE_INPUT_LEFT))
                 {
-                    for (int j = 0; j < BUFWIDTH; j++)
+                    waitKey = false;                                                    //待機フラグをfalseにする
+                }
+            }
+            //～待機フラグが立っていなかったら～
+            else
+            {
+                char Moji = GetText(Sn, Sp);                                            //1文字分取得
+                switch (Moji)
+                {
+                    //～待機文字だったら～
+                case '/':
+                    waitKey = true;                                                     //待機フラグを立てる
+                    Sp++;                                                               //読み込み文字を1文字進める
+                    break;
+
+                    //～終了文字だったら～
+                case '^':
+                    eofFlag = true;                                                     //終了フラグを立てる
+                    Sp++;                                                               //読み込み文字を1文字進める
+                    break;
+
+                    //～クリア文字だったら～
+                case '|':
+                    for (int i = 0; i < BUFHEIGHT; i++)
                     {
-                        stringBuf[i][j] = 0;                                        //仮想テキストバッファを初期化
+                        for (int j = 0; j < BUFWIDTH; j++)
+                        {
+                            stringBuf[i][j] = 0;                                        //仮想テキストバッファを初期化
+                        }
                     }
+                    textX = 0;                                                          //描画位置X初期化
+                    textY = 0;                                                          //描画位置Y初期化
+                    Sp++;                                                               //読み込み文字を1文字進める
+                    break;
+
+                    //～その他の文字～
+                default:
+                    //---1文字分記憶する---//
+                    holdBuf[0] = GetText(Sn, Sp);
+                    holdBuf[1] = GetText(Sn, Sp + 1);
+                    holdBuf[2] = '\0';
+
+                    //---テキストバッファに代入---//
+                    stringBuf[textY][textX * 2] = holdBuf[0];
+                    stringBuf[textY][textX * 2 + 1] = holdBuf[1];
+
+                    Sp += 2;                                                            //読み込み文字を2文字進める
+                    textX++;                                                            //文字表示位置を1文字進める
+
+                    //～文字表示位置が横幅からはみ出たら～
+                    if (textX > BUFWIDTH)
+                    {
+                        NewLine();                                                      //改行する
+                    }
+
+                    //～読み込み文字が終端まで行ったら～
+                    if (GetText(Sn, Sp) == '\0')
+                    {
+                        NewLine();                                                      //改行する
+                        Sn++;                                                           //読み込み文字を1列進める
+                        Sp = 0;                                                         //読み込み文字を初めからにする
+                    }
+
+                    break;
                 }
-                textX = 0;                                                          //描画位置X初期化
-                textY = 0;                                                          //描画位置Y初期化
-                Sp++;                                                               //読み込み文字を1文字進める
-                break;
-
-            //～その他の文字～
-            default:
-                //---1文字分記憶する---//
-                holdBuf[0] = GetText(Sn, Sp);
-                holdBuf[1] = GetText(Sn, Sp + 1);
-                holdBuf[2] = '\0';
-
-                //---テキストバッファに代入---//
-                stringBuf[textY][textX * 2] = holdBuf[0];
-                stringBuf[textY][textX * 2 + 1] = holdBuf[1];
-
-                Sp += 2;                                                            //読み込み文字を2文字進める
-                textX++;                                                            //文字表示位置を1文字進める
-
-                //～文字表示位置が横幅からはみ出たら～
-                if (textX > BUFWIDTH)
-                {
-                    NewLine();                                                      //改行する
-                }
-
-                //～読み込み文字が終端まで行ったら～
-                if (GetText(Sn, Sp) == '\0')
-                {
-                    NewLine();                                                      //改行する
-                    Sn++;                                                           //読み込み文字を1列進める
-                    Sp = 0;                                                         //読み込み文字を初めからにする
-                }
-
-                break;
             }
         }
-    }
-    if (eofFlag)
-    {
-        isAlive = false;
+        if (eofFlag)
+        {
+            isAlive = false;
+        }
     }
 }
 
@@ -153,10 +156,13 @@ char Remarks::GetText(int sn,int sp)
     case TextType::OpeningText:
         return Opening[sn][sp];                                                     //Openingの文字列を返す
         break;
-        
     //～TxtTypeがDay1Stageだったら～
     case TextType::Day1Stage:
         return Day1Stage[sn][sp];
+        break;
+        //～TxtTypeがManSpeakだったら～
+    case TextType::ManSpeak:
+        return ManSpeak[sn][sp];
         break;
     }
 

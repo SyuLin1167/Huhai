@@ -40,6 +40,8 @@ void Man::Load()
     manAnim->StartAnim(animType);
 
     ObjManager::Entry(new Action(objPos + VGet(0, 0, 5)));
+    ObjManager::Entry(new Remarks(TextType::ManSpeak));
+
 }
 
 // @brief Man更新処理 //
@@ -57,9 +59,14 @@ void Man::Update(float deltaTime)
         Rotate();
         if (!rotateNow)
         {
-            ObjManager::Entry(new Remarks(TextType::ManSpeak));
+            ObjManager::GetObj(ObjectTag::UI, 1)->SetVisible(true);
         }
     }
+    else
+    {
+        ObjManager::GetObj(ObjectTag::UI, 1)->SetVisible(false);
+    }
+
     // モデルに回転をセットする
     MV1SetRotationZYAxis(objHandle, negativeVec, VGet(0.0f, 1.0f, 0.0f), 0.0f);
 }

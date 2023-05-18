@@ -1,7 +1,6 @@
 #include "Play.h"
 #include "../../Object/CharaObject/Camera/CameraFps.h"
 #include "../../Object/CharaObject/Player/Player.h"
-#include "../../Object/CharaObject/Ghost/Ghost.h"
 #include "../../Object/CharaObject/Ghost/MoveGimmic/GhostMoveGim.h"
 #include "../../Object/MapObject/Map/Map.h"
 #include "../../Object/MapObject/Door/Door.h"
@@ -45,7 +44,6 @@ Play::Play()
     ////---エネミー生成---//
     ObjManager::Entry(new GhostMoveGim);
 
-
     ObjManager::Entry(new Remarks(TextType::Day1Stage));
 }
 
@@ -71,14 +69,11 @@ SceneBase* Play::Update(float deltaTime)
     if (man)                               //Ｒキーが押されたら
     {
         ObjectBase* remarks = ObjManager::GetObj(ObjectTag::UI, 1);
-        if (remarks)
+        if (!remarks->IsAlive())
         {
-            if (!remarks->IsAlive())
-            {
-                AssetManager::ReleaseAllAsset();            //全てのアセットの開放
-                ObjManager::ReleaseAllObj();                //全てのオブジェクトの開放
-                return new Result();                        //リザルト画面へ
-            }
+            AssetManager::ReleaseAllAsset();            //全てのアセットの開放
+            ObjManager::ReleaseAllObj();                //全てのオブジェクトの開放
+            return new Result();                        //リザルト画面へ
         }
     }
 
