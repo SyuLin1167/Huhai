@@ -9,6 +9,7 @@ Man::Man()
     , manAnim(nullptr)
     , rotateNow(false)
     , aimDir{ 0,0,0 }
+    , addRemarks(false)
 {
     Load();
 }
@@ -40,7 +41,6 @@ void Man::Load()
     manAnim->StartAnim(animType);
 
     ObjManager::Entry(new Action(objPos + VGet(0, 0, 5)));
-    ObjManager::Entry(new Remarks(TextType::ManSpeak));
 
 }
 
@@ -57,14 +57,11 @@ void Man::Update(float deltaTime)
         aimDir = VSub(ObjManager::GetFirstObj(ObjectTag::Player)->GetPos(), objPos);
         aimDir = VNorm(aimDir);
         Rotate();
-        if (!rotateNow)
+        if (!rotateNow && !addRemarks)
         {
-            ObjManager::GetObj(ObjectTag::UI, 1)->SetVisible(true);
+            ObjManager::Entry(new Remarks(TextType::Day1Stage));
+            addRemarks = true;
         }
-    }
-    else
-    {
-        ObjManager::GetObj(ObjectTag::UI, 1)->SetVisible(false);
     }
 
     // モデルに回転をセットする

@@ -48,5 +48,7 @@ private:
 	//---アニメーション関連---//
 	Animation* manAnim;
 	int animType;
+
+	bool addRemarks;
 };
 
