@@ -15,6 +15,7 @@
 
 Play::Play()
     :SceneBase()
+    ,sceneChange(false)
 {
     ////---カメラ生成---//
     ObjManager::Entry(new CameraFps);
@@ -65,11 +66,16 @@ SceneBase* Play::Update(float deltaTime)
     ObjManager::Update(deltaTime);
     ObjManager::Collision();
 
+
     ObjectBase* man = ObjManager::GetFirstObj(ObjectTag::Man);
     if (man)                               //Ｒキーが押されたら
     {
-        ObjectBase* remarks = ObjManager::GetFirstObj(ObjectTag::UI);
-        if (!remarks && !ObjManager::GetFirstObj(ObjectTag::UI)->IsVisible())
+        ObjectBase* remarks = ObjManager::GetObj(ObjectTag::UI, 1);
+        if (remarks)
+        {
+            sceneChange = true;
+        }
+        else if (sceneChange)
         {
             AssetManager::ReleaseAllAsset();            //全てのアセットの開放
             ObjManager::ReleaseAllObj();                //全てのオブジェクトの開放

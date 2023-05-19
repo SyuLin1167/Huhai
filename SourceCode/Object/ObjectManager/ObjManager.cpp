@@ -200,9 +200,9 @@ ObjectBase* ObjManager::GetFirstObj(ObjectTag tag)
 
 ObjectBase* ObjManager::GetObj(ObjectTag tag, int tagNum)
 {
-	if (objInstance->Object[tag].size() == 0)		//オブジェクトの数が0だったら
+	if (objInstance->Object[tag].size() < tagNum + 1)		//オブジェクトの数が指定数より少なかったら
 	{
-		return nullptr;								//空なのでnullptrを返す
+		return nullptr;								//nullptrを返す
 	}
 	return objInstance->Object[tag][tagNum];		//タグ種のtagNum番目のオブジェクトを返す
 }

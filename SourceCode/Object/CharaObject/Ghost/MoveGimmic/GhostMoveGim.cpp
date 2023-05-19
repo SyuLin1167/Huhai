@@ -17,7 +17,7 @@ GhostMoveGim::GhostMoveGim()
     colSphere.Radius = 15.0f;						//球半径
     colSphere.worldCenter = objPos;					//ワールド座標
 
-    objSpeed = 15.0f;
+    objSpeed = 16.0f;
 }
 
 // @brief GhostMoveGimデストラクタ //

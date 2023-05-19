@@ -59,7 +59,7 @@ void Man::Update(float deltaTime)
         Rotate();
         if (!rotateNow && !addRemarks)
         {
-            ObjManager::Entry(new Remarks(TextType::Day1Stage));
+            ObjManager::Entry(new Remarks(TextType::ManSpeak));
             addRemarks = true;
         }
     }
