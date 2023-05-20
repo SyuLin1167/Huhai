@@ -7,7 +7,6 @@
 /* プレイシーンのクラス */
 class Play :public SceneBase
 {
-    class Remarks* remarks = nullptr;
     class Grid* grid = nullptr;
 
 public:

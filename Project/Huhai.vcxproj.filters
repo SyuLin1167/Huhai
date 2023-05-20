@@ -112,9 +112,6 @@
     <Filter Include="ソース ファイル\MapObject\Light\FlashLight">
       <UniqueIdentifier>{8162273c-8545-46cb-b527-a2fa0254e08a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Scene\Day1Room">
-      <UniqueIdentifier>{b50aa5a5-e753-40ad-8de5-45562dd12299}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Asset\Model">
       <UniqueIdentifier>{5cffe36f-bfe5-4fdf-805e-30e7f5a35d70}</UniqueIdentifier>
     </Filter>
@@ -144,6 +141,12 @@
     </Filter>
     <Filter Include="ソース ファイル\UI\Remarks">
       <UniqueIdentifier>{7911e8e5-15a8-441b-bbfb-d4b034f6e0bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Escape">
+      <UniqueIdentifier>{a9817ddc-b635-44b9-8d10-58a863fd6df5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Room">
+      <UniqueIdentifier>{b50aa5a5-e753-40ad-8de5-45562dd12299}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -228,8 +231,8 @@
     <ClCompile Include="..\SourceCode\Object\CharaObject\Man\Man.cpp">
       <Filter>ソース ファイル\CharaObject\Man</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Scene\Day1Chase\Day1Room.cpp">
-      <Filter>ソース ファイル\Scene\Day1Room</Filter>
+    <ClCompile Include="..\SourceCode\Scene\Day1Chase\Room.cpp">
+      <Filter>ソース ファイル\Scene\Room</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Object\MapObject\Light\FlashLight\FlashLight.cpp">
       <Filter>ソース ファイル\MapObject\Light\FlashLight</Filter>
@@ -257,6 +260,9 @@
     </ClCompile>
     <ClCompile Include="..\SourceCode\Object\CharaObject\Camera\MoveCamera\MoveCamera.cpp">
       <Filter>ソース ファイル\CharaObject\Camera\MoveCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Scene\Day1Escape\Escape.cpp">
+      <Filter>ソース ファイル\Scene\Escape</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -344,8 +350,8 @@
     <ClInclude Include="..\SourceCode\Object\CharaObject\Man\Man.h">
       <Filter>ソース ファイル\CharaObject\Man</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Scene\Day1Chase\Day1Room.h">
-      <Filter>ソース ファイル\Scene\Day1Room</Filter>
+    <ClInclude Include="..\SourceCode\Scene\Day1Chase\Room.h">
+      <Filter>ソース ファイル\Scene\Room</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Object\MapObject\Light\FlashLight\FlashLight.h">
       <Filter>ソース ファイル\MapObject\Light\FlashLight</Filter>
@@ -376,6 +382,9 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\Scene\Reamarks\TextType.h">
       <Filter>ソース ファイル\UI\Remarks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\Day1Escape\Escape.h">
+      <Filter>ソース ファイル\Scene\Escape</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

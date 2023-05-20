@@ -177,7 +177,8 @@
     <ClCompile Include="..\SourceCode\Object\MapObject\Map\Map.cpp" />
     <ClCompile Include="..\SourceCode\Object\ObjectBase\ObjectBase.cpp" />
     <ClCompile Include="..\SourceCode\Object\ObjectManager\ObjManager.cpp" />
-    <ClCompile Include="..\SourceCode\Scene\Day1Chase\Day1Room.cpp" />
+    <ClCompile Include="..\SourceCode\Scene\Day1Chase\Room.cpp" />
+    <ClCompile Include="..\SourceCode\Scene\Day1Escape\Escape.cpp" />
     <ClCompile Include="..\SourceCode\Scene\PlayScene\Play.cpp" />
     <ClCompile Include="..\SourceCode\Scene\Reamarks\Remarks.cpp" />
     <ClCompile Include="..\SourceCode\Scene\ResultScene\Result.cpp" />
@@ -217,7 +218,8 @@
     <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectBase.h" />
     <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectTag.h" />
     <ClInclude Include="..\SourceCode\Object\ObjectManager\ObjManager.h" />
-    <ClInclude Include="..\SourceCode\Scene\Day1Chase\Day1Room.h" />
+    <ClInclude Include="..\SourceCode\Scene\Day1Chase\Room.h" />
+    <ClInclude Include="..\SourceCode\Scene\Day1Escape\Escape.h" />
     <ClInclude Include="..\SourceCode\Scene\PlayScene\Play.h" />
     <ClInclude Include="..\SourceCode\Scene\Reamarks\Remarks.h" />
     <ClInclude Include="..\SourceCode\Scene\Reamarks\TextType.h" />
