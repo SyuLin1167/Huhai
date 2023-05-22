@@ -72,15 +72,13 @@ SceneBase* Play::Update(float deltaTime)
     ObjectBase* man = ObjManager::GetFirstObj(ObjectTag::Man);
     if (man)                               //Ｒキーが押されたら
     {
-        ObjectBase* remarks = ObjManager::GetObj(ObjectTag::UI, 1);
-        if (remarks)
-        {
             sceneChange = true;
-        }
-        else if (sceneChange)
-        {
-            return new EscapeScene;                        //リザルト画面へ
-        }
+    }
+    else if (sceneChange)
+    {
+        AssetManager::ReleaseAllAsset();
+        ObjManager::ReleaseAllObj();
+        return new EscapeScene;                        //リザルト画面へ
     }
 
     return this;                                    //常にプレイシーンを返す

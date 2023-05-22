@@ -17,7 +17,7 @@ GhostWalkGim::GhostWalkGim()
     colSphere.Radius = 15.0f;						//球半径
     colSphere.worldCenter = objPos;					//ワールド座標
 
-    objSpeed = 16.0f;
+    objSpeed = 17.0f;
 }
 
 // @brief GhostWalkGimデストラクタ //

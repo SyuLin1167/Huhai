@@ -34,6 +34,7 @@ int WINAPI WinMain(_In_ HINSTANCE,_In_opt_ HINSTANCE,_In_ LPSTR,_In_ int)
 
 	//標準ライトを無効化
 	SetLightEnable(FALSE);
+	SetBackgroundColor(150, 150, 150);
 
 	//---シーンループ---//
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)			//ウィンドウが閉じられるか、ESCキーが押されるまで実行

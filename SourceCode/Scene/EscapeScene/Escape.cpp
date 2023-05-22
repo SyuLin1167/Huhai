@@ -16,31 +16,24 @@
 EscapeScene::EscapeScene()
 	:SceneBase()
 {
-    ////---カメラ生成---//
+    //---カメラ生成---//
     ObjManager::Entry(new CameraFps);
 
-    ////---マップを生成---//
+    //---マップを生成---//
     ObjManager::Entry(new Map(Map::MapName::ESCAPE));
     ObjManager::Entry(new Map(Map::MapName::ESCAPEMAIN));
 
-    ////---家具を生成---//
-    ObjManager::Entry(new Furniture(Furniture::FurName::Stage));
-
-    ////---ドアを生成---//
+    //---ドアを生成---//
     ObjManager::Entry(new Door(VGet(0, 0, 66), VGet(0, 0, 0)));
 
-    ////---照明を生成---//
+    //---照明を生成---//
     ObjManager::Entry(new NomalLight(VGet(-10, 32, 0)));
-    ObjManager::Entry(new LitLight(VGet(65, 32, 0), 50.0f));
     ObjManager::Entry(new LitLight(VGet(120, 32, 20), 40.0f));
 
-    ////---プレイヤー生成---//
+    //---プレイヤー生成---//
     ObjManager::Entry(new Player);
 
-    ////---エネミー生成---//
-    ObjManager::Entry(new GhostWalkGim);
 
-    ObjManager::Entry(new Remarks(TextType::Day1Stage));
 }
 
 // @brief EscapeSceneデストラクタ //
