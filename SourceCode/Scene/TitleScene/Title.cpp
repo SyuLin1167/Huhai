@@ -1,6 +1,6 @@
 #include "Title.h"
 
-#include "../Day1Chase/Day1Room.h"
+#include "../RoomScene/Room.h"
 #include"../../Object/CharaObject/Camera/CameraFps.h"
 #include"../../Object/MapObject/Door/Door.h"
 #include"../../Object/MapObject/Light/FlashLight/FlashLight.h"
@@ -67,7 +67,7 @@ SceneBase* Title::Update(float deltaTime)
         {
             AssetManager::ReleaseAllAsset();            //全てのアセットの開放
             ObjManager::ReleaseAllObj();                //全てのオブジェクトの開放
-            return new Day1Room();
+            return new Room();
         }
     }
 

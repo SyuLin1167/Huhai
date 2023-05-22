@@ -9,7 +9,7 @@
 #include "../../Object/MapObject/Light/LightingLight/LitLight.h"
 #include "../../Object/MapObject/Furniture/Furniture.h"
 #include "../ResultScene/Result.h"
-#include"../Reamarks/Remarks.h"
+#include"../../UI/Reamarks/Remarks.h"
 
 // @brief PlaySceneコンストラクタ //
 

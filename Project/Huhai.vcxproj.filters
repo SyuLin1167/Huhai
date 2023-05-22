@@ -231,14 +231,8 @@
     <ClCompile Include="..\SourceCode\Object\CharaObject\Man\Man.cpp">
       <Filter>ソース ファイル\CharaObject\Man</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Scene\Day1Chase\Room.cpp">
-      <Filter>ソース ファイル\Scene\Room</Filter>
-    </ClCompile>
     <ClCompile Include="..\SourceCode\Object\MapObject\Light\FlashLight\FlashLight.cpp">
       <Filter>ソース ファイル\MapObject\Light\FlashLight</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\Scene\Reamarks\Remarks.cpp">
-      <Filter>ソース ファイル\UI\Remarks</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Asset\Model\Model.cpp">
       <Filter>ソース ファイル\Asset\Model</Filter>
@@ -261,8 +255,14 @@
     <ClCompile Include="..\SourceCode\Object\CharaObject\Camera\MoveCamera\MoveCamera.cpp">
       <Filter>ソース ファイル\CharaObject\Camera\MoveCamera</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Scene\Day1Escape\Escape.cpp">
+    <ClCompile Include="..\SourceCode\Scene\EscapeScene\Escape.cpp">
       <Filter>ソース ファイル\Scene\Escape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Scene\RoomScene\Room.cpp">
+      <Filter>ソース ファイル\Scene\Room</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\UI\Reamarks\Remarks.cpp">
+      <Filter>ソース ファイル\UI\Remarks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -350,14 +350,8 @@
     <ClInclude Include="..\SourceCode\Object\CharaObject\Man\Man.h">
       <Filter>ソース ファイル\CharaObject\Man</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Scene\Day1Chase\Room.h">
-      <Filter>ソース ファイル\Scene\Room</Filter>
-    </ClInclude>
     <ClInclude Include="..\SourceCode\Object\MapObject\Light\FlashLight\FlashLight.h">
       <Filter>ソース ファイル\MapObject\Light\FlashLight</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\Scene\Reamarks\Remarks.h">
-      <Filter>ソース ファイル\UI\Remarks</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Asset\Model\Model.h">
       <Filter>ソース ファイル\Asset\Model</Filter>
@@ -380,11 +374,17 @@
     <ClInclude Include="..\SourceCode\Object\CharaObject\Camera\MoveCamera\MoveCamera.h">
       <Filter>ソース ファイル\CharaObject\Camera\MoveCamera</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Scene\Reamarks\TextType.h">
+    <ClInclude Include="..\SourceCode\Scene\EscapeScene\Escape.h">
+      <Filter>ソース ファイル\Scene\Escape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\RoomScene\Room.h">
+      <Filter>ソース ファイル\Scene\Room</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\UI\Reamarks\Remarks.h">
       <Filter>ソース ファイル\UI\Remarks</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Scene\Day1Escape\Escape.h">
-      <Filter>ソース ファイル\Scene\Escape</Filter>
+    <ClInclude Include="..\SourceCode\UI\Reamarks\TextType.h">
+      <Filter>ソース ファイル\UI\Remarks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

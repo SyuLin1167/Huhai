@@ -1,6 +1,6 @@
 #include "Man.h"
 #include"../../../UI/Action/Action.h"
-#include"../../../Scene/Reamarks/Remarks.h"
+#include"../../../UI/Reamarks/Remarks.h"
 
 // @brief Manコンストラクタ //
 

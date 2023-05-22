@@ -1,4 +1,4 @@
-#include "Day1Room.h"
+#include "Room.h"
 #include "../../Object/CharaObject/Camera/CameraFps.h"
 #include "../../Object/CharaObject/Player/Player.h"
 #include "../../Object/MapObject/Map/Map.h"
@@ -6,12 +6,12 @@
 #include "../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../Object/MapObject/Furniture/Furniture.h"
 #include"../../UI/Action/Action.h"
-#include"../Reamarks/Remarks.h"
+#include"../../UI/Reamarks/Remarks.h"
 #include"../PlayScene/Play.h"
 
-// @brief Day1Roomコンストラクタ //
+// @brief Roomコンストラクタ //
 
-Day1Room::Day1Room()
+Room::Room()
     :SceneBase()
     , roomBlend(nullptr)
 {
@@ -38,16 +38,16 @@ Day1Room::Day1Room()
     roomBlend = new BlendMode;
 }
 
-// @brief Day1Roomデストラクタ //
+// @brief Roomデストラクタ //
 
-Day1Room::~Day1Room()
+Room::~Room()
 {
 
 }
 
-// @brief Day1Room更新処理 //
+// @brief Room更新処理 //
 
-SceneBase* Day1Room::Update(float deltaTime)
+SceneBase* Room::Update(float deltaTime)
 {
     ObjManager::Update(deltaTime);
     ObjManager::Collision();
@@ -66,12 +66,12 @@ SceneBase* Day1Room::Update(float deltaTime)
 	return this;
 }
 
-// @brief Day1Room描画処理 //
+// @brief Room描画処理 //
 
-void Day1Room::Draw()
+void Room::Draw()
 {
     ObjManager::Draw();
-    DrawFormatString(0, 0, GetColor(255, 255, 255), "Day1R画面:PでPlayシーンへ移行");
+    DrawFormatString(0, 0, GetColor(255, 255, 255), "R画面:PでPlayシーンへ移行");
     roomBlend->Fade();
     DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), true);
     roomBlend->NoBlend();
