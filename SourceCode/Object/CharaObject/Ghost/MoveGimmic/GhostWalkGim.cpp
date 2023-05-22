@@ -1,10 +1,10 @@
-#include "GhostMoveGim.h"
+#include "GhostWalkGim.h"
 #include"../../../MapObject/Light/NomalLight/NomalLight.h"
 #include"../../Man/Man.h"
 
-// @brief GhostMoveGimコンストラクタ //
+// @brief GhostWalkGimコンストラクタ //
 
-GhostMoveGim::GhostMoveGim()
+GhostWalkGim::GhostWalkGim()
     :GhostBase()
     ,light(nullptr)
     ,move(false)
@@ -20,15 +20,15 @@ GhostMoveGim::GhostMoveGim()
     objSpeed = 16.0f;
 }
 
-// @brief GhostMoveGimデストラクタ //
+// @brief GhostWalkGimデストラクタ //
 
-GhostMoveGim::~GhostMoveGim()
+GhostWalkGim::~GhostWalkGim()
 {
 }
 
-// @brief GhostMoveGim更新処理 //
+// @brief GhostWalkGim更新処理 //
 
-void GhostMoveGim::Update(float deltaTime)
+void GhostWalkGim::Update(float deltaTime)
 {
 
     gstAnim->AddAnimTime(deltaTime);
@@ -49,16 +49,16 @@ void GhostMoveGim::Update(float deltaTime)
     ColUpdate();
 }
 
-// @brief GhostMoveGim描画処理 //
+// @brief GhostWalkGim描画処理 //
 
-void GhostMoveGim::Draw()
+void GhostWalkGim::Draw()
 {
     MV1DrawModel(objHandle);
 }
 
-// @brief GhostMoveGim衝突時処理 //
+// @brief GhostWalkGim衝突時処理 //
 
-void GhostMoveGim::OnCollisionEnter(const ObjectBase* other)
+void GhostWalkGim::OnCollisionEnter(const ObjectBase* other)
 {
     ObjectTag tag = other->GetTag();
     if (tag == ObjectTag::Player)

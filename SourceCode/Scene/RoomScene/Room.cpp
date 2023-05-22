@@ -1,4 +1,6 @@
 #include "Room.h"
+
+#include"../PlayScene/Play.h"
 #include "../../Object/CharaObject/Camera/CameraFps.h"
 #include "../../Object/CharaObject/Player/Player.h"
 #include "../../Object/MapObject/Map/Map.h"
@@ -7,7 +9,6 @@
 #include "../../Object/MapObject/Furniture/Furniture.h"
 #include"../../UI/Action/Action.h"
 #include"../../UI/Reamarks/Remarks.h"
-#include"../PlayScene/Play.h"
 
 // @brief Roomコンストラクタ //
 
@@ -60,7 +61,7 @@ SceneBase* Room::Update(float deltaTime)
         {
             AssetManager::ReleaseAllAsset();            //全てのアセットの開放
             ObjManager::ReleaseAllObj();                //全てのオブジェクトの開放
-            return new Play();                        //リザルト画面へ
+            return new Play;                        //リザルト画面へ
         }
     }
 	return this;
@@ -71,7 +72,7 @@ SceneBase* Room::Update(float deltaTime)
 void Room::Draw()
 {
     ObjManager::Draw();
-    DrawFormatString(0, 0, GetColor(255, 255, 255), "R画面:PでPlayシーンへ移行");
+    DrawFormatString(0, 0, GetColor(255, 255, 255), "Room画面:Stageシーンへ移行");
     roomBlend->Fade();
     DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), true);
     roomBlend->NoBlend();

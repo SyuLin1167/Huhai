@@ -4,11 +4,30 @@
 #include "../../Collision/Collision.h"
 
 /*脱出シーンクラス*/
-class Escape:public ObjectBase
+class EscapeScene:public SceneBase
 {
 public:
-    Escape();
-    ~Escape();
+    /// <summary>
+    /// EscapeSceneコンストラクタ
+    /// </summary>
+    EscapeScene();
+
+    /// <summary>
+    /// EscapeSceneデストラクタ
+    /// </summary>
+    ~EscapeScene();
+
+    /// <summary>
+    /// EscapeScene更新処理
+    /// </summary>
+    /// <param name="deltaTime">:フレームレート</param>
+    /// <returns>現在のシーンのポインタ</returns>
+    SceneBase* Update(float deltaTime)override;
+
+    /// <summary>
+    /// EscapeScene描画処理
+    /// </summary>
+    void Draw()override;
 
 };
 

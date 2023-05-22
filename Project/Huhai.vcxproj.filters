@@ -103,9 +103,6 @@
     <Filter Include="ソース ファイル\CharaObject\Ghost\Base">
       <UniqueIdentifier>{37fef137-fa07-49ed-b4c0-bce1061d4b2e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\CharaObject\Ghost\GhostMoveGim">
-      <UniqueIdentifier>{a0fd39f9-91ee-422f-9309-cf2f4e51ce8a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\CharaObject\Man">
       <UniqueIdentifier>{33e0c2ea-1b94-4e5b-8232-4644acdc7fc5}</UniqueIdentifier>
     </Filter>
@@ -147,6 +144,9 @@
     </Filter>
     <Filter Include="ソース ファイル\Scene\Room">
       <UniqueIdentifier>{b50aa5a5-e753-40ad-8de5-45562dd12299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CharaObject\Ghost\GhostWalkGim">
+      <UniqueIdentifier>{a0fd39f9-91ee-422f-9309-cf2f4e51ce8a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -219,8 +219,8 @@
     <ClCompile Include="..\SourceCode\Object\MapObject\Light\LightingLight\LitLight.cpp">
       <Filter>ソース ファイル\MapObject\Light\LitLight</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Object\CharaObject\Ghost\MoveGimmic\GhostMoveGim.cpp">
-      <Filter>ソース ファイル\CharaObject\Ghost\GhostMoveGim</Filter>
+    <ClCompile Include="..\SourceCode\Object\CharaObject\Ghost\MoveGimmic\GhostWalkGim.cpp">
+      <Filter>ソース ファイル\CharaObject\Ghost\GhostWalkGim</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Object\CharaObject\Ghost\Base\GhostBase.cpp">
       <Filter>ソース ファイル\CharaObject\Ghost\Base</Filter>
@@ -338,8 +338,8 @@
     <ClInclude Include="..\SourceCode\Object\MapObject\Light\LightingLight\LitLight.h">
       <Filter>ソース ファイル\MapObject\Light\LitLight</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Object\CharaObject\Ghost\MoveGimmic\GhostMoveGim.h">
-      <Filter>ソース ファイル\CharaObject\Ghost\GhostMoveGim</Filter>
+    <ClInclude Include="..\SourceCode\Object\CharaObject\Ghost\MoveGimmic\GhostWalkGim.h">
+      <Filter>ソース ファイル\CharaObject\Ghost\GhostWalkGim</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Object\CharaObject\Ghost\Base\GhostBase.h">
       <Filter>ソース ファイル\CharaObject\Ghost\Base</Filter>

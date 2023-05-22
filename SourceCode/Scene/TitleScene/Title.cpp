@@ -67,7 +67,7 @@ SceneBase* Title::Update(float deltaTime)
         {
             AssetManager::ReleaseAllAsset();            //全てのアセットの開放
             ObjManager::ReleaseAllObj();                //全てのオブジェクトの開放
-            return new Room();
+            return new Room;
         }
     }
 
@@ -82,7 +82,7 @@ void Title::Draw()
     GetDrawScreenGraph(0, 0, 1920, 1080, graph);
     DrawExtendGraph(BgX, BgY, BgX + 450, BgY+130, BgHandle, TRUE);
     select->Draw();
-    DrawFormatString(0, 0, GetColor(255, 255, 255), "Title画面:PでPlayシーンへ移行");
+    DrawFormatString(0, 0, GetColor(255, 255, 255), "Title画面:Roomシーンへ移行");
     titleBlend->Fade();
     DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), true);
     titleBlend->NoBlend();

@@ -3,20 +3,19 @@
 #include"../../Object/ObjectManager/ObjManager.h"
 #include "../../Collision/Collision.h"
 
-
-/* プレイシーンのクラス */
+/* プレイシーンクラス */
 class Play :public SceneBase
 {
     class Grid* grid = nullptr;
 
 public:
     /// <summary>
-    /// コンストラクター
+    /// PlaySceneコンストラクタ
     /// </summary>
     Play();
 
     /// <summary>
-    /// デストラクター
+    /// PlaySceneデストラクタ
     /// </summary>
     ~Play();
 
@@ -28,7 +27,7 @@ public:
     SceneBase* Update(float deltaTime)override;
 
     /// <summary>
-    /// プレイシーンの描画
+    /// PlaySceneの描画
     /// </summary>
     void Draw()override;
 

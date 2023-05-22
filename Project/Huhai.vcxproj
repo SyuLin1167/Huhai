@@ -163,7 +163,7 @@
     <ClCompile Include="..\SourceCode\Object\CharaObject\Camera\MoveCamera\MoveCamera.cpp" />
     <ClCompile Include="..\SourceCode\Object\CharaObject\Ghost\Base\GhostBase.cpp" />
     <ClCompile Include="..\SourceCode\Object\CharaObject\Ghost\Ghost.cpp" />
-    <ClCompile Include="..\SourceCode\Object\CharaObject\Ghost\MoveGimmic\GhostMoveGim.cpp" />
+    <ClCompile Include="..\SourceCode\Object\CharaObject\Ghost\MoveGimmic\GhostWalkGim.cpp" />
     <ClCompile Include="..\SourceCode\Object\CharaObject\Man\Man.cpp" />
     <ClCompile Include="..\SourceCode\Object\CharaObject\Player\Player.cpp" />
     <ClCompile Include="..\SourceCode\Object\MapObject\Bed\Bed.cpp" />
@@ -203,7 +203,7 @@
     <ClInclude Include="..\SourceCode\Object\CharaObject\Camera\MoveCamera\MoveCamera.h" />
     <ClInclude Include="..\SourceCode\Object\CharaObject\Ghost\Base\GhostBase.h" />
     <ClInclude Include="..\SourceCode\Object\CharaObject\Ghost\Ghost.h" />
-    <ClInclude Include="..\SourceCode\Object\CharaObject\Ghost\MoveGimmic\GhostMoveGim.h" />
+    <ClInclude Include="..\SourceCode\Object\CharaObject\Ghost\MoveGimmic\GhostWalkGim.h" />
     <ClInclude Include="..\SourceCode\Object\CharaObject\Man\Man.h" />
     <ClInclude Include="..\SourceCode\Object\CharaObject\Player\Player.h" />
     <ClInclude Include="..\SourceCode\Object\MapObject\Bed\Bed.h" />

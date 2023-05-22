@@ -40,7 +40,8 @@ public:
         TITLE=0,
         ROOM,
         STAGE,
-        Chase,
+        ESCAPE,
+        ESCAPEMAIN,
     };
 
 private:

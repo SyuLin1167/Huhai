@@ -1,15 +1,17 @@
 #include "Play.h"
+
+#include"../EscapeScene/Escape.h"
+#include"../ResultScene/Result.h"
 #include "../../Object/CharaObject/Camera/CameraFps.h"
 #include "../../Object/CharaObject/Player/Player.h"
-#include "../../Object/CharaObject/Ghost/MoveGimmic/GhostMoveGim.h"
+#include "../../Object/CharaObject/Ghost/MoveGimmic/GhostWalkGim.h"
 #include "../../Object/MapObject/Map/Map.h"
 #include "../../Object/MapObject/Door/Door.h"
 #include "../../Object/MapObject/Chair/Chair.h"
 #include "../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../Object/MapObject/Light/LightingLight/LitLight.h"
 #include "../../Object/MapObject/Furniture/Furniture.h"
-#include "../ResultScene/Result.h"
-#include"../../UI/Reamarks/Remarks.h"
+#include "../../UI/Reamarks/Remarks.h"
 
 // @brief PlaySceneコンストラクタ //
 
@@ -43,7 +45,7 @@ Play::Play()
     ObjManager::Entry(new Player);
 
     ////---エネミー生成---//
-    ObjManager::Entry(new GhostMoveGim);
+    ObjManager::Entry(new GhostWalkGim);
 
     ObjManager::Entry(new Remarks(TextType::Day1Stage));
 }
@@ -77,9 +79,7 @@ SceneBase* Play::Update(float deltaTime)
         }
         else if (sceneChange)
         {
-            AssetManager::ReleaseAllAsset();            //全てのアセットの開放
-            ObjManager::ReleaseAllObj();                //全てのオブジェクトの開放
-            return new Result;                        //リザルト画面へ
+            return new EscapeScene;                        //リザルト画面へ
         }
     }
 
@@ -91,5 +91,5 @@ SceneBase* Play::Update(float deltaTime)
 void Play::Draw()
 {
     ObjManager::Draw();
-    DrawFormatString(0, 0, GetColor(255, 255, 255), "Play画面:RでResultシーンへ移行");
+    DrawFormatString(0, 0, GetColor(255, 255, 255), "Stage画面:Escapeシーンへ移行");
 }

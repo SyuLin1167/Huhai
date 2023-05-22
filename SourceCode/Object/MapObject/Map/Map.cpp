@@ -25,6 +25,8 @@ void Map::LoadModel (int maptag)
 	mapModel->AddModel("../Assets/Map/Stage/Huhai.mv1");
 	mapModel->AddModel("../Assets/Map/Room/Room.mv1");						//モデル読み込み
 	mapModel->AddModel("../Assets/Map/Stage/StageDay1.mv1");						//モデル読み込み
+	mapModel->AddModel("../Assets/Map/Stage/Escape.mv1");
+	mapModel->AddModel("../Assets/Map/Stage/EscapeMain.mv1");
 	objHandle = mapModel->SetModel(maptag);
 
 	colModel = objHandle;																	//当たり判定モデルはモデルに
