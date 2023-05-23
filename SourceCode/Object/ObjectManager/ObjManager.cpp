@@ -200,7 +200,7 @@ ObjectBase* ObjManager::GetFirstObj(ObjectTag tag)
 
 ObjectBase* ObjManager::GetObj(ObjectTag tag, int tagNum)
 {
-	if (objInstance->Object[tag].size() < tagNum + 1)		//オブジェクトの数が指定数より少なかったら
+	if (objInstance->Object[tag].size() < static_cast<unsigned long long>(tagNum) + 1)		//オブジェクトの数が指定数より少なかったら
 	{
 		return nullptr;								//nullptrを返す
 	}

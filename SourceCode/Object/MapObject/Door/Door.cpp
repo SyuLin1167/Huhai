@@ -42,12 +42,13 @@ void Door::Load()
 
     //---アニメーション読み込み---//
     doorAnim = new Animation(objHandle);
-    doorAnim->AddAnimation("../Assets/Map/Door/Door.mv1");                        //待機:0
+    doorAnim->AddAnimation("../Assets/Map/Door/Door.mv1", 30.0f, false);                        //待機:0
     doorAnim->AddAnimation("../Assets/Map/Door/DoorOpen.mv1", 30.0f, false);      //開:1
     doorAnim->AddAnimation("../Assets/Map/Door/DoorClose.mv1", 30.0f, false);     //閉:2
 
     animType = IDLE;
     doorAnim->StartAnim(animType);
+    doorAnim->StopAnim();
 
     colType = CollisionType::Sphere;                                                         //当たり判定は球体
 

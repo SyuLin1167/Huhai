@@ -37,6 +37,7 @@ void Man::Load()
     manAnim = new Animation(objHandle);
 
     manAnim->AddAnimation("../Assets/Chara/Man/ManCrying.mv1");
+    manAnim->AddAnimation("../Assets/Chara/Man/ManDying.mv1", 30.0f, false);
     animType = CRYING;
     manAnim->StartAnim(animType);
 
@@ -57,14 +58,24 @@ void Man::Update(float deltaTime)
         aimDir = VSub(ObjManager::GetFirstObj(ObjectTag::Player)->GetPos(), objPos);
         aimDir = VNorm(aimDir);
         Rotate();
+
+        ObjectBase* remarks = ObjManager::GetObj(ObjectTag::UI, 1);
+        if (!remarks && addRemarks)
+        {
+            if (animType != DEAD)
+            {
+                animType = DEAD;
+                manAnim->StartAnim(animType);
+            }
+        }
         if (!rotateNow && !addRemarks)
         {
             ObjManager::Entry(new Remarks(TextType::ManSpeak));
             addRemarks = true;
         }
-        if (!ObjManager::GetObj(ObjectTag::UI, 1))
+        if (animType == DEAD && !manAnim->IsPlaying())
         {
-
+            isAlive = false;
         }
     }
 
@@ -93,7 +104,7 @@ void Man::Rotate()
         {
             // ‰ñ“]‚³‚¹‚é
             VECTOR interPolateDir;
-            interPolateDir = RotForAimY(objDir, aimDir, 2.0f);
+            interPolateDir = RotForAimY(objDir, aimDir, 5.0f);
 
             // ‰ñ“]‚ª–Ú•WŠp“x‚ð’´‚¦‚Ä‚¢‚È‚¢‚©
             VECTOR cross1, cross2;
