@@ -62,6 +62,10 @@ void Man::Update(float deltaTime)
             ObjManager::Entry(new Remarks(TextType::ManSpeak));
             addRemarks = true;
         }
+        if (!ObjManager::GetObj(ObjectTag::UI, 1))
+        {
+
+        }
     }
 
     // モデルに回転をセットする

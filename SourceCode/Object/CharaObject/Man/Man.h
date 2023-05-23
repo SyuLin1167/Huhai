@@ -39,6 +39,7 @@ public:
 	enum Anim
 	{
 		CRYING = 0,			//‘Ò‹@
+		DOWN,
 	};
 
 private:
