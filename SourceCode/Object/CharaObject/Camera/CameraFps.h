@@ -4,7 +4,7 @@
 #include"../../ObjectManager/ObjManager.h"
 
 constexpr float CameraNear = 0.1f;       //カメラの描画範囲(近)
-constexpr float CameraFar = 200.0f;     //カメラの描画範囲(遠)
+constexpr float CameraFar = 400.0f;     //カメラの描画範囲(遠)
 
 /*一人称視点のクラス*/
 class CameraFps:public ObjectBase
