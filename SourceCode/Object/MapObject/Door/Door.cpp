@@ -62,33 +62,32 @@ void Door::Load()
 
 void Door::Update(float deltaTime)
 {
-	doorAnim->AddAnimTime(deltaTime);	
+    doorAnim->AddAnimTime(deltaTime);	
 
 
-	//---当たり判定設定---//
-	player = ObjManager::GetFirstObj(ObjectTag::Player);         //プレイヤーオブジェクト取得
-	if (player)                                                              //オブジェクトの中身が空でなければ
-	{
-		if (CollisionPair(colSphere, player->GetColSphere()))
-		{
-			if (!doorAnim->IsPlaying())
-			{
-				if (CheckHitKey(KEY_INPUT_E))                //Eキー入力
-				{
+    //---当たり判定設定---//
+    player = ObjManager::GetFirstObj(ObjectTag::Player);         //プレイヤーオブジェクト取得
+    if (player)                                                              //オブジェクトの中身が空でなければ
+    {
+        if (CollisionPair(colSphere, player->GetColSphere()))
+        {
+            if (!doorAnim->IsPlaying())
+            {
+                if (CheckHitKey(KEY_INPUT_E))                //Eキー入力
+                {
                     MoveAnim(OPEN);
-				}
-				if (CheckHitKey(KEY_INPUT_Q))                //Qキー入力
-				{
+                }
+                if (CheckHitKey(KEY_INPUT_Q))                //Qキー入力
+                {
                     MoveAnim(CLOSE);
-                    isAlive = false;
-				}
-			}
-		}
+                }
+            }
+        }
 
-	}
-	colModel = objHandle;																//当たり判定のモデルはオブジェクトのモデル
-	ColUpdate();
-	
+    }
+    colModel = objHandle;                                           //当たり判定のモデルはオブジェクトのモデル
+    ColUpdate();
+
 }
 
 // @brief Doorアニメーション処理

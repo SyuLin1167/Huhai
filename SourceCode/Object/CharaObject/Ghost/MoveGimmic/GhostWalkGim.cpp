@@ -73,7 +73,7 @@ void GhostWalkGim::OnCollisionEnter(const ObjectBase* other)
                 light = ObjManager::GetFirstObj(ObjectTag::Light);
                 if (light)
                 {
-                    light->SetPos(VGet(-30, 32, 75));
+                    light->SetPos(VGet(-32, 32, 75));
                 }
                 ObjManager::Entry(new Man);
             }
