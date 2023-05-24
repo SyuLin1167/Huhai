@@ -27,8 +27,8 @@ EscapeScene::EscapeScene()
     ObjManager::Entry(new Door(VGet(0, 0, 66), VGet(0, 0, 0)));
 
     //---Æ–¾‚ğ¶¬---//
-    ObjManager::Entry(new NomalLight(VGet(-10, 32, 0)));
-    ObjManager::Entry(new LitLight(VGet(120, 32, 20), 40.0f));
+    ObjManager::Entry(new NomalLight(VGet(23, 32, 10)));
+    ObjManager::Entry(new NomalLight(VGet(170, 32, -15)));
 
     //---ƒvƒŒƒCƒ„[¶¬---//
     ObjManager::Entry(new Player);

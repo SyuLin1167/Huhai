@@ -39,7 +39,7 @@ Play::Play()
     ////---Æ–¾‚ğ¶¬---//
     ObjManager::Entry(new NomalLight(VGet(-10, 32, 0)));
     ObjManager::Entry(new LitLight(VGet(65, 32, 0),50.0f));
-    ObjManager::Entry(new LitLight(VGet(120, 32, 20),40.0f));
+    ObjManager::Entry(new LitLight(VGet(121, 32, 25),40.0f));
 
     ////---ƒvƒŒƒCƒ„[¶¬---//
     ObjManager::Entry(new Player);
