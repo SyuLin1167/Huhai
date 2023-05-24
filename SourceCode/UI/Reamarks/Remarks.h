@@ -2,7 +2,7 @@
 #include"../../Object/ObjectBase/ObjectBase.h"
 #include"TextType.h"
 
-constexpr int TEXTSIZE = 18;
+constexpr int TEXTSIZE = 22;
 constexpr int BUFWIDTH = 35;
 constexpr int BUFHEIGHT = 20;
 
