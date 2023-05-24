@@ -151,6 +151,9 @@
     <Filter Include="ソース ファイル\MapObject\Light\BlinkingLight">
       <UniqueIdentifier>{570da3c0-d4d7-4ea5-878a-bd8a4fae3b64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\MapObject\Table">
+      <UniqueIdentifier>{b773265b-301b-4f17-8142-86d5d9261f28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SourceCode\Main.cpp">
@@ -269,6 +272,9 @@
     </ClCompile>
     <ClCompile Include="..\SourceCode\Object\MapObject\Light\BlinkingLight\BlinkingLight.cpp">
       <Filter>ソース ファイル\MapObject\Light\BlinkingLight</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\MapObject\Table\Table.cpp">
+      <Filter>ソース ファイル\MapObject\Table</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -394,6 +400,9 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\Object\MapObject\Light\BlinkingLight\BlinkingLight.h">
       <Filter>ソース ファイル\MapObject\Light\BlinkingLight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\MapObject\Table\Table.h">
+      <Filter>ソース ファイル\MapObject\Table</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
