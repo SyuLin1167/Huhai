@@ -1,40 +1,48 @@
 #pragma once
+#include<random>
+#include<time.h>
+
 #include"../LightBase/LightBase.h"
 
-/*FlashLighitのクラス*/
-class FlashLight:public LightBase
+/*BlinkingLighitのクラス*/
+class BlinkingLight :public LightBase
 {
 public:
 	/// <summary>
-	/// FlashLightコンストラクタ
+	/// BlinkingLightコンストラクタ
 	/// </summary>
-	FlashLight();
+	BlinkingLight();
 
 	/// <summary>
-	/// FlashLightコンストラクタ
+	/// BlinkingLightコンストラクタ
 	/// </summary>
 	/// <param name="lightPos">:ライトのワールド座標</param>
-	FlashLight(VECTOR lightPos);
+	BlinkingLight(VECTOR lightPos);
 
 	/// <summary>
-	/// FlashLightデストラクタ
+	/// BlinkingLightデストラクタ
 	/// </summary>
-	~FlashLight();
+	~BlinkingLight();
 
 	/// <summary>
-	/// FlashLight読み込み処理
+	/// BlinkingLight読み込み処理
 	/// </summary>
 	void Load();
 
 	/// <summary>
-	/// FlashLight更新処理
+	/// BlinkingLight更新処理
 	/// </summary>
 	/// <param name="deltaTime">:フレームレート</param>
 	void Update(float deltaTime)override;
 
 	/// <summary>
-	/// FlashLight描画処理
+	/// BlinkingLight描画処理
 	/// </summary>
 	void Draw()override;
+
+private:
+	float intervalTime;
+	float countTimer;
+	bool lightBlinking;
 };
 

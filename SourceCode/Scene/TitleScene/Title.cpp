@@ -3,7 +3,7 @@
 #include "../RoomScene/Room.h"
 #include"../../Object/CharaObject/Camera/CameraFps.h"
 #include"../../Object/MapObject/Door/Door.h"
-#include"../../Object/MapObject/Light/FlashLight/FlashLight.h"
+#include"../../Object/MapObject/Light/BlinkingLight/BlinkingLight.h"
 #include"../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../Object/MapObject/Map/Map.h"
 #include"../../UI/Select/Select.h"
@@ -28,7 +28,7 @@ Title::Title()
     door = new Door(VGet(0, 0, 66), VGet(0, 0, 0));
     ObjManager::Entry(door);
 
-    ObjManager::Entry(new FlashLight(VGet(-35, 32, 70)));
+    ObjManager::Entry(new BlinkingLight(VGet(-35, 32, 70)));
     ObjManager::Entry(new NomalLight(VGet(120, 32, 65)));
     
     select = new Select();

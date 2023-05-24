@@ -4,9 +4,6 @@
 
 FlashLight::FlashLight()
 	:LightBase()
-	,intervalTime(0.0f)
-	,countTimer(0.0f)
-	,lightFlash(false)
 {
 	Load();
 }
@@ -31,49 +28,22 @@ FlashLight::~FlashLight()
 
 void FlashLight::Load()
 {
-	MV1SetPosition(objHandle, objPos);
-	MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
+	lightAtten2 = 0.0005f;
+	lightHandle = CreateSpotLightHandle(VGet(0.0f, 0.0f, 0.0f), VGet(0.0f, 0.0f, 0.0f),
+		DX_PI_F / 6.0f, DX_PI_F / 4.0f, lightRange, 0.0f, 0.0f, lightAtten2);
 }
 
 // @brief FlashLightXVˆ— //
 
 void FlashLight::Update(float deltaTime)
 {
-
-	DeleteLightHandle(lightHandle);
-	lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2);
-	
-	if (countTimer >= intervalTime)
-	{
-		countTimer = 0;
-		srand((unsigned int)time(NULL));
-		intervalTime = static_cast <float>(rand() % 4 + 1);
-	}
-
-	if (intervalTime <= 1)
-	{
-		lightFlash = !lightFlash;
-	}
-	else
-	{
-		lightFlash = false;
-	}
-	
-	if (lightFlash)
-	{
-		lightAtten2 = 0.003f;
-	}
-	else
-	{
-		lightAtten2 = 0.002f;
-	}
-
-	countTimer += deltaTime;
+	ObjectBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
+	SetLightPositionHandle(lightHandle, camera->GetPos());
+	SetLightDirectionHandle(lightHandle, camera->GetDir());
 }
 
 // @brief FlashLight•`‰æˆ— //
 
 void FlashLight::Draw()
 {
-	MV1DrawModel(objHandle);						//ƒ‚ƒfƒ‹•`‰æ
 }

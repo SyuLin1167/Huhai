@@ -170,6 +170,7 @@
     <ClCompile Include="..\SourceCode\Object\MapObject\Chair\Chair.cpp" />
     <ClCompile Include="..\SourceCode\Object\MapObject\Door\Door.cpp" />
     <ClCompile Include="..\SourceCode\Object\MapObject\Furniture\Furniture.cpp" />
+    <ClCompile Include="..\SourceCode\Object\MapObject\Light\BlinkingLight\BlinkingLight.cpp" />
     <ClCompile Include="..\SourceCode\Object\MapObject\Light\FlashLight\FlashLight.cpp" />
     <ClCompile Include="..\SourceCode\Object\MapObject\Light\LightBase\LightBase.cpp" />
     <ClCompile Include="..\SourceCode\Object\MapObject\Light\LightingLight\LitLight.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="..\SourceCode\Object\MapObject\Chair\Chair.h" />
     <ClInclude Include="..\SourceCode\Object\MapObject\Door\Door.h" />
     <ClInclude Include="..\SourceCode\Object\MapObject\Furniture\Furniture.h" />
+    <ClInclude Include="..\SourceCode\Object\MapObject\Light\BlinkingLight\BlinkingLight.h" />
     <ClInclude Include="..\SourceCode\Object\MapObject\Light\FlashLight\FlashLight.h" />
     <ClInclude Include="..\SourceCode\Object\MapObject\Light\LightBase\LightBase.h" />
     <ClInclude Include="..\SourceCode\Object\MapObject\Light\LightingLight\LitLight.h" />

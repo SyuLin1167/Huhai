@@ -36,8 +36,7 @@ void NomalLight::Load()
 
 void NomalLight::Update(float deltaTime)
 {
-	DeleteLightHandle(lightHandle);
-	lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2);
+	SetLightPositionHandle(lightHandle, objPos);
 	MV1SetPosition(objHandle, objPos);
 }
 

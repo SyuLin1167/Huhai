@@ -6,7 +6,7 @@
 #include "../../Object/MapObject/Door/Door.h"
 #include "../../Object/MapObject/Chair/Chair.h"
 #include "../../Object/MapObject/Light/NomalLight/NomalLight.h"
-#include "../../Object/MapObject/Light/LightingLight/LitLight.h"
+#include "../../Object/MapObject/Light/FlashLight/FlashLight.h"
 #include "../../Object/MapObject/Furniture/Furniture.h"
 #include"../../UI/Reamarks/Remarks.h"
 #include "../ResultScene/Result.h"
@@ -24,11 +24,13 @@ EscapeScene::EscapeScene()
     ObjManager::Entry(new Map(Map::MapName::ESCAPEMAIN));
 
     //---ドアを生成---//
-    ObjManager::Entry(new Door(VGet(0, 0, 66), VGet(0, 0, 0)));
+    ObjManager::Entry(new Door(VGet(53, 0, 0), VGet(0, 0, 0)));
+    ObjManager::Entry(new Door(VGet(183, 0, 0), VGet(0, 180, 0)));
 
     //---照明を生成---//
     ObjManager::Entry(new NomalLight(VGet(23, 32, 10)));
-    ObjManager::Entry(new NomalLight(VGet(170, 32, -15)));
+    ObjManager::Entry(new NomalLight(VGet(175, 32, -30)));
+    ObjManager::Entry(new FlashLight());
 
     //---プレイヤー生成---//
     ObjManager::Entry(new Player);

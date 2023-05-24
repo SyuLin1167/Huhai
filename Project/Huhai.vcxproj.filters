@@ -148,6 +148,9 @@
     <Filter Include="ソース ファイル\CharaObject\Ghost\GhostWalkGim">
       <UniqueIdentifier>{a0fd39f9-91ee-422f-9309-cf2f4e51ce8a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\MapObject\Light\BlinkingLight">
+      <UniqueIdentifier>{570da3c0-d4d7-4ea5-878a-bd8a4fae3b64}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SourceCode\Main.cpp">
@@ -263,6 +266,9 @@
     </ClCompile>
     <ClCompile Include="..\SourceCode\UI\Reamarks\Remarks.cpp">
       <Filter>ソース ファイル\UI\Remarks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\MapObject\Light\BlinkingLight\BlinkingLight.cpp">
+      <Filter>ソース ファイル\MapObject\Light\BlinkingLight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -385,6 +391,9 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\UI\Reamarks\TextType.h">
       <Filter>ソース ファイル\UI\Remarks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\MapObject\Light\BlinkingLight\BlinkingLight.h">
+      <Filter>ソース ファイル\MapObject\Light\BlinkingLight</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
