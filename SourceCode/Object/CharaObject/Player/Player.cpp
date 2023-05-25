@@ -21,7 +21,7 @@ Player::Player()
 
     //---当たり判定球設定---//
     colType = CollisionType::Sphere;                                                        //当たり判定は球体
-    colSphere.localCenter = VGet(0, 5, 0);                                                  //ローカル座標
+    colSphere.localCenter = VGet(0, 5.5f, 0);                                                  //ローカル座標
     colSphere.Radius = 3.0f;                                                                //球半径
     colSphere.worldCenter = objPos;                                                         //ワールド座標
 

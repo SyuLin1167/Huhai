@@ -35,18 +35,16 @@ void Furniture::LoadModel(int furtag)
 	furColModel->AddModel("../Assets/Map/Furniture/StageFurCol.mv1");
 	colModel = furColModel->SetModel(furtag);
 	MV1SetScale(colModel, VGet(0.11f,0.12f,0.11f));
-	MV1SetOpacityRate(colModel, 0.3f);
 
 	// 表示モデルと当たり判定モデルの位置を微調整
 	MV1SetPosition(colModel, objPos);
-
-	MV1SetupCollInfo(colModel);
 }
 
 // @brief Furniture更新処理 //
 
 void Furniture::Update(float deltaTime)
 {
+	ColUpdate();
 }
 
 // @brief Furniture描画処理 //

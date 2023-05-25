@@ -3,10 +3,11 @@
 
 #include"../../../Asset/AssetManager/AssetManager.h"
 #include"../../ObjectBase/ObjectBase.h"
+#include"../../../Collision/Collision.h"
 
 using namespace std;
 
-constexpr int TableNum = 2;
+constexpr int TableNum = 4;
 
 /*TableƒNƒ‰ƒX*/
 class Table:public ObjectBase
@@ -35,13 +36,19 @@ public:
 	void Draw()override;
 
 private:
-	map<int, VECTOR> posData{
-	{0,{230,0,20}},
-	{1,{230,0,-20}},
+	map<int, VECTOR> posData
+	{
+		{0,{215,0,8}},
+		{1,{220,0,-21}},
+		{2,{250,0,-10}},
+		{3,{240,0,18}},
 	};
-	map<int, float> dirData{
+	map<int, float> dirData
+	{
 		{0,0.0f},
 		{1,90.0f},
+		{2,0.0f},
+		{3,-75.0f},
 	};
 };
 
