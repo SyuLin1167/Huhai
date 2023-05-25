@@ -29,8 +29,9 @@ FlashLight::~FlashLight()
 void FlashLight::Load()
 {
 	lightAtten2 = 0.0005f;
-	lightHandle = CreateSpotLightHandle(VGet(0.0f, 0.0f, 0.0f), VGet(0.0f, 0.0f, 0.0f),
-		DX_PI_F / 6.0f, DX_PI_F / 4.0f, lightRange, 0.0f, 0.0f, lightAtten2);
+	/*lightHandle = CreateSpotLightHandle(objPos, objDir,
+		DX_PI_F / 6.0f, DX_PI_F / 4.0f, lightRange, 0.0f, 0.0f, lightAtten2);*/
+	lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2 * 10);
 }
 
 // @brief FlashLightXVˆ— //
@@ -39,7 +40,7 @@ void FlashLight::Update(float deltaTime)
 {
 	ObjectBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
 	SetLightPositionHandle(lightHandle, camera->GetPos());
-	SetLightDirectionHandle(lightHandle, camera->GetDir());
+	//SetLightDirectionHandle(lightHandle, camera->GetDir());
 }
 
 // @brief FlashLight•`‰æˆ— //
