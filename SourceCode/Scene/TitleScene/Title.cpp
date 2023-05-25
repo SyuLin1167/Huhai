@@ -7,6 +7,7 @@
 #include"../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../Object/MapObject/Map/Map.h"
 #include"../../UI/Select/Select.h"
+#include"../EscapeScene/Escape.h"
 
 // @brief TitleSceneコンストラクター //
 
@@ -67,7 +68,8 @@ SceneBase* Title::Update(float deltaTime)
         {
             AssetManager::ReleaseAllAsset();            //全てのアセットの開放
             ObjManager::ReleaseAllObj();                //全てのオブジェクトの開放
-            return new Room;
+            //return new Room;
+            return new EscapeScene;
         }
     }
 
