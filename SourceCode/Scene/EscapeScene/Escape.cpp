@@ -1,10 +1,12 @@
 #include "Escape.h"
 #include "../../Object/CharaObject/Camera/CameraFps.h"
 #include "../../Object/CharaObject/Player/Player.h"
+#include"../../Object/CharaObject/Ghost/Ghost.h"
 #include "../../Object/MapObject/Map/Map.h"
 #include "../../Object/MapObject/Door/Door.h"
 #include"../../Object/MapObject/Table/Table.h"
 #include "../../Object/MapObject/Light/NomalLight/NomalLight.h"
+#include "../../Object/MapObject/Light/BlinkingLight/BlinkingLight.h"
 #include "../../Object/MapObject/Light/FlashLight/FlashLight.h"
 #include "../../Object/MapObject/Furniture/Furniture.h"
 #include "../ResultScene/Result.h"
@@ -32,14 +34,14 @@ EscapeScene::EscapeScene()
     }
 
     //---照明を生成---//
-    ObjManager::Entry(new NomalLight(VGet(23, 32, 10)));
+    ObjManager::Entry(new BlinkingLight(VGet(23, 32, 10)));
     ObjManager::Entry(new NomalLight(VGet(175, 32, -30)));
     ObjManager::Entry(new FlashLight());
 
     //---プレイヤー生成---//
     ObjManager::Entry(new Player);
 
-
+    ObjManager::Entry(new Ghost);
 }
 
 // @brief EscapeSceneデストラクタ //

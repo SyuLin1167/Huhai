@@ -26,7 +26,9 @@ public:
     enum Anim
     {
         IDLE = 0,                           //‘Ò‹@
-        RUN,                                //‘–‚è
+        WALK,                                //‘–‚è
+        SAD,
+        MOVE,
     };
 
     /// <summary>

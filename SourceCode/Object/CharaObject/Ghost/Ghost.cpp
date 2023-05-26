@@ -6,12 +6,19 @@
 Ghost::Ghost()
     :GhostBase()
 {
+    if (animType != SAD)
+    {
+        animType = SAD;
+        gstAnim->StartAnim(animType);
+    }
+    objPos = { 0,0,-35 };
+
     //---当たり判定球設定---//
-    colSphere.localCenter = VGet(0, 10, 0);			//ローカル座標
-    colSphere.Radius = 5.0f;						//球半径
+    colSphere.localCenter = VGet(0, 6, 0);			//ローカル座標
+    colSphere.Radius = 3.0f;						//球半径
     colSphere.worldCenter = objPos;					//ワールド座標
 
-    objSpeed = 5.0f;
+    objSpeed = 15.0f;
 }
 
 // @brief Ghostデストラクタ //
@@ -32,14 +39,12 @@ void Ghost::Update(float deltaTime)
 
     ObjectBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
 
-
-
     MV1SetPosition(objHandle, objPos);                        //ポジション設定
-    MATRIX RotMatY = MGetRotY(90 * (float)(DX_PI / 90.0f));       //左向きに回転させる
+    MATRIX RotMatY = MGetRotY(-90 * (float)(DX_PI / 180.0f));       //左向きに回転させる
     MV1SetRotationZYAxis(objHandle, VTransform(objDir, RotMatY), VGet(0.0f, 1.0f, 0.0f), 0.0f);         //モデル回転
 
     
-    colSphere.Move(objPos);					//当たり判定の移動
+    ColUpdate();            //当たり判定の移動
 }
 
 // @brief Ghost描画処理 //

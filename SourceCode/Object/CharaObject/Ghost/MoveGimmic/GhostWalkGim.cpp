@@ -65,9 +65,9 @@ void GhostWalkGim::OnCollisionEnter(const ObjectBase* other)
     {
         if (CollisionPair(colSphere, other->GetColSphere()))
         {
-            if (animType != RUN)
+            if (animType != WALK)
             {
-                animType = RUN;
+                animType = WALK;
                 gstAnim->StartAnim(animType);
                 move = true;
                 light = ObjManager::GetFirstObj(ObjectTag::Light);

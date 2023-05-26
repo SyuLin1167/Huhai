@@ -15,6 +15,8 @@ GhostBase::GhostBase()
     //---アニメーション読み込み---//
     gstAnim->AddAnimation("../Assets/Chara/Ghost/GhostIdle.mv1");               //待機:0
     gstAnim->AddAnimation("../Assets/Chara/Ghost/GhostWalk.mv1");                //走る:1
+    gstAnim->AddAnimation("../Assets/Chara/Ghost/GhostSad.mv1");                //走る:1
+    gstAnim->AddAnimation("../Assets/Chara/Ghost/GhostMove.mv1");                //走る:1
 
     //---アニメーション状態セット---//
     gstAnim->StartAnim(animType);

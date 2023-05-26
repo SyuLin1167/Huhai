@@ -34,5 +34,8 @@ public:
     /// <param name="other">:オブジェクト</param>
     void OnCollisionEnter(const ObjectBase* other)override;
 
+private:
+    bool firstMove;
+
 };
 
