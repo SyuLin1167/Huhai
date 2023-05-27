@@ -43,7 +43,7 @@ void Bed::Update(float deltaTime)
         ObjectBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
         VECTOR movePly = VSub(objPos + VGet(5.0f, 0.0f, 0.0f), player->GetPos());
         movePly = VNorm(movePly);
-        player->SetPos(VAdd(player->GetPos(), movePly));
+        player->SetPos(VAdd(player->GetPos(), movePly * objSpeed * deltaTime));
 
         ObjectBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
         SetCameraPositionAndTarget_UpVecY(camera->GetPos() - VGet(0, 8, 0), VGet(0, 25, 20));

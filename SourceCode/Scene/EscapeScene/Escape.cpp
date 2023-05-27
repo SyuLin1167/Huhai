@@ -22,10 +22,12 @@ EscapeScene::EscapeScene()
     //---マップを生成---//
     ObjManager::Entry(new Map(Map::MapName::ESCAPE));
     ObjManager::Entry(new Map(Map::MapName::ESCAPEMAIN));
+    ObjManager::Entry(new Map(Map::MapName::GOAL));
 
     //---ドアを生成---//
     ObjManager::Entry(new Door(VGet(55, 0, 0), VGet(0, 0, 0)));
     ObjManager::Entry(new Door(VGet(187, 0, 0), VGet(0, 180, 0)));
+    ObjManager::Entry(new Door(VGet(700, 0, 0), VGet(0, 180, 0)));
 
     //---机を生成---//
     for (int i = 0; i < TableNum; i++)

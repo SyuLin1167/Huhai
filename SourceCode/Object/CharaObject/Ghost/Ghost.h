@@ -34,8 +34,20 @@ public:
     /// <param name="other">:オブジェクト</param>
     void OnCollisionEnter(const ObjectBase* other)override;
 
+    /// <summary>
+    /// Ghost回転処理
+    /// </summary>
+    void Rotate();
+
 private:
     bool firstMove;
+    float moveCount;
+    bool rotateNow;
+    VECTOR aimDir;
 
+    VECTOR aimPos;
+    VECTOR holdPos;
+
+    int lightHandle;
 };
 

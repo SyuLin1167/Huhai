@@ -21,8 +21,7 @@ public:
     /// <summary>
     /// Map読み込み処理
     /// </summary>
-    /// <param name="maptag">:マップタグ</param>
-    void LoadModel(int maptag);
+    void LoadModel();
 
     /// <summary>
     /// Map更新処理
@@ -42,9 +41,11 @@ public:
         STAGE,
         ESCAPE,
         ESCAPEMAIN,
+        GOAL,
     };
 
 private:
     class Model* mapModel;
+    int mapTag;
 };
 

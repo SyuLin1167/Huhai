@@ -9,7 +9,7 @@ GhostWalkGim::GhostWalkGim()
     ,light(nullptr)
     ,move(false)
 {
-    objPos = { 120.0f,0.0f,65.0f };
+    objPos = VGet(120.0f, 0.0f, 65.0f);
 
     //---“–‚½‚è”»’è‹…İ’è---//
     colType = CollisionType::Sphere;
