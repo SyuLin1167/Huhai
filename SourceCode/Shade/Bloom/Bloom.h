@@ -25,6 +25,7 @@ public:
     /// Bloom描画更新処理
     /// </summary>
     static void DrawUpdate();
+
 private:
     /// <summary>
     /// コンストラクター(シングルトン)
@@ -36,11 +37,11 @@ private:
     /// </summary>
 	~Bloom();
 
-    static int GaussParam;             //ガウスのぼかし具合
-    static int ColorScreen;            //普通の描画結果を書き込むスクリーン
-    static int HighBrightScreen;       //普通の描画結果から高輝度部分を抜き出した結果を書き込むスクリーン
-    static int DownScaleScreen;        //高輝度部分を縮小した結果を書き込むスクリーン
-    static int GaussScreen;            //縮小画像をガウスフィルタでぼかした結果を書き込むスクリーン
+    int GaussParam;             //ガウスのぼかし具合
+    int ColorScreen;            //普通の描画結果を書き込むスクリーン
+    int HighBrightScreen;       //普通の描画結果から高輝度部分を抜き出した結果を書き込むスクリーン
+    int DownScaleScreen;        //高輝度部分を縮小した結果を書き込むスクリーン
+    int GaussScreen;            //縮小画像をガウスフィルタでぼかした結果を書き込むスクリーン
 
     static Bloom* bloom;               //Bloomの実態
 };

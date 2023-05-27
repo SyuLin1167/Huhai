@@ -2,7 +2,6 @@
 #include"Scene/SceneManager/SceneManager.h"
 #include"Object/ObjectManager/ObjManager.h"
 #include"Asset/AssetManager/AssetManager.h"
-#include"Shade/Bloom/Bloom.h"
 
 int WINAPI WinMain(_In_ HINSTANCE,_In_opt_ HINSTANCE,_In_ LPSTR,_In_ int)
 {
@@ -32,7 +31,6 @@ int WINAPI WinMain(_In_ HINSTANCE,_In_opt_ HINSTANCE,_In_ LPSTR,_In_ int)
     SceneManager* sceneManager = new SceneManager;
     AssetManager::Init();
     ObjManager::Init();
-    Bloom::Init();
 
     //標準ライトを無効化
     SetLightEnable(FALSE);
@@ -41,11 +39,9 @@ int WINAPI WinMain(_In_ HINSTANCE,_In_opt_ HINSTANCE,_In_ LPSTR,_In_ int)
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)         //ウィンドウが閉じられるか、ESCキーが押されるまで実行
     {
         sceneManager->Update();                                                 //更新処理
-        Bloom::SetColoerScreen();
         ClearDrawScreen();                                                      //画面を初期化
 
         sceneManager->Draw();                                                   //描画処理
-        Bloom::DrawUpdate() ;
         ScreenFlip();                                                           //裏画面の内容を表描画に反映
     }
 

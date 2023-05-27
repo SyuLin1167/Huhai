@@ -27,7 +27,7 @@ EscapeScene::EscapeScene()
     //---ƒhƒA‚ğ¶¬---//
     ObjManager::Entry(new Door(VGet(55, 0, 0), VGet(0, 0, 0)));
     ObjManager::Entry(new Door(VGet(187, 0, 0), VGet(0, 180, 0)));
-    ObjManager::Entry(new Door(VGet(700, 0, 0), VGet(0, 180, 0)));
+    ObjManager::Entry(new Door(VGet(750, 0, 0), VGet(0, 180, 0)));
 
     //---Š÷‚ğ¶¬---//
     for (int i = 0; i < TableNum; i++)

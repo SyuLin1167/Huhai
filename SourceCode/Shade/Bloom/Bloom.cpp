@@ -2,27 +2,17 @@
 #include"../../Object/CharaObject/Camera/CameraFps.h"
 
 Bloom* Bloom::bloom = nullptr;
-int Bloom::GaussParam;
-int Bloom::ColorScreen;
-int Bloom::HighBrightScreen;
-int Bloom::DownScaleScreen;
-int Bloom::GaussScreen;
 
 // @brief BloomƒRƒ“ƒXƒgƒ‰ƒNƒ^[ //
 
 Bloom::Bloom()
+    :ColorScreen(MakeScreen(SCREEN_WIDTH, SCREEN_HEIGHT, FALSE)) 
+    , HighBrightScreen(MakeScreen(SCREEN_WIDTH, SCREEN_HEIGHT, FALSE))
+    , DownScaleScreen(MakeScreen(DOWN_SCALE_WIDTH, DOWN_SCALE_HEIGHT, FALSE))
+    , GaussScreen(MakeScreen(DOWN_SCALE_WIDTH, DOWN_SCALE_HEIGHT, FALSE))
+    , GaussParam(100)
 {
-    bloom = nullptr;
-
-    //---ƒXƒNƒŠ[ƒ“‚Ìì¬---//
-    ColorScreen = MakeScreen(SCREEN_WIDTH, SCREEN_HEIGHT, FALSE);                   //’Êí‚Ì•`‰æŒ‹‰Ê‚ð‘‚«ž‚ÞƒXƒNƒŠ[ƒ“ì¬
-    HighBrightScreen = MakeScreen(SCREEN_WIDTH, SCREEN_HEIGHT, FALSE);              //ã‚ÌŒ‹‰Ê‚©‚ç‚‹P“x•”•ª‚ð”²‚«o‚µ‚½Œ‹‰Ê‚ð‘‚«ž‚ÞƒXƒNƒŠ[ƒ“ì¬
-    DownScaleScreen = MakeScreen(DOWN_SCALE_WIDTH, DOWN_SCALE_HEIGHT, FALSE);        //‚‹P“x•”•ª‚ðk¬‚µ‚½Œ‹‰Ê‚ð‘‚«ž‚ÞƒXƒNƒŠ[ƒ“ì¬
-    GaussScreen = MakeScreen(DOWN_SCALE_WIDTH, DOWN_SCALE_HEIGHT, FALSE);            //k¬‰æ‘œ‚ðƒKƒEƒXƒtƒBƒ‹ƒ^‚Å‚Ú‚©‚µ‚½Œ‹‰Ê‚ð‘‚«ž‚ÞƒXƒNƒŠ[ƒ“ì¬
-
-    SetBackgroundColor(255, 255, 255);                                              //ClearDrawScreenŽž‚ÉƒZƒbƒg‚µ‚½F‚Å‰æ–Ê‚ð“h‚è‚Â‚Ô‚·
-
-    GaussParam = 500;                                                               //ƒKƒEƒX‚Ì‚Ú‚©‚µ‹ï‡
+    SetBackgroundColor(0, 0, 0);                                              //ClearDrawScreenŽž‚ÉƒZƒbƒg‚µ‚½F‚Å‰æ–Ê‚ð“h‚è‚Â‚Ô‚·
 }
 
 // @briefb BloomƒfƒXƒgƒ‰ƒNƒ^[ //
@@ -46,38 +36,36 @@ void Bloom::Init()
 
 void Bloom::SetColoerScreen()
 {
-    SetDrawScreen(ColorScreen);
+    SetDrawScreen(bloom->ColorScreen);
 }
 
 // @brief Bloom•`‰æXVˆ— //
 
 void Bloom::DrawUpdate() 
 {
-    GraphFilterBlt(ColorScreen, HighBrightScreen,
-        DX_GRAPH_FILTER_BRIGHT_CLIP, DX_CMP_LESS, 230, TRUE,
-        GetColor(0, 0, 0), 255);                                                    //•`‰æŒ‹‰Ê‚©‚ç‚‹P“x•”•ª‚Ì‚Ý‚ð”²‚«o‚µ‚½‰æ‘œ‚ð“¾‚é
-    GraphFilterBlt(HighBrightScreen,DownScaleScreen,
-        DX_GRAPH_FILTER_DOWN_SCALE,DOWN_SCALE);                                     //‚‹P“x•”•ª‚ð‚W•ª‚Ì‚P‚Ék¬‚µ‚½‰æ‘œ‚ð“¾‚é
-    GraphFilterBlt(DownScaleScreen, GaussScreen,
-        DX_GRAPH_FILTER_GAUSS, 16, GaussParam);                                     //‚W•ª‚Ì‚P‚Ék¬‚µ‚½‰æ‘œ‚ðƒKƒEƒXƒtƒBƒ‹ƒ^‚Å‚Ú‚©‚·
+    GraphFilterBlt(bloom->ColorScreen, bloom->HighBrightScreen,DX_GRAPH_FILTER_BRIGHT_CLIP,
+        DX_CMP_LESS, 230, TRUE,GetColor(0, 0, 0), 255);                                                                               //•`‰æŒ‹‰Ê‚©‚ç‚‹P“x•”•ª‚Ì‚Ý‚ð”²‚«o‚µ‚½‰æ‘œ‚ð“¾‚é
+    GraphFilterBlt(bloom->HighBrightScreen,bloom->DownScaleScreen,DX_GRAPH_FILTER_DOWN_SCALE,DOWN_SCALE);         //‚‹P“x•”•ª‚ð‚W•ª‚Ì‚P‚Ék¬‚µ‚½‰æ‘œ‚ð“¾‚é
+    GraphFilterBlt(bloom->DownScaleScreen, bloom->GaussScreen,DX_GRAPH_FILTER_GAUSS, 16, bloom->GaussParam);                                     //‚W•ª‚Ì‚P‚Ék¬‚µ‚½‰æ‘œ‚ðƒKƒEƒXƒtƒBƒ‹ƒ^‚Å‚Ú‚©‚·
 
     SetDrawScreen(DX_SCREEN_BACK);                                                  //•`‰æ‘ÎÛ‚ð— ‰æ–Ê‚É‚·‚é
-    ClearDrawScreenZBuffer();
+    //ClearDrawScreenZBuffer();
+    DrawGraph(0, 0, bloom->ColorScreen, FALSE);
 
     //---•`‰æƒ‚[ƒhÝ’è---//
     SetDrawMode(DX_DRAWMODE_BILINEAR);                                              //•`‰æƒ‚[ƒh‚ðƒoƒCƒŠƒjƒAƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚É‚·‚é
     SetDrawBlendMode(DX_BLENDMODE_ADD, 255);                                        //•`‰æƒuƒŒƒ“ƒhƒ‚[ƒh‚ð‰ÁŽZ‚É‚·‚é
 
     //---‚Ú‚©‚µ‰æ‘œ•`‰æ---//
-    DrawExtendGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, GaussScreen, FALSE);         //‚‹P“x•”•ª‚ðk¬‚µ‚Ä‚Ú‚©‚µ‚½‰æ‘œ•`‰æ
-    DrawExtendGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, GaussScreen, FALSE);         //‰æ–Ê‚¢‚Á‚Ï‚¢‚É2‰ñ•`‰æ‚·‚é
+    DrawExtendGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,bloom-> GaussScreen, FALSE);         //‚‹P“x•”•ª‚ðk¬‚µ‚Ä‚Ú‚©‚µ‚½‰æ‘œ•`‰æ
+    DrawExtendGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,bloom-> GaussScreen, FALSE);         //‰æ–Ê‚¢‚Á‚Ï‚¢‚É2‰ñ•`‰æ‚·‚é
     
     //---•`‰æƒ‚[ƒhŒãˆ—---//
     SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);                                    //ƒuƒŒƒ“ƒhƒ‚[ƒh‚ð–³‚µ‚É‚·‚é
     SetDrawMode(DX_DRAWMODE_NEAREST);                                               //•`‰æƒ‚[ƒh‚ðƒjƒAƒŒƒXƒg‚É‚·‚é
 
     //---“r’†Œo‰ß•`‰æ---//
-    DrawExtendGraph(180 * 0 + 24, 320, 180 * 0 + 24 + 160, 120 + 320, HighBrightScreen, FALSE);
-    DrawExtendGraph(180 * 1 + 24, 320, 180 * 1 + 24 + 160, 120 + 320, DownScaleScreen, FALSE);
-    DrawExtendGraph(180 * 2 + 24, 320, 180 * 2 + 24 + 160, 120 + 320, GaussScreen, FALSE);
+    DrawExtendGraph(180 * 0 + 24, 320, 180 * 0 + 24 + 160, 120 + 320, bloom->HighBrightScreen, FALSE);
+    DrawExtendGraph(180 * 1 + 24, 320, 180 * 1 + 24 + 160, 120 + 320, bloom->DownScaleScreen, FALSE);
+    DrawExtendGraph(180 * 2 + 24, 320, 180 * 2 + 24 + 160, 120 + 320, bloom->GaussScreen, FALSE);
 }

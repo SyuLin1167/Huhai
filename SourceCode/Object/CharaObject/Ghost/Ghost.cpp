@@ -18,7 +18,7 @@ Ghost::Ghost()
         animType = SAD;
         gstAnim->StartAnim(animType);
     }
-    objPos = VGet(0.0f, -10.0f, -45.0f);
+    objPos = VGet(0.0f, 0.0f, -45.0f);
     aimPos = objPos;
 
     //---“–‚½‚è”»’è‹…İ’è---//
