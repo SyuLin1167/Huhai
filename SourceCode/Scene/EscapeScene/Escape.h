@@ -29,5 +29,7 @@ public:
     /// </summary>
     void Draw()override;
 
+private:
+    class BlendMode* escBlend;
 };
 

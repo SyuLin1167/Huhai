@@ -9,7 +9,9 @@
 #include "../../Object/MapObject/Light/BlinkingLight/BlinkingLight.h"
 #include "../../Object/MapObject/Light/FlashLight/FlashLight.h"
 #include "../../Object/MapObject/Furniture/Furniture.h"
+#include"../../BlendMode/BlendMode.h"
 #include "../ResultScene/Result.h"
+#include"../TitleScene/Title.h"
 
 // @brief EscapeSceneコンストラクタ //
 
@@ -27,7 +29,7 @@ EscapeScene::EscapeScene()
     //---ドアを生成---//
     ObjManager::Entry(new Door(VGet(55, 0, 0), VGet(0, 0, 0)));
     ObjManager::Entry(new Door(VGet(187, 0, 0), VGet(0, 180, 0)));
-    ObjManager::Entry(new Door(VGet(750, 0, 0), VGet(0, 180, 0)));
+    ObjManager::Entry(new Door(VGet(759, 0, 0), VGet(0, 180, 0)));
 
     //---机を生成---//
     for (int i = 0; i < TableNum; i++)
@@ -44,6 +46,8 @@ EscapeScene::EscapeScene()
     ObjManager::Entry(new Player);
 
     ObjManager::Entry(new Ghost);
+
+    escBlend = new BlendMode(2);
 }
 
 // @brief EscapeSceneデストラクタ //
@@ -60,6 +64,22 @@ SceneBase* EscapeScene::Update(float deltaTime)
     ObjManager::Update(deltaTime);
     ObjManager::Collision();
 
+    if (!ObjManager::GetObj(ObjectTag::Map, 2))
+    {
+        AssetManager::ReleaseAllAsset();
+        ObjManager::ReleaseAllObj();
+        return new Result;
+    }
+    else if (!ObjManager::GetFirstObj(ObjectTag::Player)->IsVisible())
+    {
+        escBlend->AddFade();
+        if (!escBlend->NowFade())
+        {
+            AssetManager::ReleaseAllAsset();
+            ObjManager::ReleaseAllObj();
+            return new Title;
+        }
+    }
     return this;
 }
 
@@ -69,4 +89,7 @@ void EscapeScene::Draw()
 {
     ObjManager::Draw();
     DrawFormatString(0, 0, GetColor(255, 255, 255), "Escape画面:Resultシーンへ移行");
+    escBlend->Fade();
+    DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), true);
+    escBlend->NoBlend();
 }

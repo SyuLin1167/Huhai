@@ -7,7 +7,6 @@
 #include"../../Object/MapObject/Bed/Bed.h"
 #include "../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../Object/MapObject/Furniture/Furniture.h"
-#include"../../UI/Action/Action.h"
 #include"../../UI/Reamarks/Remarks.h"
 
 // @brief Roomコンストラクタ //

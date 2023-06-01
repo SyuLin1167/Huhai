@@ -3,13 +3,14 @@
 #include"../../Object/ObjectManager/ObjManager.h"
 #include "../../Collision/Collision.h"
 #include"../../BlendMode/BlendMode.h"
+#include"../../UI/Select/SelectType.h"
 
 
 /* タイトルシーンのクラス */
 class Title :public SceneBase
 {
     class Door* door = nullptr;
-    class Select* select = nullptr;
+    class Select* select[TypeSize];
     class BlendMode* titleBlend;
 
 public:

@@ -30,5 +30,9 @@ public:
     /// Œ»İ‚ÌƒV[ƒ“‚Ì•`‰æ
     /// </summary>
     void Draw();
+
+    bool IsLoop() { return isLoop; }
+private:
+    bool isLoop;
 };
 
