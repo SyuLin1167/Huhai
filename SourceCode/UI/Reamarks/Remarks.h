@@ -2,8 +2,8 @@
 #include"../../Object/ObjectBase/ObjectBase.h"
 #include"TextType.h"
 
-constexpr int TEXTSIZE = 22;
-constexpr int BUFWIDTH = 35;
+constexpr int TEXTSIZE = 24;
+constexpr int BUFWIDTH = 50;
 constexpr int BUFHEIGHT = 20;
 
 /*Remarksのクラス*/
@@ -61,4 +61,5 @@ private:
     bool eofFlag;                                       //終了フラグ
     bool waitKey;                                       //待機フラグ
     char holdBuf[3];                                    //文字一時記憶領域
+    int graph;
 };

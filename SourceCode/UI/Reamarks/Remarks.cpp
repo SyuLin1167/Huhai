@@ -4,18 +4,21 @@
 // @brief Remarksコンストラクタ //
 
 Remarks::Remarks(TextType texttype)
-    :ObjectBase(ObjectTag::UI)
-    ,textType(texttype)
-    ,stringBuf()
-    ,textX(0)
-    ,textY(0)
-    ,Sn(0)
-    ,Sp(0)
-    ,eofFlag(false)
-    ,waitKey(false)
-    ,holdBuf()
+    :ObjectBase(ObjectTag::Remarks)
+    , textType(texttype)
+    , stringBuf()
+    , textX(0)
+    , textY(0)
+    , Sn(0)
+    , Sp(0)
+    , eofFlag(false)
+    , waitKey(false)
+    , holdBuf()
+    , graph(MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT))
 {
     SetFontSize(TEXTSIZE);          //フォントサイズ設定
+    objHandle = LoadGraph("../Assets/BackGround/Remarks.png");
+    objPos = VGet(0.0f, 600.0f, 0.0f);
 }
 
 // @brief Remarksデストラクタ //
@@ -110,7 +113,7 @@ char Remarks::GetText(int sn,int sp)
         "最近仕事がうまくいかない...。 ",
         "/|いつも自分を支えてくれた妻を事故で無くし、 ",
         "それからずっと、自分の生きる意味を見出せないでいる。 ",
-        "/もっと妻と触れ合っていれば良かったと、/心底思う。 ",
+        "/もっと妻と触れ合っていれば良かったと、/心底思う。",
         "/|きっと私は、あの時の事をずっと引きずっているのだろう...。 ",
         "/^",
     };
@@ -140,7 +143,13 @@ char Remarks::GetText(int sn,int sp)
         "/これを持って早くここから逃げるんだ!」  ",
         "/^ ",
     };
-
+    char GameClear[][256]=
+    {
+        "現在プレイできるのはここまでになります。",
+        "/|遊んでいただきありがとうございました!!!",
+        "/^",
+    }
+    ;
     switch (textType)
     {
     //～TextTypeがOpeningTextだったら～
@@ -154,6 +163,10 @@ char Remarks::GetText(int sn,int sp)
         //～TxtTypeがManSpeakだったら～
     case TextType::ManSpeak:
         return ManSpeak[sn][sp];
+        break;
+        //～TxtTypeがGameClearだったら～
+    case TextType::GameClear:
+        return GameClear[sn][sp];
         break;
     }
 
@@ -186,8 +199,10 @@ void Remarks::NewLine()
 
 void Remarks::Draw()
 {
+    GetDrawScreenGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, graph);
+    DrawExtendGraph((int)objPos.x, (int)objPos.y, (int)objPos.x + 1920, (int)objPos.y + 480, objHandle, TRUE);
     for (int i = 0; i < BUFHEIGHT; i++)
     {
-        DrawString(i + 500, i * TEXTSIZE + 500, stringBuf[i], GetColor(255, 255, 255));     //テキストバッファの描画
+        DrawString(i + 620, i * TEXTSIZE + 930, stringBuf[i], GetColor(255, 255, 255));     //テキストバッファの描画
     }
 }
