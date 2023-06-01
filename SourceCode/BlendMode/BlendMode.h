@@ -8,7 +8,7 @@ public:
     /// <summary>
     /// BlendModeコンストラクタ
     /// </summary>
-    BlendMode();
+    BlendMode(int fadespeed = 4);
 
     /// <summary>
     /// BlendModeデストラクタ
@@ -51,7 +51,7 @@ private:
 
     bool nowFade;                           //fadeフラグ
     int fadeValue;                          //fade値
-    const int fadeSpeed = 4;                //fade速度
+    int fadeSpeed;                //fade速度
 
     bool nowDark;                           //darkフラグ
     const int darkValue = 150;              //dark値

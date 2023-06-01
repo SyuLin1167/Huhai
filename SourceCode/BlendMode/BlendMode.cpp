@@ -2,10 +2,11 @@
 
 // @brief BlendModeコンストラクタ //
 
-BlendMode::BlendMode()
+BlendMode::BlendMode(int fadespeed)
     :fadeValue(0)
-    ,nowFade(false)
-    ,nowDark(false)
+    , fadeSpeed(fadespeed)
+    , nowFade(false)
+    , nowDark(false)
 {
 }
 
