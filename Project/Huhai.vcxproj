@@ -235,6 +235,7 @@
     <ClInclude Include="..\SourceCode\UI\Reamarks\Remarks.h" />
     <ClInclude Include="..\SourceCode\UI\Reamarks\TextType.h" />
     <ClInclude Include="..\SourceCode\UI\Select\Select.h" />
+    <ClInclude Include="..\SourceCode\UI\Select\SelectType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

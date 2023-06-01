@@ -1,5 +1,6 @@
 #pragma once
 #include"../../ObjectBase/ObjectBase.h"
+#include"../../ObjectManager/ObjManager.h"
 #include"../../../Asset/AssetManager/AssetManager.h"
 #include"../../../Asset/Model/Model.h"
 
@@ -33,6 +34,7 @@ public:
     /// Map•`‰æˆ—
     /// </summary>
     void Draw()override;
+
 
     enum MapName
     {

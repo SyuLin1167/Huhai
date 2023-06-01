@@ -28,7 +28,6 @@ void CameraFps::Update(float deltaTime)
         objPos = player->GetPos() + VGet(0.0f, 22.5f, 0.0f);                    //カメラの位置はプレイヤーの座標かつ目線の高さ
 
         Move(deltaTime);
-        SetCameraPositionAndTarget_UpVecY(objPos, objPos + objDir);         //プレイヤーの位置から注視点に向けてカメラをセット
     }
     SetMousePoint(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);                         //マウス座標を画面の中心にセット
 }
@@ -56,4 +55,9 @@ void CameraFps::Move(float deltaTime)
         objDir.x = cosf(cameraYaw);
         objDir.y = cameraPitch;
         objDir.z = sinf(cameraYaw);
+}
+
+void CameraFps::Draw()
+{
+    SetCameraPositionAndTarget_UpVecY(objPos, objPos + objDir);         //プレイヤーの位置から注視点に向けてカメラをセット
 }

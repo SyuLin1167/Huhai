@@ -22,10 +22,14 @@ public:
     static void SetColoerScreen();
 
     /// <summary>
+    /// ブルームの描画準備
+    /// </summary>
+    static void SetBloomGraph();
+
+    /// <summary>
     /// Bloom描画更新処理
     /// </summary>
-    static void DrawUpdate();
-
+    static void Draw();
 private:
     /// <summary>
     /// コンストラクター(シングルトン)

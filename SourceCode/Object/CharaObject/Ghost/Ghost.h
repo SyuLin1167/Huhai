@@ -1,6 +1,7 @@
 #pragma once
 
 #include"Base/GhostBase.h"
+#include"../../../Collision/Collision.h"
 
 /* Ghost‚ÌƒNƒ‰ƒX */
 class Ghost :public GhostBase
@@ -41,6 +42,7 @@ public:
 
 private:
     bool firstMove;
+    bool nowMove;
     float moveCount;
     bool rotateNow;
     VECTOR aimDir;

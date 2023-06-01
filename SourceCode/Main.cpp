@@ -38,6 +38,10 @@ int WINAPI WinMain(_In_ HINSTANCE,_In_opt_ HINSTANCE,_In_ LPSTR,_In_ int)
     //---シーンループ---//
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)         //ウィンドウが閉じられるか、ESCキーが押されるまで実行
     {
+        if (!sceneManager->IsLoop())
+        {
+            break;
+        }
         sceneManager->Update();                                                 //更新処理
         ClearDrawScreen();                                                      //画面を初期化
 

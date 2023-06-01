@@ -8,6 +8,7 @@ Ghost::Ghost()
     :GhostBase()
     , moveCount(0.0f)
     , firstMove(true)
+    ,nowMove(false)
     , rotateNow(false)
     , aimDir(VGet(0.0f, 0.0f, 1.0f))
     , lightHandle(-1)
@@ -19,12 +20,15 @@ Ghost::Ghost()
         gstAnim->StartAnim(animType);
     }
     objPos = VGet(0.0f, 0.0f, -45.0f);
-    aimPos = objPos;
 
     //---当たり判定球設定---//
-    colSphere.localCenter = VGet(0, 6, 0);			//ローカル座標
+    colType = CollisionType::Sphere;
+    colSphere.localCenter = VGet(0, 5.0f, 0);			//ローカル座標
     colSphere.Radius = 3.0f;						//球半径
     colSphere.worldCenter = objPos;					//ワールド座標
+
+    //---当たり判定線分設定---//
+    colLine = Line(VGet(0.0f, 2.0f, 0.0f), VGet(0.0f, -5.0f, 0.0f));             //線分設定
 
     objSpeed = 13.0f;
 }
@@ -44,11 +48,21 @@ Ghost::~Ghost()
 void Ghost::Update(float deltaTime)
 {
     gstAnim->AddAnimTime(deltaTime);
+    MATRIX rotMatY = MGetRotY(180 * (float)(DX_PI / 180.0f));       //左向きに回転させる
+    objDir.y = 0;
+    VECTOR negativeVec = VTransform(objDir, rotMatY);
+    MV1SetRotationZYAxis(objHandle, negativeVec, VGet(0.0f, 1.0f, 0.0f), 0.0f);         //モデル回転
+
+    rotateNow = true;
+    Rotate();
+
+
     if (firstMove)
     {
         moveCount += deltaTime;
         if (moveCount >= 7.0f)
         {
+            nowMove = true;
             if (animType != MOVE)
             {
                 animType = MOVE;
@@ -58,7 +72,7 @@ void Ghost::Update(float deltaTime)
                 SetLightDifColorHandle(lightHandle, GetColorF(1.0f, 0.0f, 0.0f, 1.0f));
                 aimPos = VGet(0.0f, 0.0f, 0.0f);
             }
-            if (VSize(aimPos - objPos) < 1)
+            if (abs(VSize(aimPos - objPos) )< 2.0f)
             {
                 firstMove = false;
             }
@@ -68,24 +82,21 @@ void Ghost::Update(float deltaTime)
     {
         aimPos = ObjManager::GetFirstObj(ObjectTag::Player)->GetPos();
     }
-    VECTOR moveVec = aimPos - objPos;
-    moveVec = VNorm(moveVec);
-    objPos += moveVec * objSpeed * deltaTime;
-    aimDir = moveVec;
+
+    if (nowMove)
+    {
+        VECTOR moveVec = aimPos - objPos;
+        moveVec = VNorm(moveVec);
+        objPos += moveVec * objSpeed * deltaTime;
+        aimDir = moveVec;
+    }
 
     if (lightHandle)
     {
         SetLightPositionHandle(lightHandle, objPos+VGet(0.0f,10.0f,0.0f));
     }
 
-    ObjectBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
-
     MV1SetPosition(objHandle, objPos);                        //ポジション設定
-    MATRIX RotMatY = MGetRotY(180 * (float)(DX_PI / 180.0f));       //左向きに回転させる
-    MV1SetRotationZYAxis(objHandle, VTransform(objDir, RotMatY), VGet(0.0f, 1.0f, 0.0f), 0.0f);         //モデル回転
-
-    rotateNow = true;
-    Rotate();
 
     ColUpdate();            //当たり判定の移動
 }
@@ -96,6 +107,7 @@ void Ghost::Draw()
 {
     MV1DrawModel(objHandle);
     DrawFormatString(0, 30, GetColor(255, 255, 255), "%f", moveCount);
+    ColDraw();
 }
 
 // @brief Ghost衝突時処理 //
@@ -125,8 +137,21 @@ void Ghost::OnCollisionEnter(const ObjectBase* other)
             objPos = colInfoLine.HitPosition;                       //足元を衝突時の座標に合わせる
             ColUpdate();
         }
+    }
 
-
+    if (tag == ObjectTag::Player)
+    {
+        if (abs(VSize(other->GetPos() - objPos)) < 12.0f)
+        {
+            if (animType != SAD)
+            {
+                animType = SAD;
+                gstAnim->StartAnim(animType);
+            }
+            nowMove=false;
+            aimDir= VScale(VNorm(aimPos - objPos), 0.1f);
+            ColUpdate();
+        }
     }
 
 }

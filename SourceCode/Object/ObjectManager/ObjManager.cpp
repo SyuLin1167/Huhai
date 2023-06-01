@@ -1,5 +1,6 @@
 #include "ObjManager.h"
 
+
 ObjManager* ObjManager::objInstance = nullptr;				//ObjManager実体へのポインタ定義
 
 // @brief ObjManagerコンストラクター //
@@ -8,7 +9,6 @@ ObjManager::ObjManager()
 	:Object()
 	,holdObj()
 {
-	objInstance = nullptr;
 }
 
 // @brief ObjManagerデストラクター //
@@ -181,6 +181,11 @@ void ObjManager::Collision()
 		{
 			objInstance->Object[ObjectTag::Player][plyNum]->
 				OnCollisionEnter(objInstance->Object[ObjectTag::Furniture][furNum]);
+		}
+		for (int gstNum = 0; gstNum < objInstance->Object[ObjectTag::Ghost].size(); ++gstNum)
+		{
+			objInstance->Object[ObjectTag::Player][plyNum]->
+				OnCollisionEnter(objInstance->Object[ObjectTag::Ghost][gstNum]);
 		}
 	}
 }

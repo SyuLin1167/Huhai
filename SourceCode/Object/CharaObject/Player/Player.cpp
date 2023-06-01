@@ -4,6 +4,7 @@
 
 Player::Player()
     :ObjectBase(ObjectTag::Player)
+    , canMove(true)
     , inputVec{ 0,0,0 }
     , UP{ 0,0,0 }
     , DOWN{ 0,0,0 }
@@ -11,8 +12,9 @@ Player::Player()
     , RIGHT{ 0,0,0 }
     , inputVel{ 0,0,0 }
     , inputKey(false)
-    , nowRoted(false)
+    , rotateNow(false)
     , camFront{ 0,0,0 }
+    , aimDir(VGet(0.0f, 0.0f, 0.0f))
 {
 
     //---インスタンス---//
@@ -21,12 +23,12 @@ Player::Player()
 
     //---当たり判定球設定---//
     colType = CollisionType::Sphere;                                                        //当たり判定は球体
-    colSphere.localCenter = VGet(0, 5.5f, 0);                                                  //ローカル座標
+    colSphere.localCenter = VGet(0, 5.0f, 0);                                                  //ローカル座標
     colSphere.Radius = 3.0f;                                                                //球半径
     colSphere.worldCenter = objPos;                                                         //ワールド座標
 
     //---当たり判定線分設定---//
-    colLine = Line(VGet(0.0f, 2.0f, 0.0f), VGet(0.0f, -3.0f, 0.0f));             //線分設定
+    colLine = Line(VGet(0.0f, 2.0f, 0.0f), VGet(0.0f, -5.0f, 0.0f));             //線分設定
 
 }
 
@@ -52,9 +54,19 @@ void Player::Update(float deltaTime)
     LEFT = VScale(RIGHT, -1.0f);                    //カメラ方向から左に前進
 
     objDir = camFront;
-    Move(deltaTime);                                        //Player移動処理
+    if (ObjManager::GetFirstObj(ObjectTag::Remarks))
+    {
+        canMove = false;
+    }
+    else
+    {
+        canMove = true;
+    }
+    if (canMove)
+    {
+        Move(deltaTime);                                        //Player移動処理
+    }
 
-    objPos.y = 0;
     MV1SetPosition(objHandle, objPos);                              //ポジションセット
 
     colSphere.Move(objPos);                                         //当たり判定の移動
@@ -65,7 +77,6 @@ void Player::Update(float deltaTime)
 
 void Player::Draw()
 {
-    ColDraw();
 }
 
 // @brief Player衝突時処理 //
@@ -80,6 +91,21 @@ void Player::OnCollisionEnter(const ObjectBase* other)
         int mapColModel = other->GetColModel();                        //モデル当たり判定取得
         CollHitSphere(mapColModel);
         ColHitLine(mapColModel);
+    }
+
+    if (tag == ObjectTag::Ghost)
+    {
+        if (abs(VSize(other->GetPos() - objPos)) < 12.0f)
+        {
+            canMove = false;
+            isVisible = false;
+            ObjectBase*camera= ObjManager::GetFirstObj(ObjectTag::Camera);
+            if (camera)
+            {
+                SetCameraPositionAndTarget_UpVecY(camera->GetPos(), other->GetPos() + VGet(0.0f, 20.0f, 0.0f));
+            }
+            ColUpdate();
+        }
     }
 }
 
@@ -159,4 +185,37 @@ void Player::Move(float deltaTime)
         inputVel *= 0.5f;                                           //徐々に減速
     }
     objPos += inputVel;                                             //移動
+}
+
+void Player::Rotate()
+{
+    if (rotateNow)
+    {
+        // 回転が目標角度に十分近ければ回転モード終了
+        if (IsSameAngle(aimDir, objDir))
+        {
+            objDir = aimDir;
+            rotateNow = false;
+        }
+        else
+        {
+            // 回転させる
+            VECTOR interPolateDir;
+            interPolateDir = RotForAimY(objDir, aimDir, 1.0f);
+
+            // 回転が目標角度を超えていないか
+            VECTOR cross1, cross2;
+            cross1 = VCross(objDir, aimDir);
+            cross2 = VCross(interPolateDir, aimDir);
+
+            //目標角度を超えたら終了
+            if (cross1.y * cross2.y < 0.0f)
+            {
+                interPolateDir = aimDir;
+                rotateNow = false;
+            }
+            // 目標ベクトルに10度だけ近づけた角度
+            objDir = interPolateDir;
+        }
+    }
 }

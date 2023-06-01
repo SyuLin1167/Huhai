@@ -32,6 +32,7 @@ public:
     /// <param name="deltaTime">:フレームレート</param>
     void Move(float deltaTime);
 
+    void Draw()override;
 private:
     //---マウス関連---//
     int mouseX;             //マウス座標X

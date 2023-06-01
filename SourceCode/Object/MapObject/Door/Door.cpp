@@ -24,7 +24,6 @@ Door::Door(VECTOR doorPos,VECTOR doorAngle)
 Door::~Door()
 {
     delete doorAnim;
-    delete doorModel;
 }
 
 // @brief Door読み込み処理 //
@@ -32,9 +31,7 @@ Door::~Door()
 void Door::Load()
 {
     //---モデル読み込み---//
-    doorModel = new Model;
-    doorModel->AddModel("../Assets/Map/Door/Door.mv1");            //モデル読み込み
-    objHandle = doorModel->SetModel(0);
+    objHandle=AssetManager::GetMesh("../Assets/Map/Door/Door.mv1");            //モデル読み込み
 
     MV1SetPosition(objHandle, objPos);                                                      //モデルの座標設定
     MV1SetScale(objHandle, VGet(0.11f, 0.12f, 0.11f));                                                       //モデルのサイズ設定
@@ -42,7 +39,7 @@ void Door::Load()
 
     //---アニメーション読み込み---//
     doorAnim = new Animation(objHandle);
-    doorAnim->AddAnimation("../Assets/Map/Door/Door.mv1", 30.0f, false);                        //待機:0
+    doorAnim->AddAnimation("../Assets/Map/Door/DoorClose.mv1", 30.0f, false);                        //待機:0
     doorAnim->AddAnimation("../Assets/Map/Door/DoorOpen.mv1", 30.0f, false);      //開:1
     doorAnim->AddAnimation("../Assets/Map/Door/DoorClose.mv1", 30.0f, false);     //閉:2
 
@@ -64,7 +61,6 @@ void Door::Update(float deltaTime)
 {
     doorAnim->AddAnimTime(deltaTime);	
 
-
     //---当たり判定設定---//
     player = ObjManager::GetFirstObj(ObjectTag::Player);         //プレイヤーオブジェクト取得
     if (player)                                                              //オブジェクトの中身が空でなければ
@@ -83,7 +79,6 @@ void Door::Update(float deltaTime)
                 }
             }
         }
-
     }
     colModel = objHandle;                                           //当たり判定のモデルはオブジェクトのモデル
     ColUpdate();

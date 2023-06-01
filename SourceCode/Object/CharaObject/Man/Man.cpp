@@ -59,7 +59,7 @@ void Man::Update(float deltaTime)
         aimDir = VNorm(aimDir);
         Rotate();
 
-        ObjectBase* remarks = ObjManager::GetObj(ObjectTag::UI, 1);
+        ObjectBase* remarks = ObjManager::GetFirstObj(ObjectTag::Remarks);
         if (!remarks && addRemarks)
         {
             if (animType != DEAD)

@@ -404,5 +404,8 @@
     <ClInclude Include="..\SourceCode\Object\MapObject\Table\Table.h">
       <Filter>ソース ファイル\MapObject\Table</Filter>
     </ClInclude>
+    <ClInclude Include="..\SourceCode\UI\Select\SelectType.h">
+      <Filter>ソース ファイル\UI\Select</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

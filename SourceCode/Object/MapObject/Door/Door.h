@@ -4,7 +4,7 @@
 #include"../../ObjectBase/ObjectBase.h"
 #include"../../ObjectManager/ObjManager.h"
 #include"../../../Asset/Animation/Animation.h"
-#include"../../../Asset/Model/Model.h"
+#include"../../../Asset/AssetManager/AssetManager.h"
 #include"../../../Collision/Collision.h"
 
 /*Door‚ÌƒNƒ‰ƒX*/

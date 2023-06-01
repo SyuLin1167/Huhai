@@ -48,12 +48,15 @@ public:
 	/// <param name="colmodel">:当たり判定モデル</param>
 	void ColHitLine(int colmodel);
 
+	void Rotate();
+
 private:
 	/// <summary>
 	/// Player移動処理
 	/// </summary>
 	/// <param name="deltaTime">:フレームレート</param>
 	void Move(float deltaTime);
+	bool canMove;
 
 	VECTOR UP;					//前方向
 	VECTOR DOWN;				//後方向
@@ -63,7 +66,8 @@ private:
 	VECTOR inputVec;						//合成ベクトル
 	VECTOR inputVel;						//速度ベクトル
 	bool inputKey;							//キー入力判定
-	bool nowRoted;							//現在回転中かどうか
+	bool rotateNow;							//現在回転中かどうか
+	VECTOR aimDir;
 
 	//---当たり判定関連---//
 	Sphere colSphere;			//当たり判定球

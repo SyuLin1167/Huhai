@@ -12,6 +12,7 @@ enum class ObjectTag :unsigned char
     Ghost,      //エネミー
     Man,        //男性
     UI,         //UI
+    Remarks,
 };
 
 /*ループ制御用*/
@@ -25,5 +26,6 @@ constexpr static ObjectTag ObjTagAll[] =
     ObjectTag::Ghost,
     ObjectTag::Man,
     ObjectTag::UI,
+    ObjectTag::Remarks,
 };
 
