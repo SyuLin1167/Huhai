@@ -2,7 +2,7 @@
 
 // @brief Selectコンストラクタ //
 
-Select::Select()
+Select::Select(SelectType type)
     :ObjectBase(ObjectTag::UI)
     , selectBlend(nullptr)
     , mouseX(0)
@@ -11,11 +11,8 @@ Select::Select()
     , nowInput(false)
 {
     selectBlend = new BlendMode;
-    for (int i=0;i<drawPos.size();i++)
-    {
-        objPos = drawPos[i];
-        objHandle = LoadGraph(drawHandle[i]);
-    }
+    objPos = drawPos[type];
+    objHandle = LoadGraph(drawHandle[type]);
 }
 
 // @brief Selectデストラクタ //
@@ -32,8 +29,8 @@ void Select::Update(float deltaTime)
     selectBlend->AddFade();
     GetMousePoint(&mouseX, &mouseY);                //マウス座標取得
 
-    if (mouseX >= objPos.x && mouseX <= objPos.x + 150 &&
-        mouseY >= objPos.y && mouseY <= objPos.y + 60)
+    if (mouseX >= objPos.x && mouseX <= objPos.x + 160 &&
+        mouseY >= objPos.y && mouseY <= objPos.y + 50)
     {
         OnCollisionEnter();
     }
@@ -67,7 +64,6 @@ void Select::Draw()
 	{
 		selectBlend->Darken();
 	}
-	DrawExtendGraph((int)objPos.x, (int)objPos.y, (int)objPos.x + 150, (int)objPos.y + 60, objHandle, TRUE);
+	DrawExtendGraph((int)objPos.x, (int)objPos.y, (int)objPos.x + 160, (int)objPos.y + 50, objHandle, TRUE);
 	selectBlend->NoBlend();
-	DrawBox(125,660,275,720,GetColor(255,255,255),FALSE);
 }

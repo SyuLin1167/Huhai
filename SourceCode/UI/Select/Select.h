@@ -1,6 +1,7 @@
 #pragma once
 #include<unordered_map>
 
+#include"SelectType.h"
 #include"../../Object/ObjectBase/ObjectBase.h"
 #include"../../BlendMode/BlendMode.h"
 
@@ -15,7 +16,7 @@ public:
     /// <summary>
     /// Selectコンストラクタ
     /// </summary>
-    Select();
+    Select(SelectType type);
 
     /// <summary>
     /// Selectデストラクタ
@@ -51,13 +52,17 @@ private:
     bool nowInput;                  //入力中かどうか
 
     //描画座標を格納した配列
-    unordered_map<int, VECTOR> drawPos{
-        {0,{125,660,0}},
+    unordered_map<SelectType, VECTOR> drawPos{
+        {SelectType::PLAY,{125,680,0}},
+        {SelectType::LOAD,{125,760,0}},
+        {SelectType::EXIT,{125,840,0}},
     };
 
     //画像ハンドルを格納した配列
-    unordered_map<int, const char*> drawHandle{
-        {0,"../Assets/BackGround/Play.png"},
+    unordered_map<SelectType, const char*> drawHandle{
+        {SelectType::PLAY,"../Assets/BackGround/Play.png"},
+        {SelectType::LOAD,"../Assets/BackGround/Load.png"},
+        {SelectType::EXIT,"../Assets/BackGround/Exit.png"},
     };
 };
 
