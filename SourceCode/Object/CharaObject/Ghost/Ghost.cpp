@@ -8,7 +8,7 @@ Ghost::Ghost()
     :GhostBase()
     , moveCount(0.0f)
     , firstMove(true)
-    ,nowMove(false)
+    , nowMove(false)
     , rotateNow(false)
     , aimDir(VGet(0.0f, 0.0f, 1.0f))
     , lightHandle(-1)
@@ -31,6 +31,7 @@ Ghost::Ghost()
     colLine = Line(VGet(0.0f, 2.0f, 0.0f), VGet(0.0f, -5.0f, 0.0f));             //線分設定
 
     objSpeed = 13.0f;
+
 }
 
 // @brief Ghostデストラクタ //
@@ -48,6 +49,7 @@ Ghost::~Ghost()
 void Ghost::Update(float deltaTime)
 {
     gstAnim->AddAnimTime(deltaTime);
+    gstSound->Update(objPos);
     MATRIX rotMatY = MGetRotY(180 * (float)(DX_PI / 180.0f));       //左向きに回転させる
     objDir.y = 0;
     VECTOR negativeVec = VTransform(objDir, rotMatY);
@@ -67,6 +69,7 @@ void Ghost::Update(float deltaTime)
             {
                 animType = MOVE;
                 gstAnim->StartAnim(animType);
+                gstSound->StartSound(SoundTag::GhostScream, DX_PLAYTYPE_BACK);
                 ObjManager::GetFirstObj(ObjectTag::Light)->SetAlive(false);
                 lightHandle = CreatePointLightHandle(objPos, 50.0f, 0.0f, 0.0f, 0.005f);
                 SetLightDifColorHandle(lightHandle, GetColorF(1.0f, 0.0f, 0.0f, 1.0f));
@@ -106,8 +109,6 @@ void Ghost::Update(float deltaTime)
 void Ghost::Draw()
 {
     MV1DrawModel(objHandle);
-    DrawFormatString(0, 30, GetColor(255, 255, 255), "%f", moveCount);
-    ColDraw();
 }
 
 // @brief Ghost衝突時処理 //
@@ -141,7 +142,7 @@ void Ghost::OnCollisionEnter(const ObjectBase* other)
 
     if (tag == ObjectTag::Player)
     {
-        if (abs(VSize(other->GetPos() - objPos)) < 12.0f)
+        if (abs(VSize(other->GetPos() - objPos)) < 12.0f && !firstMove)
         {
             if (animType != SAD)
             {

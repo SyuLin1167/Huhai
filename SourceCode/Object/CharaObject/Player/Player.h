@@ -56,6 +56,7 @@ private:
 	/// </summary>
 	/// <param name="deltaTime">:フレームレート</param>
 	void Move(float deltaTime);
+
 	bool canMove;
 
 	VECTOR UP;					//前方向
@@ -74,4 +75,6 @@ private:
 
 	//---カメラ関連---//
 	VECTOR camFront;						//カメラ前方向
+
+	class Sound* plySound;
 };

@@ -1,5 +1,4 @@
 #pragma once
-#include<vector>
 
 /*種類別タグクラス*/
 enum class ObjectTag :unsigned char

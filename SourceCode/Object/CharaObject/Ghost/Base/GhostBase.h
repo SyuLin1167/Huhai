@@ -5,6 +5,7 @@
 #include"../../../ObjectBase/ObjectBase.h"
 #include"../../../../Asset/Animation/Animation.h"
 #include"../../../../Collision/Collision.h"
+#include"../../../../Asset/Sound/Sound.h"
 
 /*Ghostの基底クラス*/
 class GhostBase:public ObjectBase
@@ -42,4 +43,5 @@ protected:
     class Animation* gstAnim;                     //アニメーション
     int animType;                           //アニメーション状態
 
+    class Sound* gstSound;
 };

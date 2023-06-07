@@ -46,7 +46,8 @@ void Bed::Update(float deltaTime)
         player->SetPos(VAdd(player->GetPos(), movePly * objSpeed * deltaTime));
 
         ObjectBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
-        SetCameraPositionAndTarget_UpVecY(camera->GetPos() - VGet(0, 8, 0), VGet(0, 25, 20));
+        camera->SetPos(player->GetPos() + VGet(0, 14, 0));
+        camera->SetDir(VGet(0, 25, 20) - camera->GetPos());
     }
     else
     {
@@ -59,5 +60,6 @@ void Bed::Update(float deltaTime)
 
 void Bed::Draw()
 {
+
     MV1DrawModel(objHandle);                                                            //ƒ‚ƒfƒ‹•`‰æ
 }

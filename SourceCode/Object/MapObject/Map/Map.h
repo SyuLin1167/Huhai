@@ -48,6 +48,7 @@ public:
 
 private:
     class Model* mapModel;
+    class Sound* mapSound;
     int mapTag;
 };
 

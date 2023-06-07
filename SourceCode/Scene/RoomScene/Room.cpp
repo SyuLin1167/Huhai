@@ -71,7 +71,6 @@ SceneBase* Room::Update(float deltaTime)
 void Room::Draw()
 {
     ObjManager::Draw();
-    DrawFormatString(0, 0, GetColor(255, 255, 255), "Room‰æ–Ê:StageƒV[ƒ“‚ÖˆÚs");
     roomBlend->Fade();
     DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), true);
     roomBlend->NoBlend();

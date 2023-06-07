@@ -31,5 +31,6 @@ public:
 
 private:
     class BlendMode* escBlend;
+    class Sound* escSound;
 };
 

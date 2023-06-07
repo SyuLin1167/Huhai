@@ -63,5 +63,7 @@ private:
 	int animType;						//アニメーション状態
 
 	class Model* doorModel;
+
+	class Sound* doorSound;
 };
 

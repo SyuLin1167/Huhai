@@ -1,10 +1,12 @@
 #include "Chair.h"
+#include"../../../Asset/Sound/Sound.h"
 
 // @brief Chairコンストラクター //
 
 Chair::Chair()
 	:ObjectBase(ObjectTag::Furniture)
 	, ChairAnim(nullptr)
+	,chairSound(nullptr)
 {
 	Load();
 }
@@ -15,6 +17,7 @@ Chair::~Chair()
 {
 	AssetManager::ReleaseMesh(objHandle);
 	delete ChairAnim;
+	delete chairSound;
 }
 
 // @brief Chair読み込み処理 //
@@ -48,6 +51,9 @@ void Chair::Load()
 	colSphere.Radius = 15.0f;                                                                //球半径
 	colSphere.worldCenter = objPos;                                                          //ワールド座標
 
+	chairSound = new Sound;
+	chairSound->AddSound("../Assets/Sound/MoveChairSE.mp3", SoundTag::MoveChair, 300, true);
+	chairSound->AddSound("../Assets/Sound/FallingChairSE.mp3", SoundTag::FallingChair, 150, true);
 }
 
 // @brief Chair更新処理 //
@@ -55,7 +61,7 @@ void Chair::Load()
 void Chair::Update(float deltaTime)
 {
 	ChairAnim->AddAnimTime(deltaTime);
-
+	chairSound->Update(objPos);
 
 	//---当たり判定設定---//
 	ObjectBase* player = ObjManager::GetFirstObj(ObjectTag::Player);         //プレイヤーオブジェクト取得
@@ -67,6 +73,7 @@ void Chair::Update(float deltaTime)
 			{
 				animType = MOVE;                                        //アニメーションは開くモーション
 				ChairAnim->StartAnim(animType);                               //開くモーションでアニメーション開始
+				chairSound->StartSoundOnce(SoundTag::MoveChair, DX_PLAYTYPE_BACK);
 			}
 		}
 	}

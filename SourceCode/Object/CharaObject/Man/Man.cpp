@@ -1,6 +1,7 @@
 #include "Man.h"
 #include"../../../UI/Action/Action.h"
 #include"../../../UI/Reamarks/Remarks.h"
+#include"../../../Asset/Sound/Sound.h"
 
 // @brief Manコンストラクタ //
 
@@ -10,6 +11,7 @@ Man::Man()
     , rotateNow(false)
     , aimDir{ 0,0,0 }
     , addRemarks(false)
+    ,manSound(nullptr)
 {
     Load();
 }
@@ -20,6 +22,7 @@ Man::~Man()
 {
     AssetManager::ReleaseMesh(objHandle);
     delete manAnim;
+    delete manSound;
 }
 
 // @brief Man読み込み処理 //
@@ -43,6 +46,9 @@ void Man::Load()
 
     ObjManager::Entry(new Action(objPos + VGet(0, 0, 5)));
 
+    manSound = new Sound;
+    manSound->AddSound("../Assets/Sound/ManHurtSE.mp3", SoundTag::ManHurt, 300, true);
+    manSound->AddSound("../Assets/Sound/BodyFallSE.mp3", SoundTag::BodyFall, 300, true);
 }
 
 // @brief Man更新処理 //
@@ -50,6 +56,8 @@ void Man::Load()
 void Man::Update(float deltaTime)
 {
     manAnim->AddAnimTime(deltaTime);
+    manSound->Update(objPos);
+
     MATRIX rotYMat = MGetRotY(180.0f * (float)(DX_PI / 180.0f));
     VECTOR negativeVec = VTransform(objDir, rotYMat);
     if (!ObjManager::GetFirstObj(ObjectTag::UI)->IsVisible())
@@ -66,6 +74,11 @@ void Man::Update(float deltaTime)
             {
                 animType = DEAD;
                 manAnim->StartAnim(animType);
+                manSound->StartSound(SoundTag::ManHurt, DX_PLAYTYPE_BACK);
+            }
+            if (!manSound->IsPlaying(SoundTag::ManHurt))
+            {
+                manSound->StartSound(SoundTag::BodyFall, DX_PLAYTYPE_BACK);
             }
         }
         if (!rotateNow && !addRemarks)

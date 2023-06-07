@@ -6,6 +6,7 @@
 #include"../../Object/MapObject/Light/BlinkingLight/BlinkingLight.h"
 #include"../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../Object/MapObject/Map/Map.h"
+#include"../../Asset/Sound/Sound.h"
 #include"../../UI/Select/Select.h"
 #include"../ResultScene/Result.h"
 
@@ -16,12 +17,11 @@ Title::Title()
     ,fadeLock(true)
     ,titleBlend(nullptr)
 {
-    ObjManager::Init();
-    AssetManager::Init();
-
     BgX = 180;
     BgY = 150;
     BgHandle = LoadGraph("../Assets/BackGround/Title.png");
+
+    ObjManager::Entry(new CameraFps);
 
     ////---マップを生成---//
     ObjManager::Entry(new Map(Map::MapName::TITLE));
@@ -42,6 +42,11 @@ Title::Title()
 
     graph = MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT);
     SetMouseDispFlag(TRUE);
+
+    sound = new Sound;
+    sound->AddSound("../Assets/Sound/TitleBgm.mp3", SoundTag::Title, 150);
+    sound->AddSound("../Assets/Sound/StartSE.mp3", SoundTag::Start, 150);
+    sound->StartSound(SoundTag::Title, DX_PLAYTYPE_LOOP);
 }
 
 // @brief TitleSceneデストラクター //
@@ -63,32 +68,47 @@ SceneBase* Title::Update(float deltaTime)
     for (auto type : selectTypeAll)
     {
         select[type]->Update(deltaTime);
-    if (select[type]->GetSelect())
-    {
-        SetMousePoint(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-        SetMouseDispFlag(FALSE);                                                    //マウスは非表示
-        titleBlend->AddFade();
-        if (!titleBlend->NowFade())
+        if (select[type]->GetSelect())
         {
-            AssetManager::ReleaseAllAsset();            //全てのアセットの開放
-            ObjManager::ReleaseAllObj();                //全てのオブジェクトの開放
-            if (type == PLAY)
-            {
-                return new Room;
-            }
-            if (type == LOAD)
-            {
-                return new Result;
-            }
             if (type == EXIT)
             {
                 return nullptr;
             }
+            SetMousePoint(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+            SetMouseDispFlag(FALSE);                                                    //マウスは非表示
+            titleBlend->AddFade();
+
+            if (!titleBlend->NowFade()&&!sound->IsPlaying(SoundTag::Start))
+            {
+                sound->StopAllSound();
+                AssetManager::ReleaseAllAsset();            //全てのアセットの開放
+                ObjManager::ReleaseAllObj();                //全てのオブジェクトの開放
+                if (type == PLAY)
+                {
+                    return new Room;
+                }
+                if (type == LOAD)
+                {
+                    return new Result;
+                }
+            }
+            if (type != EXIT)
+            {
+                sound->StartSoundOnce(SoundTag::Start, DX_PLAYTYPE_BACK);
+            }
         }
     }
-    }
     
-    SetCameraPositionAndTarget_UpVecY(VGet(70, 6, 75), VGet(-10, 10, 25));         //注視点に向けてカメラをセット
+
+    ObjectBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
+    if (camera)
+    { 
+        camera->SetPos(VGet(70, 6, 75));
+        camera->SetDir(VGet(-1.0f,0.1f,-0.7f));
+    }
+
+
+    //SetCameraPositionAndTarget_UpVecY(VGet(70, 6, 75), VGet(-10, 10, 25));         //注視点に向けてカメラをセット
 
     return this;
 }

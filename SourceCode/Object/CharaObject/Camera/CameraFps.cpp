@@ -28,8 +28,8 @@ void CameraFps::Update(float deltaTime)
         objPos = player->GetPos() + VGet(0.0f, 22.5f, 0.0f);                    //カメラの位置はプレイヤーの座標かつ目線の高さ
 
         Move(deltaTime);
+        SetMousePoint(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);                         //マウス座標を画面の中心にセット
     }
-    SetMousePoint(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);                         //マウス座標を画面の中心にセット
 }
 
 // @brief CameraFps移動処理 //

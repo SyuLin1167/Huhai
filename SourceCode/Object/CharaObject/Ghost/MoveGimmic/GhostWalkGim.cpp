@@ -30,9 +30,7 @@ GhostWalkGim::~GhostWalkGim()
 
 void GhostWalkGim::Update(float deltaTime)
 {
-
     gstAnim->AddAnimTime(deltaTime);
-
     if (move)
     {
         //---“–‚½‚è”»’èü•ªÝ’è---//
@@ -69,13 +67,13 @@ void GhostWalkGim::OnCollisionEnter(const ObjectBase* other)
             {
                 animType = WALK;
                 gstAnim->StartAnim(animType);
+                gstSound->StartSound(SoundTag::GhostWalk, DX_PLAYTYPE_BACK);
                 move = true;
                 light = ObjManager::GetFirstObj(ObjectTag::Light);
                 if (light)
                 {
                     light->SetPos(VGet(-32, 32, 75));
                 }
-                ObjManager::Entry(new Man);
             }
         }
     }
@@ -87,7 +85,11 @@ void GhostWalkGim::OnCollisionEnter(const ObjectBase* other)
         MV1_COLL_RESULT_POLY colInfoLine;                           //ü•ª“–‚½‚è”»’èî•ñ
         if (CollisionPair(colLine, mapColModel, colInfoLine))
         {
-            isAlive = false;                       //‘«Œ³‚ðÕ“ËŽž‚ÌÀ•W‚É‡‚í‚¹‚é
+            isVisible = false;
+            if (!gstSound->IsPlaying(SoundTag::GhostWalk))
+            {
+                isAlive = false;
+            }
             ColUpdate();
         }
     }

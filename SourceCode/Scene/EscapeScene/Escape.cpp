@@ -9,6 +9,7 @@
 #include "../../Object/MapObject/Light/BlinkingLight/BlinkingLight.h"
 #include "../../Object/MapObject/Light/FlashLight/FlashLight.h"
 #include "../../Object/MapObject/Furniture/Furniture.h"
+#include"../../Asset/Sound/Sound.h"
 #include"../../BlendMode/BlendMode.h"
 #include "../ResultScene/Result.h"
 #include"../TitleScene/Title.h"
@@ -17,6 +18,7 @@
 
 EscapeScene::EscapeScene()
 	:SceneBase()
+    ,escSound(nullptr)
 {
     //---カメラ生成---//
     ObjManager::Entry(new CameraFps);
@@ -48,6 +50,11 @@ EscapeScene::EscapeScene()
     ObjManager::Entry(new Ghost);
 
     escBlend = new BlendMode(2);
+
+    escSound = new Sound;
+    escSound->AddSound("../Assets/Sound/EscapeBgm.mp3", SoundTag::Escape, 150);
+    escSound->AddSound("../Assets/Sound/GameOverSE.mp3", SoundTag::GameOver, 150);
+    escSound->StartSound(SoundTag::Escape, DX_PLAYTYPE_LOOP);
 }
 
 // @brief EscapeSceneデストラクタ //
@@ -73,11 +80,15 @@ SceneBase* EscapeScene::Update(float deltaTime)
     else if (!ObjManager::GetFirstObj(ObjectTag::Player)->IsVisible())
     {
         escBlend->AddFade();
-        if (!escBlend->NowFade())
+        escSound->StartSoundOnce(SoundTag::GameOver, DX_PLAYTYPE_BACK);
+        if (!escSound->IsPlaying(SoundTag::GameOver))
         {
-            AssetManager::ReleaseAllAsset();
-            ObjManager::ReleaseAllObj();
-            return new Title;
+            if (!escBlend->NowFade())
+            {
+                AssetManager::ReleaseAllAsset();
+                ObjManager::ReleaseAllObj();
+                return new Title;
+            }
         }
     }
     return this;
@@ -88,7 +99,6 @@ SceneBase* EscapeScene::Update(float deltaTime)
 void EscapeScene::Draw()
 {
     ObjManager::Draw();
-    DrawFormatString(0, 0, GetColor(255, 255, 255), "Escape画面:Resultシーンへ移行");
     escBlend->Fade();
     DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), true);
     escBlend->NoBlend();

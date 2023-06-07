@@ -4,6 +4,7 @@ GhostBase::GhostBase()
     :ObjectBase(ObjectTag::Ghost)
     , gstAnim(nullptr)
     , animType(IDLE)
+    , gstSound(nullptr)
 {
     //---モデル読み込み---//
     objHandle = AssetManager::GetMesh("../Assets/Chara/Ghost/GhostModel.mv1");        //モデル読み込み
@@ -22,6 +23,10 @@ GhostBase::GhostBase()
     gstAnim->StartAnim(animType);
     objDir = VGet(-1.0f, 0.0f, 0.0f);                                                   //初期方向
     MV1SetPosition(objHandle, objPos);                                                  //ポジション設定
+
+    gstSound = new Sound;
+    gstSound->AddSound("../Assets/Sound/GhostWalkSE.mp3", SoundTag::GhostWalk, 150);
+    gstSound->AddSound("../Assets/Sound/GhostScreamSE.mp3", SoundTag::GhostScream, 300, true);
 }
 
 GhostBase::~GhostBase()
@@ -32,4 +37,5 @@ GhostBase::~GhostBase()
         MV1DeleteModel(objHandle);
     }
     delete gstAnim;
+    delete gstSound;
 }

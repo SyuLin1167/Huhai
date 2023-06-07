@@ -1,20 +1,24 @@
 #include "Door.h"
+#include"../../../Asset/Sound/Sound.h"
+
 // @brief Doorコンストラクター //
 
 Door::Door()
     :ObjectBase(ObjectTag::Furniture)
-    ,doorAnim(nullptr)
-    ,doorModel(nullptr)
+    , doorAnim(nullptr)
+    , doorModel(nullptr)
+    , doorSound(nullptr)
 {
     Load();
 }
 
 // @brief Doorコンストラクター //
 
-Door::Door(VECTOR doorPos,VECTOR doorAngle)
-    :ObjectBase(ObjectTag::Furniture,doorPos,doorAngle)
-    ,doorAnim(nullptr)
-    ,doorModel(nullptr)
+Door::Door(VECTOR doorPos, VECTOR doorAngle)
+    :ObjectBase(ObjectTag::Furniture, doorPos, doorAngle)
+    , doorAnim(nullptr)
+    , doorModel(nullptr)
+    , doorSound(nullptr)
 {
     Load();
 }
@@ -53,13 +57,16 @@ void Door::Load()
     colSphere.Radius = 15.0f;                                                                //球半径
     colSphere.worldCenter = objPos;                                                          //ワールド座標
 
+    doorSound = new Sound;
+    doorSound->AddSound("../Assets/Sound/DoorOpenSE.wav", SoundTag::DoorOpen, 150, true);
+    doorSound->AddSound("../Assets/Sound/DoorCloseSE.wav", SoundTag::DoorClose, 150, true);
 }
 
 // @brief Door更新処理 //
 
 void Door::Update(float deltaTime)
 {
-    doorAnim->AddAnimTime(deltaTime);	
+    doorAnim->AddAnimTime(deltaTime);
 
     //---当たり判定設定---//
     player = ObjManager::GetFirstObj(ObjectTag::Player);         //プレイヤーオブジェクト取得
@@ -71,18 +78,26 @@ void Door::Update(float deltaTime)
             {
                 if (CheckHitKey(KEY_INPUT_E))                //Eキー入力
                 {
-                    MoveAnim(OPEN);
+                    if (animType != OPEN)															//現在のアニメーションが指定したアニメーションじゃなかったら
+                    {
+                        MoveAnim(OPEN);
+                    }
                 }
                 if (CheckHitKey(KEY_INPUT_Q))                //Qキー入力
                 {
-                    MoveAnim(CLOSE);
+                    if (animType != CLOSE)															//現在のアニメーションが指定したアニメーションじゃなかったら
+                    {
+                        MoveAnim(CLOSE);
+                    }
                 }
             }
+
         }
     }
     colModel = objHandle;                                           //当たり判定のモデルはオブジェクトのモデル
     ColUpdate();
 
+    doorSound->Update(objPos);
 }
 
 // @brief Doorアニメーション処理
@@ -93,6 +108,14 @@ void Door::MoveAnim(int animtype)
     {
         animType = animtype;														//現在のアニメーションを指定したアニメーションにする
         doorAnim->StartAnim(animType);												//アニメーション開始
+        if (animtype == OPEN)
+        {
+            doorSound->StartSound(SoundTag::DoorOpen, DX_PLAYTYPE_BACK);
+        }
+        else if (animtype == CLOSE)
+        {
+            doorSound->StartSound(SoundTag::DoorClose, DX_PLAYTYPE_BACK);
+        }
     }
 }
 

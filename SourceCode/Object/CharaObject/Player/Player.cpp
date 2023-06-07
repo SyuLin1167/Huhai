@@ -1,4 +1,5 @@
 #include "Player.h"
+#include"../../../Asset/Sound/Sound.h"
 
 // @brief Playerコンストラクター //
 
@@ -15,6 +16,7 @@ Player::Player()
     , rotateNow(false)
     , camFront{ 0,0,0 }
     , aimDir(VGet(0.0f, 0.0f, 0.0f))
+    , plySound(nullptr)
 {
 
     //---インスタンス---//
@@ -30,6 +32,8 @@ Player::Player()
     //---当たり判定線分設定---//
     colLine = Line(VGet(0.0f, 2.0f, 0.0f), VGet(0.0f, -5.0f, 0.0f));             //線分設定
 
+    plySound = new Sound;
+    plySound->AddSound("../Assets/Sound/PlayerWalkSE.mp3", SoundTag::PlayerWalk, 250);
 }
 
 // @brief Playerデストラクター //
@@ -71,6 +75,7 @@ void Player::Update(float deltaTime)
 
     colSphere.Move(objPos);                                         //当たり判定の移動
     ColUpdate();
+
 }
 
 // @brief Player描画処理 //
@@ -102,7 +107,7 @@ void Player::OnCollisionEnter(const ObjectBase* other)
             ObjectBase*camera= ObjManager::GetFirstObj(ObjectTag::Camera);
             if (camera)
             {
-                SetCameraPositionAndTarget_UpVecY(camera->GetPos(), other->GetPos() + VGet(0.0f, 20.0f, 0.0f));
+                camera->SetDir(other->GetPos() - camera->GetPos() + VGet(0, 18.0f, 0));
             }
             ColUpdate();
         }
@@ -170,7 +175,7 @@ void Player::Move(float deltaTime)
     //---移動処理---//
     if (inputKey)                                                   //移動キーが入力されたら
     {
-
+        plySound->StartSound(SoundTag::PlayerWalk, DX_PLAYTYPE_LOOP);
         inputVec = VNorm(inputVec);                                 //ベクトルの方向成分を取得
         
         if (VSquareSize(inputVec)==0)                               //左右・上下同時押しの際は無視
@@ -182,6 +187,7 @@ void Player::Move(float deltaTime)
     }
     else
     {
+        plySound->StopSound(SoundTag::PlayerWalk);
         inputVel *= 0.5f;                                           //徐々に減速
     }
     objPos += inputVel;                                             //移動

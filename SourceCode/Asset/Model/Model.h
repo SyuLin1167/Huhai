@@ -24,7 +24,7 @@ public:
     /// モデル追加処理
     /// </summary>
     /// <param name="modelFileName">:モデルファイル名</param>
-    /// <returns></returns>
+    /// <returns>複製したモデルID</returns>
     int AddModel(string modelFileName);
 
     /// <summary>
@@ -47,6 +47,7 @@ public:
     };
 
 private:
+    //モデルのデータ配列
     vector<ModelData> modelData;
 };
 

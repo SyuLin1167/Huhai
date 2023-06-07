@@ -18,15 +18,22 @@ public:
     /// メッシュの取得
     /// </summary>
     /// <param name="fileName">:メッシュファイル名</param>
-    /// <returns></returns>
+    /// <returns>複製したメッシュID</returns>
     static int GetMesh(string meshFileName);
 
     /// <summary>
     /// アニメーションの取得
     /// </summary>
     /// <param name="fileName">:アニメーションファイル名</param>
-    /// <returns></returns>
+    /// <returns>アニメーションID</returns>
     static int GetAnim(string animFileName);
+
+    /// <summary>
+    /// サウンドの取得
+    /// </summary>
+    /// <param name="soundFileName">:サウンドファイル名</param>
+    /// <returns>複製したサウンドID</returns>
+    static int GetSound(string soundFileName);
 
     /// <summary>
     /// メッシュの削除
@@ -58,6 +65,8 @@ private:
     static AssetManager* assetInstance;     //AssetManagerの実態
     unordered_map<string, int>meshMap;      //メッシュ(オリジナル)
     unordered_map<string, int>animMap;      //アニメーション(オリジナル)
-    vector<int> duplicateMesh;              //メッシュ(コピー)
+    unordered_map<string, int>soundMap;     //サウンド(オリジナル)
+    vector<int> duplicateMesh;              //メッシュ(複製)
+    vector<int> duplicateSound;             //サウンド(複製)
 };
 

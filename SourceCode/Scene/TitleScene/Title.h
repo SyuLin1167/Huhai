@@ -12,6 +12,7 @@ class Title :public SceneBase
     class Door* door = nullptr;
     class Select* select[TypeSize];
     class BlendMode* titleBlend;
+    class Sound* sound = nullptr;
 
 public:
     /// <summary>
@@ -39,4 +40,5 @@ public:
 private: 
     int graph;
     bool fadeLock;
+    int a = 70;
 };

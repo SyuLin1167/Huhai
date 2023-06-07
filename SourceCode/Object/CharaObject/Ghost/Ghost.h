@@ -51,5 +51,6 @@ private:
     VECTOR holdPos;
 
     int lightHandle;
+
 };
 

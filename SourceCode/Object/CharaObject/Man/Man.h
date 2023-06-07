@@ -51,5 +51,7 @@ private:
 	int animType;
 
 	bool addRemarks;
+
+	class Sound* manSound;
 };
 

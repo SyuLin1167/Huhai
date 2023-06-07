@@ -2,7 +2,7 @@
 
 #include<DxLib.h>
 #include<string>
-#include<unordered_map>
+#include<vector>
 
 using namespace std;
 
@@ -58,7 +58,7 @@ public:
 	{
 	public:
 		/// <summary>
-		/// AnimDataコンストラクタ―
+		/// AnimDataコンストラクタ
 		/// </summary>
 		AnimData();
 

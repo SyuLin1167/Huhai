@@ -1,10 +1,12 @@
 #include "Map.h"
+#include"../../../Asset/Sound/Sound.h"
 
 // @brief Mapコンストラクター //
 
 Map::Map(int maptag)
 	:ObjectBase(ObjectTag::Map)
 	, mapModel(nullptr)
+	,mapSound(nullptr)
 	, mapTag(maptag)
 {
 	LoadModel();
@@ -36,6 +38,10 @@ void Map::LoadModel()
 	MV1SetScale(objHandle, VGet(0.11f, 0.12f, 0.11f));										//スケールセット
 
 	MV1SetupCollInfo(colModel);																//当たり判定情報設定
+
+	mapSound = new Sound;
+	mapSound->AddSound("../Assets/Sound/InDoorSE.mp3", SoundTag::InDoor, 150);
+	mapSound->StartSound(SoundTag::InDoor, DX_PLAYTYPE_LOOP);
 }
 
 // @brief Map更新処理 //

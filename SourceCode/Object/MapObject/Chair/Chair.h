@@ -44,5 +44,7 @@ private:
 	//---アニメーション関連---//
 	class Animation* ChairAnim;			//アニメーション
 	int animType;						//アニメーション状態
+
+	class Sound* chairSound;
 };
 

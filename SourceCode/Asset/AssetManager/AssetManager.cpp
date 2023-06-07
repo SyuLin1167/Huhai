@@ -6,7 +6,9 @@ AssetManager* AssetManager::assetInstance = nullptr;    //AssetManager実態へのポ
 
 AssetManager::AssetManager()
 {
-    assetInstance = nullptr;
+    SetEnableXAudioFlag(FALSE);
+    Set3DSoundOneMetre(20.0f);
+
 }
 
 // @brief AssetManagerデストラクター //
@@ -72,6 +74,28 @@ int AssetManager::GetAnim(string animFileName)
     return assetInstance->animMap[animFileName];                                         //アニメーションIDを返す
 }
 
+int AssetManager::GetSound(string soundFileName)
+{
+    int meshID = 0;
+    //---メッシュ登録---//
+    auto iter = assetInstance->soundMap.find(soundFileName);   //ファイルが登録されているかどうか検索
+
+    if (iter == assetInstance->soundMap.end())                                               //登録されていなかったら
+    {
+        meshID = LoadSoundMem(soundFileName.c_str());                                        //新規ファイル読み込み
+        if (meshID == -1)                                                                   //IDが空だったら
+        {
+            return meshID;                                                                  //IDを返す
+        }
+        assetInstance->meshMap.emplace(soundFileName, meshID);                //ファイルをIDと共に登録
+    }
+
+    //---複製したメッシュを返却---//
+    meshID = DuplicateSoundMem(assetInstance->meshMap[soundFileName]);             //メッシュ複製、IDに代入
+    assetInstance->duplicateMesh.push_back(meshID);                                   //複製を末尾に追加
+    return meshID;                                                                         //複製したIDを返す
+}
+
 // @brief メッシュの削除 //
 
 void AssetManager::ReleaseMesh(int meshID)
@@ -104,15 +128,28 @@ void AssetManager::ReleaseAllAsset()
         MV1DeleteModel(mesh.second);
     }
 
+    //サウンド開放
+    for (auto& sound : assetInstance->soundMap)
+    {
+        DeleteSoundMem(sound.second);
+    }
+
     //---複製解放---//
     for (auto dup : assetInstance->duplicateMesh)
     {
         MV1DeleteModel(dup);
     }
+    for (auto dup : assetInstance->duplicateSound)
+    {
+        DeleteSoundMem(dup);
+    }
+
 
     assetInstance->animMap.clear();             //アニメーションのすべての要素を削除
     assetInstance->meshMap.clear();             //メッシュのすべての要素を削除
+    assetInstance->soundMap.clear();
     assetInstance->duplicateMesh.clear();       //複製メッシュのすべての要素を削除
+    assetInstance->duplicateSound.clear();
 }
 
 // @brief AssetManagerの解放 //

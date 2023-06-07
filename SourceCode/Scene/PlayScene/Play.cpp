@@ -5,6 +5,7 @@
 #include "../../Object/CharaObject/Camera/CameraFps.h"
 #include "../../Object/CharaObject/Player/Player.h"
 #include "../../Object/CharaObject/Ghost/MoveGimmic/GhostWalkGim.h"
+#include"../../Object/CharaObject/Man/Man.h"
 #include "../../Object/MapObject/Map/Map.h"
 #include "../../Object/MapObject/Door/Door.h"
 #include "../../Object/MapObject/Chair/Chair.h"
@@ -46,6 +47,7 @@ Play::Play()
 
     ////---エネミー生成---//
     ObjManager::Entry(new GhostWalkGim);
+    ObjManager::Entry(new Man);
 
     ObjManager::Entry(new Remarks(TextType::Day1Stage));
 }
@@ -70,11 +72,7 @@ SceneBase* Play::Update(float deltaTime)
 
 
     ObjectBase* man = ObjManager::GetFirstObj(ObjectTag::Man);
-    if (man)                               //Ｒキーが押されたら
-    {
-            sceneChange = true;
-    }
-    else if (sceneChange)
+    if (!man)                               //Ｒキーが押されたら
     {
         AssetManager::ReleaseAllAsset();
         ObjManager::ReleaseAllObj();
@@ -89,5 +87,4 @@ SceneBase* Play::Update(float deltaTime)
 void Play::Draw()
 {
     ObjManager::Draw();
-    DrawFormatString(0, 0, GetColor(255, 255, 255), "Stage画面:Escapeシーンへ移行");
 }
