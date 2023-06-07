@@ -154,6 +154,7 @@
     <ClCompile Include="..\SourceCode\Asset\Animation\Animation.cpp" />
     <ClCompile Include="..\SourceCode\Asset\AssetManager\AssetManager.cpp" />
     <ClCompile Include="..\SourceCode\Asset\Model\Model.cpp" />
+    <ClCompile Include="..\SourceCode\Asset\Sound\Sound.cpp" />
     <ClCompile Include="..\SourceCode\BlendMode\BlendMode.cpp" />
     <ClCompile Include="..\SourceCode\Collision\Collision.cpp" />
     <ClCompile Include="..\SourceCode\Grid\Grid.cpp" />
@@ -196,6 +197,8 @@
     <ClInclude Include="..\SourceCode\Asset\Animation\Animation.h" />
     <ClInclude Include="..\SourceCode\Asset\AssetManager\AssetManager.h" />
     <ClInclude Include="..\SourceCode\Asset\Model\Model.h" />
+    <ClInclude Include="..\SourceCode\Asset\Sound\Sound.h" />
+    <ClInclude Include="..\SourceCode\Asset\Sound\SoundTag.h" />
     <ClInclude Include="..\SourceCode\BlendMode\BlendMode.h" />
     <ClInclude Include="..\SourceCode\Collision\Collision.h" />
     <ClInclude Include="..\SourceCode\Collision\CollisionType.h" />

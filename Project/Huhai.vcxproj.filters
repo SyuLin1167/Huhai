@@ -154,6 +154,9 @@
     <Filter Include="ソース ファイル\MapObject\Table">
       <UniqueIdentifier>{b773265b-301b-4f17-8142-86d5d9261f28}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Asset\Sound">
+      <UniqueIdentifier>{82e8c667-400c-4c32-962f-fbadc0d2c170}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SourceCode\Main.cpp">
@@ -275,6 +278,9 @@
     </ClCompile>
     <ClCompile Include="..\SourceCode\Object\MapObject\Table\Table.cpp">
       <Filter>ソース ファイル\MapObject\Table</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Asset\Sound\Sound.cpp">
+      <Filter>ソース ファイル\Asset\Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -406,6 +412,12 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\UI\Select\SelectType.h">
       <Filter>ソース ファイル\UI\Select</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Asset\Sound\Sound.h">
+      <Filter>ソース ファイル\Asset\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Asset\Sound\SoundTag.h">
+      <Filter>ソース ファイル\Asset\Sound</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
