@@ -1,15 +1,15 @@
 #include "SceneBase.h"
 
-// @brief ScenBaseコンストラクター //
+// コンストラクタ //
 
 SceneBase::SceneBase()
-	:BgHandle(-1)
-	, BgX(0)
-	, BgY(0)
+    :BgHandle(-1)
+    , BgX(0)
+    , BgY(0)
 {
 }
 
-// @brief SceneBaseデストラクタ― //
+// デストラクタ //
 
 SceneBase::~SceneBase()
 {

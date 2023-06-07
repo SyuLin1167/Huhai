@@ -3,36 +3,44 @@
 #include"../../Time/TimeManager.h"
 
 
-/*シーンマネージャーのクラス*/
+/*SceneManagerクラス*/
 class SceneManager
 {
-private:
-    SceneBase* nowScene;
-    TimeManager* timeManager;
 
 public:
     /// <summary>
-    /// コンストラクター
+    /// コンストラクタ
     /// </summary>
     SceneManager();
 
     /// <summary>
-    /// デストラクター
+    /// デストラクタ
     /// </summary>
     ~SceneManager();
 
     /// <summary>
-    /// SceneManager更新処理
+    /// 初期化処理
+    /// </summary>
+    int Init();
+
+    /// <summary>
+    /// NowScene更新処理
     /// </summary>
     void Update();
 
     /// <summary>
-    /// 現在のシーンの描画
+    /// NowScene描画処理
     /// </summary>
     void Draw();
 
-    bool IsLoop() { return isLoop; }
+    /// <summary>
+    /// ゲームループ
+    /// </summary>
+    void GameLoop();
+
 private:
     bool isLoop;
+    SceneBase* nowScene;
+    TimeManager* timeMgr;
 };
 
