@@ -1,7 +1,4 @@
 #pragma once
-#include"../SceneBase/SceneBase.h"
-#include"../../Time/TimeManager.h"
-
 
 /*SceneManagerƒNƒ‰ƒX*/
 class SceneManager
@@ -39,8 +36,9 @@ public:
     void GameLoop();
 
 private:
-    bool isLoop;
-    SceneBase* nowScene;
-    TimeManager* timeMgr;
+    bool canLoop;
+    std::stack<class SceneBase*> nowScene;
+    //class SceneBase* nowScene;
+    class TimeManager* timeMgr;
 };
 
