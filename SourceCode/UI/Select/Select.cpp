@@ -1,6 +1,6 @@
 #include "Select.h"
 
-// @brief Selectコンストラクタ //
+        // @brief Selectコンストラクタ //
 
 Select::Select(SelectType type)
     :ObjectBase(ObjectTag::UI)
@@ -15,14 +15,14 @@ Select::Select(SelectType type)
     objHandle = LoadGraph(drawHandle[type]);
 }
 
-// @brief Selectデストラクタ //
+        // @brief Selectデストラクタ //
 
 Select::~Select()
 {
     DeleteGraph(objHandle);                         //ハンドルの開放
 }
 
-// @brief Select更新処理 //
+        // @brief Select更新処理 //
 
 void Select::Update(float deltaTime)
 {
@@ -43,27 +43,27 @@ void Select::Update(float deltaTime)
 void Select::OnCollisionEnter()
 {
 
-		if ((GetMouseInput() & MOUSE_INPUT_LEFT))
-		{
-			nowInput = true;
-		}
-		else if (nowInput)
-		{
-			isSelect = true;
-			nowInput = false;
-		}
+    if ((GetMouseInput() & MOUSE_INPUT_LEFT))
+    {
+        nowInput = true;
+    }
+    else if (nowInput)
+    {
+        isSelect = true;
+        nowInput = false;
+    }
 }
 
 void Select::Draw()
 {
-	if (!isSelect)
-	{
-		selectBlend->Fade();
-	}
-	if(nowInput)
-	{
-		selectBlend->Darken();
-	}
-	DrawExtendGraph((int)objPos.x, (int)objPos.y, (int)objPos.x + 160, (int)objPos.y + 50, objHandle, TRUE);
-	selectBlend->NoBlend();
+    if (!isSelect)
+    {
+        selectBlend->Fade();
+    }
+    if (nowInput)
+    {
+        selectBlend->Darken();
+    }
+    DrawExtendGraph((int)objPos.x, (int)objPos.y, (int)objPos.x + 160, (int)objPos.y + 50, objHandle, TRUE);
+    selectBlend->NoBlend();
 }

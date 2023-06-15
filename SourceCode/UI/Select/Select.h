@@ -5,10 +5,8 @@
 #include"../../Object/ObjectBase/ObjectBase.h"
 #include"../../BlendMode/BlendMode.h"
 
-using namespace std;
-
-/*セレクトボタンクラス*/
-class Select:public ObjectBase
+        /*セレクトボタンクラス*/
+class Select :public ObjectBase
 {
     class BlendMode* selectBlend;
 
@@ -52,14 +50,14 @@ private:
     bool nowInput;                  //入力中かどうか
 
     //描画座標を格納した配列
-    unordered_map<SelectType, VECTOR> drawPos{
+    std::unordered_map<SelectType, VECTOR> drawPos{
         {SelectType::PLAY,{125,680,0}},
         {SelectType::LOAD,{125,760,0}},
         {SelectType::EXIT,{125,840,0}},
     };
 
     //画像ハンドルを格納した配列
-    unordered_map<SelectType, const char*> drawHandle{
+    std::unordered_map<SelectType, const char*> drawHandle{
         {SelectType::PLAY,"../Assets/BackGround/Play.png"},
         {SelectType::LOAD,"../Assets/BackGround/Load.png"},
         {SelectType::EXIT,"../Assets/BackGround/Exit.png"},

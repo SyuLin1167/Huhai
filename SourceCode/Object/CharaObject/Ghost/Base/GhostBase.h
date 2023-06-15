@@ -7,8 +7,9 @@
 #include"../../../../Collision/Collision.h"
 #include"../../../../Asset/Sound/Sound.h"
 
-/*Ghostの基底クラス*/
-class GhostBase:public ObjectBase
+
+        /*Ghostの基底クラス*/
+class GhostBase :public ObjectBase
 {
 public:
     /// <summary>

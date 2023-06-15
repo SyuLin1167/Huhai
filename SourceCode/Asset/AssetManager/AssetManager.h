@@ -3,9 +3,7 @@
 #include<string>
 #include<unordered_map>
 
-using namespace std;
-
-/* アセット管理クラス */
+    /* アセット管理クラス */
 class AssetManager final
 {
 public:
@@ -19,21 +17,21 @@ public:
     /// </summary>
     /// <param name="fileName">:メッシュファイル名</param>
     /// <returns>複製したメッシュID</returns>
-    static int GetMesh(string meshFileName);
+    static int GetMesh(std::string meshFileName);
 
     /// <summary>
     /// アニメーションの取得
     /// </summary>
     /// <param name="fileName">:アニメーションファイル名</param>
     /// <returns>アニメーションID</returns>
-    static int GetAnim(string animFileName);
+    static int GetAnim(std::string animFileName);
 
     /// <summary>
     /// サウンドの取得
     /// </summary>
     /// <param name="soundFileName">:サウンドファイル名</param>
     /// <returns>複製したサウンドID</returns>
-    static int GetSound(string soundFileName);
+    static int GetSound(std::string soundFileName);
 
     /// <summary>
     /// メッシュの削除
@@ -63,10 +61,9 @@ private:
     ~AssetManager();
 
     static AssetManager* assetInstance;     //AssetManagerの実態
-    unordered_map<string, int>meshMap;      //メッシュ(オリジナル)
-    unordered_map<string, int>animMap;      //アニメーション(オリジナル)
-    unordered_map<string, int>soundMap;     //サウンド(オリジナル)
-    vector<int> duplicateMesh;              //メッシュ(複製)
-    vector<int> duplicateSound;             //サウンド(複製)
+    std::unordered_map<std::string, int>meshMap;      //メッシュ(オリジナル)
+    std::unordered_map<std::string, int>animMap;      //アニメーション(オリジナル)
+    std::unordered_map<std::string, int>soundMap;     //サウンド(オリジナル)
+    std::vector<int> duplicateMesh;              //メッシュ(複製)
+    std::vector<int> duplicateSound;             //サウンド(複製)
 };
-

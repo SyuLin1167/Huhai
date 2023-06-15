@@ -157,7 +157,7 @@
     <ClCompile Include="..\SourceCode\Asset\Sound\Sound.cpp" />
     <ClCompile Include="..\SourceCode\BlendMode\BlendMode.cpp" />
     <ClCompile Include="..\SourceCode\Collision\Collision.cpp" />
-    <ClCompile Include="..\SourceCode\Grid\Grid.cpp" />
+    <ClCompile Include="..\SourceCode\GameSetting\GameSetting.cpp" />
     <ClCompile Include="..\SourceCode\Main.cpp" />
     <ClCompile Include="..\SourceCode\Math\Math.cpp" />
     <ClCompile Include="..\SourceCode\Object\CharaObject\Camera\CameraFps.cpp" />
@@ -202,7 +202,7 @@
     <ClInclude Include="..\SourceCode\BlendMode\BlendMode.h" />
     <ClInclude Include="..\SourceCode\Collision\Collision.h" />
     <ClInclude Include="..\SourceCode\Collision\CollisionType.h" />
-    <ClInclude Include="..\SourceCode\Grid\Grid.h" />
+    <ClInclude Include="..\SourceCode\GameSetting\GameSetting.h" />
     <ClInclude Include="..\SourceCode\Math\Math.h" />
     <ClInclude Include="..\SourceCode\Object\CharaObject\Camera\CameraFps.h" />
     <ClInclude Include="..\SourceCode\Object\CharaObject\Camera\MoveCamera\MoveCamera.h" />

@@ -1,27 +1,27 @@
 #include "Action.h"
 
-// @brief Actionコンストラクタ //
+		// @brief Actionコンストラクタ //
 
 Action::Action(VECTOR objpos)
 	:ObjectBase(ObjectTag::UI)
 	, objDistance(0)
-	,canAction(false)
-	,isAction(false)
-	,actionBlend(nullptr)
+	, canAction(false)
+	, isAction(false)
+	, actionBlend(nullptr)
 {
 	actionBlend = new BlendMode;
 	objPos = objpos + VGet(0, 20, 0);
 	objHandle = LoadGraph("../Assets/BackGround/Action.png");
 }
 
-// @brief Actionデストラクタ //
+		// @brief Actionデストラクタ //
 
 Action::~Action()
 {
 	DeleteGraph(objHandle);
 }
 
-// @brief Action更新処理 //
+		// @brief Action更新処理 //
 
 void Action::Update(float deltaTime)
 {
@@ -48,5 +48,4 @@ void Action::Draw()
 	actionBlend->Fade();
 	DrawExtendGraph3D(objPos.x, objPos.y, objPos.z, 0.3f, 0.3f, objHandle, TRUE);
 	actionBlend->NoBlend();
-
 }

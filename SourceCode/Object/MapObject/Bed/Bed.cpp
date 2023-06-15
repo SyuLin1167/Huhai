@@ -1,7 +1,7 @@
 #include "Bed.h"
 #include"../../../UI/Action/Action.h"
 
-// @brief Bedコンストラクタ //
+        // コンストラクタ //
 
 Bed::Bed()
     :ObjectBase(ObjectTag::Furniture)
@@ -9,14 +9,14 @@ Bed::Bed()
     Load();
 }
 
-// @brief Bedデストラクタ //
+        // デストラクタ //
 
 Bed::~Bed()
 {
     AssetManager::ReleaseMesh(objHandle);                                               //モデルメッシュの削除
 }
 
-// @brief Bed読み込み処理 //
+        // 読み込み処理 //
 
 void Bed::Load()
 {
@@ -32,7 +32,7 @@ void Bed::Load()
     ObjManager::Entry(new Action(objPos));
 }
 
-// @brief Bed更新処理 //
+        // 更新処理 //
 
 void Bed::Update(float deltaTime)
 {
@@ -56,7 +56,7 @@ void Bed::Update(float deltaTime)
     }
 }
 
-// @brief Bed描画処理 //
+        // 描画処理 //
 
 void Bed::Draw()
 {

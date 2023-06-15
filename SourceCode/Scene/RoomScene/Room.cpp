@@ -9,7 +9,7 @@
 #include "../../Object/MapObject/Furniture/Furniture.h"
 #include"../../UI/Reamarks/Remarks.h"
 
-// @brief Roomコンストラクタ //
+    // @brief Roomコンストラクタ //
 
 Room::Room()
     :SceneBase()
@@ -38,14 +38,14 @@ Room::Room()
     roomBlend = new BlendMode;
 }
 
-// @brief Roomデストラクタ //
+    // @brief Roomデストラクタ //
 
 Room::~Room()
 {
 
 }
 
-// @brief Room更新処理 //
+    // @brief Room更新処理 //
 
 SceneBase* Room::Update(float deltaTime)
 {
@@ -63,10 +63,10 @@ SceneBase* Room::Update(float deltaTime)
             return new Play;                        //リザルト画面へ
         }
     }
-	return this;
+    return this;
 }
 
-// @brief Room描画処理 //
+    // @brief Room描画処理 //
 
 void Room::Draw()
 {

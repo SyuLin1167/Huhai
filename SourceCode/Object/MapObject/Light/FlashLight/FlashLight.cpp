@@ -1,47 +1,47 @@
 #include "FlashLight.h"
 
-// @brief FlashLightコンストラクタ //
+        // コンストラクタ //
 
 FlashLight::FlashLight()
-	:LightBase()
+    :LightBase()
 {
-	Load();
+    Load();
 }
 
-// @brief FlashLightコンストラクタ //
+        // コンストラクタ //
 
 FlashLight::FlashLight(VECTOR lightPos)
-	:LightBase(lightPos)
+    :LightBase(lightPos)
 {
-	Load();
+    Load();
 }
 
-// @brief FlashLightデストラクタ //
+        // デストラクタ //
 
 FlashLight::~FlashLight()
 {
-	DeleteLightHandle(lightHandle);
-	AssetManager::ReleaseMesh(objHandle);
+    DeleteLightHandle(lightHandle);
+    AssetManager::ReleaseMesh(objHandle);
 }
 
-// @brief FlashLight読み込み処理 //
+        // 読み込み処理 //
 
 void FlashLight::Load()
 {
-	lightAtten2 = 0.0005f;
-	lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2 * 10);
+    lightAtten2 = 0.0005f;
+    lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2 * 10);
 }
 
-// @brief FlashLight更新処理 //
+        // 更新処理 //
 
 void FlashLight::Update(float deltaTime)
 {
-	ObjectBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
-	SetLightPositionHandle(lightHandle, camera->GetPos());
-	//SetLightDirectionHandle(lightHandle, camera->GetDir());
+    ObjectBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
+    SetLightPositionHandle(lightHandle, camera->GetPos());
+    //SetLightDirectionHandle(lightHandle, camera->GetDir());
 }
 
-// @brief FlashLight描画処理 //
+        // 描画処理 //
 
 void FlashLight::Draw()
 {

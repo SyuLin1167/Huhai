@@ -2,16 +2,16 @@
 #include"../AssetManager/AssetManager.h"
 #include"../../Object/ObjectManager/ObjManager.h"
 
-// コンストラクタ //
+    // コンストラクタ //
 
 Sound::Sound()
     :soundType(-1)
-    ,nowSoundTime(0.0f)
-    ,attachedIndex(0)
+    , nowSoundTime(0.0f)
+    , attachedIndex(0)
 {
 }
 
-// デストラクタ //
+    // デストラクタ //
 
 Sound::~Sound()
 {
@@ -21,9 +21,9 @@ Sound::~Sound()
     }
 }
 
-// サウンド追加処理 //
+    // サウンド追加処理 //
 
-void Sound::AddSound(string soundFileName, SoundTag tag, int volume,bool isDimension)
+void Sound::AddSound(std::string soundFileName, SoundTag tag, int volume, bool isDimension)
 {
     SoundData sound = {};
     sound.volume = volume;
@@ -44,7 +44,7 @@ void Sound::Update(VECTOR targetPos)
     for (auto tag : soundTagAll)
     {
         auto& sound = soundData[tag];
-        if (sound.isDimension&&IsPlaying(tag))
+        if (sound.isDimension && IsPlaying(tag))
         {
             if (camera)
             {
@@ -55,9 +55,9 @@ void Sound::Update(VECTOR targetPos)
     }
 }
 
-// 再生処理 //
+    // 再生処理 //
 
-void Sound::StartSound(SoundTag tag,int playType)
+void Sound::StartSound(SoundTag tag, int playType)
 {
     auto& sound = soundData[tag];
     if (!CheckSoundMem(sound.soundHandle))

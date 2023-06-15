@@ -3,7 +3,7 @@
 #include"../../../UI/Reamarks/Remarks.h"
 #include"../../../Asset/Sound/Sound.h"
 
-// @brief Manコンストラクタ //
+        // @brief Manコンストラクタ //
 
 Man::Man()
     :ObjectBase(ObjectTag::Man)
@@ -11,12 +11,12 @@ Man::Man()
     , rotateNow(false)
     , aimDir{ 0,0,0 }
     , addRemarks(false)
-    ,manSound(nullptr)
+    , manSound(nullptr)
 {
     Load();
 }
 
-// @brief Manデストラクタ //
+        // @brief Manデストラクタ //
 
 Man::~Man()
 {
@@ -25,7 +25,7 @@ Man::~Man()
     delete manSound;
 }
 
-// @brief Man読み込み処理 //
+        // @brief Man読み込み処理 //
 
 void Man::Load()
 {
@@ -51,7 +51,7 @@ void Man::Load()
     manSound->AddSound("../Assets/Sound/BodyFallSE.mp3", SoundTag::BodyFall, 300, true);
 }
 
-// @brief Man更新処理 //
+        // @brief Man更新処理 //
 
 void Man::Update(float deltaTime)
 {
@@ -96,7 +96,7 @@ void Man::Update(float deltaTime)
     MV1SetRotationZYAxis(objHandle, negativeVec, VGet(0.0f, 1.0f, 0.0f), 0.0f);
 }
 
-// @brief Man描画処 //
+        // @brief Man描画処 //
 
 void Man::Draw()
 {

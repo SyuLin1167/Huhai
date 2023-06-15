@@ -58,9 +58,6 @@
     <Filter Include="ソース ファイル\Asset\Animation">
       <UniqueIdentifier>{37e8efb2-1ef2-494f-ab24-fd904da31a91}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Grid">
-      <UniqueIdentifier>{f9bbd91f-5c1d-47fa-a217-85efabd3518e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\MapObject">
       <UniqueIdentifier>{4d92cd9d-f4de-4472-87bc-d92b11c6f435}</UniqueIdentifier>
     </Filter>
@@ -157,6 +154,9 @@
     <Filter Include="ソース ファイル\Asset\Sound">
       <UniqueIdentifier>{82e8c667-400c-4c32-962f-fbadc0d2c170}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameSetting">
+      <UniqueIdentifier>{ace7c2f7-44de-45b3-b0f1-d7645b0945f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SourceCode\Main.cpp">
@@ -197,9 +197,6 @@
     </ClCompile>
     <ClCompile Include="..\SourceCode\Asset\AssetManager\AssetManager.cpp">
       <Filter>ソース ファイル\Asset\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\Grid\Grid.cpp">
-      <Filter>ソース ファイル\Grid</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Shade\Bloom\Bloom.cpp">
       <Filter>ソース ファイル\Shade\Bloome</Filter>
@@ -282,6 +279,9 @@
     <ClCompile Include="..\SourceCode\Asset\Sound\Sound.cpp">
       <Filter>ソース ファイル\Asset\Sound</Filter>
     </ClCompile>
+    <ClCompile Include="..\SourceCode\GameSetting\GameSetting.cpp">
+      <Filter>ソース ファイル\GameSetting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SourceCode\Time\TimeManager.h">
@@ -322,9 +322,6 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\Asset\AssetManager\AssetManager.h">
       <Filter>ソース ファイル\Asset\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\Grid\Grid.h">
-      <Filter>ソース ファイル\Grid</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Collision\CollisionType.h">
       <Filter>ソース ファイル\Collision</Filter>
@@ -418,6 +415,9 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\Asset\Sound\SoundTag.h">
       <Filter>ソース ファイル\Asset\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\GameSetting\GameSetting.h">
+      <Filter>ソース ファイル\GameSetting</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

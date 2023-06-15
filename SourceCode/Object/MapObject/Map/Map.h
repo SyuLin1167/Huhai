@@ -4,8 +4,8 @@
 #include"../../../Asset/AssetManager/AssetManager.h"
 #include"../../../Asset/Model/Model.h"
 
-/*Mapクラス*/
-class Map:public ObjectBase
+        /*Mapクラス*/
+class Map :public ObjectBase
 {
 public:
     /// <summary>
@@ -38,7 +38,7 @@ public:
 
     enum MapName
     {
-        TITLE=0,
+        TITLE = 0,
         ROOM,
         STAGE,
         ESCAPE,
@@ -51,4 +51,3 @@ private:
     class Sound* mapSound;
     int mapTag;
 };
-

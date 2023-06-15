@@ -1,79 +1,79 @@
 #include "BlinkingLight.h"
 
-// @brief BlinkingLightコンストラクタ //
+        // コンストラクタ //
 
 BlinkingLight::BlinkingLight()
-	:LightBase()
-	, intervalTime(0.0f)
-	, countTimer(0.0f)
-	, lightBlinking(false)
+    :LightBase()
+    , intervalTime(0.0f)
+    , countTimer(0.0f)
+    , isBlinking(false)
 {
-	Load();
+    Load();
 }
 
-// @brief BlinkingLightコンストラクタ //
+        // コンストラクタ //
 
 BlinkingLight::BlinkingLight(VECTOR lightPos)
-	:LightBase(lightPos)
+    :LightBase(lightPos)
 {
-	Load();
+    Load();
 }
 
-// @brief BlinkingLightデストラクタ //
+        // デストラクタ //
 
 BlinkingLight::~BlinkingLight()
 {
-	DeleteLightHandle(lightHandle);
-	AssetManager::ReleaseMesh(objHandle);
+    DeleteLightHandle(lightHandle);
+    AssetManager::ReleaseMesh(objHandle);
 }
 
-// @brief BlinkingLight読み込み処理 //
+        // @brief BlinkingLight読み込み処理 //
 
 void BlinkingLight::Load()
 {
-	lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2);
-	MV1SetPosition(objHandle, objPos);
-	MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
+    lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2);
+    MV1SetPosition(objHandle, objPos);
+    MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
 }
 
-// @brief BlinkingLight更新処理 //
+        // 更新処理 //
 
 void BlinkingLight::Update(float deltaTime)
 {
 
-	SetLightRangeAttenHandle(lightHandle, lightRange, 0.0f, 0.0f, lightAtten2);
+    SetLightRangeAttenHandle(lightHandle, lightRange, 0.0f, 0.0f, lightAtten2);
 
-	if (countTimer >= intervalTime)
-	{
-		countTimer = 0;
-		srand((unsigned int)time(NULL));
-		intervalTime = static_cast <float>(rand() % 4 + 1);
-	}
+    if (countTimer >= intervalTime)
+    {
+        countTimer = 0;
+        srand((unsigned int)time(NULL));
+        intervalTime = static_cast <float>(rand() % 4 + 1);
+    }
 
-	if (intervalTime <= 1)
-	{
-		lightBlinking = !lightBlinking;
-	}
-	else
-	{
-		lightBlinking = false;
-	}
+    if (intervalTime <= 1)
+    {
+        isBlinking = !isBlinking;
+    }
+    else
+    {
+        isBlinking = false;
+    }
 
-	if (lightBlinking)
-	{
-		lightAtten2 = 0.003f;
-	}
-	else
-	{
-		lightAtten2 = 0.002f;
-	}
+    if (isBlinking)
+    {
+        lightAtten2 = 0.003f;
+    }
+    else
+    {
+        lightAtten2 = 0.002f;
+    }
 
-	countTimer += deltaTime;
+    countTimer += deltaTime;
 }
 
-// @brief BlinkingLight描画処理 //
+        // 描画処理 //
 
 void BlinkingLight::Draw()
 {
-	MV1DrawModel(objHandle);						//モデル描画
+    MV1DrawModel(objHandle);						//モデル描画
 }

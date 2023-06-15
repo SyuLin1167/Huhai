@@ -4,34 +4,33 @@
 #include"../../ObjectManager/ObjManager.h"
 #include"../../../Scene/TitleScene/Title.h"
 
-/*Bedクラス*/
+        /*Bedクラス*/
 class Bed :public ObjectBase
 {
 public:
     /// <summary>
-    /// Bedコンストラクタ
+    /// コンストラクタ
     /// </summary>
     Bed();
 
     /// <summary>
-    /// Bedデストラクタ
+    /// デストラクタ
     /// </summary>
     ~Bed();
 
     /// <summary>
-    /// Bed読み込み処理
+    /// 読み込み処理
     /// </summary>
     void Load();
 
     /// <summary>
-    /// Bed更新処理
+    /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     void Update(float deltaTime)override;
 
     /// <summary>
-    /// Bed描画処理
+    /// 描画処理
     /// </summary>
     void Draw()override;
 };
-

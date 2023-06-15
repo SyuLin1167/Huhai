@@ -6,8 +6,8 @@ constexpr int TEXTSIZE = 24;
 constexpr int BUFWIDTH = 50;
 constexpr int BUFHEIGHT = 20;
 
-/*Remarksのクラス*/
-class Remarks:public ObjectBase
+        /*Remarksのクラス*/
+class Remarks :public ObjectBase
 {
 public:
     /// <summary>

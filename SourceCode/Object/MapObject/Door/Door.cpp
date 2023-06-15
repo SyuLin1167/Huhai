@@ -1,7 +1,7 @@
 #include "Door.h"
 #include"../../../Asset/Sound/Sound.h"
 
-// @brief Doorコンストラクター //
+        // コンストラクタ //
 
 Door::Door()
     :ObjectBase(ObjectTag::Furniture)
@@ -12,7 +12,7 @@ Door::Door()
     Load();
 }
 
-// @brief Doorコンストラクター //
+        // コンストラクタ //
 
 Door::Door(VECTOR doorPos, VECTOR doorAngle)
     :ObjectBase(ObjectTag::Furniture, doorPos, doorAngle)
@@ -23,19 +23,19 @@ Door::Door(VECTOR doorPos, VECTOR doorAngle)
     Load();
 }
 
-// @brief Doorデストラクター //
+        // デストラクタ //
 
 Door::~Door()
 {
     delete doorAnim;
 }
 
-// @brief Door読み込み処理 //
+        // 読み込み処理 //
 
 void Door::Load()
 {
     //---モデル読み込み---//
-    objHandle=AssetManager::GetMesh("../Assets/Map/Door/Door.mv1");            //モデル読み込み
+    objHandle = AssetManager::GetMesh("../Assets/Map/Door/Door.mv1");            //モデル読み込み
 
     MV1SetPosition(objHandle, objPos);                                                      //モデルの座標設定
     MV1SetScale(objHandle, VGet(0.11f, 0.12f, 0.11f));                                                       //モデルのサイズ設定
@@ -62,7 +62,7 @@ void Door::Load()
     doorSound->AddSound("../Assets/Sound/DoorCloseSE.wav", SoundTag::DoorClose, 150, true);
 }
 
-// @brief Door更新処理 //
+        // @brief Door更新処理 //
 
 void Door::Update(float deltaTime)
 {
@@ -100,7 +100,7 @@ void Door::Update(float deltaTime)
     doorSound->Update(objPos);
 }
 
-// @brief Doorアニメーション処理
+        // @brief Doorアニメーション処理
 
 void Door::MoveAnim(int animtype)
 {
@@ -119,9 +119,9 @@ void Door::MoveAnim(int animtype)
     }
 }
 
-// @brief Door描画処理 //
+        // @brief Door描画処理 //
 
 void Door::Draw()
 {
-	MV1DrawModel(objHandle);						//モデル描画
+    MV1DrawModel(objHandle);						//モデル描画
 }

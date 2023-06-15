@@ -4,45 +4,44 @@
 
 #include"../LightBase/LightBase.h"
 
-/*BlinkingLighitのクラス*/
+        /*BlinkingLighitクラス*/
 class BlinkingLight :public LightBase
 {
 public:
-	/// <summary>
-	/// BlinkingLightコンストラクタ
-	/// </summary>
-	BlinkingLight();
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    BlinkingLight();
 
-	/// <summary>
-	/// BlinkingLightコンストラクタ
-	/// </summary>
-	/// <param name="lightPos">:ライトのワールド座標</param>
-	BlinkingLight(VECTOR lightPos);
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="lightPos">:ライトのワールド座標</param>
+    BlinkingLight(VECTOR lightPos);
 
-	/// <summary>
-	/// BlinkingLightデストラクタ
-	/// </summary>
-	~BlinkingLight();
+    /// <summary>
+    /// デストラクタ
+    /// </summary>
+    ~BlinkingLight();
 
-	/// <summary>
-	/// BlinkingLight読み込み処理
-	/// </summary>
-	void Load();
+    /// <summary>
+    /// 読み込み処理
+    /// </summary>
+    void Load();
 
-	/// <summary>
-	/// BlinkingLight更新処理
-	/// </summary>
-	/// <param name="deltaTime">:フレームレート</param>
-	void Update(float deltaTime)override;
+    /// <summary>
+    /// 更新処理
+    /// </summary>
+    /// <param name="deltaTime">:フレームレート</param>
+    void Update(float deltaTime)override;
 
-	/// <summary>
-	/// BlinkingLight描画処理
-	/// </summary>
-	void Draw()override;
+    /// <summary>
+    /// 描画処理
+    /// </summary>
+    void Draw()override;
 
 private:
-	float intervalTime;
-	float countTimer;
-	bool lightBlinking;
+    float intervalTime;
+    float countTimer;
+    bool isBlinking;
 };
-

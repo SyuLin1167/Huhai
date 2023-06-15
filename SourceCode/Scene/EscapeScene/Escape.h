@@ -3,8 +3,8 @@
 #include"../../Object/ObjectManager/ObjManager.h"
 #include "../../Collision/Collision.h"
 
-/*脱出シーンクラス*/
-class EscapeScene:public SceneBase
+/*EscapeSceneクラス*/
+class EscapeScene :public SceneBase
 {
 public:
     /// <summary>

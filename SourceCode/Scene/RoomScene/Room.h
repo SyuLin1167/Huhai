@@ -3,8 +3,8 @@
 #include"../../Object/ObjectManager/ObjManager.h"
 #include"../../BlendMode/BlendMode.h"
 
-/*部屋シーンのクラス*/
-class Room:public SceneBase
+	/*部屋シーンのクラス*/
+class Room :public SceneBase
 {
 public:
 	/// <summary>
@@ -32,4 +32,3 @@ public:
 private:
 	class BlendMode* roomBlend;
 };
-

@@ -8,9 +8,8 @@
 
 constexpr auto SCREEN_WIDTH = 1920;       //スクリーン幅指定
 constexpr auto SCREEN_HEIGHT = 1080;      //スクリーン高さ指定
-//---スクリーンサイズの例: 640*480, 800*600, 1024*768, 1280*1024, 1280*720, 1920*1080---//
 
-/*親クラス*/
+    /*親クラス*/
 class ObjectBase
 {
 public:
@@ -27,7 +26,7 @@ public:
     /// <param name="pos">:座標</param>
     /// <param name="angle">:方向</param>
     ObjectBase(ObjectTag tag, VECTOR pos, VECTOR angle = { 0,0,0 });
-    
+
     /// <summary>
     /// デストラクター
     /// </summary>
@@ -105,7 +104,7 @@ public:
     /// 衝突時処理
     /// </summary>
     /// <param name="other">:オブジェクト</param>
-    virtual void OnCollisionEnter(const ObjectBase*other){}
+    virtual void OnCollisionEnter(const ObjectBase* other) {}
 
     /// <summary>
     /// オブジェクトとの当たり判定

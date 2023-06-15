@@ -1,7 +1,6 @@
 #include "Remarks.h"
 
-
-// @brief Remarksコンストラクタ //
+        // @brief Remarksコンストラクタ //
 
 Remarks::Remarks(TextType texttype)
     :ObjectBase(ObjectTag::Remarks)
@@ -21,14 +20,14 @@ Remarks::Remarks(TextType texttype)
     objPos = VGet(0.0f, 600.0f, 0.0f);
 }
 
-// @brief Remarksデストラクタ //
+        // @brief Remarksデストラクタ //
 
 Remarks::~Remarks()
 {
 
 }
 
-// @brief Remarks更新処理 //
+        // @brief Remarks更新処理 //
 
 void Remarks::Update(float deltaTime)
 {
@@ -104,9 +103,9 @@ void Remarks::Update(float deltaTime)
     }
 }
 
-// @brief 文字列取得処理 //
+        // @brief 文字列取得処理 //
 
-char Remarks::GetText(int sn,int sp)
+char Remarks::GetText(int sn, int sp)
 {
     char Opening[][256] =
     {
@@ -143,7 +142,7 @@ char Remarks::GetText(int sn,int sp)
         "/これを持って早くここから逃げるんだ!」  ",
         "/^ ",
     };
-    char GameClear[][256]=
+    char GameClear[][256] =
     {
         "現在プレイできるのはここまでになります。",
         "/|遊んでいただきありがとうございました!!!",
@@ -152,11 +151,11 @@ char Remarks::GetText(int sn,int sp)
     ;
     switch (textType)
     {
-    //～TextTypeがOpeningTextだったら～
+        //～TextTypeがOpeningTextだったら～
     case TextType::OpeningText:
         return Opening[sn][sp];                                                     //Openingの文字列を返す
         break;
-    //～TxtTypeがDay1Stageだったら～
+        //～TxtTypeがDay1Stageだったら～
     case TextType::Day1Stage:
         return Day1Stage[sn][sp];
         break;
@@ -173,7 +172,7 @@ char Remarks::GetText(int sn,int sp)
     return -1;
 }
 
-// @brief 改行処理 //
+        // @brief 改行処理 //
 
 void Remarks::NewLine()
 {
@@ -195,7 +194,7 @@ void Remarks::NewLine()
     }
 }
 
-// @brief Remarks描画処理 //
+        // @brief Remarks描画処理 //
 
 void Remarks::Draw()
 {

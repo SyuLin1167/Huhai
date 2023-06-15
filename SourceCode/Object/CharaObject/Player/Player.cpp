@@ -1,7 +1,6 @@
 #include "Player.h"
-#include"../../../Asset/Sound/Sound.h"
 
-// @brief Playerコンストラクター //
+        // @brief Playerコンストラクター //
 
 Player::Player()
     :ObjectBase(ObjectTag::Player)
@@ -36,14 +35,14 @@ Player::Player()
     plySound->AddSound("../Assets/Sound/PlayerWalkSE.mp3", SoundTag::PlayerWalk, 250);
 }
 
-// @brief Playerデストラクター //
+        // @brief Playerデストラクター //
 
 Player::~Player()
 {
 
 }
 
-//@brief Player更新処理//
+        //@brief Player更新処理//
 
 void Player::Update(float deltaTime)
 {
@@ -78,19 +77,19 @@ void Player::Update(float deltaTime)
 
 }
 
-// @brief Player描画処理 //
+        // @brief Player描画処理 //
 
 void Player::Draw()
 {
 }
 
-// @brief Player衝突時処理 //
+        // @brief Player衝突時処理 //
 
 void Player::OnCollisionEnter(const ObjectBase* other)
 {
     ObjectTag tag = other->GetTag();
 
-    if (tag == ObjectTag::Map||
+    if (tag == ObjectTag::Map ||
         tag == ObjectTag::Furniture)                                      //マップとぶつかったら
     {
         int mapColModel = other->GetColModel();                        //モデル当たり判定取得
@@ -104,7 +103,7 @@ void Player::OnCollisionEnter(const ObjectBase* other)
         {
             canMove = false;
             isVisible = false;
-            ObjectBase*camera= ObjManager::GetFirstObj(ObjectTag::Camera);
+            ObjectBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
             if (camera)
             {
                 camera->SetDir(other->GetPos() - camera->GetPos() + VGet(0, 18.0f, 0));
@@ -114,7 +113,7 @@ void Player::OnCollisionEnter(const ObjectBase* other)
     }
 }
 
-// @brief 球体の衝突時処理 //
+        // @brief 球体の衝突時処理 //
 
 void Player::CollHitSphere(int colmodel)
 {
@@ -130,7 +129,7 @@ void Player::CollHitSphere(int colmodel)
 
 }
 
-// @brief 線分の衝突時処理 //
+        // @brief 線分の衝突時処理 //
 
 void Player::ColHitLine(int colmodel)
 {
@@ -143,7 +142,7 @@ void Player::ColHitLine(int colmodel)
     }
 }
 
-// @brief Player移動処理 //
+        // @brief Player移動処理 //
 
 void Player::Move(float deltaTime)
 {
@@ -177,8 +176,8 @@ void Player::Move(float deltaTime)
     {
         plySound->StartSound(SoundTag::PlayerWalk, DX_PLAYTYPE_LOOP);
         inputVec = VNorm(inputVec);                                 //ベクトルの方向成分を取得
-        
-        if (VSquareSize(inputVec)==0)                               //左右・上下同時押しの際は無視
+
+        if (VSquareSize(inputVec) == 0)                               //左右・上下同時押しの際は無視
         {
             return;
         }

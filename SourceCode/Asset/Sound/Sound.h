@@ -4,9 +4,8 @@
 #include<string>
 
 #include"SoundTag.h"
-using namespace std;
 
-/*Soundクラス*/
+    /*Soundクラス*/
 class Sound
 {
 public:
@@ -24,7 +23,7 @@ public:
     /// 追加処理
     /// </summary>
     /// <param name="soundFileName">:サウンドファイル名</param>
-    void AddSound(string soundFileName, SoundTag tag, int volume,bool isDimension=false);
+    void AddSound(std::string soundFileName, SoundTag tag, int volume, bool isDimension = false);
 
     void Update(VECTOR targetPos);
 
@@ -63,7 +62,7 @@ public:
     };
 
 private:
-    unordered_map<SoundTag, SoundData> soundData;
+    std::unordered_map<SoundTag, SoundData> soundData;
     int soundType;              //サウンドID
     int attachedIndex;          //アタッチ後のインデックス
     float nowSoundTime;          //現在のサウンド時刻

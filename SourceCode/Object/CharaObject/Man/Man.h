@@ -3,55 +3,55 @@
 #include"../../ObjectBase/ObjectBase.h"
 #include"../../../Asset/Animation/Animation.h"
 #include"../../../Asset/AssetManager/AssetManager.h"
+#include"../../../Asset/Sound/Sound.h"
 
-/*Manのクラス*/
-class Man:public ObjectBase
+        /*Manクラス*/
+class Man :public ObjectBase
 {
 public:
-	/// <summary>
-	/// Manのコンストラクタ
-	/// </summary>
-	Man();
+    /// <summary>
+    /// Manのコンストラクタ
+    /// </summary>
+    Man();
 
-	/// <summary>
-	/// Manのデストラクタ
-	/// </summary>
-	~Man();
+    /// <summary>
+    /// Manのデストラクタ
+    /// </summary>
+    ~Man();
 
-	/// <summary>
-	/// Man読み込み処理
-	/// </summary>
-	void Load();
+    /// <summary>
+    /// Man読み込み処理
+    /// </summary>
+    void Load();
 
-	/// <summary>
-	/// Man更新処理
-	/// </summary>
-	/// <param name="deltaTime">:フレームレート</param>
-	void Update(float deltaTime)override;
+    /// <summary>
+    /// Man更新処理
+    /// </summary>
+    /// <param name="deltaTime">:フレームレート</param>
+    void Update(float deltaTime)override;
 
-	/// <summary>
-	/// Man描画処理
-	/// </summary>
-	void Draw()override;
+    /// <summary>
+    /// Man描画処理
+    /// </summary>
+    void Draw()override;
 
-	void Rotate();
+    void Rotate();
 
-	enum Anim
-	{
-		CRYING = 0,			//待機
-		DEAD,
-	};
+    enum Anim
+    {
+        CRYING = 0,			//待機
+        DEAD,
+    };
 
 private:
-	bool rotateNow;
-	VECTOR aimDir;
+    bool rotateNow;
+    VECTOR aimDir;
 
-	//---アニメーション関連---//
-	Animation* manAnim;
-	int animType;
+    //---アニメーション関連---//
+    Animation* manAnim;
+    int animType;
 
-	bool addRemarks;
+    bool addRemarks;
 
-	class Sound* manSound;
+    class Sound* manSound;
 };
-

@@ -1,6 +1,6 @@
 #include "SceneBase.h"
 
-// コンストラクタ //
+    // コンストラクタ //
 
 SceneBase::SceneBase()
     :BgHandle(-1)
@@ -9,7 +9,7 @@ SceneBase::SceneBase()
 {
 }
 
-// デストラクタ //
+    // デストラクタ //
 
 SceneBase::~SceneBase()
 {

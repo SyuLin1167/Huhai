@@ -3,10 +3,9 @@
 #include"../../Object/ObjectManager/ObjManager.h"
 #include "../../Collision/Collision.h"
 
-/* プレイシーンクラス */
+/* PlaySceneクラス */
 class Play :public SceneBase
 {
-    class Grid* grid = nullptr;
 
 public:
     /// <summary>

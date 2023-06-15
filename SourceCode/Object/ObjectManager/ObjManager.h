@@ -1,18 +1,15 @@
 #pragma once
 #include<vector>
 #include<unordered_map>
-
 #include"../ObjectBase/ObjectBase.h"
 #include"../ObjectBase/ObjectTag.h"
 
-using namespace std;
-
-/* オブジェクト管理クラス */
+    /* ObjManagerクラス */
 class ObjManager final
 {
 public:
     /// <summary>
-    /// ObjManager初期化処理
+    /// 初期化処理
     /// </summary>
     static void Init();
 
@@ -40,11 +37,6 @@ public:
     static void Update(float deltaTime);
 
     /// <summary>
-    /// オブジェクトの死亡処理
-    /// </summary>
-    static void Dead();
-
-    /// <summary>
     /// オブジェクトの描画処理
     /// </summary>
     static void Draw();
@@ -67,8 +59,8 @@ public:
     /// <param name="tag">:タグ</param>
     /// <param name="tagNum">:オブジェクト番号</param>
     /// <returns>:タグ種のtagNum番目のオブジェクト</returns>
-    static ObjectBase* GetObj(ObjectTag tag,int tagNum);
-    
+    static ObjectBase* GetObj(ObjectTag tag, int tagNum);
+
     /// <summary>
     /// ObjManagerの解放
     /// </summary>
@@ -85,8 +77,12 @@ private:
     /// </summary>
     ~ObjManager();
 
-    static ObjManager* objInstance;     //ObjManagerの実態
-    vector<ObjectBase*>holdObj;         //一時待機オブジェクト
-    unordered_map<ObjectTag, vector<ObjectBase*>>Object;          //Object[タグ種類][オブジェクト個数]
-};
+    /// <summary>
+    /// オブジェクトの死亡処理
+    /// </summary>
+    static void Dead();
 
+    static ObjManager* objInstance;     //ObjManagerの実態
+    std::vector<ObjectBase*>holdObj;         //一時待機オブジェクト
+    std::unordered_map<ObjectTag, std::vector<ObjectBase*>>Object;          //Object[タグ種類][オブジェクト個数]
+};

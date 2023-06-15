@@ -2,12 +2,12 @@
 #include"../../../MapObject/Light/NomalLight/NomalLight.h"
 #include"../../Man/Man.h"
 
-// @brief GhostWalkGimコンストラクタ //
+        // コンストラクタ //
 
 GhostWalkGim::GhostWalkGim()
     :GhostBase()
-    ,light(nullptr)
-    ,move(false)
+    , light(nullptr)
+    , move(false)
 {
     objPos = VGet(120.0f, 0.0f, 65.0f);
 
@@ -20,13 +20,13 @@ GhostWalkGim::GhostWalkGim()
     objSpeed = 17.0f;
 }
 
-// @brief GhostWalkGimデストラクタ //
+        // デストラクタ //
 
 GhostWalkGim::~GhostWalkGim()
 {
 }
 
-// @brief GhostWalkGim更新処理 //
+        // 更新処理 //
 
 void GhostWalkGim::Update(float deltaTime)
 {
@@ -35,7 +35,7 @@ void GhostWalkGim::Update(float deltaTime)
     {
         //---当たり判定線分設定---//
         ObjectBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
-        colLine = Line(VGet(7.0f, 5.0f, 0.0f), player->GetPos() - objPos+VGet(0,5,0));             //線分設定
+        colLine = Line(VGet(7.0f, 5.0f, 0.0f), player->GetPos() - objPos + VGet(0, 5, 0));             //線分設定
 
         objPos.x -= objSpeed * deltaTime;
     }
@@ -47,14 +47,14 @@ void GhostWalkGim::Update(float deltaTime)
     ColUpdate();
 }
 
-// @brief GhostWalkGim描画処理 //
+        // 描画処理 //
 
 void GhostWalkGim::Draw()
 {
     MV1DrawModel(objHandle);
 }
 
-// @brief GhostWalkGim衝突時処理 //
+        // 衝突時処理 //
 
 void GhostWalkGim::OnCollisionEnter(const ObjectBase* other)
 {

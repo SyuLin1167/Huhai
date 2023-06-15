@@ -14,11 +14,11 @@
 #include "../../Object/MapObject/Furniture/Furniture.h"
 #include "../../UI/Reamarks/Remarks.h"
 
-// @brief PlaySceneコンストラクタ //
+    // @brief PlaySceneコンストラクタ //
 
 Play::Play()
     :SceneBase()
-    ,sceneChange(false)
+    , sceneChange(false)
 {
     ////---カメラ生成---//
     ObjManager::Entry(new CameraFps);
@@ -39,8 +39,8 @@ Play::Play()
 
     ////---照明を生成---//
     ObjManager::Entry(new NomalLight(VGet(-10, 32, 0)));
-    ObjManager::Entry(new LitLight(VGet(65, 32, 0),50.0f));
-    ObjManager::Entry(new LitLight(VGet(121, 32, 25),40.0f));
+    ObjManager::Entry(new LitLight(VGet(65, 32, 0), 50.0f));
+    ObjManager::Entry(new LitLight(VGet(121, 32, 25), 40.0f));
 
     ////---プレイヤー生成---//
     ObjManager::Entry(new Player);
@@ -52,7 +52,7 @@ Play::Play()
     ObjManager::Entry(new Remarks(TextType::Day1Stage));
 }
 
-// @brief PlaySceneデストラクタ //
+    // @brief PlaySceneデストラクタ //
 
 Play::~Play()
 {
@@ -62,7 +62,7 @@ Play::~Play()
     }
 }
 
-// @biref PlayScene更新処理 //
+    // @biref PlayScene更新処理 //
 
 SceneBase* Play::Update(float deltaTime)
 {
@@ -82,7 +82,7 @@ SceneBase* Play::Update(float deltaTime)
     return this;                                    //常にプレイシーンを返す
 }
 
-// @brief PlayScene描画処理 //
+    // @brief PlayScene描画処理 //
 
 void Play::Draw()
 {

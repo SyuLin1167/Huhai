@@ -1,49 +1,48 @@
 #include "NomalLight.h"
 
-// @brief NomalLightコンストラクタ //
+        // コンストラクタ //
 
 NomalLight::NomalLight()
-	:LightBase()
+    :LightBase()
 {
-	Load();
+    Load();
 }
 
-// @brief NomalLightコンストラクタ //
+        // コンストラクタ //
 
 NomalLight::NomalLight(VECTOR lightPos)
-	:LightBase(lightPos)
+    :LightBase(lightPos)
 {
-	Load();
+    Load();
 }
 
-// @brief NomalLightデストラクタ //
+        // デストラクタ //
 
 NomalLight::~NomalLight()
 {
-	DeleteLightHandle(lightHandle);
-	AssetManager::ReleaseMesh(objHandle);
+    DeleteLightHandle(lightHandle);
+    AssetManager::ReleaseMesh(objHandle);
 }
 
-// @brief NomalLight読み込み処理 //
+        // @brief NomalLight読み込み処理 //
 
 void NomalLight::Load()
 {
-	lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2);
-	MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
+    lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2);
+    MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
 }
 
-// @brief NomalLight更新処理 //
+        // @brief NomalLight更新処理 //
 
 void NomalLight::Update(float deltaTime)
 {
-	SetLightPositionHandle(lightHandle, objPos);
-	MV1SetPosition(objHandle, objPos);
+    SetLightPositionHandle(lightHandle, objPos);
+    MV1SetPosition(objHandle, objPos);
 }
 
-
-// @brief NomalLight描画処理 //
+        // @brief NomalLight描画処理 //
 
 void NomalLight::Draw()
 {
-	MV1DrawModel(objHandle);						//モデル描画
+    MV1DrawModel(objHandle);						//モデル描画
 }

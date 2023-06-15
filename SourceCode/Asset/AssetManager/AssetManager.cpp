@@ -1,8 +1,9 @@
 #include "AssetManager.h"
 
+
 AssetManager* AssetManager::assetInstance = nullptr;    //AssetManager実態へのポインタ定義
 
-// @brief AssetManagerコンストラクター //
+    // @brief AssetManagerコンストラクター //
 
 AssetManager::AssetManager()
 {
@@ -11,7 +12,7 @@ AssetManager::AssetManager()
 
 }
 
-// @brief AssetManagerデストラクター //
+    // @brief AssetManagerデストラクター //
 
 AssetManager::~AssetManager()
 {
@@ -19,7 +20,7 @@ AssetManager::~AssetManager()
     assetInstance = nullptr;                //ポインタを削除
 }
 
-// @brief AssetManager初期化 //
+    // @brief AssetManager初期化 //
 
 void AssetManager::Init()
 {
@@ -29,9 +30,9 @@ void AssetManager::Init()
     }
 }
 
-// @brief メッシュの取得 //
+    // @brief メッシュの取得 //
 
-int AssetManager::GetMesh(string meshFileName)
+int AssetManager::GetMesh(std::string meshFileName)
 {
     int meshID = 0;
     //---メッシュ登録---//
@@ -53,9 +54,9 @@ int AssetManager::GetMesh(string meshFileName)
     return meshID;                                                                         //複製したIDを返す
 }
 
-// @brief アニメーションの取得 //
+    // @brief アニメーションの取得 //
 
-int AssetManager::GetAnim(string animFileName)
+int AssetManager::GetAnim(std::string animFileName)
 {
     int animID = 0;
     //---アニメーション登録---//
@@ -74,7 +75,7 @@ int AssetManager::GetAnim(string animFileName)
     return assetInstance->animMap[animFileName];                                         //アニメーションIDを返す
 }
 
-int AssetManager::GetSound(string soundFileName)
+int AssetManager::GetSound(std::string soundFileName)
 {
     int meshID = 0;
     //---メッシュ登録---//
@@ -96,7 +97,7 @@ int AssetManager::GetSound(string soundFileName)
     return meshID;                                                                         //複製したIDを返す
 }
 
-// @brief メッシュの削除 //
+    // @brief メッシュの削除 //
 
 void AssetManager::ReleaseMesh(int meshID)
 {
@@ -112,7 +113,7 @@ void AssetManager::ReleaseMesh(int meshID)
     assetInstance->duplicateMesh.pop_back();                                                //末尾のデータを削除
 }
 
-// @brief 全アセットの削除 //
+    // @brief 全アセットの削除 //
 
 void AssetManager::ReleaseAllAsset()
 {
@@ -152,7 +153,7 @@ void AssetManager::ReleaseAllAsset()
     assetInstance->duplicateSound.clear();
 }
 
-// @brief AssetManagerの解放 //
+    // @brief AssetManagerの解放 //
 
 void AssetManager::Finalize()
 {

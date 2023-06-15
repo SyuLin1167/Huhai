@@ -1,23 +1,24 @@
 #include "ObjManager.h"
 
 
-ObjManager* ObjManager::objInstance = nullptr;				//ObjManager実体へのポインタ定義
+    //実体へのポインタ定義
+ObjManager* ObjManager::objInstance = nullptr;
 
-// @brief ObjManagerコンストラクター //
+    // コンストラクター //
 
 ObjManager::ObjManager()
 	:Object()
-	,holdObj()
+	, holdObj()
 {
 }
 
-// @brief ObjManagerデストラクター //
+    // デストラクタ //
 
 ObjManager::~ObjManager()
 {
 }
 
-// @brief ObjManager初期化処理 //
+    // 初期化処理 //
 
 void ObjManager::Init()
 {
@@ -27,14 +28,14 @@ void ObjManager::Init()
 	}
 }
 
-// @brief オブジェクト登録 //
+    // オブジェクト登録 //
 
 void ObjManager::Entry(ObjectBase* newObj)
 {
 	objInstance->holdObj.emplace_back(newObj);				//オブジェクト一時保存
 }
 
-//@brief オブジェクト削除 //
+    // オブジェクト削除 //
 
 void ObjManager::Release(ObjectBase* releaseObj)
 {
@@ -60,7 +61,7 @@ void ObjManager::Release(ObjectBase* releaseObj)
 	}
 }
 
-// @brief 全オブジェクト削除 //
+    // 全オブジェクト削除 //
 
 void ObjManager::ReleaseAllObj()
 {
@@ -80,7 +81,7 @@ void ObjManager::ReleaseAllObj()
 	}
 }
 
-// @brief 全オブジェクトの更新処理 //
+	// 全オブジェクトの更新処理 //
 
 void ObjManager::Update(float deltaTime)
 {
@@ -103,15 +104,15 @@ void ObjManager::Update(float deltaTime)
 	Dead();
 }
 
-// @brief オブジェクトの生死状況 //
+	// オブジェクトの生死状況 //
 
 void ObjManager::Dead()
 {
-	vector<ObjectBase*>deadObj;										//死亡オブジェクト
+	std::vector<ObjectBase*>deadObj;										//死亡オブジェクト
 	for (auto& tag : ObjTagAll)
 	{
-			// タグ内をすべて回り、死亡Objectを検索し、deadObjectsへ
-		for (auto obj:objInstance->Object[tag])
+		// タグ内をすべて回り、死亡Objectを検索し、deadObjectsへ
+		for (auto obj : objInstance->Object[tag])
 		{
 			if (!obj->IsAlive())
 			{
@@ -130,7 +131,7 @@ void ObjManager::Dead()
 }
 
 
-// @brief オブジェクトの描画処理 //
+	// オブジェクトの描画処理 //
 
 void ObjManager::Draw()
 {
@@ -147,7 +148,7 @@ void ObjManager::Draw()
 	}
 }
 
-// @brief　当たり判定処理 //
+	// 当たり判定処理 //
 
 void ObjManager::Collision()
 {
@@ -190,7 +191,7 @@ void ObjManager::Collision()
 	}
 }
 
-// @brief タグ種の最初のオブジェクト取得 //
+	// @brief タグ種の最初のオブジェクト取得 //
 
 ObjectBase* ObjManager::GetFirstObj(ObjectTag tag)
 {
@@ -201,7 +202,7 @@ ObjectBase* ObjManager::GetFirstObj(ObjectTag tag)
 	return objInstance->Object[tag][0];				//タグ種の最初のオブジェクトを返す
 }
 
-// @brief タグ種のtagNum番目のオブジェクト取得 //
+	// @brief タグ種のtagNum番目のオブジェクト取得 //
 
 ObjectBase* ObjManager::GetObj(ObjectTag tag, int tagNum)
 {
@@ -212,7 +213,7 @@ ObjectBase* ObjManager::GetObj(ObjectTag tag, int tagNum)
 	return objInstance->Object[tag][tagNum];		//タグ種のtagNum番目のオブジェクトを返す
 }
 
-// @birief ObjManagerの開放 //
+	// @birief ObjManagerの開放 //
 
 void ObjManager::Finalize()
 {

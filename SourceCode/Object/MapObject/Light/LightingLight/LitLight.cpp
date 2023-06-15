@@ -1,15 +1,15 @@
 #include "LitLight.h"
 
-// @brief LitLightコンストラクタ //
+        // コンストラクタ //
 
 LitLight::LitLight()
     :LightBase()
-    ,lightDistance(0.0f)
+    , lightDistance(0.0f)
 {
     Load();
 }
 
-// @brief LitLightコンストラクタ //
+        // コンストラクタ //
 
 LitLight::LitLight(VECTOR lightPos, float range)
     :LightBase(lightPos)
@@ -19,7 +19,7 @@ LitLight::LitLight(VECTOR lightPos, float range)
     Load();
 }
 
-// @brief LitLightデストラクタ //
+        // デストラクタ //
 
 LitLight::~LitLight()
 {
@@ -27,15 +27,15 @@ LitLight::~LitLight()
     AssetManager::ReleaseMesh(objHandle);
 }
 
-// @brief LitLight読み込み処理 //
+        // 読み込み処理 //
 
 void LitLight::Load()
-{    
+{
     lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2);
     SetLightEnableHandle(lightHandle, FALSE);
 }
 
-// @brief LitLight更新処理 //
+        // 更新処理 //
 
 void LitLight::Update(float deltaTime)
 {
@@ -55,7 +55,7 @@ void LitLight::Update(float deltaTime)
     }
 }
 
-// @brief LitLight描画処理 //
+        // 描画処理 //
 
 void LitLight::Draw()
 {

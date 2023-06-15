@@ -2,7 +2,7 @@
 #include"../Player/Player.h"
 #include"../../MapObject/Light/FlashLight/FlashLight.h"
 
-/* @brief Ghostコンストラクタ */
+        /* @brief Ghostコンストラクタ */
 
 Ghost::Ghost()
     :GhostBase()
@@ -34,7 +34,7 @@ Ghost::Ghost()
 
 }
 
-// @brief Ghostデストラクタ //
+        // @brief Ghostデストラクタ //
 
 Ghost::~Ghost()
 {
@@ -44,7 +44,7 @@ Ghost::~Ghost()
     }
 }
 
-// @brief Ghost更新処理 //
+        // @brief Ghost更新処理 //
 
 void Ghost::Update(float deltaTime)
 {
@@ -75,7 +75,7 @@ void Ghost::Update(float deltaTime)
                 SetLightDifColorHandle(lightHandle, GetColorF(1.0f, 0.0f, 0.0f, 1.0f));
                 aimPos = VGet(0.0f, 0.0f, 0.0f);
             }
-            if (abs(VSize(aimPos - objPos) )< 2.0f)
+            if (abs(VSize(aimPos - objPos)) < 2.0f)
             {
                 firstMove = false;
             }
@@ -96,7 +96,7 @@ void Ghost::Update(float deltaTime)
 
     if (lightHandle)
     {
-        SetLightPositionHandle(lightHandle, objPos+VGet(0.0f,10.0f,0.0f));
+        SetLightPositionHandle(lightHandle, objPos + VGet(0.0f, 10.0f, 0.0f));
     }
 
     MV1SetPosition(objHandle, objPos);                        //ポジション設定
@@ -104,14 +104,14 @@ void Ghost::Update(float deltaTime)
     ColUpdate();            //当たり判定の移動
 }
 
-// @brief Ghost描画処理 //
+        // @brief Ghost描画処理 //
 
 void Ghost::Draw()
 {
     MV1DrawModel(objHandle);
 }
 
-// @brief Ghost衝突時処理 //
+        // @brief Ghost衝突時処理 //
 
 void Ghost::OnCollisionEnter(const ObjectBase* other)
 {
@@ -149,15 +149,15 @@ void Ghost::OnCollisionEnter(const ObjectBase* other)
                 animType = SAD;
                 gstAnim->StartAnim(animType);
             }
-            nowMove=false;
-            aimDir= VScale(VNorm(aimPos - objPos), 0.1f);
+            nowMove = false;
+            aimDir = VScale(VNorm(aimPos - objPos), 0.1f);
             ColUpdate();
         }
     }
 
 }
 
-// @brief Ghost回転処理 //
+        // @brief Ghost回転処理 //
 
 void Ghost::Rotate()
 {

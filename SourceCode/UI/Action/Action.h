@@ -5,8 +5,8 @@
 
 constexpr float actionRange = 30.0f;
 
-/*アクションボタンクラス*/
-class Action:public ObjectBase
+        /*アクションボタンクラス*/
+class Action :public ObjectBase
 {
     class BlendMode* actionBlend;
 public:
@@ -43,4 +43,3 @@ private:
     bool canAction;         //アクション可能かどうか
     bool isAction;          //アクション中かどうか
 };
-

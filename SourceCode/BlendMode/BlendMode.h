@@ -1,17 +1,18 @@
 #pragma once
 #include<DxLib.h>
 
-/*BlendModeのクラス*/
+    /*BlendModeのクラス*/
 class BlendMode
 {
 public:
     /// <summary>
-    /// BlendModeコンストラクタ
+    /// コンストラクタ
     /// </summary>
-    BlendMode(int fadespeed = 4);
+    /// <param name="FadeSpeed">:フェード速度</param>
+    BlendMode(int FadeSpeed = 4);
 
     /// <summary>
-    /// BlendModeデストラクタ
+    /// デストラクタ
     /// </summary>
     ~BlendMode();
 
@@ -31,31 +32,27 @@ public:
     void NoBlend();
 
     /// <summary>
-    /// フェード加算
+    /// フェードアウト
     /// </summary>
     void AddFade();
 
     /// <summary>
-    /// フェード減算
+    /// フェードイン
     /// </summary>
     void SubFade();
 
     /// <summary>
     /// フェードフラグ
     /// </summary>
-    /// <returns>:フェード中かどうか</returns>
+    /// <returns>フェード中:true|でない:false</returns>
     bool NowFade() { return nowFade; }
 
 private:
+    bool nowFade;                   //フェードフラグ
+    int fadeValue;                  //フェード値
+    int fadeSpeed;                  //フェード速度
 
-
-    bool nowFade;                           //fadeフラグ
-    int fadeValue;                          //fade値
-    int fadeSpeed;                //fade速度
-
-    bool nowDark;                           //darkフラグ
-    const int darkValue = 150;              //dark値
-
-    static BlendMode* blend;                //BlendModeの実体
+    bool nowDark;                   //暗転フラグ
+    const int darkValue = 150;      //暗転値
 };
 

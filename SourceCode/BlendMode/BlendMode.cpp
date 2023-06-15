@@ -1,76 +1,80 @@
 #include "BlendMode.h"
 
-// @brief BlendModeコンストラクタ //
+    // コンストラクタ //
 
-BlendMode::BlendMode(int fadespeed)
+BlendMode::BlendMode(int FadeSpeed)
     :fadeValue(0)
-    , fadeSpeed(fadespeed)
+    , fadeSpeed(FadeSpeed)
     , nowFade(false)
     , nowDark(false)
 {
 }
 
-// @brief BlendModeデストラクタ //
+    // デストラクタ //
 
 BlendMode::~BlendMode()
 {
 }
 
-// @brief フェード加算 //
+    // フェードアウト //
 
 void BlendMode::AddFade()
 {
-    if (fadeValue <= 255)                                    //((値が255以下だったら))
+    if (fadeValue <= 255)
     {
-        nowFade = true;                                      //フェード中
-        fadeValue += fadeSpeed;                       //値に速度を加算
+        //値が255以下だったらフェードアウトする
+        nowFade = true;
+        fadeValue += fadeSpeed;
     }
-    else                                                            //((上の条件が当てはまらないなら))
+    else
     {
-        nowFade = false;                                     //フェード中でない
+        //上の条件に当てはまらないならフェードしない
+        nowFade = false;
     }
-
 }
 
-// @brief フェード減算 //
+    // フェードイン //
 
 void BlendMode::SubFade()
 {
-    if (fadeValue >= 0)                                      //((値が0以上だったら))
+    if (fadeValue >= 0)
     {
-        nowFade = true;                                      //フェード中
-        fadeValue -= fadeSpeed;                       //値に速度を減算
+        //値が0以上だったらフェードインする
+        nowFade = true;
+        fadeValue -= fadeSpeed;
     }
-    else                                                            //((上の条件が当てはまらないなら))
+    else
     {
-        nowFade = false;                                     //フェード中でない
+        //上の条件に当てはまらないならフェードしない
+        nowFade = false;
     }
 }
 
-// @brief フェード //
+    // フェード //
 
 void BlendMode::Fade()
 {
-        //～フェード処理～//
-        SetDrawBlendMode(DX_BLENDMODE_ALPHA, fadeValue);         //アルファブレンドモード設定
+    SetDrawBlendMode(DX_BLENDMODE_ALPHA, fadeValue);
 }
 
-// @brief 暗転処理 //
+    // 暗転処理 //
 
 void BlendMode::Darken()
 {
     if (nowFade)
     {
+        //フェード中だったら暗転しない
         nowDark = false;
     }
     else
     {
-        SetDrawBlendMode(DX_BLENDMODE_ADD, darkValue);           //サブブレンドモード
+        //フェード中でないなら暗転する
+        SetDrawBlendMode(DX_BLENDMODE_ADD, darkValue);
         nowDark = true;
     }
 }
 
-// @brief デフォルト //
+    // デフォルト //
 
 void BlendMode::NoBlend()
 {

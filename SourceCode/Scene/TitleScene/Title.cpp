@@ -2,7 +2,7 @@
 
 #include "../RoomScene/Room.h"
 #include"../../Object/CharaObject/Camera/CameraFps.h"
-#include"../../Object/MapObject/Door/Door.h"
+#include "../../Object/MapObject/Door/Door.h"
 #include"../../Object/MapObject/Light/BlinkingLight/BlinkingLight.h"
 #include"../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../Object/MapObject/Map/Map.h"
@@ -10,12 +10,11 @@
 #include"../../UI/Select/Select.h"
 #include"../ResultScene/Result.h"
 
-// @brief TitleSceneコンストラクター //
+    // @brief TitleSceneコンストラクター //
 
 Title::Title()
     :SceneBase()
-    ,fadeLock(true)
-    ,titleBlend(nullptr)
+    , fadeLock(true)
 {
     BgX = 180;
     BgY = 150;
@@ -36,7 +35,6 @@ Title::Title()
     {
         select[type] = new Select(type);
     }
-
     titleBlend = new BlendMode;
     SetCameraNearFar(CameraNear, CameraFar);                                    //カメラの描画範囲設定
 
@@ -49,7 +47,7 @@ Title::Title()
     sound->StartSound(SoundTag::Title, DX_PLAYTYPE_LOOP);
 }
 
-// @brief TitleSceneデストラクター //
+    // @brief TitleSceneデストラクター //
 
 Title::~Title()
 {
@@ -59,7 +57,7 @@ Title::~Title()
     }
 }
 
-// @brief TitleScene更新処理 //
+    // @brief TitleScene更新処理 //
 
 SceneBase* Title::Update(float deltaTime)
 {
@@ -78,7 +76,7 @@ SceneBase* Title::Update(float deltaTime)
             SetMouseDispFlag(FALSE);                                                    //マウスは非表示
             titleBlend->AddFade();
 
-            if (!titleBlend->NowFade()&&!sound->IsPlaying(SoundTag::Start))
+            if (!titleBlend->NowFade() && !sound->IsPlaying(SoundTag::Start))
             {
                 sound->StopAllSound();
                 AssetManager::ReleaseAllAsset();            //全てのアセットの開放
@@ -98,13 +96,13 @@ SceneBase* Title::Update(float deltaTime)
             }
         }
     }
-    
+
 
     ObjectBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
     if (camera)
-    { 
+    {
         camera->SetPos(VGet(70, 6, 75));
-        camera->SetDir(VGet(-1.0f,0.1f,-0.7f));
+        camera->SetDir(VGet(-1.0f, 0.1f, -0.7f));
     }
 
 
@@ -113,13 +111,13 @@ SceneBase* Title::Update(float deltaTime)
     return this;
 }
 
-// @brief TitleScene描画処理 //
+    // @brief TitleScene描画処理 //
 
 void Title::Draw()
 {
     ObjManager::Draw();
     GetDrawScreenGraph(0, 0, 1920, 1080, graph);
-    DrawExtendGraph(BgX, BgY, BgX + 450, BgY+200, BgHandle, TRUE);
+    DrawExtendGraph(BgX, BgY, BgX + 450, BgY + 200, BgHandle, TRUE);
     for (auto type : selectTypeAll)
     {
         select[type]->Draw();

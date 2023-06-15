@@ -6,7 +6,7 @@
 #include "../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../Object/MapObject/Furniture/Furniture.h"
 
-// @brief ResultSceneコンストラクター //
+    // @brief ResultSceneコンストラクター //
 
 Result::Result()
     :SceneBase()
@@ -16,7 +16,7 @@ Result::Result()
     SetCameraPositionAndTarget_UpVecY(VGet(0.0f, 20.0f, 0.0f), VGet(30.0f, 10.0f, 0.0f));
 }
 
-// @brief ResultSceneデストラクター //
+    // @brief ResultSceneデストラクター //
 
 Result::~Result()
 {
@@ -26,7 +26,7 @@ Result::~Result()
     }
 }
 
-// @brief ResultScene更新処理 //
+    // @brief ResultScene更新処理 //
 
 SceneBase* Result::Update(float deltaTime)
 {
@@ -35,12 +35,12 @@ SceneBase* Result::Update(float deltaTime)
     {
         AssetManager::ReleaseAllAsset();
         ObjManager::ReleaseAllObj();
-        return new Title();
+        return new Title;
     }
     return this;
 }
 
-// @brief ResultScene描画処理 //
+    // @brief ResultScene描画処理 //
 
 void Result::Draw()
 {

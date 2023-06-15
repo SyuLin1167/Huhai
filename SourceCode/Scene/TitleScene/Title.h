@@ -6,39 +6,38 @@
 #include"../../UI/Select/SelectType.h"
 
 
-/* タイトルシーンのクラス */
+    /* TitleSceneクラス */
 class Title :public SceneBase
 {
     class Door* door = nullptr;
-    class Select* select[TypeSize];
     class BlendMode* titleBlend;
+    class Select* select[TypeSize];
     class Sound* sound = nullptr;
 
 public:
     /// <summary>
-    /// TitleSceneコンストラクタ
+    /// コンストラクタ
     /// </summary>
     Title();
 
     /// <summary>
-    /// TitleSceneデストラクタ
+    /// デストラクタ
     /// </summary>
     ~Title();
 
     /// <summary>
-    /// TitleScene更新処理
+    /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     /// <returns>現在のシーンのポインタ</returns>
     SceneBase* Update(float deltaTime)override;
 
     /// <summary>
-    /// TitleSceneシーンの描画
+    /// シーンの描画
     /// </summary>
     void Draw()override;
 
-private: 
+private:
     int graph;
     bool fadeLock;
-    int a = 70;
 };

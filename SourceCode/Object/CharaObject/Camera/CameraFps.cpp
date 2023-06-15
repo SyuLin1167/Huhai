@@ -1,7 +1,7 @@
 #include "CameraFps.h"
 #include"../Player/Player.h"
 
-// @brief CameraFpsコンストラクター //
+        // コンストラクター //
 
 CameraFps::CameraFps()
     :ObjectBase(ObjectTag::Camera)
@@ -17,7 +17,7 @@ CameraFps::CameraFps()
 
 }
 
-// @brief CameraFps更新処理 //
+        // 更新処理 //
 
 void CameraFps::Update(float deltaTime)
 {
@@ -32,29 +32,29 @@ void CameraFps::Update(float deltaTime)
     }
 }
 
-// @brief CameraFps移動処理 //
+        // 移動処理 //
 
 void CameraFps::Move(float deltaTime)
 {
-        //---マウス座標からスクリーン座標の中心を引く---//
-        GetMousePoint(&mouseX, &mouseY);                                         //マウス座標取得
-        movePos.x = (float)mouseX - static_cast<float>(SCREEN_WIDTH) / 2;
-        movePos.y = (float)mouseY - static_cast<float>(SCREEN_HEIGHT) / 2;
+    //---マウス座標からスクリーン座標の中心を引く---//
+    GetMousePoint(&mouseX, &mouseY);                                         //マウス座標取得
+    movePos.x = (float)mouseX - static_cast<float>(SCREEN_WIDTH) / 2;
+    movePos.y = (float)mouseY - static_cast<float>(SCREEN_HEIGHT) / 2;
 
-        //---視点移動--//
-        if (abs(movePos.x) > 0)                                                 //マウスカーソルX方向スライド時
-        {
-            cameraYaw -= movePos.x * deltaTime * DX_PI_F / 30;                      //カーソルの移動量分水平方向に回転
-        }
-        if (abs(movePos.y) > 0)                                                 //マウスカーソルY方向スライド時
-        {
-            cameraPitch -= movePos.y * deltaTime * DX_PI_F / 30;                  //カーソルの移動量分垂直方向に回転
-        }
+    //---視点移動--//
+    if (abs(movePos.x) > 0)                                                 //マウスカーソルX方向スライド時
+    {
+        cameraYaw -= movePos.x * deltaTime * DX_PI_F / 30;                      //カーソルの移動量分水平方向に回転
+    }
+    if (abs(movePos.y) > 0)                                                 //マウスカーソルY方向スライド時
+    {
+        cameraPitch -= movePos.y * deltaTime * DX_PI_F / 30;                  //カーソルの移動量分垂直方向に回転
+    }
 
-        //---注視点処理---//
-        objDir.x = cosf(cameraYaw);
-        objDir.y = cameraPitch;
-        objDir.z = sinf(cameraYaw);
+    //---注視点処理---//
+    objDir.x = cosf(cameraYaw);
+    objDir.y = cameraPitch;
+    objDir.z = sinf(cameraYaw);
 }
 
 void CameraFps::Draw()

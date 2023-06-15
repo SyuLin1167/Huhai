@@ -1,6 +1,6 @@
 #include "ObjectBase.h"
 
-// @brief コンストラクター //
+    // @brief コンストラクター //
 
 ObjectBase::ObjectBase(ObjectTag tag)
     :objTag(tag)
@@ -19,7 +19,7 @@ ObjectBase::ObjectBase(ObjectTag tag)
 {
 }
 
-// @brief コンストラクター(位置・方向セット) //
+    // @brief コンストラクター(位置・方向セット) //
 
 ObjectBase::ObjectBase(ObjectTag tag, VECTOR pos, VECTOR angle)
     :objTag(tag)
@@ -38,7 +38,7 @@ ObjectBase::ObjectBase(ObjectTag tag, VECTOR pos, VECTOR angle)
 {
 }
 
-// @brief デストラクター //
+    // @brief デストラクター //
 
 ObjectBase::~ObjectBase()
 {
@@ -48,13 +48,13 @@ ObjectBase::~ObjectBase()
     }
 }
 
-// @brief 描画処理 //
+    // @brief 描画処理 //
 
 void ObjectBase::Draw()
 {
 }
 
-// @brief Collision更新処理 //
+    // @brief Collision更新処理 //
 
 void ObjectBase::ColUpdate()
 {
@@ -71,12 +71,12 @@ void ObjectBase::ColUpdate()
 
 }
 
-// @brief Collision描画処理 //
+    // @brief Collision描画処理 //
 
 void ObjectBase::ColDraw()
 {
     //---全当たり判定種の描画処理---//
-    DrawLine3D(colLine.worldStart, colLine.worldEnd, 
+    DrawLine3D(colLine.worldStart, colLine.worldEnd,
         GetColor(255, 255, 0));
     DrawSphere3D(colSphere.worldCenter, colSphere.Radius, 10,
         GetColor(0, 255, 255),

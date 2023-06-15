@@ -4,9 +4,7 @@
 #include<string>
 #include<vector>
 
-using namespace std;
-
-/* Animationのクラス */
+	/* Animationのクラス */
 class Animation
 {
 public:
@@ -28,7 +26,7 @@ public:
 	/// <param name="animFps">:再生フレームレート(デフォルト・30fps)</param>
 	/// <param name="animLoop">:ループ再生(デフォルト・ループさせる)</param>
 	/// <returns>animData配列の添え字番号</returns>
-	int AddAnimation(string animFileName, float animFps = 30.0f, bool animLoop = true);
+	int AddAnimation(std::string animFileName, float animFps = 30.0f, bool animLoop = true);
 
 	/// <summary>
 	/// アニメーション時間セット
@@ -70,9 +68,8 @@ public:
 	};
 private:
 	int modelHandle;			//モデルハンドル
-	vector<AnimData> animData;	//アニメーション複数登録用
+	std::vector<AnimData> animData;	//アニメーション複数登録用
 	int nowAnimType;			//現在のアニメーションID
 	int attachedIndex;			//アタッチ後のインデックス
 	float nowAnimTime;			//現在のアニメーション時刻
 };
-

@@ -6,8 +6,8 @@
 constexpr float CameraNear = 0.1f;       //カメラの描画範囲(近)
 constexpr float CameraFar = 400.0f;     //カメラの描画範囲(遠)
 
-/*一人称視点のクラス*/
-class CameraFps:public ObjectBase
+        /*一人称視点のクラス*/
+class CameraFps :public ObjectBase
 {
 public:
     /// <summary>
@@ -43,4 +43,3 @@ private:
     float cameraYaw;        //水平方向回転角
     float cameraPitch;      //垂直方向回転角
 };
-

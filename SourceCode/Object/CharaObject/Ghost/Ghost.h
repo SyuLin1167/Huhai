@@ -3,7 +3,8 @@
 #include"Base/GhostBase.h"
 #include"../../../Collision/Collision.h"
 
-/* Ghostのクラス */
+
+        /* Ghostのクラス */
 class Ghost :public GhostBase
 {
 public:

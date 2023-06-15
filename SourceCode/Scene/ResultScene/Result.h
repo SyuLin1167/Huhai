@@ -2,29 +2,29 @@
 #include<DxLib.h>
 #include"../SceneBase/SceneBase.h"
 
-/*リザルトシーンのクラス*/
+	/*ResultSceneクラス*/
 class Result :public SceneBase
 {
 public:
 	/// <summary>
-	/// コンストラクター
+	/// コンストラクタ
 	/// </summary>
 	Result();
 
 	/// <summary>
-	/// デストラクター
+	/// デストラクタ
 	/// </summary>
 	~Result();
 
 	/// <summary>
-	/// ResultScene更新処理
+	/// 更新処理
 	/// </summary>
 	/// <param name="deltaTime"></param>
 	/// <returns>現在のシーンのポインタ</returns>
 	SceneBase* Update(float deltaTime)override;
 
 	/// <summary>
-	/// リザルトシーンの描画
+	/// 描画処理
 	/// </summary>
 	void Draw()override;
 

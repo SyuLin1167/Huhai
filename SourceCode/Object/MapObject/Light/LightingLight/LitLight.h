@@ -2,8 +2,8 @@
 
 #include"../LightBase/LightBase.h"
 
-/*LitLightのクラス*/
-class LitLight:public LightBase
+        /*LitLightクラス*/
+class LitLight :public LightBase
 {
 public:
     /// <summary>
@@ -22,18 +22,18 @@ public:
     /// LitLightデストラクタ
     /// </summary>
     ~LitLight();
-    
+
     /// <summary>
     /// LitLight読み込み処理
     /// </summary>
     void Load();
-    
+
     /// <summary>
     /// LitLight更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     void Update(float deltaTime)override;
-    
+
     /// <summary>
     /// LitLight描画処理
     /// </summary>
@@ -43,4 +43,3 @@ private:
     float lightDistance;        //ライトからの距離
     float actionRange;        //反応範囲
 };
-

@@ -4,9 +4,7 @@
 #include<vector>
 #include<string>
 
-using namespace std;
-
-/*Modelのクラス*/
+    /*Modelのクラス*/
 class Model
 {
 public:
@@ -25,7 +23,7 @@ public:
     /// </summary>
     /// <param name="modelFileName">:モデルファイル名</param>
     /// <returns>複製したモデルID</returns>
-    int AddModel(string modelFileName);
+    int AddModel(std::string modelFileName);
 
     /// <summary>
     /// Model設定処理
@@ -48,6 +46,6 @@ public:
 
 private:
     //モデルのデータ配列
-    vector<ModelData> modelData;
+    std::vector<ModelData> modelData;
 };
 

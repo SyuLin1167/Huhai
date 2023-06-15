@@ -2,9 +2,9 @@
 #include <Dxlib.h>
 
 //カラービット数
-const int ColorBit = 16;
+constexpr int ColorBit = 16;
 
-/*SceneBaseクラス*/
+    /*SceneBaseクラス*/
 class SceneBase
 {
 public:
@@ -22,8 +22,8 @@ public:
     /// Scene更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
-    /// <returns>現在のシーンのポインタ</returns>
-    virtual SceneBase* Update(float deltaTime) = 0;
+    /// <returns>現在のシーン</retdeltaTimeurns>
+    virtual SceneBase* Update(float) = 0;
 
     /// <summary>
     /// シーンの描画

@@ -17,8 +17,8 @@
 // @brief EscapeSceneコンストラクタ //
 
 EscapeScene::EscapeScene()
-	:SceneBase()
-    ,escSound(nullptr)
+    :SceneBase()
+    , escSound(nullptr)
 {
     //---カメラ生成---//
     ObjManager::Entry(new CameraFps);
@@ -49,7 +49,7 @@ EscapeScene::EscapeScene()
 
     ObjManager::Entry(new Ghost);
 
-    escBlend = new BlendMode(2);
+    BlendMode* escBlend = new BlendMode(2);
 
     escSound = new Sound;
     escSound->AddSound("../Assets/Sound/EscapeBgm.mp3", SoundTag::Escape, 150);
@@ -57,14 +57,14 @@ EscapeScene::EscapeScene()
     escSound->StartSound(SoundTag::Escape, DX_PLAYTYPE_LOOP);
 }
 
-// @brief EscapeSceneデストラクタ //
+    // @brief EscapeSceneデストラクタ //
 
 EscapeScene::~EscapeScene()
 {
 
 }
 
-// @brief EscapeScene更新処理 //
+    // @brief EscapeScene更新処理 //
 
 SceneBase* EscapeScene::Update(float deltaTime)
 {
@@ -94,7 +94,7 @@ SceneBase* EscapeScene::Update(float deltaTime)
     return this;
 }
 
-// @brief EscapeScene描画処理 //
+    // @brief EscapeScene描画処理 //
 
 void EscapeScene::Draw()
 {

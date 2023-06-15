@@ -1,7 +1,7 @@
 #include "Animation.h"
 #include"../AssetManager/AssetManager.h"
 
-// @brief Animationコンストラクター //
+    // @brief Animationコンストラクター //
 
 Animation::Animation(int modelHandle)
     :modelHandle(modelHandle)
@@ -11,15 +11,15 @@ Animation::Animation(int modelHandle)
 {
 }
 
-// @brief Animationデストラクター //
+    // @brief Animationデストラクター //
 
 Animation::~Animation()
 {
 }
 
-// @brief アニメーション追加処理 //
+    // @brief アニメーション追加処理 //
 
-int Animation::AddAnimation(string animFileName, float animFps, bool animLoop)
+int Animation::AddAnimation(std::string animFileName, float animFps, bool animLoop)
 {
     AnimData anim = {};                                                                     //アニメーションデータ
     anim.animFps = animFps;                                                                 //フレームレートは引数から代入
@@ -46,7 +46,7 @@ int Animation::AddAnimation(string animFileName, float animFps, bool animLoop)
     return static_cast<int>(animData.size() - 1);                                               //vectorに入る添え字番号を返す
 }
 
-// @brief アニメーション時間セット //
+    // @brief アニメーション時間セット //
 
 void Animation::AddAnimTime(float deltaTime)
 {
@@ -60,7 +60,7 @@ void Animation::AddAnimTime(float deltaTime)
     MV1SetAttachAnimTime(modelHandle, attachedIndex, nowAnimTime);
 }
 
-// @brief アニメーション再生 //
+    // @brief アニメーション再生 //
 
 void Animation::StartAnim(int animID)
 {
@@ -80,14 +80,14 @@ void Animation::StartAnim(int animID)
     MV1SetAttachAnimTime(modelHandle, attachedIndex, nowAnimTime);                          //アタッチしているアニメーションの時間設定
 }
 
-// @brief アニメーション停止 //
+    // @brief アニメーション停止 //
 
 void Animation::StopAnim()
 {
     nowAnimTime = animData[nowAnimType].totalTime;                                          //アニメーション時刻を総再生時間にする
 }
 
-// @brief 再生中かどうか //
+    // @brief 再生中かどうか //
 
 bool Animation::IsPlaying()
 {
@@ -98,7 +98,7 @@ bool Animation::IsPlaying()
     return true;                                                                            //基本は再生中のtrueを返す
 }
 
-// @brief AnimDataコンストラクタ― //
+    // @brief AnimDataコンストラクタ― //
 
 Animation::AnimData::AnimData()
     :animHandle(-1)
@@ -108,6 +108,5 @@ Animation::AnimData::AnimData()
     , isLoop(false)
 {
 }
-
 
 

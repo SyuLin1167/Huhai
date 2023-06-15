@@ -2,15 +2,15 @@
 
 #include"../Base/GhostBase.h"
 
-/*GhostWalkGimのクラス*/
-class GhostWalkGim:public GhostBase
+        /*GhostWalkGimクラス*/
+class GhostWalkGim :public GhostBase
 {
 public:
     /// <summary>
     /// GhostWalkGimコンストラクター
     /// </summary>
     GhostWalkGim();
-	
+
     /// <summary>
     /// GhostWalkGimコンストラクター
     /// </summary>
@@ -38,4 +38,3 @@ private:
 
     bool move;
 };
-

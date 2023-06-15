@@ -1,6 +1,6 @@
 #include "MoveCamera.h"
 
-// @brief MoveCamraコンストラクタ //
+	// @brief MoveCamraコンストラクタ //
 
 MoveCamera::MoveCamera()
 	:ObjectBase(ObjectTag::Camera)
@@ -8,6 +8,6 @@ MoveCamera::MoveCamera()
 
 }
 
-// @brief MoveCamraデストラクタ //
-// @brief MoveCamra更新処理 //
-// @brief MoveCamra描画処理 //
+	// @brief MoveCamraデストラクタ //
+	// @brief MoveCamra更新処理 //
+	// @brief MoveCamra描画処理 //

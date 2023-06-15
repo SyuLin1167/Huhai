@@ -1,8 +1,8 @@
 #pragma once
 #include"../../../ObjectBase/ObjectBase.h"
 
-/*MoveCameraクラス*/
-class MoveCamera:public ObjectBase
+    /*MoveCameraクラス*/
+class MoveCamera :public ObjectBase
 {
 public:
     /// <summary>
