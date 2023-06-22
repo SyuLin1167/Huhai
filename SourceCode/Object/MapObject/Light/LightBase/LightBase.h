@@ -6,33 +6,33 @@
 #include"../../../ObjectManager/ObjManager.h"
 #include"../../../../Asset/AssetManager/AssetManager.h"
 
-        /*Lightの基底クラス*/
-class LightBase :public ObjectBase
+/*Light基底クラス*/
+class LightBase :public ObjBase
 {
 public:
     /// <summary>
-    /// LightBaseコンストラクタ
+    /// コンストラクタ
     /// </summary>
     LightBase();
 
     /// <summary>
-    /// LightBaseコンストラクタ
+    /// コンストラクタ
     /// </summary>
-    /// <param name="lightPos">ライトのワールド座標</param>
-    LightBase(VECTOR lightPos);
+    /// <param name="pos">ワールド座標</param>
+    LightBase(VECTOR pos);
 
     /// <summary>
-    /// LightBaseのデストラクタ
+    /// デストラクタ
     /// </summary>
-    ~LightBase();
+    virtual ~LightBase();
 
     /// <summary>
-    /// LightBase読み込み処理
+    /// 読み込み処理
     /// </summary>
     void Load();
 
 protected:
-    int lightHandle;
+    int lightHandle;            //ライトハンドル
 
     float lightRange;			//距離減衰有効距離
     float lightAtten2;			//距離減衰係数

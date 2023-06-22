@@ -1,7 +1,7 @@
 #include "Animation.h"
 #include"../AssetManager/AssetManager.h"
 
-    // @brief Animationコンストラクター //
+// コンストラクタ //
 
 Animation::Animation(int modelHandle)
     :modelHandle(modelHandle)
@@ -11,94 +11,114 @@ Animation::Animation(int modelHandle)
 {
 }
 
-    // @brief Animationデストラクター //
+// デストラクタ //
 
 Animation::~Animation()
 {
+    //データ削除
+    while (animData.size() == 0)
+    {
+        animData.pop_back();
+    }
 }
 
-    // @brief アニメーション追加処理 //
+// 追加処理 //
 
-int Animation::AddAnimation(std::string animFileName, float animFps, bool animLoop)
+int Animation::AddAnimation(std::string fileName, float Fps, bool loopState)
 {
-    AnimData anim = {};                                                                     //アニメーションデータ
-    anim.animFps = animFps;                                                                 //フレームレートは引数から代入
-    anim.isLoop = animLoop;                                                                 //ループ再生フラグは引数から代入
+    //アニメーションデータ設定
+    AnimData anim = {};
+    anim.animFps = Fps;
+    anim.isLoop = loopState;
 
-    anim.animHandle = AssetManager::GetAnim(animFileName.c_str());                          //アニメーションデータ読み込み
-    if (anim.animHandle == -1)                                                              //データが入っていなかったら
+    //アニメーション登録&取得
+    anim.animHandle = AssetManager::GetAnim(fileName.c_str());
+
+    //中身が空だったらそのまま返す
+    if (anim.animHandle == -1)
     {
-        return -1;                                                                          //入っていないという結果を返す
+        return -1;
     }
 
-    anim.animIndex = MV1GetAnimNum(anim.animHandle) - 1;                                    //アニメーションの個数からインデックスを得る
-
+    //アニメーションの個数からインデックス取得してアタッチ
+    anim.animIndex = MV1GetAnimNum(anim.animHandle) - 1;
     attachedIndex = MV1AttachAnim(modelHandle, anim.animIndex,
-        anim.animHandle, TRUE);                                          //アニメーションをモデルに追加
+        anim.animHandle, TRUE);
 
-    anim.totalTime = MV1GetAnimTotalTime(anim.animHandle, anim.animIndex);                //アニメーション再生時間取得
+    //アニメーション再生時間取得
+    anim.totalTime = MV1GetAnimTotalTime(anim.animHandle, anim.animIndex);
 
-    //このアニメはまだ再生しないので、異端アニメーション解除
+    //まだ再生しないので、デタッチ
     MV1DetachAnim(modelHandle, attachedIndex);
 
-    animData.push_back(anim);                                                           //末尾にアニメーションデータ追加
-
+    //データに追加して添え字番号返す
+    animData.push_back(anim);
     return static_cast<int>(animData.size() - 1);                                               //vectorに入る添え字番号を返す
 }
 
-    // @brief アニメーション時間セット //
+// アニメーション時間経過 //
 
 void Animation::AddAnimTime(float deltaTime)
 {
-    nowAnimTime += animData[nowAnimType].animFps * deltaTime;                               //現在時間に現在のアニメーションフレームを加算
+    //現在時間に現在のアニメーションフレームを加算
+    nowAnimTime += animData[nowAnimType].animFps * deltaTime;
 
+    //ループ再生させるなら時間リセット
     if (animData[nowAnimType].isLoop &&
-        nowAnimTime > animData[nowAnimType].totalTime)                                      //現在時間がアニメーションの総再生数を超えてループ再生させるなら
+        nowAnimTime > animData[nowAnimType].totalTime)
     {
-        nowAnimTime = 0.0f;                                                                 //時間リセット
+        nowAnimTime = 0.0f;
     }
+
+    //アニメーション時間アタッチ
     MV1SetAttachAnimTime(modelHandle, attachedIndex, nowAnimTime);
 }
 
-    // @brief アニメーション再生 //
+// 再生処理 //
 
 void Animation::StartAnim(int animID)
 {
-    if (animID != nowAnimType)                                                              //以前のアニメーションと違っていたら
+    //以前のアニメーションと違っていたら新しい方に差し替える
+    if (animID != nowAnimType)
     {
-        if (nowAnimType != -1)                                                              //現在のアニメーションが空じゃなかったら
+        if (nowAnimType != -1)
         {
-            MV1DetachAnim(modelHandle, attachedIndex);                                      //デタッチ
+            MV1DetachAnim(modelHandle, attachedIndex);
         }
 
-        nowAnimType = animID;                                                               //以前のアニメーションとする
+        nowAnimType = animID;
         attachedIndex = MV1AttachAnim(modelHandle, animData[animID].animIndex,
-            animData[nowAnimType].animHandle, TRUE);                                        //アニメーションをアタッチ
+            animData[nowAnimType].animHandle, TRUE);
     }
 
-    nowAnimTime = 0.0f;                                                                     //時間リセット
-    MV1SetAttachAnimTime(modelHandle, attachedIndex, nowAnimTime);                          //アタッチしているアニメーションの時間設定
+    //時間をリセットしてアニメーション時間アタッチ
+    nowAnimTime = 0.0f;
+    MV1SetAttachAnimTime(modelHandle, attachedIndex, nowAnimTime);
 }
 
-    // @brief アニメーション停止 //
+    // 停止処理 //
 
 void Animation::StopAnim()
 {
-    nowAnimTime = animData[nowAnimType].totalTime;                                          //アニメーション時刻を総再生時間にする
+    //アニメーション時刻を総再生時間にする
+    nowAnimTime = animData[nowAnimType].totalTime;
 }
 
-    // @brief 再生中かどうか //
+// 再生状態 //
 
 bool Animation::IsPlaying()
 {
-    if (!animData[nowAnimType].isLoop && nowAnimTime > animData[nowAnimType].totalTime)      //ループ再生不可で、時刻が総再生時間を超えたら
+    //ループ再生不可で、時刻が総再生時間を超えたら停止中にする
+    if (!animData[nowAnimType].isLoop && nowAnimTime > animData[nowAnimType].totalTime)
     {
-        return false;                                                                       //再生中でないfalseを返す
+        return false;
     }
-    return true;                                                                            //基本は再生中のtrueを返す
+
+    //基本は再生中にする
+    return true;
 }
 
-    // @brief AnimDataコンストラクタ― //
+// コンストラクタ //
 
 Animation::AnimData::AnimData()
     :animHandle(-1)

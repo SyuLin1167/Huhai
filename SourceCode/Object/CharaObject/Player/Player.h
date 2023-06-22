@@ -1,41 +1,38 @@
 #pragma once
 #include<DxLib.h>
 
-#include"../../ObjectManager/ObjManager.h"
 #include"../../ObjectBase/ObjectBase.h"
-#include"../../../Collision/Collision.h"
-#include"../../../Asset/Sound/Sound.h"
 
-        /* Playerのクラス */
-class Player :public ObjectBase
+/* Playerクラス */
+class Player :public ObjBase
 {
 public:
     /// <summary>
-    /// Playerコンストラクター
+    /// コンストラクタ
     /// </summary>
     Player();
 
     /// <summary>
-    /// Playerデストラクター
+    /// デストラクタ
     /// </summary>
     ~Player();
 
     /// <summary>
-    /// Player更新処理
+    /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     void Update(float deltaTime) override;
 
     /// <summary>
-    /// Player描画処理
+    /// 描画処理
     /// </summary>
     void Draw() override;
 
     /// <summary>
-    /// Player衝突時処理
+    /// 当たり判定処理
     /// </summary>
     /// <param name="other">:オブジェクト</param>
-    void OnCollisionEnter(const ObjectBase* other)override;
+    void OnCollisionEnter(const ObjBase* other)override;
 
     /// <summary>
     /// 球体の衝突時処理
@@ -49,8 +46,6 @@ public:
     /// <param name="colmodel">:当たり判定モデル</param>
     void ColHitLine(int colmodel);
 
-    void Rotate();
-
 private:
     /// <summary>
     /// Player移動処理
@@ -58,28 +53,18 @@ private:
     /// <param name="deltaTime">:フレームレート</param>
     void Move(float deltaTime);
 
-    bool canMove;
 
-    //正面
-    VECTOR UP;
-    //後方
-    VECTOR DOWN;
-    //右
-    VECTOR RIGHT;
-    //左
-    VECTOR LEFT;
+    VECTOR UP;                              //正面
+    VECTOR DOWN;                            //後方
+    VECTOR RIGHT;                           //右
+    VECTOR LEFT;                            //左
 
     VECTOR inputVec;						//合成ベクトル
     VECTOR inputVel;						//速度ベクトル
     bool inputKey;							//キー入力判定
-    bool rotateNow;							//現在回転中かどうか
-    VECTOR aimDir;
+    bool canMove;                           //動作状態
 
-    //---当たり判定関連---//
-    Sphere colSphere;			//当たり判定球
-
-    //---カメラ関連---//
     VECTOR camFront;						//カメラ前方向
 
-    class Sound* plySound;
+    class Sound* plySound;                  //サウンド
 };

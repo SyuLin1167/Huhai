@@ -1,91 +1,99 @@
 #include "Door.h"
+
+#include"../../ObjectManager/ObjManager.h"
+#include"../../../Asset/Animation/Animation.h"
+#include"../../../Asset/Model/Model.h"
+#include"../../../Asset/AssetManager/AssetManager.h"
 #include"../../../Asset/Sound/Sound.h"
 
-        // コンストラクタ //
+// コンストラクタ //
 
 Door::Door()
-    :ObjectBase(ObjectTag::Furniture)
+    :ObjBase(ObjectTag::Furniture)
     , doorAnim(nullptr)
-    , doorModel(nullptr)
     , doorSound(nullptr)
 {
     Load();
 }
 
-        // コンストラクタ //
+// コンストラクタ //
 
 Door::Door(VECTOR doorPos, VECTOR doorAngle)
-    :ObjectBase(ObjectTag::Furniture, doorPos, doorAngle)
+    :ObjBase(ObjectTag::Furniture, doorPos, doorAngle)
     , doorAnim(nullptr)
-    , doorModel(nullptr)
     , doorSound(nullptr)
 {
     Load();
 }
 
-        // デストラクタ //
+// デストラクタ //
 
 Door::~Door()
 {
+    //インスタンス削除
     delete doorAnim;
+    delete doorSound;
 }
 
-        // 読み込み処理 //
+// 読み込み処理 //
 
 void Door::Load()
 {
-    //---モデル読み込み---//
-    objHandle = AssetManager::GetMesh("../Assets/Map/Door/Door.mv1");            //モデル読み込み
+    //モデル設定
+    objHandle = AssetManager::GetMesh("../Assets/Map/Door/Door.mv1");
+    MV1SetPosition(objHandle, objPos);
+    MV1SetScale(objHandle, VGet(0.11f, 0.12f, 0.11f));
+    MV1SetRotationXYZ(objHandle, VGet(0.0f, objDir.y / 180.0f * DX_PI_F, 0.0f));
 
-    MV1SetPosition(objHandle, objPos);                                                      //モデルの座標設定
-    MV1SetScale(objHandle, VGet(0.11f, 0.12f, 0.11f));                                                       //モデルのサイズ設定
-    MV1SetRotationXYZ(objHandle, VGet(0.0f, objDir.y / 180.0f * DX_PI_F, 0.0f));            //モデルの向き設定
-
-    //---アニメーション読み込み---//
+    //アニメーション設定
     doorAnim = new Animation(objHandle);
-    doorAnim->AddAnimation("../Assets/Map/Door/DoorClose.mv1", 30.0f, false);                        //待機:0
-    doorAnim->AddAnimation("../Assets/Map/Door/DoorOpen.mv1", 30.0f, false);      //開:1
-    doorAnim->AddAnimation("../Assets/Map/Door/DoorClose.mv1", 30.0f, false);     //閉:2
-
+    doorAnim->AddAnimation("../Assets/Map/Door/DoorClose.mv1", 30.0f, false);
+    doorAnim->AddAnimation("../Assets/Map/Door/DoorOpen.mv1", 30.0f, false);
+    doorAnim->AddAnimation("../Assets/Map/Door/DoorClose.mv1", 30.0f, false);
     animType = IDLE;
     doorAnim->StartAnim(animType);
     doorAnim->StopAnim();
 
-    colType = CollisionType::Sphere;                                                         //当たり判定は球体
+    //当たり判定設定
+    colType = CollisionType::Sphere;
+    colSphere.localCenter = VGet(0, 5, 0);
+    colSphere.Radius = 15.0f;
+    colSphere.worldCenter = objPos;
 
-    colSphere.localCenter = VGet(0, 5, 0);                                                 //ローカル座標
-    colSphere.Radius = 15.0f;                                                                //球半径
-    colSphere.worldCenter = objPos;                                                          //ワールド座標
-
+    //サウンド設定
     doorSound = new Sound;
     doorSound->AddSound("../Assets/Sound/DoorOpenSE.wav", SoundTag::DoorOpen, 150, true);
     doorSound->AddSound("../Assets/Sound/DoorCloseSE.wav", SoundTag::DoorClose, 150, true);
 }
 
-        // @brief Door更新処理 //
+// 更新処理 //
 
 void Door::Update(float deltaTime)
 {
+    //アニメーション時間再生
     doorAnim->AddAnimTime(deltaTime);
 
-    //---当たり判定設定---//
-    player = ObjManager::GetFirstObj(ObjectTag::Player);         //プレイヤーオブジェクト取得
-    if (player)                                                              //オブジェクトの中身が空でなければ
+    //ドアの開閉処理
+    player = ObjManager::GetFirstObj(ObjectTag::Player);
+    if (player)
     {
+        //プレイヤーが一定距離近づいていたら
         if (CollisionPair(colSphere, player->GetColSphere()))
         {
             if (!doorAnim->IsPlaying())
             {
-                if (CheckHitKey(KEY_INPUT_E))                //Eキー入力
+                //Eキー入力でドア開放
+                if (CheckHitKey(KEY_INPUT_E))
                 {
-                    if (animType != OPEN)															//現在のアニメーションが指定したアニメーションじゃなかったら
+                    if (animType != OPEN)
                     {
                         MoveAnim(OPEN);
                     }
                 }
-                if (CheckHitKey(KEY_INPUT_Q))                //Qキー入力
+                //Qキー入力でドア閉鎖
+                if (CheckHitKey(KEY_INPUT_Q))
                 {
-                    if (animType != CLOSE)															//現在のアニメーションが指定したアニメーションじゃなかったら
+                    if (animType != CLOSE)
                     {
                         MoveAnim(CLOSE);
                     }
@@ -94,20 +102,24 @@ void Door::Update(float deltaTime)
 
         }
     }
-    colModel = objHandle;                                           //当たり判定のモデルはオブジェクトのモデル
+
+    //当たり判定更新
+    colModel = objHandle;
     ColUpdate();
 
+    //サウンド更新
     doorSound->Update(objPos);
 }
 
-        // @brief Doorアニメーション処理
+// アニメーション処理 //
 
 void Door::MoveAnim(int animtype)
 {
-    if (animType != animtype)															//現在のアニメーションが指定したアニメーションじゃなかったら
+    //指定したアニメーションを再生する
+    if (animType != animtype)
     {
-        animType = animtype;														//現在のアニメーションを指定したアニメーションにする
-        doorAnim->StartAnim(animType);												//アニメーション開始
+        animType = animtype;
+        doorAnim->StartAnim(animType);
         if (animtype == OPEN)
         {
             doorSound->StartSound(SoundTag::DoorOpen, DX_PLAYTYPE_BACK);
@@ -119,9 +131,10 @@ void Door::MoveAnim(int animtype)
     }
 }
 
-        // @brief Door描画処理 //
+// 描画処理 //
 
 void Door::Draw()
 {
-    MV1DrawModel(objHandle);						//モデル描画
+    //モデル描画
+    MV1DrawModel(objHandle);
 }

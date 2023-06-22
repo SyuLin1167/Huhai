@@ -1,8 +1,9 @@
 #include "Sound.h"
+
 #include"../AssetManager/AssetManager.h"
 #include"../../Object/ObjectManager/ObjManager.h"
 
-    // コンストラクタ //
+// コンストラクタ //
 
 Sound::Sound()
     :soundType(-1)
@@ -11,117 +12,149 @@ Sound::Sound()
 {
 }
 
-    // デストラクタ //
+// デストラクタ //
 
 Sound::~Sound()
 {
+    //サウンド削除
     for (auto tag : soundTagAll)
     {
-        DeleteSoundMem(soundData[tag].soundHandle);
+        DeleteSoundMem(soundData[tag].handle);
     }
+
+    //データ削除
+
 }
 
-    // サウンド追加処理 //
+// 追加処理 //
 
-void Sound::AddSound(std::string soundFileName, SoundTag tag, int volume, bool isDimension)
+void Sound::AddSound(std::string fileName, SoundTag tag, int volume, bool isDim)
 {
+    //サウンドデータ設定
     SoundData sound = {};
     sound.volume = volume;
-    sound.isDimension = isDimension;
+    sound.isDim = isDim;
 
-    SetCreate3DSoundFlag(sound.isDimension);
-    sound.soundHandle = AssetManager::GetSound(soundFileName.c_str());
-    if (sound.soundHandle == -1)
+    //サウンド登録&取得
+    SetCreate3DSoundFlag(sound.isDim);
+    sound.handle = AssetManager::GetSound(fileName.c_str());
+
+    //中身が空だったらそのまま返す
+    if (sound.handle == -1)
     {
-        return;
+        return ;
     }
+
+    //データ追加
     soundData.emplace(tag, sound);
 }
 
+// 更新処理 //
+
 void Sound::Update(VECTOR targetPos)
 {
-    ObjectBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
+    //3次元サウンドはカメラの距離に合わせて音量を変える
+    ObjBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
     for (auto tag : soundTagAll)
     {
         auto& sound = soundData[tag];
-        if (sound.isDimension && IsPlaying(tag))
+        if (sound.isDim && IsPlaying(tag))
         {
             if (camera)
             {
                 Set3DSoundListenerPosAndFrontPos_UpVecY(camera->GetPos(), camera->GetDir());
             }
-            Set3DPositionSoundMem(targetPos, sound.soundHandle);
+            Set3DPositionSoundMem(targetPos, sound.handle);
         }
     }
 }
 
-    // 再生処理 //
+// 再生処理 //
 
 void Sound::StartSound(SoundTag tag, int playType)
 {
+    //再生されていなかったらサウンド再生
     auto& sound = soundData[tag];
-    if (!CheckSoundMem(sound.soundHandle))
+    if (!CheckSoundMem(sound.handle))
     {
-        if (sound.isDimension)
+        if (sound.isDim)
         {
-            Set3DPositionSoundMem(VGet(0.0f, 0.0f, 0.0f), sound.soundHandle);
-            Set3DRadiusSoundMem(200.0f, sound.soundHandle);
+            Set3DPositionSoundMem(VGet(0.0f, 0.0f, 0.0f), sound.handle);
+            Set3DRadiusSoundMem(200.0f, sound.handle);
         }
-        ChangeVolumeSoundMem(sound.volume, sound.soundHandle);
-        PlaySoundMem(sound.soundHandle, playType);
+        ChangeVolumeSoundMem(sound.volume, sound.handle);
+        PlaySoundMem(sound.handle, playType);
     }
 }
+
+// 一度だけ再生処理 //
 
 void Sound::StartSoundOnce(SoundTag tag, int playType)
 {
+    //再生されていなかったらサウンド再生
     auto& sound = soundData[tag];
-    if (!CheckSoundMem(sound.soundHandle) && sound.soundOnce)
+    if (!sound.playOnce)
     {
-        if (sound.isDimension)
+        if (!CheckSoundMem(sound.handle))
         {
-            Set3DPositionSoundMem(VGet(0.0f, 0.0f, 0.0f), sound.soundHandle);
-            Set3DRadiusSoundMem(200.0f, sound.soundHandle);
+            if (sound.isDim)
+            {
+                Set3DPositionSoundMem(VGet(0.0f, 0.0f, 0.0f), sound.handle);
+                Set3DRadiusSoundMem(200.0f, sound.handle);
+            }
+            ChangeVolumeSoundMem(sound.volume, sound.handle);
+            PlaySoundMem(sound.handle, playType);
+            sound.playOnce = true;
         }
-        ChangeVolumeSoundMem(sound.volume, sound.soundHandle);
-        PlaySoundMem(sound.soundHandle, playType);
-        sound.soundOnce = false;
     }
 }
+
+// 停止処理 //
 
 void Sound::StopSound(SoundTag tag)
 {
+    //サウンドが再生されていたら停止
     auto& sound = soundData[tag];
-    if (CheckSoundMem(sound.soundHandle))
+    if (CheckSoundMem(sound.handle))
     {
-        StopSoundMem(sound.soundHandle);
+        StopSoundMem(sound.handle);
     }
 }
 
+// 全サウンド停止処理 //
+
 void Sound::StopAllSound()
 {
+    //すべてのサウンドに停止処理をする
     for (auto& tag : soundTagAll)
     {
         StopSound(tag);
     }
 }
 
+// 再生状態 //
+
 bool Sound::IsPlaying(SoundTag tag)
 {
+    //再生されていたら再生中にする
     auto& sound = soundData[tag];
-    if (CheckSoundMem(sound.soundHandle))
+    if (CheckSoundMem(sound.handle))
     {
         return true;
     }
     else
     {
+        //されていなかったら停止中にする
         return false;
     }
 }
 
+// コンストラクタ //
+
 Sound::SoundData::SoundData()
-    :soundHandle(-1)
+    :handle(-1)
     , volume(0)
-    , isDimension(false)
-    , soundOnce(true)
+    , isDim(false)
+    , playOnce(false)
 {
 }

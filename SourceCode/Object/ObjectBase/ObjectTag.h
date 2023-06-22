@@ -1,6 +1,6 @@
 #pragma once
 
-/*種類別タグクラス*/
+/*オブジェクトタグ*/
 enum class ObjectTag :unsigned char
 {
     Camera,     //カメラ
@@ -14,7 +14,7 @@ enum class ObjectTag :unsigned char
     Remarks,
 };
 
-/*ループ制御用*/
+/*全タグ*/
 constexpr static ObjectTag ObjTagAll[] =
 {
     ObjectTag::Camera,

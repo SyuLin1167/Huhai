@@ -2,16 +2,11 @@
 #include<DxLib.h>
 
 #include"../../ObjectBase/ObjectBase.h"
-#include"../../ObjectManager/ObjManager.h"
-#include"../../../Asset/Animation/Animation.h"
-#include"../../../Asset/Model/Model.h"
-#include"../../../Asset/AssetManager/AssetManager.h"
-#include"../../../Collision/Collision.h"
 
-        /*Doorクラス*/
-class Door :public ObjectBase
+/*Doorクラス*/
+class Door :public ObjBase
 {
-    ObjectBase* player;
+    ObjBase* player;
 public:
     /// <summary>
     /// コンストラクタ
@@ -21,9 +16,9 @@ public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    /// <param name="doorPos">:ドアのワールド座標</param>
-    /// <param name="doorAngle">:ドアの方向</param>
-    Door(VECTOR doorPos, VECTOR doorAngle);
+    /// <param name="pos">:ワールド座標</param>
+    /// <param name="dir">:方向</param>
+    Door(VECTOR pos, VECTOR dir);
 
     /// <summary>
     /// デストラクタ
@@ -52,18 +47,17 @@ public:
     /// </summary>
     void Draw()override;
 
+    //アニメーションタイプ
     enum Anim
     {
-        IDLE = 0,			//待機
-        OPEN,			//開
-        CLOSE			//閉
+        IDLE = 0,       //待機
+        OPEN,           //開
+        CLOSE           //閉
     };
+
 private:
-    //---アニメーション関連---//
     class Animation* doorAnim;			//アニメーション
-    int animType;						//アニメーション状態
+    int animType;						//アニメーションタイプ
 
-    class Model* doorModel;
-
-    class Sound* doorSound;
+    class Sound* doorSound;             //サウンド
 };

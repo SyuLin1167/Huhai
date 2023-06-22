@@ -1,29 +1,29 @@
 #include "GhostBase.h"
 
+#include"../../../ObjectManager/ObjManager.h"
+#include"../../../../Asset/AssetManager/AssetManager.h"
+
 GhostBase::GhostBase()
-    :ObjectBase(ObjectTag::Ghost)
+    :ObjBase(ObjectTag::Ghost)
     , gstAnim(nullptr)
     , animType(IDLE)
     , gstSound(nullptr)
 {
-    //---モデル読み込み---//
-    objHandle = AssetManager::GetMesh("../Assets/Chara/Ghost/GhostModel.mv1");        //モデル読み込み
-    MV1SetScale(objHandle, VGet(0.02f, 0.02f, 0.02f));                                  //モデルのサイズ設定
+    //モデル設定
+    objHandle = AssetManager::GetMesh("../Assets/Chara/Ghost/GhostModel.mv1");
+    objDir = VGet(-1.0f, 0.0f, 0.0f);
+    MV1SetPosition(objHandle, objPos);
+    MV1SetScale(objHandle, VGet(0.02f, 0.02f, 0.02f));
 
-    gstAnim = new Animation(objHandle);                                                 //アニメーションのインスタンス
-
-
-    //---アニメーション読み込み---//
-    gstAnim->AddAnimation("../Assets/Chara/Ghost/GhostIdle.mv1");               //待機:0
-    gstAnim->AddAnimation("../Assets/Chara/Ghost/GhostWalk.mv1");                //走る:1
-    gstAnim->AddAnimation("../Assets/Chara/Ghost/GhostSad.mv1");                //走る:1
-    gstAnim->AddAnimation("../Assets/Chara/Ghost/GhostMove.mv1");                //走る:1
-
-    //---アニメーション状態セット---//
+    //アニメーション設定
+    gstAnim = new Animation(objHandle);
+    gstAnim->AddAnimation("../Assets/Chara/Ghost/GhostIdle.mv1");
+    gstAnim->AddAnimation("../Assets/Chara/Ghost/GhostWalk.mv1");
+    gstAnim->AddAnimation("../Assets/Chara/Ghost/GhostSad.mv1");
+    gstAnim->AddAnimation("../Assets/Chara/Ghost/GhostMove.mv1");
     gstAnim->StartAnim(animType);
-    objDir = VGet(-1.0f, 0.0f, 0.0f);                                                   //初期方向
-    MV1SetPosition(objHandle, objPos);                                                  //ポジション設定
 
+    //サウンド設定
     gstSound = new Sound;
     gstSound->AddSound("../Assets/Sound/GhostWalkSE.mp3", SoundTag::GhostWalk, 150);
     gstSound->AddSound("../Assets/Sound/GhostScreamSE.mp3", SoundTag::GhostScream, 300, true);
@@ -31,11 +31,10 @@ GhostBase::GhostBase()
 
 GhostBase::~GhostBase()
 {
+    //モデル削除
     AssetManager::ReleaseMesh(objHandle);
-    if (objHandle != -1)
-    {
-        MV1DeleteModel(objHandle);
-    }
+
+    //インスタンス削除
     delete gstAnim;
     delete gstSound;
 }

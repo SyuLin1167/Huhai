@@ -1,6 +1,6 @@
 #include "NomalLight.h"
 
-        // コンストラクタ //
+// コンストラクタ //
 
 NomalLight::NomalLight()
     :LightBase()
@@ -8,41 +8,51 @@ NomalLight::NomalLight()
     Load();
 }
 
-        // コンストラクタ //
+// コンストラクタ //
 
-NomalLight::NomalLight(VECTOR lightPos)
-    :LightBase(lightPos)
+NomalLight::NomalLight(VECTOR pos)
+    :LightBase(pos)
 {
     Load();
 }
 
-        // デストラクタ //
+// デストラクタ //
 
 NomalLight::~NomalLight()
 {
+    //ライト削除
     DeleteLightHandle(lightHandle);
+
+    //モデル削除
     AssetManager::ReleaseMesh(objHandle);
 }
 
-        // @brief NomalLight読み込み処理 //
+// 読み込み処理 //
 
 void NomalLight::Load()
 {
+    //ライト設定
+    SetLightPositionHandle(lightHandle, objPos);
+
+    //モデル設定
     lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2);
     MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
+    MV1SetPosition(objHandle, objPos);
 }
 
-        // @brief NomalLight更新処理 //
+// 更新処理 //
 
 void NomalLight::Update(float deltaTime)
 {
+    //座標更新
     SetLightPositionHandle(lightHandle, objPos);
     MV1SetPosition(objHandle, objPos);
 }
 
-        // @brief NomalLight描画処理 //
+// 描画処理 //
 
 void NomalLight::Draw()
 {
-    MV1DrawModel(objHandle);						//モデル描画
+    //モデル描画
+    MV1DrawModel(objHandle);
 }

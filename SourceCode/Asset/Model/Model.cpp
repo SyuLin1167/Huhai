@@ -1,29 +1,52 @@
 #include "Model.h"
 #include"../../Asset/AssetManager/AssetManager.h"
 
-	// @brief Model追加処理
+
+// コンストラクタ //
+
+Model::Model()
+{
+}
+
+// デストラクタ //
+
+Model::~Model()
+{
+    //データ削除
+    while (modelData.size() == 0)
+    {
+        modelData.pop_back();
+    }
+}
+
+// 追加処理 //
 
 int Model::AddModel(std::string modelFileName)
 {
-	ModelData model = {};
-	model.modelHandle = AssetManager::GetMesh(modelFileName.c_str());
-	if (model.modelHandle == -1)
+    //メッシュを登録&取得する
+    ModelData model = {};
+    model.modelHandle = AssetManager::GetMesh(modelFileName.c_str());
+
+    //中身が空だったらそのまま返す
+    if (model.modelHandle == -1)
 	{
-		return-1;
-	}
-	modelData.emplace_back(model);
+        return model.modelHandle;
+    }
 
-	return static_cast<int>(modelData.size() - 1);
+    //データに追加してIDを返す
+    modelData.emplace_back(model);
+    return static_cast<int>(modelData.size() - 1);
 }
 
-	// @brief Model設定処理 //
+// 設定処理 //
 
-int Model::SetModel(int modelId)
+int Model::GetModel(int modelID)
 {
-	return modelData[modelId].modelHandle;
+    //データ内のIDのモデルハンドルを返す
+	return modelData[modelID].modelHandle;
 }
 
-	// @brief ModelDataコンストラクタ //
+// コンストラクタ //
 
 Model::ModelData::ModelData()
 	:modelHandle(-1)

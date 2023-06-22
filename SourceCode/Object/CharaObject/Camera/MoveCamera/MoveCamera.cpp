@@ -3,7 +3,7 @@
 	// @brief MoveCamraコンストラクタ //
 
 MoveCamera::MoveCamera()
-	:ObjectBase(ObjectTag::Camera)
+	:ObjBase(ObjectTag::Camera)
 {
 
 }

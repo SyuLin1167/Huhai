@@ -8,8 +8,8 @@ public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    /// <param name="FadeSpeed">:フェード速度</param>
-    BlendMode(int FadeSpeed = 4);
+    /// <param name="speed">:フェード速度(デフォルト・80.0)</param>
+    BlendMode(float speed = 80.0f);
 
     /// <summary>
     /// デストラクタ
@@ -34,12 +34,12 @@ public:
     /// <summary>
     /// フェードアウト
     /// </summary>
-    void AddFade();
+    void AddFade(float deltaTime);
 
     /// <summary>
     /// フェードイン
     /// </summary>
-    void SubFade();
+    void SubFade(float deltaTime);
 
     /// <summary>
     /// フェードフラグ
@@ -49,8 +49,8 @@ public:
 
 private:
     bool nowFade;                   //フェードフラグ
-    int fadeValue;                  //フェード値
-    int fadeSpeed;                  //フェード速度
+    float fadeValue;                  //フェード値
+    float fadeSpeed;                  //フェード速度
 
     bool nowDark;                   //暗転フラグ
     const int darkValue = 150;      //暗転値

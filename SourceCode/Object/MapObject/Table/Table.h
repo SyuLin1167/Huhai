@@ -1,35 +1,34 @@
 #pragma once
+
 #include<map>
 
-#include"../../../Asset/AssetManager/AssetManager.h"
 #include"../../ObjectBase/ObjectBase.h"
-#include"../../../Collision/Collision.h"
 
 constexpr int TableNum = 19;
 
-        /*Tableクラス*/
-class Table :public ObjectBase
+/*Tableクラス*/
+class Table :public ObjBase
 {
 public:
     /// <summary>
-    /// Tableコンストラクタ
+    /// コンストラクタ
     /// </summary>
     /// <param name="objNum">:オブジェクト番号</param>
     Table(int objNum);
 
     /// <summary>
-    /// Tableデストラクタ
+    /// デストラクタ
     /// </summary>
     ~Table();
 
     /// <summary>
-    /// Table更新処理
+    /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     void Update(float deltaTime)override;
 
     /// <summary>
-    /// Table描画処理
+    /// 描画処理
     /// </summary>
     void Draw()override;
 

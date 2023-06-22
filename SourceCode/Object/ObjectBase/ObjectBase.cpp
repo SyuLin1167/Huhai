@@ -1,13 +1,13 @@
 #include "ObjectBase.h"
 
-    // @brief コンストラクター //
+// コンストラクタ //
 
-ObjectBase::ObjectBase(ObjectTag tag)
+ObjBase::ObjBase(ObjectTag tag)
     :objTag(tag)
     , objHandle(-1)
-    , objPos{ 0,0,0 }
-    , objDir{ 1,0,0 }
-    , objScale{ 0.1f,0.1f,0.1f }
+    , objPos(VGet(0.0f,0.0f,0.0f))
+    , objDir(VGet(1.0f, 0.0f, 0.0f))
+    , objScale(VGet(0.1f, 0.1f, 0.1f))
     , objSpeed(20.0f)
     , isVisible(true)
     , isAlive(true)
@@ -19,14 +19,14 @@ ObjectBase::ObjectBase(ObjectTag tag)
 {
 }
 
-    // @brief コンストラクター(位置・方向セット) //
+// コンストラクタ(位置・方向セット) //
 
-ObjectBase::ObjectBase(ObjectTag tag, VECTOR pos, VECTOR angle)
+ObjBase::ObjBase(ObjectTag tag, VECTOR pos, VECTOR angle)
     :objTag(tag)
     , objHandle(-1)
     , objPos(pos)
     , objDir(angle)
-    , objScale{ 0.1f,0.1f,0.1f }
+    , objScale(VGet(0.1f, 0.1f, 0.1f))
     , objSpeed(20.0f)
     , isVisible(true)
     , isAlive(true)
@@ -38,57 +38,24 @@ ObjectBase::ObjectBase(ObjectTag tag, VECTOR pos, VECTOR angle)
 {
 }
 
-    // @brief デストラクター //
+// デストラクタ //
 
-ObjectBase::~ObjectBase()
-{
-    if (objHandle != -1)
-    {
-        MV1DeleteModel(objHandle);
-    }
-}
-
-    // @brief 描画処理 //
-
-void ObjectBase::Draw()
+ObjBase::~ObjBase()
 {
 }
 
-    // @brief Collision更新処理 //
+// Collision更新処理 //
 
-void ObjectBase::ColUpdate()
+void ObjBase::ColUpdate()
 {
-    //---全当たり判定種の移動処理---//
+    //全当たり判定更新
     colLine.Move(objPos);
     colSphere.Move(objPos);
     colCapsule.Move(objPos);
 
-    if (colModel != -1)                                         //モデルが空でなければ
+    if (colModel != -1)
     {
-        MV1SetPosition(colModel, objPos);                       //位置設定
-        MV1SetupCollInfo(colModel);                             //当たり判定情報構築
-    }
-
-}
-
-    // @brief Collision描画処理 //
-
-void ObjectBase::ColDraw()
-{
-    //---全当たり判定種の描画処理---//
-    DrawLine3D(colLine.worldStart, colLine.worldEnd,
-        GetColor(255, 255, 0));
-    DrawSphere3D(colSphere.worldCenter, colSphere.Radius, 10,
-        GetColor(0, 255, 255),
-        GetColor(0, 0, 0), FALSE);
-    DrawCapsule3D(colCapsule.worldStart, colCapsule.worldEnd, colCapsule.Radius, 8,
-        GetColor(255, 0, 255),
-        GetColor(0, 0, 0), FALSE);
-
-    if (colModel != -1)                                         //モデルが空でなければ
-    {
-        SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);      //半透明にして
-        MV1DrawModel(colModel);                             //モデル描画
-        SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);    //以降は不透明
+        MV1SetPosition(colModel, objPos);
+        MV1SetupCollInfo(colModel);
     }
 }

@@ -6,31 +6,31 @@
 #include"../../Collision/Collision.h"
 #include"../../Collision/CollisionType.h"
 
-constexpr auto SCREEN_WIDTH = 1920;       //スクリーン幅指定
-constexpr auto SCREEN_HEIGHT = 1080;      //スクリーン高さ指定
+constexpr auto SCREEN_WIDTH = 1920;       //スクリーン幅
+constexpr auto SCREEN_HEIGHT = 1080;      //スクリーン高さ
 
-    /*親クラス*/
-class ObjectBase
+/*ObjBaseクラス*/
+class ObjBase
 {
 public:
     /// <summary>
-    /// コンストラクタ―
+    /// コンストラクタ
     /// </summary>
     /// <param name="tag">:タグ</param>
-    ObjectBase(ObjectTag tag);
+    ObjBase(ObjectTag tag);
 
     /// <summary>
-    /// コンストラクタ―(位置・方向セット)
+    /// コンストラクタ(位置・方向セット)
     /// </summary>
     /// <param name="tag">:タグ</param>
     /// <param name="pos">:座標</param>
     /// <param name="angle">:方向</param>
-    ObjectBase(ObjectTag tag, VECTOR pos, VECTOR angle = { 0,0,0 });
+    ObjBase(ObjectTag tag, VECTOR pos, VECTOR angle = { 0,0,0 });
 
     /// <summary>
-    /// デストラクター
+    /// デストラクタ
     /// </summary>
-    virtual ~ObjectBase();
+    virtual ~ObjBase();
 
     /// <summary>
     /// 座標取得
@@ -60,25 +60,25 @@ public:
     /// 可視化判定
     /// </summary>
     /// <returns>可視化状態</returns>
-    bool IsVisible() { return isVisible; }
+    bool IsVisible()const { return isVisible; }
 
     /// <summary>
     /// 可視化設定
     /// </summary>
     /// <param name="visible">見えるかどうか</param>
-    void SetVisible(bool visible) { isVisible = visible; }
+    void SetVisible(const bool visible) { isVisible = visible; }
 
     /// <summary>
     /// 生死判定
     /// </summary>
     /// <returns>生死状態</returns>
-    bool IsAlive() { return isAlive; }
+    bool IsAlive()const { return isAlive; }
 
     /// <summary>
     /// 生死設定
     /// </summary>
     /// <param name="alive">:生きているかどうか</param>
-    void SetAlive(bool alive) { isAlive = alive; }
+    void SetAlive(const bool alive) { isAlive = alive; }
 
 
     /// <summary>
@@ -90,7 +90,7 @@ public:
     /// <summary>
     /// 描画処理
     /// </summary>
-    virtual void Draw();
+    virtual void Draw() = 0;
 
     /// <summary>
     /// オブジェクトのタグ取得
@@ -104,16 +104,16 @@ public:
     /// 衝突時処理
     /// </summary>
     /// <param name="other">:オブジェクト</param>
-    virtual void OnCollisionEnter(const ObjectBase* other) {}
+    virtual void OnCollisionEnter(const ObjBase* other) {}
 
     /// <summary>
-    /// オブジェクトとの当たり判定
+    /// 当たり判定処理
     /// </summary>
     /// <param name="other">:オブジェクト</param>
-    virtual void ColWithOther(ObjectBase* other) {};
+    virtual void ColWithOther(ObjBase* other) {};
 
     /// <summary>
-    /// オブジェクトの当たり判定種
+    /// 当たり判定種
     /// </summary>
     /// <returns>当たり判定種</returns>
     CollisionType GetColType()const { return colType; }
@@ -125,7 +125,7 @@ public:
     Line GetColLine()const { return colLine; }
 
     /// <summary>
-    /// 球当たり判定
+    /// 球体当たり判定
     /// </summary>
     /// <returns>当たり判定Sphere</returns>
     Sphere GetColSphere()const { return colSphere; }
@@ -148,27 +148,22 @@ protected:
     /// </summary>
     void ColUpdate();
 
-    /// <summary>
-    /// Collision描画処理
-    /// </summary>
-    void ColDraw();
-
-    ObjectTag objTag;                           //オブジェクトの種類
-    int objHandle;                              //モデルハンドル
+    ObjectTag objTag;                           //オブジェクトタグ
+    int objHandle;                              //オブジェクトハンドル
     VECTOR objPos;                              //ワールド座標
     VECTOR objDir;                              //ワールド方向
-    VECTOR objScale;                            //オブジェクトの大きさ
+    VECTOR objScale;                            //オブジェクトサイズ
 
-    float objSpeed;                             //オブジェクトの速度
+    float objSpeed;                             //移動速度
 
     bool isVisible;                             //可視化状態
     bool isAlive;                               //生死状態
 
     //---当たり判定関連---//
     CollisionType colType;                      //当たり判定種
-    Line colLine;                    //当たり判定Line
-    Sphere colSphere;                //当たり判定Sphere
-    Capsule colCapsule;              //当たり判定Capsule
-    int colModel;                               //当たり判定Model
+    Line colLine;                               //線分
+    Sphere colSphere;                           //球体
+    Capsule colCapsule;                         //カプセル
+    int colModel;                               //モデル
 };
 

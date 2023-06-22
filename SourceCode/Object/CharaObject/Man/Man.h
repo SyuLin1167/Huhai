@@ -1,57 +1,57 @@
 #pragma once
 
 #include"../../ObjectBase/ObjectBase.h"
-#include"../../../Asset/Animation/Animation.h"
-#include"../../../Asset/AssetManager/AssetManager.h"
-#include"../../../Asset/Sound/Sound.h"
 
-        /*Manクラス*/
-class Man :public ObjectBase
+/*Manクラス*/
+class Man :public ObjBase
 {
 public:
     /// <summary>
-    /// Manのコンストラクタ
+    /// コンストラクタ
     /// </summary>
     Man();
 
     /// <summary>
-    /// Manのデストラクタ
+    /// デストラクタ
     /// </summary>
     ~Man();
 
     /// <summary>
-    /// Man読み込み処理
+    /// 読み込み処理
     /// </summary>
     void Load();
 
     /// <summary>
-    /// Man更新処理
+    /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     void Update(float deltaTime)override;
 
     /// <summary>
-    /// Man描画処理
+    /// 描画処理
     /// </summary>
     void Draw()override;
 
+    /// <summary>
+    /// 回転処理
+    /// </summary>
     void Rotate();
 
+    //アニメーションタイプ
     enum Anim
     {
-        CRYING = 0,			//待機
-        DEAD,
+        CRYING = 0,			//泣き
+        DEAD,               //死亡
     };
 
 private:
-    bool rotateNow;
-    VECTOR aimDir;
+    bool rotateNow;                 //回転状態
+    VECTOR aimDir;                  //目標方向
 
-    //---アニメーション関連---//
-    Animation* manAnim;
-    int animType;
+    class Animation* manAnim;       //アニメーション
+    int animType;                   //アニメーションタイプ
 
-    bool addRemarks;
+    bool isSpeak;                   //会話状態
 
-    class Sound* manSound;
+    class Sound* manSound;          //サウンド
 };

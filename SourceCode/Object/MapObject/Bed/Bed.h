@@ -1,11 +1,9 @@
 #pragma once
-#include"../../../Asset/AssetManager/AssetManager.h"
-#include"../../ObjectBase/ObjectBase.h"
-#include"../../ObjectManager/ObjManager.h"
-#include"../../../Scene/TitleScene/Title.h"
 
-        /*Bedクラス*/
-class Bed :public ObjectBase
+#include"../../ObjectBase/ObjectBase.h"
+
+/*Bedクラス*/
+class Bed :public ObjBase
 {
 public:
     /// <summary>

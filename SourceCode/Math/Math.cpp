@@ -1,6 +1,6 @@
 #include "Math.h"
 
-// @brief ベクトル同士の加算 //
+// ベクトル同士の加算 //
 
 VECTOR operator+(const VECTOR& lhs, const VECTOR& rhs)
 {
@@ -11,7 +11,7 @@ VECTOR operator+(const VECTOR& lhs, const VECTOR& rhs)
     return vRet;
 }
 
-// @brief ベクトル同士の減算 //
+// ベクトル同士の減算 //
 
 VECTOR operator-(const VECTOR& lhs, const VECTOR& rhs)
 {
@@ -22,7 +22,7 @@ VECTOR operator-(const VECTOR& lhs, const VECTOR& rhs)
     return vRet;
 }
 
-// @brief ベクトルのスカラー倍 //
+// ベクトルのスカラー倍 //
 
 VECTOR operator*(const VECTOR& lhs, float s)
 {
@@ -33,7 +33,7 @@ VECTOR operator*(const VECTOR& lhs, float s)
     return vRet;
 }
 
-// @brief ベクトルのスカラー倍 //
+// ベクトルのスカラー倍 //
 
 VECTOR operator*(float s, const VECTOR& rhs)
 {
@@ -44,7 +44,7 @@ VECTOR operator*(float s, const VECTOR& rhs)
     return vRet;
 }
 
-// @brief ベクトルの演算子 //
+// ベクトルの演算子 //
 
 VECTOR operator+=(VECTOR& lhs, const VECTOR& rhs)
 {
@@ -52,7 +52,7 @@ VECTOR operator+=(VECTOR& lhs, const VECTOR& rhs)
     return lhs;
 }
 
-// @brief ベクトルのスカラー倍の演算子 //
+// ベクトルのスカラー倍の演算子 //
 
 VECTOR operator*=(VECTOR& lhs, float rhs)
 {
@@ -60,7 +60,7 @@ VECTOR operator*=(VECTOR& lhs, float rhs)
     return lhs;
 }
 
-// @brief 角度の相似判定 //
+// 角度の相似判定 //
 
 bool IsSameAngle(const VECTOR& v1, const VECTOR& v2)
 {
@@ -72,7 +72,7 @@ bool IsSameAngle(const VECTOR& v1, const VECTOR& v2)
     return false;                                  //基本は異なるfalseを返す
 }
 
-// @brief Y回転方向算出 //
+// Y回転方向算出 //
 
 float CalcDirRotY(const VECTOR& nowVec, const VECTOR& dirVec)
 {
@@ -85,7 +85,7 @@ float CalcDirRotY(const VECTOR& nowVec, const VECTOR& dirVec)
     return 1.0f;                                    //基本は時計回り
 }
 
-// @brief Y回転処理 //
+// Y回転処理 //
 
 VECTOR RotForAimY(const VECTOR& nowVec, const VECTOR& aimVec,float velocity)
 {

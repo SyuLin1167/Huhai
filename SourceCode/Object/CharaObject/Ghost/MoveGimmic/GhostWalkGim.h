@@ -2,39 +2,37 @@
 
 #include"../Base/GhostBase.h"
 
-        /*GhostWalkGimクラス*/
+/*GhostWalkGimクラス*/
 class GhostWalkGim :public GhostBase
 {
 public:
     /// <summary>
-    /// GhostWalkGimコンストラクター
+    /// コンストラクタ
     /// </summary>
     GhostWalkGim();
 
     /// <summary>
-    /// GhostWalkGimコンストラクター
+    /// コンストラクタ
     /// </summary>
     ~GhostWalkGim();
 
     /// <summary>
-    /// GhostWalkGim更新処理
+    /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     void Update(float deltaTime)override;
 
     /// <summary>
-    /// GhostWalkGim描画処理
+    /// 描画処理
     /// </summary>
     void Draw()override;
 
     /// <summary>
-    /// GhostWalkGim衝突時処理
+    /// 衝突時処理
     /// </summary>
     /// <param name="other">:オブジェクト</param>
-    void OnCollisionEnter(const ObjectBase* other)override;
+    void OnCollisionEnter(const ObjBase* other)override;
 
 private:
-    ObjectBase* light;
-
-    bool move;
+    bool isMove;        //動作状態
 };

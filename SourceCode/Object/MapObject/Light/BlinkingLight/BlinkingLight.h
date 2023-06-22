@@ -16,8 +16,8 @@ public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    /// <param name="lightPos">:ライトのワールド座標</param>
-    BlinkingLight(VECTOR lightPos);
+    /// <param name="pos">:ワールド座標</param>
+    BlinkingLight(VECTOR pos);
 
     /// <summary>
     /// デストラクタ
@@ -41,7 +41,7 @@ public:
     void Draw()override;
 
 private:
-    float intervalTime;
-    float countTimer;
-    bool isBlinking;
+    float intervalTime;     //インターバル
+    float countTimer;       //カウント
+    bool isBlinking;        //点滅判定
 };

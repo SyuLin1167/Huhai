@@ -1,62 +1,65 @@
 #include "Player.h"
 
-        // @brief Playerコンストラクター //
+#include"../../ObjectManager/ObjManager.h"
+#include"../../../Asset/Sound/Sound.h"
+
+// コンストラクタ //
 
 Player::Player()
-    :ObjectBase(ObjectTag::Player)
+    :ObjBase(ObjectTag::Player)
     , canMove(true)
-    , inputVec{ 0,0,0 }
-    , UP{ 0,0,0 }
-    , DOWN{ 0,0,0 }
-    , LEFT{ 0,0,0 }
-    , RIGHT{ 0,0,0 }
-    , inputVel{ 0,0,0 }
+    , inputVec(VGet(0.0f,0.0f,0.0f))
+    , UP(VGet(0.0f, 0.0f, 0.0f))
+    , DOWN(VGet(0.0f, 0.0f, 0.0f))
+    , LEFT(VGet(0.0f, 0.0f, 0.0f))
+    , RIGHT(VGet(0.0f, 0.0f, 0.0f))
+    , inputVel(VGet(0.0f, 0.0f, 0.0f))
     , inputKey(false)
-    , rotateNow(false)
-    , camFront{ 0,0,0 }
-    , aimDir(VGet(0.0f, 0.0f, 0.0f))
+    , camFront(VGet(0.0f, 0.0f, 0.0f))
     , plySound(nullptr)
 {
+    //当たり判定設定
+    colType = CollisionType::Sphere;
+    colSphere.localCenter = VGet(0, 5.0f, 0);
+    colSphere.Radius = 3.0f;
+    colSphere.worldCenter = objPos;
+    colLine = Line(VGet(0.0f, 2.0f, 0.0f), VGet(0.0f, -3.0f, 0.0f));
 
-    //---インスタンス---//
-
-    objPos = { 0,0,0 };
-
-    //---当たり判定球設定---//
-    colType = CollisionType::Sphere;                                                        //当たり判定は球体
-    colSphere.localCenter = VGet(0, 5.0f, 0);                                                  //ローカル座標
-    colSphere.Radius = 3.0f;                                                                //球半径
-    colSphere.worldCenter = objPos;                                                         //ワールド座標
-
-    //---当たり判定線分設定---//
-    colLine = Line(VGet(0.0f, 2.0f, 0.0f), VGet(0.0f, -5.0f, 0.0f));             //線分設定
-
+    //サウンド設定
     plySound = new Sound;
     plySound->AddSound("../Assets/Sound/PlayerWalkSE.mp3", SoundTag::PlayerWalk, 250);
 }
 
-        // @brief Playerデストラクター //
+// デストラクタ //
 
 Player::~Player()
 {
-
 }
 
-        //@brief Player更新処理//
+// 更新処理 //
 
 void Player::Update(float deltaTime)
 {
-    ObjectBase* camFps = ObjManager::GetFirstObj(ObjectTag::Camera);
-    camFront = camFps->GetDir();               //カメラの正面方向の位置ベクトルを計算
+    //カメラの向き取得
+    ObjBase* camFps = ObjManager::GetFirstObj(ObjectTag::Camera);
+    camFront = camFps->GetDir();
     camFront.y = 0;
-    camFront = VNorm(camFront);               //ベクトルを正規化
+    camFront = VNorm(camFront);
 
-    UP = camFront;                               //カメラ方向に前進
-    DOWN = VScale(UP, -1.0f);              //カメラ方向から後進
-    RIGHT = VCross(VGet(0, 1, 0), camFront);     //カメラ方向から右に前進
-    LEFT = VScale(RIGHT, -1.0f);                    //カメラ方向から左に前進
-
+    //カメラの向きに合わせて移動方向決定
+    UP = camFront;
+    DOWN = VScale(UP, -1.0f);
+    RIGHT = VCross(VGet(0, 1, 0), camFront);
+    LEFT = VScale(RIGHT, -1.0f);
     objDir = camFront;
+
+    //動作中は操作可能
+    if (canMove)
+    {
+        Move(deltaTime);
+    }
+
+    //セリフ表示時は動作停止
     if (ObjManager::GetFirstObj(ObjectTag::Remarks))
     {
         canMove = false;
@@ -65,45 +68,41 @@ void Player::Update(float deltaTime)
     {
         canMove = true;
     }
-    if (canMove)
-    {
-        Move(deltaTime);                                        //Player移動処理
-    }
 
-    MV1SetPosition(objHandle, objPos);                              //ポジションセット
-
-    colSphere.Move(objPos);                                         //当たり判定の移動
+    //当たり判定更新
+    colSphere.Move(objPos);
     ColUpdate();
-
 }
 
-        // @brief Player描画処理 //
+// 描画処理 //
 
 void Player::Draw()
 {
 }
 
-        // @brief Player衝突時処理 //
+// 衝突時処理 //
 
-void Player::OnCollisionEnter(const ObjectBase* other)
+void Player::OnCollisionEnter(const ObjBase* other)
 {
     ObjectTag tag = other->GetTag();
 
+    //建物にぶつかったら押し戻す
     if (tag == ObjectTag::Map ||
-        tag == ObjectTag::Furniture)                                      //マップとぶつかったら
+        tag == ObjectTag::Furniture)
     {
-        int mapColModel = other->GetColModel();                        //モデル当たり判定取得
+        int mapColModel = other->GetColModel();
         CollHitSphere(mapColModel);
         ColHitLine(mapColModel);
     }
 
+    //幽霊にぶつかったら死亡
     if (tag == ObjectTag::Ghost)
     {
-        if (abs(VSize(other->GetPos() - objPos)) < 12.0f)
+        if (abs(VSize(other->GetPos() - objPos)) < 12.0f && canMove)
         {
             canMove = false;
             isVisible = false;
-            ObjectBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
+            ObjBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
             if (camera)
             {
                 camera->SetDir(other->GetPos() - camera->GetPos() + VGet(0, 18.0f, 0));
@@ -113,114 +112,83 @@ void Player::OnCollisionEnter(const ObjectBase* other)
     }
 }
 
-        // @brief 球体の衝突時処理 //
+// 球体の衝突時処理 //
 
 void Player::CollHitSphere(int colmodel)
 {
-    //---マップと境界球との当たり判定---//
-    MV1_COLL_RESULT_POLY_DIM colInfo;                          //モデル当たり判定情報
+    //球体がモデルの当たったら押し戻す
+    MV1_COLL_RESULT_POLY_DIM colInfo;
     if (CollisionPair(colSphere, colmodel, colInfo))
     {
-        VECTOR pushBack = CalcSpherePushBackFromMesh(colSphere, colInfo);   //押し戻し量算出
-        objPos += pushBack;                                                         //押し戻す
-        MV1CollResultPolyDimTerminate(colInfo);                        //当たり判定情報解放
+        VECTOR pushBack = CalcSpherePushBackFromMesh(colSphere, colInfo);
+        objPos += pushBack;
+        MV1CollResultPolyDimTerminate(colInfo);
         ColUpdate();
     }
 
 }
 
-        // @brief 線分の衝突時処理 //
+// 線分の衝突時処理 //
 
 void Player::ColHitLine(int colmodel)
 {
-    //---マップと足元線分の当たり判定---//
-    MV1_COLL_RESULT_POLY colInfoLine;                           //線分当たり判定情報
+    //線分がモデルに当たったら足元の座標に合わせる
+    MV1_COLL_RESULT_POLY colInfoLine;
     if (CollisionPair(colLine, colmodel, colInfoLine))
     {
-        objPos = colInfoLine.HitPosition;                       //足元を衝突時の座標に合わせる
+        objPos = colInfoLine.HitPosition;
         ColUpdate();
     }
 }
 
-        // @brief Player移動処理 //
+// 移動処理 //
 
 void Player::Move(float deltaTime)
 {
-    //---キー入力判定処理---//
-    inputKey = false;                               //未入力時は入力判定をFALSEに
+    //通常は未入力
+    inputKey = false;
 
-    if (CheckHitKey(KEY_INPUT_A))                //左キー入力
+    //Aキー入力で左に移動
+    if (CheckHitKey(KEY_INPUT_A))
     {
-        inputVec += LEFT;                           //ベクトル加算
-        inputKey = true;                            //入力判定をTRUEに
+        inputVec += LEFT;
+        inputKey = true;
     }
-    if (CheckHitKey(KEY_INPUT_D))               //右キー入力
+    //Dキー入力で右に移動
+    if (CheckHitKey(KEY_INPUT_D))
     {
         inputVec += RIGHT;
         inputKey = true;
     }
-    if (CheckHitKey(KEY_INPUT_W))                  //上キー入力
+    //Wキー入力で前に移動
+    if (CheckHitKey(KEY_INPUT_W))
     {
         inputVec += UP;
         inputKey = true;
     }
-    if (CheckHitKey(KEY_INPUT_S))                //下キー入力
+    //Sキー入力で後ろに移動
+    if (CheckHitKey(KEY_INPUT_S))
     {
         inputVec += DOWN;
         inputKey = true;
     }
 
-
-    //---移動処理---//
-    if (inputKey)                                                   //移動キーが入力されたら
+    //キー入力中は移動
+    if (inputKey)
     {
         plySound->StartSound(SoundTag::PlayerWalk, DX_PLAYTYPE_LOOP);
-        inputVec = VNorm(inputVec);                                 //ベクトルの方向成分を取得
-
-        if (VSquareSize(inputVec) == 0)                               //左右・上下同時押しの際は無視
+        inputVec = VNorm(inputVec);
+        if (VSquareSize(inputVec) == 0)
         {
             return;
         }
-
-        inputVel = inputVec * objSpeed * deltaTime;                  //移動速度設定
+        inputVel = inputVec * objSpeed * deltaTime;
     }
     else
     {
+        //未入力時は移動停止
         plySound->StopSound(SoundTag::PlayerWalk);
-        inputVel *= 0.5f;                                           //徐々に減速
+        inputVel *= 0.0f;
     }
-    objPos += inputVel;                                             //移動
-}
-
-void Player::Rotate()
-{
-    if (rotateNow)
-    {
-        // 回転が目標角度に十分近ければ回転モード終了
-        if (IsSameAngle(aimDir, objDir))
-        {
-            objDir = aimDir;
-            rotateNow = false;
-        }
-        else
-        {
-            // 回転させる
-            VECTOR interPolateDir;
-            interPolateDir = RotForAimY(objDir, aimDir, 1.0f);
-
-            // 回転が目標角度を超えていないか
-            VECTOR cross1, cross2;
-            cross1 = VCross(objDir, aimDir);
-            cross2 = VCross(interPolateDir, aimDir);
-
-            //目標角度を超えたら終了
-            if (cross1.y * cross2.y < 0.0f)
-            {
-                interPolateDir = aimDir;
-                rotateNow = false;
-            }
-            // 目標ベクトルに10度だけ近づけた角度
-            objDir = interPolateDir;
-        }
-    }
+    objPos += inputVel;
 }

@@ -1,74 +1,87 @@
 #include "Man.h"
+
+#include "../../ObjectManager/ObjManager.h"
+#include"../../../Asset/AssetManager/AssetManager.h"
+#include"../../../Asset/Animation/Animation.h"
 #include"../../../UI/Action/Action.h"
 #include"../../../UI/Reamarks/Remarks.h"
 #include"../../../Asset/Sound/Sound.h"
 
-        // @brief Manコンストラクタ //
+// コンストラクタ //
 
 Man::Man()
-    :ObjectBase(ObjectTag::Man)
+    :ObjBase(ObjectTag::Man)
     , manAnim(nullptr)
     , rotateNow(false)
     , aimDir{ 0,0,0 }
-    , addRemarks(false)
+    , isSpeak(false)
     , manSound(nullptr)
 {
     Load();
 }
 
-        // @brief Manデストラクタ //
+// デストラクタ //
 
 Man::~Man()
 {
+    //モデル削除
     AssetManager::ReleaseMesh(objHandle);
+
+    //インスタンス削除
     delete manAnim;
     delete manSound;
 }
 
-        // @brief Man読み込み処理 //
+// 読み込み処理 //
 
 void Man::Load()
 {
-    //---モデル読み込み---//
+    //モデル設定
     objHandle = AssetManager::GetMesh("../Assets/Chara/Man/ManModel.mv1");
     objPos = { -55.0f,0.0f,30.0f };
     objDir = { 0,0,-1 };
     MV1SetPosition(objHandle, objPos);
     MV1SetScale(objHandle, VGet(0.02f, 0.02f, 0.02f));
 
-
+    //アニメーション設定
     manAnim = new Animation(objHandle);
-
     manAnim->AddAnimation("../Assets/Chara/Man/ManCrying.mv1");
     manAnim->AddAnimation("../Assets/Chara/Man/ManDying.mv1", 30.0f, false);
     animType = CRYING;
     manAnim->StartAnim(animType);
 
-    ObjManager::Entry(new Action(objPos + VGet(0, 0, 5)));
-
+    //サウンド設定
     manSound = new Sound;
     manSound->AddSound("../Assets/Sound/ManHurtSE.mp3", SoundTag::ManHurt, 300, true);
     manSound->AddSound("../Assets/Sound/BodyFallSE.mp3", SoundTag::BodyFall, 300, true);
+
+    //アクションボタン生成
+    ObjManager::Entry(new Action(objPos + VGet(0, 0, 5)));
 }
 
-        // @brief Man更新処理 //
+// 更新処理 //
 
 void Man::Update(float deltaTime)
 {
+    //アニメーション時間再生
     manAnim->AddAnimTime(deltaTime);
-    manSound->Update(objPos);
 
+    //モデルの回転
     MATRIX rotYMat = MGetRotY(180.0f * (float)(DX_PI / 180.0f));
     VECTOR negativeVec = VTransform(objDir, rotYMat);
+
+    //アクションボタンが押されたらセリフを再生
     if (!ObjManager::GetFirstObj(ObjectTag::UI)->IsVisible())
     {
+        //プレイヤーの方を向く
         rotateNow = true;
         aimDir = VSub(ObjManager::GetFirstObj(ObjectTag::Player)->GetPos(), objPos);
         aimDir = VNorm(aimDir);
         Rotate();
 
-        ObjectBase* remarks = ObjManager::GetFirstObj(ObjectTag::Remarks);
-        if (!remarks && addRemarks)
+        //セリフが終わったら男性を死亡させる
+        ObjBase* remarks = ObjManager::GetFirstObj(ObjectTag::Remarks);
+        if (!remarks && isSpeak)
         {
             if (animType != DEAD)
             {
@@ -81,19 +94,22 @@ void Man::Update(float deltaTime)
                 manSound->StartSound(SoundTag::BodyFall, DX_PLAYTYPE_BACK);
             }
         }
-        if (!rotateNow && !addRemarks)
-        {
-            ObjManager::Entry(new Remarks(TextType::ManSpeak));
-            addRemarks = true;
-        }
         if (animType == DEAD && !manAnim->IsPlaying())
         {
             isAlive = false;
+        }
+
+        //向き終わったら会話中にする
+        if (!rotateNow && !isSpeak)
+        {
+            ObjManager::Entry(new Remarks(TextType::ManSpeak));
+            isSpeak = true;
         }
     }
 
     // モデルに回転をセットする
     MV1SetRotationZYAxis(objHandle, negativeVec, VGet(0.0f, 1.0f, 0.0f), 0.0f);
+    manSound->Update(objPos);
 }
 
         // @brief Man描画処 //

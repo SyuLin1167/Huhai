@@ -1,56 +1,59 @@
 #include "Chair.h"
+
+#include"../../../Asset/AssetManager/AssetManager.h"
+#include"../../ObjectManager/ObjManager.h"
+#include"../../../Asset/Animation/Animation.h"
 #include"../../../Asset/Sound/Sound.h"
 
-        // コンストラクタ //
+// コンストラクタ //
 
 Chair::Chair()
-    :ObjectBase(ObjectTag::Furniture)
+    :ObjBase(ObjectTag::Furniture)
     , ChairAnim(nullptr)
     , chairSound(nullptr)
 {
     Load();
 }
 
-        // デストラクタ //
+// デストラクタ //
 
 Chair::~Chair()
 {
+    //モデル削除
     AssetManager::ReleaseMesh(objHandle);
+    
+    //インスタンス削除
     delete ChairAnim;
     delete chairSound;
 }
 
-        // 読み込み処理 //
+// 読み込み処理 //
 
 void Chair::Load()
 {
+
+    //モデル設定
+    objHandle = AssetManager::GetMesh("../Assets/Map/Chair/Chair.mv1");
     objPos = { 66,0,4 };
     objDir = { 0,-90,0 };
+    MV1SetPosition(objHandle, objPos);
+    MV1SetScale(objHandle, objScale);
+    MV1SetRotationXYZ(objHandle, VGet(0.0f, objDir.y / 180.0f * DX_PI_F, 0.0f));
 
-    //---モデル読み込み---//
-    objHandle = AssetManager::GetMesh("../Assets/Map/Chair/Chair.mv1");            //モデル読み込み
-
-    MV1SetPosition(objHandle, objPos);                                                      //モデルの座標設定
-    MV1SetScale(objHandle, objScale);                                                       //モデルのサイズ設定
-    MV1SetRotationXYZ(objHandle, VGet(0.0f, objDir.y / 180.0f * DX_PI_F, 0.0f));            //モデルの向き設定
-
-    //---インスタンス---//
+    //アニメーション設定
     ChairAnim = new Animation(objHandle);
-
-    //---アニメーション読み込み---//
-    ChairAnim->AddAnimation("../Assets/Map/Chair/Chair.mv1");                        //待機:0
-    ChairAnim->AddAnimation("../Assets/Map/Chair/ChairMove.mv1", 30.0f, false);      //動く:1
-
+    ChairAnim->AddAnimation("../Assets/Map/Chair/Chair.mv1");
+    ChairAnim->AddAnimation("../Assets/Map/Chair/ChairMove.mv1", 30.0f, false);
     animType = IDLE;
     ChairAnim->StartAnim(animType);
 
-    //---当たり判定---//
-    colType = CollisionType::Sphere;                                                         //当たり判定は球体
+    //当たり判定設定
+    colType = CollisionType::Sphere;
+    colSphere.localCenter = VGet(0, 5, 0);
+    colSphere.Radius = 15.0f;
+    colSphere.worldCenter = objPos;
 
-    colSphere.localCenter = VGet(0, 5, 0);                                                 //ローカル座標
-    colSphere.Radius = 15.0f;                                                                //球半径
-    colSphere.worldCenter = objPos;                                                          //ワールド座標
-
+    //サウンド設定
     chairSound = new Sound;
     chairSound->AddSound("../Assets/Sound/MoveChairSE.mp3", SoundTag::MoveChair, 300, true);
     chairSound->AddSound("../Assets/Sound/FallingChairSE.mp3", SoundTag::FallingChair, 150, true);
@@ -60,32 +63,37 @@ void Chair::Load()
 
 void Chair::Update(float deltaTime)
 {
+    //アニメーション時間再生
     ChairAnim->AddAnimTime(deltaTime);
-    chairSound->Update(objPos);
 
-    //---当たり判定設定---//
-    ObjectBase* player = ObjManager::GetFirstObj(ObjectTag::Player);         //プレイヤーオブジェクト取得
-    if (player)                                                              //オブジェクトの中身が空でなければ
+    //動作処理
+    ObjBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
+    if (player)
     {
+        //プレイヤーが一定距離近づいたら動作する
         if (CollisionPair(colSphere, player->GetColSphere()))
         {
-            if (animType != MOVE || animType == IDLE)                                       //アニメーション開くモーションでなければ
+            if (animType != MOVE || animType == IDLE)
             {
-                animType = MOVE;                                        //アニメーションは開くモーション
-                ChairAnim->StartAnim(animType);                               //開くモーションでアニメーション開始
+                animType = MOVE;
+                ChairAnim->StartAnim(animType);
                 chairSound->StartSoundOnce(SoundTag::MoveChair, DX_PLAYTYPE_BACK);
             }
         }
     }
 
-    colModel = objHandle;																//当たり判定のモデルはオブジェクトのモデル
+    //当たり判定更新
+    colModel = objHandle;
     ColUpdate();
 
+    //サウンド更新
+    chairSound->Update(objPos);
 }
 
-        // 描画処理 //
+// 描画処理 //
 
 void Chair::Draw()
 {
-    MV1DrawModel(objHandle);						//モデル描画
+    //モデル描画
+    MV1DrawModel(objHandle);
 }

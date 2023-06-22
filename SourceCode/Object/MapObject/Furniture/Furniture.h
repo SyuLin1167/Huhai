@@ -1,37 +1,35 @@
 #pragma once
 #include"../../ObjectBase/ObjectBase.h"
-#include"../../../Asset/AssetManager/AssetManager.h"
-#include"../../../Asset/Model/Model.h"
 
-        /*Furnitureクラス*/
-class Furniture :public ObjectBase
+/*Furnitureクラス*/
+class Furniture :public ObjBase
 {
 public:
     /// <summary>
-    /// Furnitureコンストラクター
+    /// コンストラクタ
     /// </summary>
     /// <param name="furtag">:家具タグ</param>
     Furniture(int furtag);
 
     /// <summary>
-    /// Furnitureデストラクター
+    /// デストラクタ
     /// </summary>
     ~Furniture();
 
     /// <summary>
-    /// Furnitureモデル読み込み処理
+    /// 読み込み処理
     /// </summary>
-    /// <param name="furtag">:家具タグ</param>
-    void LoadModel(int furtag);
+    /// <param name="tag">:タグ</param>
+    void Load(int tag);
 
     /// <summary>
-    /// Furniture更新処理
+    /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     void Update(float deltaTime) override;
 
     /// <summary>
-    /// Furniture描画処理
+    /// 描画処理
     /// </summary>
     void Draw()override;
 

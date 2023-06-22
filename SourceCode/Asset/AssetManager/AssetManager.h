@@ -3,67 +3,67 @@
 #include<string>
 #include<unordered_map>
 
-    /* アセット管理クラス */
+/* AssetManagerクラス */
 class AssetManager final
 {
 public:
     /// <summary>
-    /// AssetManager初期化処理
+    /// 初期化処理
     /// </summary>
     static void Init();
 
     /// <summary>
-    /// メッシュの取得
+    /// メッシュ取得
     /// </summary>
-    /// <param name="fileName">:メッシュファイル名</param>
+    /// <param name="fileName">:ファイル名</param>
     /// <returns>複製したメッシュID</returns>
-    static int GetMesh(std::string meshFileName);
+    static int GetMesh(std::string fileName);
 
     /// <summary>
-    /// アニメーションの取得
+    /// アニメーション取得
     /// </summary>
-    /// <param name="fileName">:アニメーションファイル名</param>
+    /// <param name="fileName">:ファイル名</param>
     /// <returns>アニメーションID</returns>
-    static int GetAnim(std::string animFileName);
+    static int GetAnim(std::string fileName);
 
     /// <summary>
-    /// サウンドの取得
+    /// サウンド取得
     /// </summary>
-    /// <param name="soundFileName">:サウンドファイル名</param>
+    /// <param name="fileName">:ファイル名</param>
     /// <returns>複製したサウンドID</returns>
-    static int GetSound(std::string soundFileName);
+    static int GetSound(std::string fileName);
 
     /// <summary>
-    /// メッシュの削除
+    /// メッシュ削除
     /// </summary>
     /// <param name="meshID">:メッシュID</param>
     static void ReleaseMesh(int meshID);
 
     /// <summary>
-    /// 全アセットの削除
+    /// 全アセット削除
     /// </summary>
     static void ReleaseAllAsset();
 
     /// <summary>
-    /// AssetManagerの解放
+    /// 後処理
     /// </summary>
     static void Finalize();
 
 private:
     /// <summary>
-    /// AssetManagerコンストラクター(シングルトン)
+    /// コンストラクタ(シングルトン)
     /// </summary>
     AssetManager();
 
     /// <summary>
-    /// AssetManagerデストラクター
+    /// デストラクタ
     /// </summary>
     ~AssetManager();
 
-    static AssetManager* assetInstance;     //AssetManagerの実態
-    std::unordered_map<std::string, int>meshMap;      //メッシュ(オリジナル)
-    std::unordered_map<std::string, int>animMap;      //アニメーション(オリジナル)
-    std::unordered_map<std::string, int>soundMap;     //サウンド(オリジナル)
-    std::vector<int> duplicateMesh;              //メッシュ(複製)
-    std::vector<int> duplicateSound;             //サウンド(複製)
+    static AssetManager* assetMgr;                      //自身の実態
+    std::unordered_map<std::string, int>meshMap;        //メッシュ(オリジナル)
+    std::unordered_map<std::string, int>animMap;        //アニメーション(オリジナル)
+    std::unordered_map<std::string, int>soundMap;       //サウンド(オリジナル)
+    std::vector<int> dupMesh;                     //メッシュ(複製)
+    std::vector<int> dupSound;                    //サウンド(複製)
 };

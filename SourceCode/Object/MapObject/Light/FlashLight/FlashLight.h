@@ -1,7 +1,7 @@
 #pragma once
 #include"../LightBase/LightBase.h"
 
-        /*FlashLighitクラス*/
+/*FlashLighitクラス*/
 class FlashLight :public LightBase
 {
 public:

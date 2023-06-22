@@ -1,10 +1,14 @@
 #include "Map.h"
+
+#include"../../ObjectManager/ObjManager.h"
+#include"../../../Asset/AssetManager/AssetManager.h"
+#include"../../../Asset/Model/Model.h"
 #include"../../../Asset/Sound/Sound.h"
 
-        // コンストラクタ //
+// コンストラクタ //
 
 Map::Map(int maptag)
-    :ObjectBase(ObjectTag::Map)
+    :ObjBase(ObjectTag::Map)
     , mapModel(nullptr)
     , mapSound(nullptr)
     , mapTag(maptag)
@@ -12,18 +16,19 @@ Map::Map(int maptag)
     LoadModel();
 }
 
-        // デストラクタ //
+// デストラクタ //
 
 Map::~Map()
 {
-    AssetManager::ReleaseMesh(objHandle);					//メッシュの削除
+    //メッシュ削除
+    AssetManager::ReleaseMesh(objHandle);
 }
 
         // 読み込み処理 //
 
 void Map::LoadModel()
 {
-    //モデル読み込み
+    //モデル設定
     mapModel = new Model;
     mapModel->AddModel("../Assets/Map/Stage/Title.mv1");
     mapModel->AddModel("../Assets/Map/Room/Room.mv1");
@@ -31,25 +36,28 @@ void Map::LoadModel()
     mapModel->AddModel("../Assets/Map/Stage/Escape.mv1");
     mapModel->AddModel("../Assets/Map/Stage/EscapeMain.mv1");
     mapModel->AddModel("../Assets/Map/Stage/GoalRoom.mv1");
-    objHandle = mapModel->SetModel(mapTag);
+    objHandle = mapModel->GetModel(mapTag);
+    MV1SetPosition(objHandle, objPos);
+    MV1SetScale(objHandle, VGet(0.11f, 0.12f, 0.11f));
 
-    colModel = objHandle;																	//当たり判定モデルはモデルに
-    MV1SetPosition(objHandle, objPos);														//位置セット
-    MV1SetScale(objHandle, VGet(0.11f, 0.12f, 0.11f));										//スケールセット
+    //当たり判定設定
+    colModel = objHandle;
+    MV1SetupCollInfo(colModel);
 
-    MV1SetupCollInfo(colModel);																//当たり判定情報設定
-
+    //サウンド設定
     mapSound = new Sound;
     mapSound->AddSound("../Assets/Sound/InDoorSE.mp3", SoundTag::InDoor, 150);
     mapSound->StartSound(SoundTag::InDoor, DX_PLAYTYPE_LOOP);
 }
 
-        // 更新処理 //
+// 更新処理 //
 
 void Map::Update(float deltaTime)
 {
+    //ゴール地点の処理
     if (mapTag == GOAL)
     {
+        //ゴールに近づいたら表示してたどり着いたら死亡にする
         MV1SetMaterialEmiColor(objHandle, 0, GetColorF(1.0f, 1.0f, 1.0f, 1.0f));
         if (ObjManager::GetFirstObj(ObjectTag::Player)->GetPos().x > 730)
         {
@@ -64,11 +72,15 @@ void Map::Update(float deltaTime)
             isVisible = false;
         }
     }
+
+    //当たり判定更新
+    ColUpdate();
 }
 
-        // 描画処理 //
+// 描画処理 //
 
 void Map::Draw()
 {
+    //モデル描画
     MV1DrawModel(objHandle);
 }

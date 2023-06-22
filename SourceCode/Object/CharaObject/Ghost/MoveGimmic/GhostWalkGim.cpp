@@ -1,64 +1,71 @@
 #include "GhostWalkGim.h"
+
 #include"../../../MapObject/Light/NomalLight/NomalLight.h"
 #include"../../Man/Man.h"
 
-        // コンストラクタ //
+// コンストラクタ //
 
 GhostWalkGim::GhostWalkGim()
     :GhostBase()
-    , light(nullptr)
-    , move(false)
+    , isMove(false)
 {
     objPos = VGet(120.0f, 0.0f, 65.0f);
-
-    //---当たり判定球設定---//
-    colType = CollisionType::Sphere;
-    colSphere.localCenter = VGet(0, 5, -40);			//ローカル座標
-    colSphere.Radius = 15.0f;						//球半径
-    colSphere.worldCenter = objPos;					//ワールド座標
-
     objSpeed = 17.0f;
+
+    //当たり判定設定
+    colType = CollisionType::Sphere;
+    colSphere.localCenter = VGet(0, 5, -40);
+    colSphere.Radius = 15.0f;
+    colSphere.worldCenter = objPos;
 }
 
-        // デストラクタ //
+// デストラクタ //
 
 GhostWalkGim::~GhostWalkGim()
 {
 }
 
-        // 更新処理 //
+// 更新処理 //
 
 void GhostWalkGim::Update(float deltaTime)
 {
+    //アニメーション時間再生
     gstAnim->AddAnimTime(deltaTime);
-    if (move)
+
+    //動作中は移動
+    if (isMove)
     {
-        //---当たり判定線分設定---//
-        ObjectBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
+        //当たり判定設定
+        ObjBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
         colLine = Line(VGet(7.0f, 5.0f, 0.0f), player->GetPos() - objPos + VGet(0, 5, 0));             //線分設定
 
         objPos.x -= objSpeed * deltaTime;
     }
 
-    MV1SetPosition(objHandle, objPos);                        //ポジション設定
-    MATRIX RotMatY = MGetRotY(90 * (float)(DX_PI / 90.0f));       //左向きに回転させる
-    MV1SetRotationZYAxis(objHandle, VTransform(objDir, RotMatY), VGet(0.0f, 1.0f, 0.0f), 0.0f);         //モデル回転
+    //モデル回転
+    MV1SetPosition(objHandle, objPos);
+    MATRIX RotMatY = MGetRotY(90 * (float)(DX_PI / 90.0f));
+    MV1SetRotationZYAxis(objHandle, VTransform(objDir, RotMatY), VGet(0.0f, 1.0f, 0.0f), 0.0f);
 
+    //当たり判定更新
     ColUpdate();
 }
 
-        // 描画処理 //
+// 描画処理 //
 
 void GhostWalkGim::Draw()
 {
+    //モデル描画
     MV1DrawModel(objHandle);
 }
 
-        // 衝突時処理 //
+// 衝突時処理 //
 
-void GhostWalkGim::OnCollisionEnter(const ObjectBase* other)
+void GhostWalkGim::OnCollisionEnter(const ObjBase* other)
 {
     ObjectTag tag = other->GetTag();
+
+    //プレイヤーが一定距離近づいたら動作開始
     if (tag == ObjectTag::Player)
     {
         if (CollisionPair(colSphere, other->GetColSphere()))
@@ -68,8 +75,8 @@ void GhostWalkGim::OnCollisionEnter(const ObjectBase* other)
                 animType = WALK;
                 gstAnim->StartAnim(animType);
                 gstSound->StartSound(SoundTag::GhostWalk, DX_PLAYTYPE_BACK);
-                move = true;
-                light = ObjManager::GetFirstObj(ObjectTag::Light);
+                isMove = true;
+                ObjBase* light = ObjManager::GetFirstObj(ObjectTag::Light);
                 if (light)
                 {
                     light->SetPos(VGet(-32, 32, 75));
@@ -77,12 +84,13 @@ void GhostWalkGim::OnCollisionEnter(const ObjectBase* other)
             }
         }
     }
+
+    //自身とプレイヤー間の線分が建物にぶつかったら死亡する
     if (tag == ObjectTag::Map ||
-        tag == ObjectTag::Furniture)                                      //マップとぶつかったら
+        tag == ObjectTag::Furniture)
     {
-        int mapColModel = other->GetColModel();                        //モデル当たり判定取得
-        //---マップと足元線分の当たり判定---//
-        MV1_COLL_RESULT_POLY colInfoLine;                           //線分当たり判定情報
+        int mapColModel = other->GetColModel();
+        MV1_COLL_RESULT_POLY colInfoLine;
         if (CollisionPair(colLine, mapColModel, colInfoLine))
         {
             isVisible = false;

@@ -2,8 +2,8 @@
 
     // コンストラクタ //
 
-BlendMode::BlendMode(int FadeSpeed)
-    :fadeValue(0)
+BlendMode::BlendMode(float FadeSpeed)
+    :fadeValue(0.0f)
     , fadeSpeed(FadeSpeed)
     , nowFade(false)
     , nowDark(false)
@@ -18,13 +18,17 @@ BlendMode::~BlendMode()
 
     // フェードアウト //
 
-void BlendMode::AddFade()
+void BlendMode::AddFade(float deltaTime)
 {
     if (fadeValue <= 255)
     {
         //値が255以下だったらフェードアウトする
         nowFade = true;
-        fadeValue += fadeSpeed;
+        fadeValue += fadeSpeed * deltaTime;
+        if (fadeValue <= 0)
+        {
+            fadeValue = 0;
+        }
     }
     else
     {
@@ -33,31 +37,35 @@ void BlendMode::AddFade()
     }
 }
 
-    // フェードイン //
+// フェードイン //
 
-void BlendMode::SubFade()
+void BlendMode::SubFade(float deltaTime)
 {
     if (fadeValue >= 0)
     {
         //値が0以上だったらフェードインする
         nowFade = true;
-        fadeValue -= fadeSpeed;
+        fadeValue -= fadeSpeed * deltaTime;
+        if (fadeValue >= 255)
+        {
+            fadeValue = 255;
+        }
     }
-    else
+    else 
     {
         //上の条件に当てはまらないならフェードしない
         nowFade = false;
     }
 }
 
-    // フェード //
+// フェード //
 
 void BlendMode::Fade()
 {
-    SetDrawBlendMode(DX_BLENDMODE_ALPHA, fadeValue);
+    SetDrawBlendMode(DX_BLENDMODE_ALPHA, static_cast<int>(fadeValue));
 }
 
-    // 暗転処理 //
+// 暗転処理 //
 
 void BlendMode::Darken()
 {

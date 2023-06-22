@@ -2,41 +2,41 @@
 
 #include"../LightBase/LightBase.h"
 
-        /*NomalLightクラス*/
+/*NomalLightクラス*/
 class NomalLight :public LightBase
 {
 public:
     /// <summary>
-    /// NomalLightコンストラクタ
+    /// コンストラクタ
     /// </summary>
     NomalLight();
 
     /// <summary>
-    /// NomalLightコントラクタ
+    /// コントラクタ
     /// </summary>
-    /// <param name="lightPos">:ライトのワールド座標</param>
-    NomalLight(VECTOR lightPos);
+    /// <param name="pos">:ワールド座標</param>
+    NomalLight(VECTOR pos);
 
 
     /// <summary>
-    /// NomalLightデストラクタ
+    /// デストラクタ
     /// </summary>
     ~NomalLight();
 
     /// <summary>
-    /// NomalLight読み込み処理
+    /// 読み込み処理
     /// </summary>
     void Load();
 
     /// <summary>
-    /// NomalLight更新処理
+    /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     void Update(float deltaTime)override;
 
 
     /// <summary>
-    /// NomalLight描画処理
+    /// 描画処理
     /// </summary>
     void Draw()override;
 };

@@ -1,7 +1,6 @@
 #include "Collision.h"
 
-//---線分当たり判定関連---//
-// @brief Lineコンストラクター //
+// Lineコンストラクタ //
 
 Line::Line()
     :localStart()
@@ -11,7 +10,7 @@ Line::Line()
 {
 }
 
-// @brief Lineコンストラクター(引数付) //
+// Lineコンストラクタ //
 
 Line::Line(const VECTOR& startPos, const VECTOR& endPos)
     :localStart(startPos)
@@ -21,7 +20,7 @@ Line::Line(const VECTOR& startPos, const VECTOR& endPos)
 {
 }
 
-// @brief Line移動処理 //
+// Line移動処理 //
 
 void Line::Move(const VECTOR& pos)
 {
@@ -29,8 +28,7 @@ void Line::Move(const VECTOR& pos)
     worldEnd = localEnd + pos;              //ワールド座標終点移動
 }
 
-//---球体当たり判定関連---//
-// @brief Sphereコンストラクター //
+// Sphereコンストラクタ //
 
 Sphere::Sphere()
     :localCenter()
@@ -39,7 +37,7 @@ Sphere::Sphere()
 {
 }
 
-// @brief Sphereコンストラクター(引数付)
+// Sphereコンストラクタ
 
 Sphere::Sphere(const VECTOR& center,float radius)
     :localCenter(center)
@@ -48,14 +46,13 @@ Sphere::Sphere(const VECTOR& center,float radius)
 {
 }
 
-// @brief Sphere移動処理 //
+// Sphere移動処理 //
 void Sphere::Move(const VECTOR& pos)
 {
     worldCenter = localCenter + pos;        //ワールド中心座標移動
 }
 
-//---カプセル当たり判定関連---//
-// @brief Capsuleコンストラクター //
+// Capsuleコンストラクタ //
 
 Capsule::Capsule()
     :localStart()
@@ -66,7 +63,7 @@ Capsule::Capsule()
 {
 }
 
-// @brief Capsuleコンストラクター //
+// Capsuleコンストラクタ //
 
 Capsule::Capsule(const VECTOR& startPos, const VECTOR& endPos, float radius)
     :localStart(startPos)
@@ -77,7 +74,7 @@ Capsule::Capsule(const VECTOR& startPos, const VECTOR& endPos, float radius)
 {
 }
 
-// @brief Capsule移動処理　//
+// Capsule移動処理　//
 
 void Capsule::Move(const VECTOR& pos)
 {
@@ -85,7 +82,7 @@ void Capsule::Move(const VECTOR& pos)
     worldEnd = localEnd + pos;              //ワールド座標終点移動
 }
 
-// @brief 球体同士の当たり判定 //
+// 球体同士の当たり判定 //
 
 bool CollisionPair(const Sphere& sphere1, const Sphere& sphere2)
 {
@@ -93,7 +90,7 @@ bool CollisionPair(const Sphere& sphere1, const Sphere& sphere2)
         sphere2.worldCenter, sphere2.Radius);
 }
 
-// @brief 線分＆球体当たり判定 //
+// 線分＆球体当たり判定 //
 
 bool CollisionPair(const Line& line, const Sphere& sphere)
 {
@@ -101,7 +98,7 @@ bool CollisionPair(const Line& line, const Sphere& sphere)
         sphere.worldCenter, sphere.Radius);
 }
 
-// @brief 球体＆線分当たり判定 //
+// 球体＆線分当たり判定 //
 
 bool CollisionPair(const Sphere& sphere, const Line& line)
 {
@@ -109,7 +106,7 @@ bool CollisionPair(const Sphere& sphere, const Line& line)
         sphere.worldCenter, sphere.Radius);
 }
 
-// @brief 線分＆モデル当たり判定 //
+// 線分＆モデル当たり判定 //
 
 bool CollisionPair(const Line& line, const int modelHandle, MV1_COLL_RESULT_POLY& colInfo)
 {
@@ -117,14 +114,14 @@ bool CollisionPair(const Line& line, const int modelHandle, MV1_COLL_RESULT_POLY
         line.worldStart, line.worldEnd);
     return colInfo.HitFlag;
 }
-// @brief モデル＆線分当たり判定 //
+// モデル＆線分当たり判定 //
 
 bool CollisionPair( const int modelHandle,const Line& line, MV1_COLL_RESULT_POLY& colInfo)
 {
     return CollisionPair(line, modelHandle, colInfo);
 }
 
-// @brief 球体＆モデル当たり判定 //
+// 球体＆モデル当たり判定 //
 
 bool CollisionPair(const Sphere& sphere, const int modelHandle, MV1_COLL_RESULT_POLY_DIM& colInfo)
 {
@@ -136,7 +133,7 @@ bool CollisionPair(const Sphere& sphere, const int modelHandle, MV1_COLL_RESULT_
     return true;
 }
 
-// @brief 球体＆モデル当たり判定押し戻し量算出 //
+// 球体＆モデル当たり判定押し戻し量算出 //
 
 VECTOR CalcSpherePushBackFromMesh(const Sphere& sphere, const MV1_COLL_RESULT_POLY_DIM& colInfo)
 {
@@ -158,28 +155,32 @@ VECTOR CalcSpherePushBackFromMesh(const Sphere& sphere, const MV1_COLL_RESULT_PO
         planeNormal = VCross(edge1, edge2);                                         //辺からポリゴン面の法線ベクトル算出
         planeNormal = VNorm(planeNormal);                                           //法線ベクトル正規化
 
-        //---球中心に最も近いポリゴン平面の点を算出---//
-        VECTOR calc1, calc2;                                                        //算出ベクトル
-
-        calc1 = canditateCenter - colInfo.Dim[i].Position[0];                       //辺(pos0・球中心)ベクトル
-        float  dot = VDot(planeNormal, calc1);                                      //法線と辺の内積
-
-        VECTOR hitPos = canditateCenter - planeNormal * dot;                        //衝突点
-
-        //--球のめり込み量算出---//
-        calc2 = canditateCenter - hitPos;                                           //辺衝突点・球中心ベクトル
-        float  len = VSize(calc2);                                                  //めり込み量の大きさ
-
         //---中心押し戻し---//
         if (HitCheck_Sphere_Triangle(canditateCenter, Rad,
             colInfo.Dim[i].Position[0],
             colInfo.Dim[i].Position[1],
             colInfo.Dim[i].Position[2]) == TRUE)                                    //球がめり込んでいたら
         {
+            //---球中心に最も近いポリゴン平面の点を算出---//
+            VECTOR calc1, calc2;                                                        //算出ベクトル
+
+            calc1 = canditateCenter - colInfo.Dim[i].Position[0];                       //辺(pos0・球中心)ベクトル
+            float  dot = VDot(planeNormal, calc1);                                      //法線と辺の内積
+
+            VECTOR hitPos = canditateCenter - planeNormal * dot;                        //衝突点
+
+            //--球のめり込み量算出---//
+            calc2 = canditateCenter - hitPos;                                           //辺衝突点・球中心ベクトル
+            float  len = VSize(calc2);                                                  //めり込み量の大きさ
+
             VECTOR moveVec;
             len = Rad - len;                                                        //球半径からめり込み量を引いた大きさ
             moveVec = planeNormal * len;                                            //移動量算出
             canditateCenter += moveVec;                                             //球中心押し戻し
+        }
+        else
+        {
+            continue;
         }
     }
 

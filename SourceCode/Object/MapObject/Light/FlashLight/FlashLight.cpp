@@ -1,6 +1,6 @@
 #include "FlashLight.h"
 
-        // コンストラクタ //
+// コンストラクタ //
 
 FlashLight::FlashLight()
     :LightBase()
@@ -8,40 +8,45 @@ FlashLight::FlashLight()
     Load();
 }
 
-        // コンストラクタ //
+// コンストラクタ //
 
-FlashLight::FlashLight(VECTOR lightPos)
-    :LightBase(lightPos)
+FlashLight::FlashLight(VECTOR pos)
+    :LightBase(pos)
 {
     Load();
 }
 
-        // デストラクタ //
+// デストラクタ //
 
 FlashLight::~FlashLight()
 {
+    //ライト削除
     DeleteLightHandle(lightHandle);
+
+    //モデル削除
     AssetManager::ReleaseMesh(objHandle);
 }
 
-        // 読み込み処理 //
+// 読み込み処理 //
 
 void FlashLight::Load()
 {
+    //ライト設定
     lightAtten2 = 0.0005f;
     lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2 * 10);
 }
 
-        // 更新処理 //
+// 更新処理 //
 
 void FlashLight::Update(float deltaTime)
 {
-    ObjectBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
+    //プレイヤーの周辺を光らせる
+    ObjBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
     SetLightPositionHandle(lightHandle, camera->GetPos());
     //SetLightDirectionHandle(lightHandle, camera->GetDir());
 }
 
-        // 描画処理 //
+// 描画処理 //
 
 void FlashLight::Draw()
 {

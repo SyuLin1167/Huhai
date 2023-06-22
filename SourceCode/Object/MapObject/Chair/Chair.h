@@ -1,12 +1,9 @@
 #pragma once
-#include"../../../Asset/AssetManager/AssetManager.h"
-#include"../../ObjectBase/ObjectBase.h"
-#include"../../ObjectManager/ObjManager.h"
-#include"../../../Asset/Animation/Animation.h"
-#include"../../../Collision/Collision.h"
 
-        /*Chairクラス*/
-class Chair :public ObjectBase
+#include"../../ObjectBase/ObjectBase.h"
+
+/*Chairクラス*/
+class Chair :public ObjBase
 {
 public:
     /// <summary>
@@ -20,31 +17,32 @@ public:
     ~Chair();
 
     /// <summary>
-    /// Chair読み込み処理
+    /// 読み込み処理
     /// </summary>
     void Load();
 
     /// <summary>
-    /// Chair更新処理
+    /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     void Update(float deltaTime)override;
 
     /// <summary>
-    /// Chair描画処理
+    /// 描画処理
     /// </summary>
     void Draw()override;
 
+    //アニメーションタイプ
     enum Anim
     {
         IDLE = 0,			//待機
-        MOVE,
+        MOVE,               //動く
     };
+
 private:
-    //---アニメーション関連---//
     class Animation* ChairAnim;			//アニメーション
     int animType;						//アニメーション状態
 
-    class Sound* chairSound;
+    class Sound* chairSound;            //サウンド
 };
 

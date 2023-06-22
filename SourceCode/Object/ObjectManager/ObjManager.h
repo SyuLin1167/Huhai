@@ -1,10 +1,12 @@
 #pragma once
+
 #include<vector>
 #include<unordered_map>
+
 #include"../ObjectBase/ObjectBase.h"
 #include"../ObjectBase/ObjectTag.h"
 
-    /* ObjManagerクラス */
+/* ObjManagerクラス */
 class ObjManager final
 {
 public:
@@ -14,30 +16,30 @@ public:
     static void Init();
 
     /// <summary>
-    /// オブジェクト登録
+    /// 登録
     /// </summary>
-    /// <param name="newObj">:追加するオブジェクト</param>
-    static void Entry(ObjectBase* newObj);
+    /// <param name="newObj">:追加オブジェクト</param>
+    static void Entry(ObjBase* newObj);
 
     /// <summary>
-    /// オブジェクト削除
+    /// 削除
     /// </summary>
-    /// <param name="releaseObj">:削除するオブジェクト</param>
-    static void Release(ObjectBase* releaseObj);
+    /// <param name="releaseObj">:削除オブジェクト</param>
+    static void Release(ObjBase* releaseObj);
 
     /// <summary>
-    /// 全オブジェクト削除
+    /// 全削除
     /// </summary>
     static void ReleaseAllObj();
 
     /// <summary>
-    /// 全オブジェクトの更新処理
+    /// 全更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     static void Update(float deltaTime);
 
     /// <summary>
-    /// オブジェクトの描画処理
+    /// 全描画処理
     /// </summary>
     static void Draw();
 
@@ -47,42 +49,42 @@ public:
     static void Collision();
 
     /// <summary>
-    /// タグ種の最初のオブジェクト取得
+    /// タグの先頭オブジェクト取得
     /// </summary>
     /// <param name="tag">:タグ</param>
-    /// <returns>タグ種の最初のオブジェクト</returns>
-    static ObjectBase* GetFirstObj(ObjectTag tag);
+    /// <returns>オブジェクト</returns>
+    static ObjBase* GetFirstObj(ObjectTag tag);
 
     /// <summary>
-    /// タグ種のtagNum番目のオブジェクト取得
+    /// タグの指定オブジェクト取得
     /// </summary>
     /// <param name="tag">:タグ</param>
     /// <param name="tagNum">:オブジェクト番号</param>
-    /// <returns>:タグ種のtagNum番目のオブジェクト</returns>
-    static ObjectBase* GetObj(ObjectTag tag, int tagNum);
+    /// <returns>:オブジェクト</returns>
+    static ObjBase* GetObj(ObjectTag tag, int tagNum);
 
     /// <summary>
-    /// ObjManagerの解放
+    /// 後処理
     /// </summary>
     static void Finalize();
 
 private:
     /// <summary>
-    /// ObjManagerコンストラクター(シングルトン)
+    /// コンストラクタ(シングルトン)
     /// </summary>
     ObjManager();
 
     /// <summary>
-    /// ObjManagerデストラクター
+    /// デストラクタ
     /// </summary>
     ~ObjManager();
 
     /// <summary>
-    /// オブジェクトの死亡処理
+    /// 死亡処理
     /// </summary>
     static void Dead();
 
-    static ObjManager* objInstance;     //ObjManagerの実態
-    std::vector<ObjectBase*>holdObj;         //一時待機オブジェクト
-    std::unordered_map<ObjectTag, std::vector<ObjectBase*>>Object;          //Object[タグ種類][オブジェクト個数]
+    static ObjManager* objManager;                                     //自身の実態
+    std::vector<ObjBase*>holdObj;                                    //一時保存オブジェクト
+    std::unordered_map<ObjectTag, std::vector<ObjBase*>>Object;      //Object[タグ種類][オブジェクト個数]
 };

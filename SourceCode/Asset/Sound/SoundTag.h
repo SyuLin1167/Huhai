@@ -19,7 +19,7 @@ enum class SoundTag :unsigned char
     FallingChair,
 };
 
-/*ループ制御用*/
+/*全サウンド*/
 constexpr static SoundTag soundTagAll[] =
 {
     SoundTag::Title,

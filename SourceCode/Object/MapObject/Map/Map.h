@@ -1,42 +1,39 @@
 #pragma once
 #include"../../ObjectBase/ObjectBase.h"
-#include"../../ObjectManager/ObjManager.h"
-#include"../../../Asset/AssetManager/AssetManager.h"
-#include"../../../Asset/Model/Model.h"
 
-        /*Mapクラス*/
-class Map :public ObjectBase
+/*Mapクラス*/
+class Map :public ObjBase
 {
 public:
     /// <summary>
-    /// Mapコンストラクタ
+    /// コンストラクタ
     /// </summary>
     /// <param name="maptag">:マップタグ</param>
-    Map(int maptag);
+    Map(int tag);
 
     /// <summary>
-    /// Mapデストラクター
+    /// デストラクタ
     /// </summary>
     ~Map();
 
     /// <summary>
-    /// Map読み込み処理
+    /// 読み込み処理
     /// </summary>
     void LoadModel();
 
     /// <summary>
-    /// Map更新処理
+    /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     void Update(float deltaTime) override;
 
     /// <summary>
-    /// Map描画処理
+    /// 描画処理
     /// </summary>
     void Draw()override;
 
-
-    enum MapName
+    //マップタグ
+    enum MapTag
     {
         TITLE = 0,
         ROOM,
@@ -47,7 +44,7 @@ public:
     };
 
 private:
-    class Model* mapModel;
-    class Sound* mapSound;
-    int mapTag;
+    class Model* mapModel;      //モデル
+    class Sound* mapSound;      //サウンド
+    int mapTag;                 //タグ
 };

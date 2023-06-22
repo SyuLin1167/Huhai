@@ -1,48 +1,37 @@
 #pragma once
 
-#include"../../../ObjectManager/ObjManager.h"
-#include"../../../../Asset/AssetManager/AssetManager.h"
 #include"../../../ObjectBase/ObjectBase.h"
 #include"../../../../Asset/Animation/Animation.h"
-#include"../../../../Collision/Collision.h"
 #include"../../../../Asset/Sound/Sound.h"
 
-
-        /*Ghostの基底クラス*/
-class GhostBase :public ObjectBase
+/*GhostBaseクラス*/
+class GhostBase :public ObjBase
 {
 public:
     /// <summary>
-    /// GhostBaseコンストラクタ
+    /// コンストラクタ
     /// </summary>
     GhostBase();
 
     /// <summary>
-    /// GhostBaseデストラクタ
+    /// デストラクタ
     /// </summary>
-    ~GhostBase();
+    virtual ~GhostBase();
 
     /// <summary>
-    /// アニメーションステータス
+    /// アニメーションタイプ
     /// </summary>
     enum Anim
     {
         IDLE = 0,                           //待機
-        WALK,                                //走り
-        SAD,
-        MOVE,
+        WALK,                               //歩き
+        SAD,                                //泣き
+        MOVE,                               //動作
     };
 
-    /// <summary>
-    /// 当たり判定球取得
-    /// </summary>
-    /// <returns>当たり判定球</returns>
-    Sphere GetColSphere() { return colSphere; }
-
 protected:
-    //---アニメーション関連---//
-    class Animation* gstAnim;                     //アニメーション
-    int animType;                           //アニメーション状態
+    class Animation* gstAnim;       //アニメーション
+    int animType;                   //アニメーションタイプ
 
-    class Sound* gstSound;
+    class Sound* gstSound;          //サウンド
 };

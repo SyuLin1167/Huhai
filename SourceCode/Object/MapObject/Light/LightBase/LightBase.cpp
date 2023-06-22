@@ -1,9 +1,9 @@
 #include "LightBase.h"
 
-        // コンストラクタ //
+// コンストラクタ //
 
 LightBase::LightBase()
-    :ObjectBase(ObjectTag::Light)
+    :ObjBase(ObjectTag::Light)
     , lightHandle(-1)
     , lightRange(70.0f)
     , lightAtten2(0.002f)
@@ -12,10 +12,10 @@ LightBase::LightBase()
     Load();
 }
 
-        // コンストラクタ //
+// コンストラクタ //
 
-LightBase::LightBase(VECTOR lightPos)
-    :ObjectBase(ObjectTag::Light, lightPos)
+LightBase::LightBase(VECTOR pos)
+    :ObjBase(ObjectTag::Light, pos)
     , lightHandle(-1)
     , lightRange(70.0f)
     , lightAtten2(0.002f)
@@ -24,20 +24,20 @@ LightBase::LightBase(VECTOR lightPos)
     Load();
 }
 
-        // デストラクタ //
+// デストラクタ //
 
 LightBase::~LightBase()
 {
+    //モデル削除
     AssetManager::ReleaseMesh(objHandle);
 }
 
-        // 読み込み処理 //
+// 読み込み処理 //
 
 void LightBase::Load()
 {
-    //---モデル読み込み---//
-    objHandle = AssetManager::GetMesh("../Assets/Map/Light/Light.mv1");						 //モデル読み込み
-
-    MV1SetPosition(objHandle, objPos);                                                      //モデルの座標設定
-    MV1SetScale(objHandle, objScale);                                                       //モデルのサイズ設定
+    //モデル設定
+    objHandle = AssetManager::GetMesh("../Assets/Map/Light/Light.mv1");
+    MV1SetPosition(objHandle, objPos);
+    MV1SetScale(objHandle, objScale);
 }

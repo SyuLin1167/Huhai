@@ -1,165 +1,182 @@
 #include "AssetManager.h"
 
+//実態へのポインタ定義
+AssetManager* AssetManager::assetMgr = nullptr;
 
-AssetManager* AssetManager::assetInstance = nullptr;    //AssetManager実態へのポインタ定義
-
-    // @brief AssetManagerコンストラクター //
+// コンストラクタ //
 
 AssetManager::AssetManager()
 {
     SetEnableXAudioFlag(FALSE);
     Set3DSoundOneMetre(20.0f);
-
 }
 
-    // @brief AssetManagerデストラクター //
+// デストラクタ //
 
 AssetManager::~AssetManager()
 {
-    assetInstance->ReleaseAllAsset();       //すべてのアセットを削除
-    assetInstance = nullptr;                //ポインタを削除
 }
 
-    // @brief AssetManager初期化 //
+// 初期化処理 //
 
 void AssetManager::Init()
 {
-    if (!assetInstance)                     //ポインタが空だったら
+    //インスタンス生成
+    if (!assetMgr)
     {
-        assetInstance = new AssetManager;   //ポインタ初期化
+        assetMgr = new AssetManager;
     }
 }
 
-    // @brief メッシュの取得 //
+// メッシュ取得 //
 
-int AssetManager::GetMesh(std::string meshFileName)
+int AssetManager::GetMesh(std::string fileName)
 {
     int meshID = 0;
-    //---メッシュ登録---//
-    auto iter = assetInstance->meshMap.find(meshFileName);   //ファイルが登録されているかどうか検索
-
-    if (iter == assetInstance->meshMap.end())                                               //登録されていなかったら
+    //ファイルを検索して登録されていなかったら登録
+    auto iter = assetMgr->meshMap.find(fileName);
+    if (iter == assetMgr->meshMap.end())
     {
-        meshID = MV1LoadModel(meshFileName.c_str());                                        //新規ファイル読み込み
-        if (meshID == -1)                                                                   //IDが空だったら
+        meshID = MV1LoadModel(fileName.c_str());
+        
+        //IDが空ならそのまま返す
+        if (meshID == -1)
         {
-            return meshID;                                                                  //IDを返す
+            return meshID;
         }
-        assetInstance->meshMap.emplace(meshFileName, meshID);                //ファイルをIDと共に登録
+
+        assetMgr->meshMap.emplace(fileName, meshID);
     }
 
-    //---複製したメッシュを返却---//
-    meshID = MV1DuplicateModel(assetInstance->meshMap[meshFileName]);             //メッシュ複製、IDに代入
-    assetInstance->duplicateMesh.push_back(meshID);                                   //複製を末尾に追加
-    return meshID;                                                                         //複製したIDを返す
+    //複製したメッシュIDを返す
+    meshID = MV1DuplicateModel(assetMgr->meshMap[fileName]);
+    assetMgr->dupMesh.push_back(meshID);
+    return meshID;
 }
 
-    // @brief アニメーションの取得 //
+// アニメーション取得 //
 
-int AssetManager::GetAnim(std::string animFileName)
+int AssetManager::GetAnim(std::string fileName)
 {
     int animID = 0;
-    //---アニメーション登録---//
-    auto iter = assetInstance->animMap.find(animFileName);  //ファイルが登録されているかどうか検索
-
-    if (iter == assetInstance->animMap.end())                                             //登録されていなかったら
+    //ファイルを検索して登録されていなかったら登録
+    auto iter = assetMgr->animMap.find(fileName);
+    if (iter == assetMgr->animMap.end())
     {
-        animID = MV1LoadModel(animFileName.c_str());                                      //新規ファイル読み込み
-        if (animID == -1)                                                                 //IDが空だったら
+        animID = MV1LoadModel(fileName.c_str());
+
+        //IDが空ならそのまま返す
+        if (animID == -1)
         {
-            return animID;                                                                //IDを返す
+            return animID;
         }
-        assetInstance->animMap.emplace(animFileName, animID);               //ファイルをIDと共に登録
+
+        assetMgr->animMap.emplace(fileName, animID);
     }
 
-    return assetInstance->animMap[animFileName];                                         //アニメーションIDを返す
+    //アニメーションIDを返す
+    return assetMgr->animMap[fileName];
 }
 
-int AssetManager::GetSound(std::string soundFileName)
+// サウンド取得 //
+
+int AssetManager::GetSound(std::string fileName)
 {
     int meshID = 0;
-    //---メッシュ登録---//
-    auto iter = assetInstance->soundMap.find(soundFileName);   //ファイルが登録されているかどうか検索
+    //ファイルを検索して登録されていなかったら登録
+    auto iter = assetMgr->soundMap.find(fileName);
 
-    if (iter == assetInstance->soundMap.end())                                               //登録されていなかったら
+    if (iter == assetMgr->soundMap.end())
     {
-        meshID = LoadSoundMem(soundFileName.c_str());                                        //新規ファイル読み込み
-        if (meshID == -1)                                                                   //IDが空だったら
+        meshID = LoadSoundMem(fileName.c_str());
+
+        //IDが空ならそのまま返す
+        if (meshID == -1)
         {
-            return meshID;                                                                  //IDを返す
+            return meshID;
         }
-        assetInstance->meshMap.emplace(soundFileName, meshID);                //ファイルをIDと共に登録
+
+        assetMgr->meshMap.emplace(fileName, meshID);
     }
 
-    //---複製したメッシュを返却---//
-    meshID = DuplicateSoundMem(assetInstance->meshMap[soundFileName]);             //メッシュ複製、IDに代入
-    assetInstance->duplicateMesh.push_back(meshID);                                   //複製を末尾に追加
-    return meshID;                                                                         //複製したIDを返す
+    //複製したサウンドIDを返す
+    meshID = DuplicateSoundMem(assetMgr->meshMap[fileName]);
+    assetMgr->dupMesh.push_back(meshID);
+    return meshID;
 }
 
     // @brief メッシュの削除 //
 
 void AssetManager::ReleaseMesh(int meshID)
 {
-    auto iter = find(assetInstance->duplicateMesh.begin(),
-        assetInstance->duplicateMesh.end(), meshID);                            //複製されたメッシュ内を検索
-    if (iter == assetInstance->duplicateMesh.end())                                        //見つからなかったら
-    {
-        return;                                                                            //結果を返す
-    }
-    MV1DeleteModel(meshID);                                                         //メッシュ削除
+    //複製したメッシュ内検索
+    auto iter =find(assetMgr->dupMesh.begin(),
+        assetMgr->dupMesh.end(), meshID);
 
-    iter_swap(iter, assetInstance->duplicateMesh.end() - 1);                   //末尾のデータと入れ替える
-    assetInstance->duplicateMesh.pop_back();                                                //末尾のデータを削除
+    //見つからなかったら結果を返す
+    if (iter == assetMgr->dupMesh.end())
+    {
+        return;
+    }
+
+    //見つかったら末尾移動して削除
+    MV1DeleteModel(meshID);
+    iter_swap(iter, assetMgr->dupMesh.end() - 1);
+    assetMgr->dupMesh.pop_back();
 }
 
-    // @brief 全アセットの削除 //
+// 全アセット削除 //
 
 void AssetManager::ReleaseAllAsset()
 {
-    //---アニメーション解放---//
-    for (auto& anim : assetInstance->animMap)
+    //アニメーション解放
+    for (auto& anim : assetMgr->animMap)
     {
         MV1DeleteModel(anim.second);
     }
 
-    //---メッシュ解放---//
-    for (auto& mesh : assetInstance->meshMap)
+    //メッシュ解放
+    for (auto& mesh : assetMgr->meshMap)
     {
         MV1DeleteModel(mesh.second);
     }
 
-    //サウンド開放
-    for (auto& sound : assetInstance->soundMap)
+    //サウンド解放
+    for (auto& sound : assetMgr->soundMap)
     {
         DeleteSoundMem(sound.second);
     }
 
     //---複製解放---//
-    for (auto dup : assetInstance->duplicateMesh)
+    for (auto dup : assetMgr->dupMesh)
     {
         MV1DeleteModel(dup);
     }
-    for (auto dup : assetInstance->duplicateSound)
+    for (auto dup : assetMgr->dupSound)
     {
         DeleteSoundMem(dup);
     }
 
+    //アセットの要素削除
+    assetMgr->animMap.clear();
+    assetMgr->meshMap.clear();
+    assetMgr->soundMap.clear();
 
-    assetInstance->animMap.clear();             //アニメーションのすべての要素を削除
-    assetInstance->meshMap.clear();             //メッシュのすべての要素を削除
-    assetInstance->soundMap.clear();
-    assetInstance->duplicateMesh.clear();       //複製メッシュのすべての要素を削除
-    assetInstance->duplicateSound.clear();
+    //複製の要素削除
+    assetMgr->dupMesh.clear();
+    assetMgr->dupSound.clear();
 }
 
-    // @brief AssetManagerの解放 //
+// 後処理 //
 
 void AssetManager::Finalize()
 {
+    //全アセット削除
     ReleaseAllAsset();
-    if (assetInstance)                          //ポインタが空じゃなかったら
+
+    //インスタンス削除
+    if (assetMgr)
     {
-        delete assetInstance;                   //中身を削除
+        delete assetMgr;
     }
 }

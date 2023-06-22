@@ -2,154 +2,172 @@
 #include"../Player/Player.h"
 #include"../../MapObject/Light/FlashLight/FlashLight.h"
 
-        /* @brief Ghostコンストラクタ */
+/* コンストラクタ */
 
 Ghost::Ghost()
     :GhostBase()
-    , moveCount(0.0f)
-    , firstMove(true)
-    , nowMove(false)
+    , moveCount(7.0f)
+    , isFirstMove(true)
+    , isMove(false)
     , rotateNow(false)
+    ,aimPos(VGet(0.0f, 0.0f, 0.0f))
     , aimDir(VGet(0.0f, 0.0f, 1.0f))
     , lightHandle(-1)
     , holdPos(VGet(0.0f, 0.0f, 0.0f))
 {
+    objPos = VGet(0.0f, 0.0f, -45.0f);
+
+    //アニメーション設定
     if (animType != SAD)
     {
         animType = SAD;
         gstAnim->StartAnim(animType);
     }
-    objPos = VGet(0.0f, 0.0f, -45.0f);
 
-    //---当たり判定球設定---//
+    //当たり判定設定
     colType = CollisionType::Sphere;
-    colSphere.localCenter = VGet(0, 5.0f, 0);			//ローカル座標
-    colSphere.Radius = 3.0f;						//球半径
-    colSphere.worldCenter = objPos;					//ワールド座標
+    colSphere.localCenter = VGet(0, 5.0f, 0);
+    colSphere.Radius = 3.0f;
+    colSphere.worldCenter = objPos;
+    colLine = Line(VGet(0.0f, 2.0f, 0.0f), VGet(0.0f, -5.0f, 0.0f));
 
-    //---当たり判定線分設定---//
-    colLine = Line(VGet(0.0f, 2.0f, 0.0f), VGet(0.0f, -5.0f, 0.0f));             //線分設定
-
+    //移動速度
     objSpeed = 13.0f;
-
 }
 
-        // @brief Ghostデストラクタ //
+// デストラクタ //
 
 Ghost::~Ghost()
 {
+    //ライト削除
+    DeleteLightHandle(lightHandle);
+
+    //モデル削除
     if (objHandle != -1)
     {
         MV1DeleteModel(objHandle);
     }
 }
 
-        // @brief Ghost更新処理 //
+// 更新処理 //
 
 void Ghost::Update(float deltaTime)
 {
+    //アニメーション時間再生
     gstAnim->AddAnimTime(deltaTime);
-    gstSound->Update(objPos);
-    MATRIX rotMatY = MGetRotY(180 * (float)(DX_PI / 180.0f));       //左向きに回転させる
-    objDir.y = 0;
-    VECTOR negativeVec = VTransform(objDir, rotMatY);
-    MV1SetRotationZYAxis(objHandle, negativeVec, VGet(0.0f, 1.0f, 0.0f), 0.0f);         //モデル回転
 
+    //モデル回転
+    MATRIX rotMatY = MGetRotY(180 * (float)(DX_PI / 180.0f));
+    VECTOR negativeVec = VTransform(objDir, rotMatY);
+    MV1SetRotationZYAxis(objHandle, negativeVec, VGet(0.0f, 1.0f, 0.0f), 0.0f);
     rotateNow = true;
     Rotate();
 
-
-    if (firstMove)
+    //初動時は指定座標へ移動
+    if (moveCount >= 0.0f)
     {
-        moveCount += deltaTime;
-        if (moveCount >= 7.0f)
+        moveCount -= deltaTime;
+    }
+    //カウントがゼロになったら動作開始
+    else if (isFirstMove)
+    {
+        //ライトを設置してアニメーションとサウンドを再生
+        if (animType != MOVE)
         {
-            nowMove = true;
-            if (animType != MOVE)
-            {
-                animType = MOVE;
-                gstAnim->StartAnim(animType);
-                gstSound->StartSound(SoundTag::GhostScream, DX_PLAYTYPE_BACK);
-                ObjManager::GetFirstObj(ObjectTag::Light)->SetAlive(false);
-                lightHandle = CreatePointLightHandle(objPos, 50.0f, 0.0f, 0.0f, 0.005f);
-                SetLightDifColorHandle(lightHandle, GetColorF(1.0f, 0.0f, 0.0f, 1.0f));
-                aimPos = VGet(0.0f, 0.0f, 0.0f);
-            }
-            if (abs(VSize(aimPos - objPos)) < 2.0f)
-            {
-                firstMove = false;
-            }
+            animType = MOVE;
+            gstAnim->StartAnim(animType);
+
+            ObjManager::GetFirstObj(ObjectTag::Light)->SetAlive(false);
+            lightHandle = CreatePointLightHandle(objPos, 50.0f, 0.0f, 0.0f, 0.005f);
+            SetLightDifColorHandle(lightHandle, GetColorF(1.0f, 0.0f, 0.0f, 1.0f));
+
+            gstSound->StartSound(SoundTag::GhostScream, DX_PLAYTYPE_BACK);
         }
+        //目標座標に近づいたら初動終了
+        if (abs(VSize(aimPos - objPos)) < 2.0f)
+        {
+            isFirstMove = false;
+        }
+        isMove = true;
     }
     else
     {
+        //基本目標座標はプレイヤー座標
         aimPos = ObjManager::GetFirstObj(ObjectTag::Player)->GetPos();
     }
 
-    if (nowMove)
+    //動作中は目標座標に向かって移動
+    if (isMove)
     {
         VECTOR moveVec = aimPos - objPos;
         moveVec = VNorm(moveVec);
         objPos += moveVec * objSpeed * deltaTime;
         aimDir = moveVec;
+        objPos.y = 1.2f;
     }
+    MV1SetPosition(objHandle, objPos);                        //ポジション設定
 
+    //ライト更新
     if (lightHandle)
     {
         SetLightPositionHandle(lightHandle, objPos + VGet(0.0f, 10.0f, 0.0f));
     }
 
-    MV1SetPosition(objHandle, objPos);                        //ポジション設定
+    //当たり判定更新
+    ColUpdate();
 
-    ColUpdate();            //当たり判定の移動
+    //サウンド更新
+    gstSound->Update(objPos);
 }
 
-        // @brief Ghost描画処理 //
+// 描画処理 //
 
 void Ghost::Draw()
 {
+    //モデル描画
     MV1DrawModel(objHandle);
 }
 
-        // @brief Ghost衝突時処理 //
+// 当たり判定処理 //
 
-void Ghost::OnCollisionEnter(const ObjectBase* other)
+void Ghost::OnCollisionEnter(const ObjBase* other)
 {
     ObjectTag tag = other->GetTag();
 
-    if (tag == ObjectTag::Map)                                      //マップとぶつかったら
+    //建物にぶつかったら押し戻す
+    if (tag == ObjectTag::Map)
     {
-        int colModel = other->GetColModel();                        //モデル当たり判定取得
-
-        //---マップと境界球都の当たり判定---//
-        MV1_COLL_RESULT_POLY_DIM colInfo;                          //モデル当たり判定情報
+        int colModel = other->GetColModel();
+        //球体の当たり判定
+        MV1_COLL_RESULT_POLY_DIM colInfo;
         if (CollisionPair(colSphere, colModel, colInfo))
         {
-            VECTOR pushBack = CalcSpherePushBackFromMesh(colSphere, colInfo);   //押し戻し量算出
-            objPos += pushBack;                                                         //押し戻す
-            MV1CollResultPolyDimTerminate(colInfo);                        //当たり判定情報解放
+            VECTOR pushBack = CalcSpherePushBackFromMesh(colSphere, colInfo);
+            objPos += pushBack;
+            MV1CollResultPolyDimTerminate(colInfo);
             ColUpdate();
         }
 
-        //---マップと足元線分の当たり判定---//
-        MV1_COLL_RESULT_POLY colInfoLine;                           //線分当たり判定情報
+        //線分の当たり判定
+        MV1_COLL_RESULT_POLY colInfoLine;
         if (CollisionPair(colLine, colModel, colInfoLine))
         {
-            objPos = colInfoLine.HitPosition;                       //足元を衝突時の座標に合わせる
+            objPos = colInfoLine.HitPosition;
             ColUpdate();
         }
     }
 
+    //プレイヤーに当たったらゲームオーバーにする
     if (tag == ObjectTag::Player)
     {
-        if (abs(VSize(other->GetPos() - objPos)) < 12.0f && !firstMove)
+        if (abs(VSize(other->GetPos() - objPos)) < 12.0f && !isFirstMove)
         {
             if (animType != SAD)
             {
                 animType = SAD;
                 gstAnim->StartAnim(animType);
             }
-            nowMove = false;
+            isMove = false;
             aimDir = VScale(VNorm(aimPos - objPos), 0.1f);
             ColUpdate();
         }
@@ -157,7 +175,7 @@ void Ghost::OnCollisionEnter(const ObjectBase* other)
 
 }
 
-        // @brief Ghost回転処理 //
+// 回転処理 //
 
 void Ghost::Rotate()
 {
