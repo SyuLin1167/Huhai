@@ -184,6 +184,7 @@
     <ClCompile Include="..\SourceCode\Scene\PlayScene\Play.cpp" />
     <ClCompile Include="..\SourceCode\Scene\ResultScene\Result.cpp" />
     <ClCompile Include="..\SourceCode\Scene\RoomScene\Room.cpp" />
+    <ClCompile Include="..\SourceCode\Scene\Save\Save.cpp" />
     <ClCompile Include="..\SourceCode\Scene\SceneBase\SceneBase.cpp" />
     <ClCompile Include="..\SourceCode\Scene\SceneManager\SceneManager.cpp" />
     <ClCompile Include="..\SourceCode\Scene\TitleScene\Title.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="..\SourceCode\Scene\PlayScene\Play.h" />
     <ClInclude Include="..\SourceCode\Scene\ResultScene\Result.h" />
     <ClInclude Include="..\SourceCode\Scene\RoomScene\Room.h" />
+    <ClInclude Include="..\SourceCode\Scene\Save\Save.h" />
     <ClInclude Include="..\SourceCode\Scene\SceneBase\SceneBase.h" />
     <ClInclude Include="..\SourceCode\Scene\SceneManager\SceneManager.h" />
     <ClInclude Include="..\SourceCode\Scene\TitleScene\Title.h" />

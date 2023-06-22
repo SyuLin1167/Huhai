@@ -157,6 +157,9 @@
     <Filter Include="ソース ファイル\GameSetting">
       <UniqueIdentifier>{ace7c2f7-44de-45b3-b0f1-d7645b0945f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Scene\Save">
+      <UniqueIdentifier>{53aaa834-8626-4162-ba16-65d77b778143}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SourceCode\Main.cpp">
@@ -281,6 +284,9 @@
     </ClCompile>
     <ClCompile Include="..\SourceCode\GameSetting\GameSetting.cpp">
       <Filter>ソース ファイル\GameSetting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Scene\Save\Save.cpp">
+      <Filter>ソース ファイル\Scene\Save</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -418,6 +424,9 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\GameSetting\GameSetting.h">
       <Filter>ソース ファイル\GameSetting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\Save\Save.h">
+      <Filter>ソース ファイル\Scene\Save</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

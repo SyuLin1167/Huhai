@@ -1,90 +1,95 @@
 #include "Play.h"
 
-#include"../EscapeScene/Escape.h"
-#include"../ResultScene/Result.h"
+#include"../../Object/ObjectManager/ObjManager.h"
+#include"../../Asset/AssetManager/AssetManager.h"
 #include "../../Object/CharaObject/Camera/CameraFps.h"
-#include "../../Object/CharaObject/Player/Player.h"
-#include "../../Object/CharaObject/Ghost/MoveGimmic/GhostWalkGim.h"
-#include"../../Object/CharaObject/Man/Man.h"
 #include "../../Object/MapObject/Map/Map.h"
+#include "../../Object/MapObject/Furniture/Furniture.h"
 #include "../../Object/MapObject/Door/Door.h"
 #include "../../Object/MapObject/Chair/Chair.h"
 #include "../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../Object/MapObject/Light/LightingLight/LitLight.h"
-#include "../../Object/MapObject/Furniture/Furniture.h"
+#include "../../Object/CharaObject/Player/Player.h"
+#include "../../Object/CharaObject/Ghost/MoveGimmic/GhostWalkGim.h"
+#include"../../Object/CharaObject/Man/Man.h"
 #include "../../UI/Reamarks/Remarks.h"
+#include"../EscapeScene/Escape.h"
+#include"../Save/Save.h"
 
     // @brief PlaySceneコンストラクタ //
 
 Play::Play()
     :SceneBase()
-    , sceneChange(false)
 {
-    ////---カメラ生成---//
+    //カメラ生成
     ObjManager::Entry(new CameraFps);
 
-    ////---マップを生成---//
-    ObjManager::Entry(new Map(Map::MapName::STAGE));
+    //マップ生成
+    ObjManager::Entry(new Map(Map::MapTag::STAGE));
 
-    ////---家具を生成---//
+    //家具生成
     ObjManager::Entry(new Furniture(Furniture::FurName::Stage));
 
-    ////---ドアを生成---//
+    //ドア生成
     ObjManager::Entry(new Door(VGet(22, 0, 0), VGet(0, 180, 0)));
     ObjManager::Entry(new Door(VGet(110, 0, 0), VGet(0, 0, 0)));
     ObjManager::Entry(new Door(VGet(0, 0, 66), VGet(0, 0, 0)));
 
-    ////---イスを生成---//
+    //イス生成
     ObjManager::Entry(new Chair);
 
-    ////---照明を生成---//
+    //照明生成
     ObjManager::Entry(new NomalLight(VGet(-10, 32, 0)));
     ObjManager::Entry(new LitLight(VGet(65, 32, 0), 50.0f));
     ObjManager::Entry(new LitLight(VGet(121, 32, 25), 40.0f));
 
-    ////---プレイヤー生成---//
+    //プレイヤー生成
     ObjManager::Entry(new Player);
 
-    ////---エネミー生成---//
+    //キャラギミック生成
     ObjManager::Entry(new GhostWalkGim);
     ObjManager::Entry(new Man);
 
-    ObjManager::Entry(new Remarks(TextType::Day1Stage));
+    //台詞生成
+    ObjManager::Entry(new Remarks(TextType::Stage));
 }
 
-    // @brief PlaySceneデストラクタ //
+// デストラクタ //
 
 Play::~Play()
 {
-    if (BgHandle != -1)
-    {
-        DeleteGraph(BgHandle);
-    }
 }
 
-    // @biref PlayScene更新処理 //
+// 更新処理 //
 
 SceneBase* Play::Update(float deltaTime)
 {
-
+    //オブジェクト更新
     ObjManager::Update(deltaTime);
+
+    //オブジェクト当たり判定
     ObjManager::Collision();
 
-
-    ObjectBase* man = ObjManager::GetFirstObj(ObjectTag::Man);
-    if (!man)                               //Ｒキーが押されたら
+    //キャラクターのギミックが作動し終わったら
+    ObjBase* man = ObjManager::GetFirstObj(ObjectTag::Man);
+    if (!man)
     {
+        //管理クラス内の確保したデータ解放
         AssetManager::ReleaseAllAsset();
         ObjManager::ReleaseAllObj();
-        return new EscapeScene;                        //リザルト画面へ
+
+        //シーンを次の場面にする
+        SaveScene::Save(this);
+        return new EscapeScene;
     }
 
-    return this;                                    //常にプレイシーンを返す
+    return this;
 }
 
-    // @brief PlayScene描画処理 //
+// 描画処理 //
 
 void Play::Draw()
 {
+    //オブジェクト描画
     ObjManager::Draw();
 }

@@ -31,12 +31,12 @@ public:
     virtual void Draw() = 0;
 
 protected:
-    //”wŒi‰æ‘œƒnƒ“ƒhƒ‹
-    int BgHandle;
-
-    //”wŒiÀ•W
-    int BgX;
-    int BgY;
-
+    int BgHandle;       //”wŒi‰æ‘œƒnƒ“ƒhƒ‹
+    int BgX;            //”wŒiÀ•WX
+    int BgY;            //”wŒiÀ•WY
 };
 
+class Save
+{
+
+};

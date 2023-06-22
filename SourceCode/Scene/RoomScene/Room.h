@@ -3,32 +3,32 @@
 #include"../../Object/ObjectManager/ObjManager.h"
 #include"../../BlendMode/BlendMode.h"
 
-	/*部屋シーンのクラス*/
+/*RoomSceneクラス*/
 class Room :public SceneBase
 {
 public:
-	/// <summary>
-	/// Roomコンストラクタ
-	/// </summary>
-	Room();
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    Room();
 
-	/// <summary>
-	/// Roomデストラクタ
-	/// </summary>
-	~Room();
+    /// <summary>
+    /// デストラクタ
+    /// </summary>
+    ~Room();
 
-	/// <summary>
-	/// Room更新処理
-	/// </summary>
-	/// <param name="deltaTime">:フレームレート</param>
-	/// <returns>現在のシーンのポインタ</returns>
-	SceneBase* Update(float deltaTime)override;
+    /// <summary>
+    /// 更新処理
+    /// </summary>
+    /// <param name="deltaTime">:フレームレート</param>
+    /// <returns>次フレームのシーン</returns>
+    SceneBase* Update(float deltaTime)override;
 
-	/// <summary>
-	/// Room描画処理
-	/// </summary>
-	void Draw()override;
+    /// <summary>
+    /// 描画処理
+    /// </summary>
+    void Draw()override;
 
 private:
-	class BlendMode* roomBlend;
+    class BlendMode* roomBlend;    //ブレンドモード
 };

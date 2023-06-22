@@ -1,4 +1,5 @@
 #pragma once
+#include<stack>
 
 /*SceneManagerクラス*/
 class SceneManager
@@ -21,12 +22,12 @@ public:
     int Init();
 
     /// <summary>
-    /// NowScene更新処理
+    /// 更新処理
     /// </summary>
     void Update();
 
     /// <summary>
-    /// NowScene描画処理
+    /// 描画処理
     /// </summary>
     void Draw();
 
@@ -36,9 +37,10 @@ public:
     void GameLoop();
 
 private:
-    bool canLoop;
-    std::stack<class SceneBase*> nowScene;
-    //class SceneBase* nowScene;
-    class TimeManager* timeMgr;
+    bool canLoop;                               //ループフラグ
+
+    std::stack<class SceneBase*> nowScene;      //現在のシーン
+
+    class TimeManager* timeMgr;                 //タイムマネージャー
 };
 

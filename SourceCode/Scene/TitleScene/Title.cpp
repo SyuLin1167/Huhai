@@ -1,104 +1,143 @@
 #include "Title.h"
 
-#include "../RoomScene/Room.h"
-#include"../../Object/CharaObject/Camera/CameraFps.h"
-#include "../../Object/MapObject/Door/Door.h"
-#include"../../Object/MapObject/Light/BlinkingLight/BlinkingLight.h"
-#include"../../Object/MapObject/Light/NomalLight/NomalLight.h"
+#include "../../Object/ObjectManager/ObjManager.h"
+#include "../../Asset/AssetManager/AssetManager.h"
+#include "../../BlendMode/BlendMode.h"
+#include "../../Asset/Sound/Sound.h"
+#include "../../Object/CharaObject/Camera/CameraFps.h"
 #include "../../Object/MapObject/Map/Map.h"
-#include"../../Asset/Sound/Sound.h"
-#include"../../UI/Select/Select.h"
-#include"../ResultScene/Result.h"
+#include "../../Object/MapObject/Door/Door.h"
+#include "../../Object/MapObject/Light/BlinkingLight/BlinkingLight.h"
+#include "../../Object/MapObject/Light/NomalLight/NomalLight.h"
+#include "../RoomScene/Room.h"
+#include "../EscapeScene/Escape.h"
+#include "../Save/Save.h"
 
-    // @brief TitleSceneコンストラクター //
+// コンストラクタ //
 
 Title::Title()
     :SceneBase()
-    , fadeLock(true)
+    ,screenGraph(-1)
 {
+    //タイトルロゴ生成
+    BgHandle = LoadGraph("../Assets/BackGround/Title.png");
     BgX = 180;
     BgY = 150;
-    BgHandle = LoadGraph("../Assets/BackGround/Title.png");
 
+    //ブレンドモード生成
+    titleBlend = new BlendMode;
+
+    //サウンド生成
+    titleSound = new Sound;
+    titleSound->AddSound("../Assets/Sound/TitleBgm.mp3", SoundTag::Title, 150);
+    titleSound->AddSound("../Assets/Sound/StartSE.mp3", SoundTag::Start, 150);
+    titleSound->StartSound(SoundTag::Title, DX_PLAYTYPE_LOOP);
+
+    //カメラ生成
     ObjManager::Entry(new CameraFps);
 
-    ////---マップを生成---//
-    ObjManager::Entry(new Map(Map::MapName::TITLE));
+    //マップ生成
+    ObjManager::Entry(new Map(Map::MapTag::TITLE));
 
+    //ドア生成
     door = new Door(VGet(0, 0, 66), VGet(0, 0, 0));
     ObjManager::Entry(door);
 
+    //ライト生成
     ObjManager::Entry(new BlinkingLight(VGet(-35, 32, 70)));
     ObjManager::Entry(new NomalLight(VGet(80, 32, 65)));
 
+    //選択ボタン生成
     for (auto type : selectTypeAll)
     {
         select[type] = new Select(type);
     }
-    titleBlend = new BlendMode;
-    SetCameraNearFar(CameraNear, CameraFar);                                    //カメラの描画範囲設定
 
-    graph = MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT);
+    //グラフ作成
+    screenGraph = MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    //マウスポインター表示
     SetMouseDispFlag(TRUE);
-
-    sound = new Sound;
-    sound->AddSound("../Assets/Sound/TitleBgm.mp3", SoundTag::Title, 150);
-    sound->AddSound("../Assets/Sound/StartSE.mp3", SoundTag::Start, 150);
-    sound->StartSound(SoundTag::Title, DX_PLAYTYPE_LOOP);
 }
 
-    // @brief TitleSceneデストラクター //
+// デストラクタ //
 
 Title::~Title()
 {
-    if (BgHandle != -1)
+    //画像ハンドル削除
+    if (BgHandle)
     {
         DeleteGraph(BgHandle);
     }
 }
 
-    // @brief TitleScene更新処理 //
+// 更新処理 //
 
 SceneBase* Title::Update(float deltaTime)
 {
+    //ドアは開く状態にする
     door->MoveAnim(Door::Anim::OPEN);
+
+    //オブジェクト更新
     ObjManager::Update(deltaTime);
     for (auto type : selectTypeAll)
     {
         select[type]->Update(deltaTime);
+
+        //ボタン選択時処理
         if (select[type]->GetSelect())
         {
+            //マウス座標を画面の中心にして非表示にする
+            SetMousePoint(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+            SetMouseDispFlag(FALSE);
+
+            //フェードアウト
+            titleBlend->AddFade(deltaTime);
+
             if (type == EXIT)
             {
+                //EXIT選択時、シーンをnullptrにする
                 return nullptr;
             }
-            SetMousePoint(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-            SetMouseDispFlag(FALSE);                                                    //マウスは非表示
-            titleBlend->AddFade();
-
-            if (!titleBlend->NowFade() && !sound->IsPlaying(SoundTag::Start))
+            else
             {
-                sound->StopAllSound();
-                AssetManager::ReleaseAllAsset();            //全てのアセットの開放
-                ObjManager::ReleaseAllObj();                //全てのオブジェクトの開放
-                if (type == PLAY)
-                {
-                    return new Room;
-                }
-                if (type == LOAD)
-                {
-                    return new Result;
-                }
+                //EXIT以外選択時、SEを再生
+                titleSound->StartSoundOnce(SoundTag::Start, DX_PLAYTYPE_BACK);
             }
-            if (type != EXIT)
+
+            //シーン移行時の演出が終わったら
+            if (!titleSound->IsPlaying(SoundTag::Start))
             {
-                sound->StartSoundOnce(SoundTag::Start, DX_PLAYTYPE_BACK);
+                if (!titleBlend->NowFade())
+                {
+                    //すべてのサウンドを止める
+                    titleSound->StopAllSound();
+
+                    //管理クラス内の確保したデータ解放
+                    AssetManager::ReleaseAllAsset();
+                    ObjManager::ReleaseAllObj();
+
+                    if (type == PLAY)
+                    {
+                        //PLAY選択時、シーンを次の場面にする
+                        return new Room;
+                    }
+                    if (type == LOAD)
+                    {
+                        //LOAD選択時、シーンを保存シーンにする
+                        if (!SaveScene::Load())
+                        {
+                            SaveScene::Save(new Room);
+                        }
+                        return SaveScene::Load();
+                    }
+                }
             }
         }
     }
 
-
-    ObjectBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
+    //カメラ設定(後にFixedCameraクラスを作成して、そこで行う)
+    ObjBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
     if (camera)
     {
         camera->SetPos(VGet(70, 6, 75));
@@ -111,17 +150,22 @@ SceneBase* Title::Update(float deltaTime)
     return this;
 }
 
-    // @brief TitleScene描画処理 //
+// 描画処理 //
 
 void Title::Draw()
 {
+    //オブジェクト描画
     ObjManager::Draw();
-    GetDrawScreenGraph(0, 0, 1920, 1080, graph);
+
+    //選択ボタン描画
+    GetDrawScreenGraph(0, 0, 1920, 1080, screenGraph);
     DrawExtendGraph(BgX, BgY, BgX + 450, BgY + 200, BgHandle, TRUE);
     for (auto type : selectTypeAll)
     {
         select[type]->Draw();
     }
+
+    //フェード処理
     titleBlend->Fade();
     DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), true);
     titleBlend->NoBlend();

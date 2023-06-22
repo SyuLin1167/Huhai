@@ -1,5 +1,4 @@
 #include "SceneManager.h"
-#include<stack>
 
 #include"../../GameSetting/GameSetting.h"
 #include"../../Object/ObjectManager/ObjManager.h"
@@ -7,12 +6,12 @@
 #include"../SceneBase/SceneBase.h"
 #include"../../Time/TimeManager.h"
 #include "../TitleScene/Title.h"
+#include "../Save/Save.h"
 
 // コンストラクタ //
 
 SceneManager::SceneManager()
-    ://nowScene(nullptr)
-    timeMgr(nullptr)
+    :timeMgr(nullptr)
     , canLoop(true)
 {
 }
@@ -47,11 +46,13 @@ int SceneManager::Init()
     }
     ObjManager::Init();
     AssetManager::Init();
+    SaveScene::Init();
 
     //インスタンス生成
-    nowScene.push(new Title);
-    //nowScene = new Title;
     timeMgr = new TimeManager;
+
+    //初期シーン設定
+    nowScene.push(new Title);
 
     return 0;
 }
@@ -77,8 +78,6 @@ void SceneManager::Update()
     if (nowScene.top() != tmpScene)
     {
         //NowSceneがtmpSceneと異なっていたら解放して代入
-        //delete nowScene;
-        //nowScene = tmpScene;
         nowScene.pop();
         nowScene.push(tmpScene);
     }

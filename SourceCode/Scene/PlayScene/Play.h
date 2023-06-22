@@ -1,35 +1,29 @@
 #pragma once
 #include"../SceneBase/SceneBase.h"
-#include"../../Object/ObjectManager/ObjManager.h"
-#include "../../Collision/Collision.h"
 
 /* PlaySceneクラス */
 class Play :public SceneBase
 {
-
 public:
     /// <summary>
-    /// PlaySceneコンストラクタ
+    /// コンストラクタ
     /// </summary>
     Play();
 
     /// <summary>
-    /// PlaySceneデストラクタ
+    /// デストラクタ
     /// </summary>
     ~Play();
 
     /// <summary>
-    /// PlayScene更新処理
+    /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
-    /// <returns>現在のシーンのポインタ</returns>
+    /// <returns>次のフレームのシーン</returns>
     SceneBase* Update(float deltaTime)override;
 
     /// <summary>
-    /// PlaySceneの描画
+    /// 描画処理
     /// </summary>
     void Draw()override;
-
-private:
-    bool sceneChange;
 };

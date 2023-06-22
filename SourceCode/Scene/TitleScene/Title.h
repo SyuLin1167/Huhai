@@ -1,19 +1,10 @@
 #pragma once
 #include"../SceneBase/SceneBase.h"
-#include"../../Object/ObjectManager/ObjManager.h"
-#include "../../Collision/Collision.h"
-#include"../../BlendMode/BlendMode.h"
-#include"../../UI/Select/SelectType.h"
+#include "../../UI/Select/Select.h"
 
-
-    /* TitleSceneクラス */
+/* TitleSceneクラス */
 class Title :public SceneBase
 {
-    class Door* door = nullptr;
-    class BlendMode* titleBlend;
-    class Select* select[TypeSize];
-    class Sound* sound = nullptr;
-
 public:
     /// <summary>
     /// コンストラクタ
@@ -29,15 +20,19 @@ public:
     /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
-    /// <returns>現在のシーンのポインタ</returns>
+    /// <returns>次のフレームのシーン</returns>
     SceneBase* Update(float deltaTime)override;
 
     /// <summary>
-    /// シーンの描画
+    /// 描画処理
     /// </summary>
     void Draw()override;
 
 private:
-    int graph;
-    bool fadeLock;
+    int screenGraph;        //画面保持グラフ
+
+    class Door* door = nullptr;                 //ドア
+    class BlendMode* titleBlend;                //ブレンドモード
+    class Select* select[SelectTypeSize];       //選択ボタン
+    class Sound* titleSound = nullptr;          //サウンド
 };
