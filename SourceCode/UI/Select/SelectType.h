@@ -1,6 +1,8 @@
 #pragma once
-constexpr int TypeSize = 3;
+//ボタン種サイズ
+constexpr int SelectTypeSize = 3;
 
+//ボタン種
 enum SelectType:unsigned int
 {
     PLAY = 0,

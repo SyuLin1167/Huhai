@@ -1,97 +1,122 @@
 #include "Remarks.h"
+#include<unordered_map>
 
-        // @brief Remarksコンストラクタ //
+// コンストラクタ //
 
 Remarks::Remarks(TextType texttype)
-    :ObjectBase(ObjectTag::Remarks)
+    :ObjBase(ObjectTag::Remarks)
     , textType(texttype)
-    , stringBuf()
-    , textX(0)
-    , textY(0)
+    , stringBuf{}
+    , holdBuf{}
     , Sn(0)
     , Sp(0)
     , eofFlag(false)
     , waitKey(false)
-    , holdBuf()
+    , textX(0)
+    , textY(0)
     , graph(MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT))
 {
-    SetFontSize(TEXTSIZE);          //フォントサイズ設定
+    //テキストボックス設定
     objHandle = LoadGraph("../Assets/BackGround/Remarks.png");
     objPos = VGet(0.0f, 600.0f, 0.0f);
+
+    SetFontSize(TEXTSIZE);
 }
 
-        // @brief Remarksデストラクタ //
+// デストラクタ //
 
 Remarks::~Remarks()
 {
-
+    //画像ハンドル削除
+    if (objHandle)
+    {
+        DeleteGraph(objHandle);
+    }
 }
 
-        // @brief Remarks更新処理 //
+// 更新処理 //
 
 void Remarks::Update(float deltaTime)
 {
-    //～終了フラグが立っていなかったら～
+    //文字の読み込み中なら
     if (!eofFlag)
     {
-        if (waitKey)        //～待機フラグが立っていたら～
+        //待機中なら
+        if (waitKey)
         {
-            //～マウスの左クリックが押されたら～
+            //左クリックが押されるまで待機
             if ((GetMouseInput() & MOUSE_INPUT_LEFT))
             {
-                waitKey = false;                                                    //待機フラグをfalseにする
+                waitKey = false;
             }
         }
-        else        //～待機フラグが立っていなかったら～
+        else
         {
-            char Moji = GetText(Sn, Sp);                                            //1文字分取得
+            //待機中でなければ台詞を一文字ずつ読み込む
+            char Moji = GetText(Sn, Sp);
             switch (Moji)
             {
-            case '/':                //～待機文字だったら～
-                waitKey = true;                                                     //待機フラグを立てる
-                Sp++;                                                               //読み込み文字を1文字進める
+            case '/':
+                //待機文字だったら待機中にする
+                waitKey = true;
+
+                //読み込み文字を1文字進める
+                Sp++;
                 break;
-            case '^':                //～終了文字だったら～
-                eofFlag = true;                                                     //終了フラグを立てる
-                Sp++;                                                               //読み込み文字を1文字進める
+
+            case '^':
+                //終了文字だったら文字読み込みを終了する
+                eofFlag = true;
                 break;
-            case '|':                //～クリア文字だったら～
+
+            case '|':
+                //クリア文字だったら既に表示されている文字列を消す
                 for (int i = 0; i < BUFHEIGHT; i++)
                 {
                     for (int j = 0; j < BUFWIDTH; j++)
                     {
-                        stringBuf[i][j] = 0;                                        //仮想テキストバッファを初期化
+                        //仮想テキストバッファ初期化
+                        stringBuf[i][j] = 0;
                     }
                 }
-                textX = 0;                                                          //描画位置X初期化
-                textY = 0;                                                          //描画位置Y初期化
-                Sp++;                                                               //読み込み文字を1文字進める
+
+                //描画位置初期化
+                textX = 0;
+                textY = 0;
+
+                //読み込み文字を1文字進める
+                Sp++;
                 break;
-            default:                //～その他の文字～
-                //---1文字分記憶する---//
+
+            default:
+                //その他の文字だったら
+                //1文字分記憶
                 holdBuf[0] = GetText(Sn, Sp);
                 holdBuf[1] = GetText(Sn, Sp + 1);
                 holdBuf[2] = '\0';
 
-                //---テキストバッファに代入---//
+                //テキストバッファに記憶した文字を代入
                 stringBuf[textY][textX * 2] = holdBuf[0];
                 stringBuf[textY][textX * 2 + 1] = holdBuf[1];
 
-                Sp += 2;                                                            //読み込み文字を2文字進める
-                textX++;                                                            //文字表示位置を1文字進める
+                //読み込み文字を2文字分進める
+                Sp += 2;
 
-                //～文字表示位置が横幅からはみ出たら～
+                //文字表示位置を1文字進める
+                textX++;
+
+                //文字表示位置が横幅からはみ出たら改行
                 if (textX > BUFWIDTH)
                 {
-                    NewLine();                                                      //改行する
+                    NewLine();
                 }
 
-                //～読み込み文字が終端まで行ったら～
+                //文が最後まで読み込み終わったら改行して次の文を読み込む
                 if (GetText(Sn, Sp) == '\0')
                 {
-                    NewLine();                                                      //改行する
-                    Sn++;                                                           //読み込み文字を1列進める
-                    Sp = 0;                                                         //読み込み文字を初めからにする
+                    NewLine();
+                    Sn++;
+                    Sp = 0;
                 }
                 break;
             }
@@ -99,14 +124,16 @@ void Remarks::Update(float deltaTime)
     }
     if (eofFlag)
     {
+        //台詞が読み終わったらオブジェクト削除のため死亡にする
         isAlive = false;
     }
 }
 
-        // @brief 文字列取得処理 //
+// 文字列取得処理 //
 
 char Remarks::GetText(int sn, int sp)
 {
+    //オープニング
     char Opening[][256] =
     {
         "最近仕事がうまくいかない...。 ",
@@ -116,7 +143,9 @@ char Remarks::GetText(int sn, int sp)
         "/|きっと私は、あの時の事をずっと引きずっているのだろう...。 ",
         "/^",
     };
-    char Day1Stage[][256] =
+
+    //ステージ
+    char Stage[][256] =
     {
         "ここは一体...。 ",
         "/さっきまで自室で寝ていたはずだが? ",
@@ -124,6 +153,8 @@ char Remarks::GetText(int sn, int sp)
         "/|気味が悪いが、進むしかないのだろうか? ",
         "/^ ",
     };
+
+    //男性セリフ
     char ManSpeak[][256] =
     {
         "男性「...!?」 ",
@@ -142,28 +173,27 @@ char Remarks::GetText(int sn, int sp)
         "/これを持って早くここから逃げるんだ!」  ",
         "/^ ",
     };
+
+    //クリア
     char GameClear[][256] =
     {
         "現在プレイできるのはここまでになります。",
         "/|遊んでいただきありがとうございました!!!",
         "/^",
-    }
-    ;
+    };
+
+    //タイプに合わせたセリフの文字を返す
     switch (textType)
     {
-        //～TextTypeがOpeningTextだったら～
-    case TextType::OpeningText:
-        return Opening[sn][sp];                                                     //Openingの文字列を返す
+    case TextType::Opening:
+        return Opening[sn][sp];
         break;
-        //～TxtTypeがDay1Stageだったら～
-    case TextType::Day1Stage:
-        return Day1Stage[sn][sp];
+    case TextType::Stage:
+        return Stage[sn][sp];
         break;
-        //～TxtTypeがManSpeakだったら～
     case TextType::ManSpeak:
         return ManSpeak[sn][sp];
         break;
-        //～TxtTypeがGameClearだったら～
     case TextType::GameClear:
         return GameClear[sn][sp];
         break;
@@ -172,36 +202,26 @@ char Remarks::GetText(int sn, int sp)
     return -1;
 }
 
-        // @brief 改行処理 //
+// 改行処理 //
 
 void Remarks::NewLine()
 {
-    textY++;                                                                        //文字表示列を1列進める
-    textX = 0;                                                                      //文字表示位置を初期位置にする
-
-    //～読み込み文字の列が縦幅からはみ出るなら～
-    if (textY >= BUFHEIGHT)
-    {
-        for (int i = 1; i < BUFHEIGHT; i++)
-        {
-            for (int j = 0; j < BUFWIDTH * 2; j++)
-            {
-                stringBuf[i - 1][j] = stringBuf[i][j];                              //テキストバッファを縦スクロールする
-            }
-        }
-
-        textY--;                                                                    //文字表示列を1れつずらす
-    }
+    //改行して表示位置を左端からにする
+    textY++;
+    textX = 0;
 }
 
-        // @brief Remarks描画処理 //
+// 描画処理 //
 
 void Remarks::Draw()
 {
+    //テキストボックス描画
     GetDrawScreenGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, graph);
     DrawExtendGraph((int)objPos.x, (int)objPos.y, (int)objPos.x + 1920, (int)objPos.y + 480, objHandle, TRUE);
+
+    //台詞描画
     for (int i = 0; i < BUFHEIGHT; i++)
     {
-        DrawString(i + 620, i * TEXTSIZE + 930, stringBuf[i], GetColor(255, 255, 255));     //テキストバッファの描画
+        DrawString(i + 620, i * TEXTSIZE + 930, stringBuf[i], GetColor(255, 255, 255));
     }
 }

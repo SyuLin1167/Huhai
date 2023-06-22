@@ -1,51 +1,72 @@
 #include "Action.h"
 
-		// @brief Actionコンストラクタ //
+#include"../../Object/ObjectManager/ObjManager.h"
+#include"../../BlendMode/BlendMode.h"
 
-Action::Action(VECTOR objpos)
-	:ObjectBase(ObjectTag::UI)
-	, objDistance(0)
-	, canAction(false)
-	, isAction(false)
-	, actionBlend(nullptr)
+// コンストラクタ //
+
+Action::Action(VECTOR pos)
+    :ObjBase(ObjectTag::UI)
+    , toDistance(0)
+    , canAction(false)
+    , isAction(false)
+    , actionBlend(nullptr)
 {
-	actionBlend = new BlendMode;
-	objPos = objpos + VGet(0, 20, 0);
-	objHandle = LoadGraph("../Assets/BackGround/Action.png");
+    //アイコン設定
+    objHandle = LoadGraph("../Assets/BackGround/Action.png");
+    objPos = pos + VGet(0, 20, 0);
+
+    actionBlend = new BlendMode();
 }
 
-		// @brief Actionデストラクタ //
+// デストラクタ //
 
 Action::~Action()
 {
-	DeleteGraph(objHandle);
+    //画像ハンドル削除
+    if (objHandle)
+    {
+        DeleteGraph(objHandle);
+    }
 }
 
-		// @brief Action更新処理 //
+// 更新処理 //
 
 void Action::Update(float deltaTime)
 {
-	ObjectBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
-	objDistance = VSize(player->GetPos() - objPos);
-	if (abs(objDistance) < actionRange)
-	{
-		actionBlend->AddFade();
-		canAction = true;
-		if (canAction && CheckHitKey(KEY_INPUT_E))
-		{
-			isVisible = false;
-		}
-	}
-	else
-	{
-		actionBlend->SubFade();
-		canAction = false;
-	}
+    //プレイヤーとの距離を測る
+    ObjBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
+    toDistance = VSize(player->GetPos() - objPos);
+
+    //一定距離近づいたら
+    if (abs(toDistance) < actionRange)
+    {
+        //アイコン表示
+        actionBlend->AddFade(deltaTime);
+        canAction = true;
+
+        //Eキーが押されたら反応中にする
+        if (canAction && CheckHitKey(KEY_INPUT_E))
+        {
+            isVisible = false;
+            isAction = true;
+        }
+    }
+    else
+    {
+        //一定距離離れたら非表示にする
+        actionBlend->SubFade(deltaTime);
+        canAction = false;
+        isAction = false;
+    }
 }
+
+// 描画処理 //
 
 void Action::Draw()
 {
-	actionBlend->Fade();
-	DrawExtendGraph3D(objPos.x, objPos.y, objPos.z, 0.3f, 0.3f, objHandle, TRUE);
-	actionBlend->NoBlend();
+    //アイコン描画
+    actionBlend->Fade();
+    DrawExtendGraph3D(objPos.x, objPos.y, objPos.z, 0.3f, 0.3f, objHandle, TRUE);
+    actionBlend->NoBlend();
 }

@@ -2,8 +2,8 @@
 
 enum class TextType
 {
-    OpeningText = 0,
-    Day1Stage,
+    Opening = 0,
+    Stage,
     ManSpeak,
     GameClear,
 };

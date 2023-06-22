@@ -1,25 +1,26 @@
 #include "TimeManager.h"
 
-// @brief TimeManagerコンストラクタ― //
+// rコンストラクタ //
 
 TimeManager::TimeManager()
-	:nowTime(0)
-	, prevTime(0)
-	, deltaTime(0)
-{}
-
-// @brief Time更新処理 //
-
-void TimeManager::Update()
+    : deltaTime(0)
 {
-	//---フレームレートの算出---//
-	nowTime = (float)GetNowCount();						//現在の時刻を取得
-	deltaTime = (nowTime - prevTime) / 1000.0f;		//フレームレートの算出
-	prevTime = nowTime;								//過去の時間に現在の時間を代入
+    nowTime = (float)GetNowCount();
+    prevTime = nowTime;
 }
 
-// @brief TimeManagerデストラクタ― //
+// デストラクタ //
 
 TimeManager::~TimeManager()
 {
+}
+
+// 更新処理 //
+
+void TimeManager::Update()
+{
+    //フレームレート算出
+    nowTime = (float)GetNowCount();
+    deltaTime = (nowTime - prevTime) / 1000.0f;
+    prevTime = nowTime;
 }

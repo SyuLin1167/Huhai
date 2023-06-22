@@ -2,27 +2,27 @@
 #include"../../Object/ObjectBase/ObjectBase.h"
 #include"TextType.h"
 
-constexpr int TEXTSIZE = 24;
-constexpr int BUFWIDTH = 50;
-constexpr int BUFHEIGHT = 20;
+constexpr int TEXTSIZE = 24;        //テキストサイズ
+constexpr int BUFWIDTH = 50;        //表示制限行
+constexpr int BUFHEIGHT = 20;       //表示制限列
 
-        /*Remarksのクラス*/
-class Remarks :public ObjectBase
+/*Remarksクラス*/
+class Remarks :public ObjBase
 {
 public:
     /// <summary>
-    /// Remarksコンストラクタ
+    /// コンストラクタ
     /// </summary>
-    /// <param name="texttype">:テキストの種類</param>
-    Remarks(TextType texttype);
+    /// <param name="type">:テキストの種類</param>
+    Remarks(TextType type);
 
     /// <summary>
-    /// Remarksデストラクタ
+    /// デストラクタ
     /// </summary>
     ~Remarks();
 
     /// <summary>
-    /// Remarks更新処理
+    /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     void Update(float deltaTime)override;
@@ -41,25 +41,28 @@ public:
     void NewLine();
 
     /// <summary>
-    /// Remarks描画処理
+    /// 描画処理
     /// </summary>
     void Draw()override;
 
     /// <summary>
-    /// Remarks終了フラグ
+    /// 終了フラグ
     /// </summary>
-    /// <returns>:終了フラグ</returns>
+    /// <returns>:終了する:true|しない:false</returns>
     bool RemarksEof() { return eofFlag; }
 
 private:
     TextType textType;
     char stringBuf[BUFHEIGHT][BUFWIDTH * 2 + 1];        //仮想テキストバッファ
-    int textX;                                          //文字表示位置X
-    int textY;                                          //文字表示位置Y
+    char holdBuf[3];                                    //文字一時記憶領域
     int Sn;                                             //文字列番号
     int Sp;                                             //文字ポインタ
+
     bool eofFlag;                                       //終了フラグ
     bool waitKey;                                       //待機フラグ
-    char holdBuf[3];                                    //文字一時記憶領域
-    int graph;
+
+    int textX;                                          //文字表示位置X
+    int textY;                                          //文字表示位置Y
+
+    int graph;                                          //画面保持グラフ
 };

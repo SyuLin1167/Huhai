@@ -1,69 +1,115 @@
 #include "Select.h"
 
-        // @brief Selectコンストラクタ //
+#include"../../BlendMode/BlendMode.h"
+
+// コンストラクタ //
 
 Select::Select(SelectType type)
-    :ObjectBase(ObjectTag::UI)
-    , selectBlend(nullptr)
+    :ObjBase(ObjectTag::UI)
     , mouseX(0)
     , mouseY(0)
+    , canSelect(false)
     , isSelect(false)
-    , nowInput(false)
+    , hasInput(false)
+    , selectBlend(nullptr)
 {
-    selectBlend = new BlendMode;
-    objPos = drawPos[type];
+    //ボタン設定
     objHandle = LoadGraph(drawHandle[type]);
+    objPos = drawPos[type];
+
+    selectBlend = new BlendMode;
 }
 
-        // @brief Selectデストラクタ //
+// デストラクタ //
 
 Select::~Select()
 {
-    DeleteGraph(objHandle);                         //ハンドルの開放
+    //画像ハンドル削除
+    if (objHandle)
+    {
+        DeleteGraph(objHandle);
+    }
 }
 
-        // @brief Select更新処理 //
+// 更新処理 //
 
 void Select::Update(float deltaTime)
 {
-    selectBlend->AddFade();
-    GetMousePoint(&mouseX, &mouseY);                //マウス座標取得
+    //ボタンは開幕時フェード処理
+    selectBlend->AddFade(deltaTime);
 
-    if (mouseX >= objPos.x && mouseX <= objPos.x + 160 &&
-        mouseY >= objPos.y && mouseY <= objPos.y + 50)
-    {
-        OnCollisionEnter();
-    }
-    else
-    {
-        nowInput = false;
-    }
+    OnCollisionEnter();
+
 }
+
+// 当たり判定処理 //
 
 void Select::OnCollisionEnter()
 {
+    //マウスカーソル座標取得
+    GetMousePoint(&mouseX, &mouseY);
 
-    if ((GetMouseInput() & MOUSE_INPUT_LEFT))
+    //マウスカーソルとボタンの当たり判定
+    if (mouseX >= objPos.x && mouseX <= objPos.x + 160 &&
+        mouseY >= objPos.y && mouseY <= objPos.y + 50)
     {
-        nowInput = true;
+        //カーソルがボタン上にあったら選択可能
+        canSelect = true;
+        Input();
     }
-    else if (nowInput)
+    else
     {
-        isSelect = true;
-        nowInput = false;
+        //でなかったら選択不可
+        canSelect = false;
+        hasInput = false;
     }
 }
 
+// 入力処理 //
+
+void Select::Input()
+{
+    //入力可能だったら
+    if (canSelect)
+    {
+
+    }
+    else
+    {
+        //不可ならクリック中ボタン上から外れた場合を考慮して選択を取り消す
+        //isSelect = false;
+        //hasInput = false;
+    }
+    //ボタン上でクリックされたら
+        if ((GetMouseInput() & MOUSE_INPUT_LEFT))
+        {
+            //ボタン入力中にする
+            hasInput = true;
+        }
+        else if (hasInput)
+        {
+            //クリックし終わったら選択されたことにする
+            isSelect = true;
+            hasInput = false;
+        }
+}
+
+// 描画処理 //
+
 void Select::Draw()
 {
-    if (!isSelect)
+    //フェード処理
+    if (selectBlend->NowFade())
     {
         selectBlend->Fade();
     }
-    if (nowInput)
+    //暗転処理
+    else if (hasInput)
     {
         selectBlend->Darken();
     }
+
+    //画像描画
     DrawExtendGraph((int)objPos.x, (int)objPos.y, (int)objPos.x + 160, (int)objPos.y + 50, objHandle, TRUE);
     selectBlend->NoBlend();
 }
