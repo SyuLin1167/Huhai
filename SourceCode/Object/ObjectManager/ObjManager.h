@@ -84,7 +84,9 @@ private:
     /// </summary>
     static void Dead();
 
-    static ObjManager* objManager;                                     //自身の実態
-    std::vector<ObjBase*>holdObj;                                    //一時保存オブジェクト
-    std::unordered_map<ObjectTag, std::vector<ObjBase*>>Object;      //Object[タグ種類][オブジェクト個数]
+    static ObjManager* objManager;                                  //自身の実態
+    std::vector<ObjBase*>holdObj;                                   //一時保存オブジェクト
+    std::unordered_map<ObjectTag, std::vector<ObjBase*>>Object;     //Object[タグ種類][オブジェクト個数]
+
+    class Bloom* bloom;                                             //ブルーム
 };

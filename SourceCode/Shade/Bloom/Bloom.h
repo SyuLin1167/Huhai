@@ -12,41 +12,35 @@ class Bloom
 {
 public:
     /// <summary>
-    /// Bloom初期化処理
-    /// </summary>
-    static void Init();
-
-    /// <summary>
-    /// スクリーンセット
-    /// </summary>
-    static void SetColoerScreen();
-
-    /// <summary>
-    /// ブルームの描画準備
-    /// </summary>
-    static void SetBloomGraph();
-
-    /// <summary>
-    /// Bloom描画更新処理
-    /// </summary>
-    static void Draw();
-private:
-    /// <summary>
-    /// コンストラクター(シングルトン)
+    /// コンストラクタ
     /// </summary>
     Bloom();
 
     /// <summary>
-    /// デストラクター
+    /// デストラクタ
     /// </summary>
-	~Bloom();
+    ~Bloom();
+
+    /// <summary>
+    /// スクリーンセット
+    /// </summary>
+    void SetColoerScreen();
+
+    /// <summary>
+    /// 描画準備
+    /// </summary>
+    void SetBloomGraph();
+
+    /// <summary>
+    /// 描画更新処理
+    /// </summary>
+    void Draw();
+private:
 
     int GaussParam;             //ガウスのぼかし具合
-    int ColorScreen;            //普通の描画結果を書き込むスクリーン
-    int HighBrightScreen;       //普通の描画結果から高輝度部分を抜き出した結果を書き込むスクリーン
-    int DownScaleScreen;        //高輝度部分を縮小した結果を書き込むスクリーン
-    int GaussScreen;            //縮小画像をガウスフィルタでぼかした結果を書き込むスクリーン
-
-    static Bloom* bloom;               //Bloomの実態
+    int ColorScreen;            //普通の描画結果用スクリーン
+    int HighBrightScreen;       //描画結果から高輝度部分抜き出し用スクリーン
+    int DownScaleScreen;        //高輝度部分縮小用スクリーン
+    int GaussScreen;            //縮小画像ぼかし用スクリーン
 };
 

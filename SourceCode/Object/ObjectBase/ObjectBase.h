@@ -6,8 +6,7 @@
 #include"../../Collision/Collision.h"
 #include"../../Collision/CollisionType.h"
 
-constexpr auto SCREEN_WIDTH = 1920;       //スクリーン幅
-constexpr auto SCREEN_HEIGHT = 1080;      //スクリーン高さ
+const VECTOR zeroVec = VGet(0.0f, 0.0f, 0.0f);    //ベクトル初期値
 
 /*ObjBaseクラス*/
 class ObjBase
@@ -25,7 +24,7 @@ public:
     /// <param name="tag">:タグ</param>
     /// <param name="pos">:座標</param>
     /// <param name="angle">:方向</param>
-    ObjBase(ObjectTag tag, VECTOR pos, VECTOR angle = { 0,0,0 });
+    ObjBase(ObjectTag tag, VECTOR pos, VECTOR dir = zeroVec);
 
     /// <summary>
     /// デストラクタ
@@ -147,6 +146,7 @@ protected:
     /// Collision更新処理
     /// </summary>
     void ColUpdate();
+
 
     ObjectTag objTag;                           //オブジェクトタグ
     int objHandle;                              //オブジェクトハンドル

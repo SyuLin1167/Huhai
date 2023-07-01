@@ -1,5 +1,6 @@
 #include "ObjManager.h"
 
+#include"../../Shade/Bloom/Bloom.h"
 
 //実態へのポインタ定義
 ObjManager* ObjManager::objManager = nullptr;
@@ -9,7 +10,9 @@ ObjManager* ObjManager::objManager = nullptr;
 ObjManager::ObjManager()
     :Object()
     , holdObj()
+    , bloom(nullptr)
 {
+    bloom = new Bloom;
 }
 
 // デストラクタ //
@@ -17,9 +20,9 @@ ObjManager::ObjManager()
 ObjManager::~ObjManager()
 {
     //インスタンス削除
-    if (objManager)
+    if (bloom)
     {
-        delete objManager;
+        delete bloom;
     }
 }
 
@@ -97,6 +100,7 @@ void ObjManager::ReleaseAllObj()
 
 void ObjManager::Update(float deltaTime)
 {
+
     // 該当タグにあるすべてのオブジェクトを更新
     for (auto& tag : ObjTagAll)
     {
@@ -105,6 +109,10 @@ void ObjManager::Update(float deltaTime)
             objManager->Object[tag][i]->Update(deltaTime);
         }
     }
+
+    //ブルーム用画面
+    //objManager->bloom->SetColoerScreen();
+    SetCameraNearFar(0.1f, 400.0f);
 
     //一時保存中のオブジェクトをアクティブリストに追加
     for (auto holding : objManager->holdObj)
@@ -123,6 +131,7 @@ void ObjManager::Update(float deltaTime)
 
 void ObjManager::Dead()
 {
+
     //死亡したオブジェクトを検索して死亡オブジェクトに移動
     std::vector<ObjBase*>deadObj;
     for (auto& tag : ObjTagAll)
@@ -146,7 +155,6 @@ void ObjManager::Dead()
     }
 }
 
-
 // 全描画処理 //
 
 void ObjManager::Draw()
@@ -154,6 +162,7 @@ void ObjManager::Draw()
     //該当タグにあるすべてのオブジェクトを描画
     for (auto& tag : ObjTagAll)
     {
+
         for (int i = 0; i < objManager->Object[tag].size(); ++i)
         {
             if (objManager->Object[tag][i]->IsVisible())
@@ -162,6 +171,10 @@ void ObjManager::Draw()
             }
         }
     }
+
+    //ブルーム描画
+    //objManager->bloom->SetBloomGraph();
+    //objManager->bloom->Draw();
 }
 
 // 当たり判定処理 //

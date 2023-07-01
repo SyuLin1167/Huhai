@@ -5,7 +5,7 @@
 ObjBase::ObjBase(ObjectTag tag)
     :objTag(tag)
     , objHandle(-1)
-    , objPos(VGet(0.0f,0.0f,0.0f))
+    , objPos(zeroVec)
     , objDir(VGet(1.0f, 0.0f, 0.0f))
     , objScale(VGet(0.1f, 0.1f, 0.1f))
     , objSpeed(20.0f)
@@ -21,11 +21,11 @@ ObjBase::ObjBase(ObjectTag tag)
 
 // コンストラクタ(位置・方向セット) //
 
-ObjBase::ObjBase(ObjectTag tag, VECTOR pos, VECTOR angle)
+ObjBase::ObjBase(ObjectTag tag, VECTOR pos, VECTOR dir)
     :objTag(tag)
     , objHandle(-1)
     , objPos(pos)
-    , objDir(angle)
+    , objDir(dir)
     , objScale(VGet(0.1f, 0.1f, 0.1f))
     , objSpeed(20.0f)
     , isVisible(true)

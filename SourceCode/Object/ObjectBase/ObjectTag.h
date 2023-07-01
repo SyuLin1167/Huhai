@@ -11,7 +11,7 @@ enum class ObjectTag :unsigned char
     Ghost,      //エネミー
     Man,        //男性
     UI,         //UI
-    Remarks,
+    Remarks,    //セリフ
 };
 
 /*全タグ*/

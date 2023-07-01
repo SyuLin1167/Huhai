@@ -22,6 +22,11 @@ public:
     int Init();
 
     /// <summary>
+    /// 後処理
+    /// </summary>
+    void Finalize();
+
+    /// <summary>
     /// 更新処理
     /// </summary>
     void Update();
@@ -32,15 +37,22 @@ public:
     void Draw();
 
     /// <summary>
+    /// シーン切り替え
+    /// </summary>
+    void SceneChange();
+
+    /// <summary>
     /// ゲームループ
     /// </summary>
     void GameLoop();
 
 private:
-    bool canLoop;                               //ループフラグ
+    int keyState[256] = { 0 };                  //キーステータス
 
     std::stack<class SceneBase*> nowScene;      //現在のシーン
+    SceneBase* tmpScene;                        //一時的なシーン
 
+    class GameSetting* gameSetting;             //ゲームセッティング
     class TimeManager* timeMgr;                 //タイムマネージャー
 };
 
