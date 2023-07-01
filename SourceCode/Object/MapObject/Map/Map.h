@@ -1,15 +1,30 @@
 #pragma once
+
+#include<unordered_map>
+#include<string>
+
 #include"../../ObjectBase/ObjectBase.h"
 
 /*Mapクラス*/
 class Map :public ObjBase
 {
 public:
+    //マップタグ
+    enum MapTag
+    {
+        TITLE = 0,
+        ROOM,
+        STAGE,
+        ESCAPE,
+        ESCAPEMAIN,
+        GOAL,
+    };
+
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="maptag">:マップタグ</param>
-    Map(int tag);
+    Map(MapTag tag);
 
     /// <summary>
     /// デストラクタ
@@ -32,19 +47,28 @@ public:
     /// </summary>
     void Draw()override;
 
-    //マップタグ
-    enum MapTag
-    {
-        TITLE = 0,
-        ROOM,
-        STAGE,
-        ESCAPE,
-        ESCAPEMAIN,
-        GOAL,
-    };
 
 private:
-    class Model* mapModel;      //モデル
     class Sound* mapSound;      //サウンド
-    int mapTag;                 //タグ
+    MapTag mapTag;                 //タグ
+
+    //マップファイルデータ
+    std::unordered_map<MapTag, std::string> mapFile
+    {
+        {MapTag::TITLE,"../Assets/Map/Stage/Title.mv1"},
+        {MapTag::ROOM,"../Assets/Map/Room/Room.mv1"},
+        {MapTag::STAGE,"../Assets/Map/Stage/Stage.mv1"},
+        {MapTag::ESCAPE,"../Assets/Map/Stage/Escape.mv1"},
+        {MapTag::ESCAPEMAIN,"../Assets/Map/Stage/EscapeMain.mv1"},
+        {MapTag::GOAL,"../Assets/Map/Stage/GoalRoom.mv1"},
+    };
+
+    //当たり判定ファイルデータ
+    std::unordered_map<MapTag, std::string> mapColFile
+    {
+        {MapTag::ROOM,"../Assets/Map/Room/Room.mv1"},
+        {MapTag::STAGE,"../Assets/Map/Stage/StageCol.mv1"},
+        {MapTag::ESCAPE,"../Assets/Map/Stage/Escape.mv1"},
+        {MapTag::ESCAPEMAIN,"../Assets/Map/Stage/EscapeMain.mv1"},
+    };
 };

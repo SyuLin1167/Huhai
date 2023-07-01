@@ -2,6 +2,7 @@
 
 #include"../../../Asset/AssetManager/AssetManager.h"
 #include"../../ObjectManager/ObjManager.h"
+#include"../../CharaObject/Camera/FixedCamera/FixedCamera.h"
 #include"../../../UI/Action/Action.h"
 #include"../../../Scene/TitleScene/Title.h"
 
@@ -48,17 +49,27 @@ void Bed::Update(float deltaTime)
     ObjBase* action = ObjManager::GetFirstObj(ObjectTag::UI);
     if (!action->IsVisible())
     {
+
+
         //プレイヤーをベッドに移動
         colModel = -1;
         ObjBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
-        VECTOR movePly = VSub(objPos + VGet(5.0f, 0.0f, 0.0f), player->GetPos());
-        movePly = VNorm(movePly);
-        player->SetPos(VAdd(player->GetPos(), movePly * objSpeed * deltaTime));
+        VECTOR movePlyVec = (objPos + VGet(5.0f, 0.0f, 0.0f)) - player->GetPos();
+        if (abs(VSize(movePlyVec)) >= 0)
+        {
+            movePlyVec = VNorm(movePlyVec);
+            player->SetPos(player->GetPos() + (movePlyVec * objSpeed * deltaTime));
+        }
 
         //視点を就寝時にする
+        VECTOR aimDir = player->GetDir();
+        if (aimDir.x > -1)
+        {
+            aimDir.x -= objSpeed * deltaTime;
+        }
         ObjBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
-        camera->SetPos(player->GetPos() + VGet(0, 14, 0));
-        camera->SetDir(VGet(0, 25, 20) - camera->GetPos());
+        camera->SetPos(camera->GetPos() - VGet(0, 8, 0));
+        camera->SetDir(aimDir);
     }
     else
     {

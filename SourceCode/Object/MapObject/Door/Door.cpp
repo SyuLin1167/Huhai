@@ -2,7 +2,6 @@
 
 #include"../../ObjectManager/ObjManager.h"
 #include"../../../Asset/Animation/Animation.h"
-#include"../../../Asset/Model/Model.h"
 #include"../../../Asset/AssetManager/AssetManager.h"
 #include"../../../Asset/Sound/Sound.h"
 
@@ -62,8 +61,8 @@ void Door::Load()
 
     //サウンド設定
     doorSound = new Sound;
-    doorSound->AddSound("../Assets/Sound/DoorOpenSE.wav", SoundTag::DoorOpen, 150, true);
-    doorSound->AddSound("../Assets/Sound/DoorCloseSE.wav", SoundTag::DoorClose, 150, true);
+    doorSound->AddSound("../Assets/Sound/DoorOpenSE.wav", SoundTag::DoorOpen, true);
+    doorSound->AddSound("../Assets/Sound/DoorCloseSE.wav", SoundTag::DoorClose, true);
 }
 
 // 更新処理 //
@@ -108,7 +107,8 @@ void Door::Update(float deltaTime)
     ColUpdate();
 
     //サウンド更新
-    doorSound->Update(objPos);
+    doorSound->Doppler(SoundTag::DoorOpen, objPos);
+    doorSound->Doppler(SoundTag::DoorClose, objPos);
 }
 
 // アニメーション処理 //

@@ -2,15 +2,6 @@
 
 // コンストラクタ //
 
-LitLight::LitLight()
-    :LightBase()
-    , lightDistance(0.0f)
-{
-    Load();
-}
-
-// コンストラクタ //
-
 LitLight::LitLight(VECTOR pos, float range)
     :LightBase(pos)
     , lightDistance(0.0f)
@@ -34,9 +25,8 @@ LitLight::~LitLight()
 
 void LitLight::Load()
 {
-    //モデル設定
-    lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2);
-    SetLightEnableHandle(lightHandle, FALSE);
+
+    SetLightEnableHandle(lightHandle,FALSE);
 }
 
         // 更新処理 //

@@ -31,11 +31,7 @@ NomalLight::~NomalLight()
 
 void NomalLight::Load()
 {
-    //ライト設定
-    SetLightPositionHandle(lightHandle, objPos);
-
     //モデル設定
-    lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2);
     MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
     MV1SetPosition(objHandle, objPos);
 }
@@ -45,7 +41,7 @@ void NomalLight::Load()
 void NomalLight::Update(float deltaTime)
 {
     //座標更新
-    SetLightPositionHandle(lightHandle, objPos);
+    SetLightPositionHandle(lightHandle, objPos + VGet(0.0f, 2.5f, 0.0f));
     MV1SetPosition(objHandle, objPos);
 }
 

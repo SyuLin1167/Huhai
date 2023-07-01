@@ -2,14 +2,12 @@
 
 #include"../../ObjectManager/ObjManager.h"
 #include"../../../Asset/AssetManager/AssetManager.h"
-#include"../../../Asset/Model/Model.h"
 #include"../../../Asset/Sound/Sound.h"
 
 // コンストラクタ //
 
-Map::Map(int maptag)
+Map::Map(MapTag maptag)
     :ObjBase(ObjectTag::Map)
-    , mapModel(nullptr)
     , mapSound(nullptr)
     , mapTag(maptag)
 {
@@ -24,29 +22,23 @@ Map::~Map()
     AssetManager::ReleaseMesh(objHandle);
 }
 
-        // 読み込み処理 //
+// 読み込み処理 //
 
 void Map::LoadModel()
 {
     //モデル設定
-    mapModel = new Model;
-    mapModel->AddModel("../Assets/Map/Stage/Title.mv1");
-    mapModel->AddModel("../Assets/Map/Room/Room.mv1");
-    mapModel->AddModel("../Assets/Map/Stage/StageDay1.mv1");
-    mapModel->AddModel("../Assets/Map/Stage/Escape.mv1");
-    mapModel->AddModel("../Assets/Map/Stage/EscapeMain.mv1");
-    mapModel->AddModel("../Assets/Map/Stage/GoalRoom.mv1");
-    objHandle = mapModel->GetModel(mapTag);
+    objHandle = AssetManager::GetMesh(mapFile[mapTag]);
     MV1SetPosition(objHandle, objPos);
     MV1SetScale(objHandle, VGet(0.11f, 0.12f, 0.11f));
 
     //当たり判定設定
-    colModel = objHandle;
-    MV1SetupCollInfo(colModel);
+    colModel = AssetManager::GetMesh(mapColFile[mapTag]);
+    MV1SetPosition(colModel, objPos);
+    MV1SetScale(colModel, VGet(0.11f, 0.12f, 0.11f));
 
     //サウンド設定
     mapSound = new Sound;
-    mapSound->AddSound("../Assets/Sound/InDoorSE.mp3", SoundTag::InDoor, 150);
+    mapSound->AddSound("../Assets/Sound/InDoorSE.mp3", SoundTag::InDoor);
     mapSound->StartSound(SoundTag::InDoor, DX_PLAYTYPE_LOOP);
 }
 

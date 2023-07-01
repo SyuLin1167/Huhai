@@ -55,8 +55,8 @@ void Chair::Load()
 
     //サウンド設定
     chairSound = new Sound;
-    chairSound->AddSound("../Assets/Sound/MoveChairSE.mp3", SoundTag::MoveChair, 300, true);
-    chairSound->AddSound("../Assets/Sound/FallingChairSE.mp3", SoundTag::FallingChair, 150, true);
+    chairSound->AddSound("../Assets/Sound/MoveChairSE.mp3", SoundTag::MoveChair, true);
+    chairSound->AddSound("../Assets/Sound/FallingChairSE.mp3", SoundTag::FallingChair, true);
 }
 
         // 更新処理 //
@@ -87,7 +87,8 @@ void Chair::Update(float deltaTime)
     ColUpdate();
 
     //サウンド更新
-    chairSound->Update(objPos);
+    chairSound->Doppler(SoundTag::MoveChair,objPos);
+    chairSound->Doppler(SoundTag::FallingChair, objPos);
 }
 
 // 描画処理 //

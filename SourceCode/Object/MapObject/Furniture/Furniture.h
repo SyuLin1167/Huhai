@@ -1,15 +1,26 @@
 #pragma once
+
+#include<unordered_map>
+#include<string>
+
 #include"../../ObjectBase/ObjectBase.h"
 
 /*Furnitureクラス*/
 class Furniture :public ObjBase
 {
 public:
+    //家具タグ
+    enum FurName
+    {
+        Room = 0,
+        Stage,
+    };
+
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    /// <param name="furtag">:家具タグ</param>
-    Furniture(int furtag);
+    /// <param name="tag">:タグ</param>
+    Furniture(FurName tag);
 
     /// <summary>
     /// デストラクタ
@@ -20,7 +31,7 @@ public:
     /// 読み込み処理
     /// </summary>
     /// <param name="tag">:タグ</param>
-    void Load(int tag);
+    void Load(FurName tag);
 
     /// <summary>
     /// 更新処理
@@ -33,13 +44,18 @@ public:
     /// </summary>
     void Draw()override;
 
-    enum FurName
+private:
+    //家具モデルファイルデータ
+    std::unordered_map<FurName, std::string> furModel
     {
-        Room = 0,
-        Stage,
+        {FurName::Room,"../Assets/Map/Furniture/RoomFur.mv1"},
+        {FurName::Stage,"../Assets/Map/Furniture/StageFur.mv1"},
     };
 
-private:
-    class Model* furModel;
-    class Model* furColModel;
+    //家具当たり判定ファイルデータ
+    std::unordered_map<FurName, std::string> furColModel
+    {
+        {FurName::Room,"../Assets/Map/Furniture/RoomFurCol.mv1"},
+        {FurName::Stage,"../Assets/Map/Furniture/StageFurCol.mv1"},
+    };
 };

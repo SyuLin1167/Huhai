@@ -1,4 +1,5 @@
 #include "BlinkingLight.h"
+#include"../../../../Shade/Bloom/Bloom.h"
 
 // コンストラクタ //
 
@@ -31,8 +32,7 @@ BlinkingLight::~BlinkingLight()
 
 void BlinkingLight::Load()
 {
-    //ライト設定
-    lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2);
+
 
     //モデル設定
     MV1SetPosition(objHandle, objPos);
@@ -44,7 +44,6 @@ void BlinkingLight::Load()
 void BlinkingLight::Update(float deltaTime)
 {
     //カウントがインターバルを超えるたびに乱数を生成
-    SetLightRangeAttenHandle(lightHandle, lightRange, 0.0f, 0.0f, lightAtten2);
     countTimer += deltaTime;
     if (countTimer >= intervalTime)
     {
@@ -67,13 +66,14 @@ void BlinkingLight::Update(float deltaTime)
     //点滅時はライトの明るさ変更
     if (isBlinking)
     {
-        lightAtten2 = 0.003f;
+        SetLightRangeAttenHandle(lightHandle, lightRange, 0.0f, 0.0f, lightAtten2 * 3.0f);
+        MV1SetMaterialEmiColor(objHandle, 0, GetColorF(0.8f, 0.8f, 0.8f, 0.8f));
     }
     else
     {
-        lightAtten2 = 0.002f;
+        SetLightRangeAttenHandle(lightHandle, lightRange, 0.0f, 0.0f, lightAtten2*2.0f);
+        MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
     }
-
 }
 
 // 描画処理 //

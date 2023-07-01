@@ -32,8 +32,7 @@ FlashLight::~FlashLight()
 void FlashLight::Load()
 {
     //ライト設定
-    lightAtten2 = 0.0005f;
-    lightHandle = CreatePointLightHandle(objPos, lightRange, 0.0f, 0.0f, lightAtten2 * 10);
+    lightHandle = CreateSpotLightHandle(objPos, objDir, DX_PI_F / 4.0f, DX_PI_F / 8.0f, lightRange, 0.0f, 0.0f, lightAtten2);
 }
 
 // 更新処理 //
@@ -43,7 +42,7 @@ void FlashLight::Update(float deltaTime)
     //プレイヤーの周辺を光らせる
     ObjBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
     SetLightPositionHandle(lightHandle, camera->GetPos());
-    //SetLightDirectionHandle(lightHandle, camera->GetDir());
+    SetLightDirectionHandle(lightHandle, camera->GetDir());
 }
 
 // 描画処理 //
