@@ -1,19 +1,19 @@
 #pragma once
 #include"../../../ObjectBase/ObjectBase.h"
 
-/*MoveCameraクラス*/
-class MoveCamera :public ObjBase
+/*FixedCameraクラス*/
+class FixedCamera :public ObjBase
 {
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    MoveCamera();
+    FixedCamera();
 
     /// <summary>
     /// デストラクタ
     /// </summary>
-    ~MoveCamera() {};
+    ~FixedCamera() {};
 
     /// <summary>
     /// 更新処理
@@ -24,7 +24,6 @@ public:
     /// <summary>
     /// 描画
     /// </summary>
-    void Draw()override {};
-
+    void Draw()override ;
 };
 

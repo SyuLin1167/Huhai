@@ -1,22 +1,26 @@
 #pragma once
-#include"../../ObjectBase/ObjectBase.h"
+
+#include"../../../../GameSetting/GameSetting.h"
+#include"../../../ObjectBase/ObjectBase.h"
 
 constexpr float CameraNear = 0.1f;       //カメラの描画範囲(近)
 constexpr float CameraFar = 400.0f;     //カメラの描画範囲(遠)
 
-/*CameraFpsクラス*/
-class CameraFps :public ObjBase
+constexpr float CameraPosY = 22.5f;
+
+/*FpsCameraクラス*/
+class FpsCamera :public ObjBase
 {
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    CameraFps();
+    FpsCamera();
 
     /// <summary>
     /// デストラクタ
     /// </summary>
-    ~CameraFps() {};
+    ~FpsCamera();
 
     /// <summary>
     /// 更新処理

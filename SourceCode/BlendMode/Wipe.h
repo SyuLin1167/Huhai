@@ -1,20 +1,21 @@
 #pragma once
-#include<DxLib.h>
 
-    /*BlendModeのクラス*/
-class BlendMode
+#include"../GameSetting/GameSetting.h"
+
+/*Wipeクラス*/
+class Wipe
 {
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="speed">:フェード速度(デフォルト・80.0)</param>
-    BlendMode(float speed = 80.0f);
+    Wipe(float speed = 80.0f);
 
     /// <summary>
     /// デストラクタ
     /// </summary>
-    ~BlendMode();
+    ~Wipe();
 
     /// <summary>
     /// フェード
@@ -47,6 +48,17 @@ public:
     /// <returns>フェード中:true|でない:false</returns>
     bool NowFade() { return nowFade; }
 
+    /// <summary>
+    /// 就寝
+    /// </summary>
+    /// <param name="deltaTime">:フレームレート</param>
+    void Sleep(float deltaTime);
+
+    /// <summary>
+    /// 就寝描画処理
+    /// </summary>
+    void SleepDraw();
+
 private:
     bool nowFade;                   //フェードフラグ
     float fadeValue;                  //フェード値
@@ -54,5 +66,9 @@ private:
 
     bool nowDark;                   //暗転フラグ
     const int darkValue = 150;      //暗転値
+
+    int screenGraph;                //仮画面
+    int gaussGraph;                 //ぼかし用画面
+    float gaussValue;               //ぼかし値
 };
 

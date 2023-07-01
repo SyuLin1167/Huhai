@@ -27,7 +27,7 @@ public:
     /// <summary>
     /// 当たり判定処理
     /// </summary>
-    void OnCollisionEnter();
+    void Collision();
 
     /// <summary>
     /// 入力処理
@@ -66,7 +66,7 @@ private:
         {SelectType::EXIT,"../Assets/BackGround/Exit.png"},
     };
 
-    class BlendMode* selectBlend;    //ブレンドモード
+    class Wipe* selectBlend;    //ブレンドモード
 };
 
 

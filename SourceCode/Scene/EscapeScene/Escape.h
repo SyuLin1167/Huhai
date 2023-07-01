@@ -28,7 +28,7 @@ public:
     void Draw()override;
 
 private:
-    class BlendMode* escBlend;    //ブレンドモード
+    class Wipe* escBlend;    //ブレンドモード
     class Sound* escSound;        //サウンド
 };
 

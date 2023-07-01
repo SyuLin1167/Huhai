@@ -3,7 +3,7 @@
 #include"../../Object/ObjectManager/ObjManager.h"
 #include"../../Asset/AssetManager/AssetManager.h"
 #include"../../Asset/Sound/Sound.h"
-#include "../../Object/CharaObject/Camera/CameraFps.h"
+#include "../../Object/CharaObject/Camera/FpsCamera/FpsCamera.h"
 #include "../../Object/MapObject/Map/Map.h"
 #include "../../Object/MapObject/Door/Door.h"
 #include"../../Object/MapObject/Table/Table.h"
@@ -12,7 +12,7 @@
 #include "../../Object/MapObject/Light/FlashLight/FlashLight.h"
 #include "../../Object/CharaObject/Player/Player.h"
 #include"../../Object/CharaObject/Ghost/Ghost.h"
-#include"../../BlendMode/BlendMode.h"
+#include"../../BlendMode/Wipe.h"
 #include "../ResultScene/Result.h"
 #include"../TitleScene/Title.h"
 #include"../RoomScene/Room.h"
@@ -25,7 +25,7 @@ EscapeScene::EscapeScene()
     , escSound(nullptr)
 {
     //カメラ生成
-    ObjManager::Entry(new CameraFps);
+    ObjManager::Entry(new FpsCamera);
 
     //マップ生成
     ObjManager::Entry(new Map(Map::MapTag::ESCAPE));
@@ -44,9 +44,9 @@ EscapeScene::EscapeScene()
     }
 
     //照明生成
-    ObjManager::Entry(new BlinkingLight(VGet(23, 32, 10)));
-    ObjManager::Entry(new NomalLight(VGet(175, 32, -30)));
-    ObjManager::Entry(new FlashLight());
+    ObjManager::Entry(new BlinkingLight(VGet(23, 33, 10)));
+    ObjManager::Entry(new NomalLight(VGet(175, 33, -30)));
+    ObjManager::Entry(new FlashLight);
 
     //プレイヤー生成
     ObjManager::Entry(new Player);
@@ -55,14 +55,11 @@ EscapeScene::EscapeScene()
     ObjManager::Entry(new Ghost);
 
     //ブレンドモード生成
-    escBlend = new BlendMode;
+    escBlend = new Wipe;
 
     //サウンド生成
     escSound = new Sound;
-    escSound->AddSound("../Assets/Sound/EscapeBgm.mp3", SoundTag::Escape, 150);
-    escSound->AddSound("../Assets/Sound/GameOverSE.mp3", SoundTag::GameOver, 150);
-    escSound->StartSound(SoundTag::Escape, DX_PLAYTYPE_LOOP);
-
+    escSound->AddSound("../Assets/Sound/GameOverSE.mp3", SoundTag::GameOver);
 }
 
 // デストラクタ //
@@ -90,7 +87,7 @@ SceneBase* EscapeScene::Update(float deltaTime)
         ObjManager::ReleaseAllObj();
 
         //シーンを次の場面にする
-        return new Result;
+        return new ResultScene;
     }
     //ゲームオーバーしたら
     else if (!ObjManager::GetFirstObj(ObjectTag::Player)->IsVisible())
@@ -109,7 +106,7 @@ SceneBase* EscapeScene::Update(float deltaTime)
                 ObjManager::ReleaseAllObj();
 
                 //シーンを次の場面にする
-                return new Title;
+                return new TitleScene;
             }
         }
     }

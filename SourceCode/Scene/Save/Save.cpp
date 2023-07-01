@@ -1,5 +1,7 @@
 #include "Save.h"
 
+#include"../RoomScene/Room.h"
+
 //実態へのポインタ定義
 SaveScene* SaveScene::save = nullptr;
 
@@ -29,6 +31,7 @@ void SaveScene::Init()
 
 // 後処理 //
 
+
 void SaveScene::Finalize()
 {
     //インスタンス削除 
@@ -51,4 +54,16 @@ void SaveScene::Save(SceneBase* scene)
     {
         save->saveScene = scene;
     }
+}
+
+// ロード処理 //
+
+SceneBase* SaveScene::Load()
+{
+    if (!save->saveScene)
+    {
+        return new RoomScene;
+    }
+
+    return save->saveScene;
 }

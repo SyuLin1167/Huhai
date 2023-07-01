@@ -2,7 +2,7 @@
 
 #include"../../Object/ObjectManager/ObjManager.h"
 #include"../../Asset/AssetManager/AssetManager.h"
-#include "../../Object/CharaObject/Camera/CameraFps.h"
+#include "../../Object/CharaObject/Camera/FpsCamera/FpsCamera.h"
 #include "../../Object/MapObject/Map/Map.h"
 #include "../../Object/MapObject/Furniture/Furniture.h"
 #include "../../Object/MapObject/Door/Door.h"
@@ -16,13 +16,13 @@
 #include"../EscapeScene/Escape.h"
 #include"../Save/Save.h"
 
-    // @brief PlaySceneコンストラクタ //
+// コンストラクタ //
 
-Play::Play()
+PlayScene::PlayScene()
     :SceneBase()
 {
     //カメラ生成
-    ObjManager::Entry(new CameraFps);
+    ObjManager::Entry(new FpsCamera);
 
     //マップ生成
     ObjManager::Entry(new Map(Map::MapTag::STAGE));
@@ -39,9 +39,9 @@ Play::Play()
     ObjManager::Entry(new Chair);
 
     //照明生成
-    ObjManager::Entry(new NomalLight(VGet(-10, 32, 0)));
-    ObjManager::Entry(new LitLight(VGet(65, 32, 0), 50.0f));
-    ObjManager::Entry(new LitLight(VGet(121, 32, 25), 40.0f));
+    ObjManager::Entry(new NomalLight(VGet(-10, 33, 0)));
+    ObjManager::Entry(new LitLight(VGet(65, 33, 0), 50.0f));
+    ObjManager::Entry(new LitLight(VGet(121, 33, 25), 40.0f));
 
     //プレイヤー生成
     ObjManager::Entry(new Player);
@@ -56,13 +56,13 @@ Play::Play()
 
 // デストラクタ //
 
-Play::~Play()
+PlayScene::~PlayScene()
 {
 }
 
 // 更新処理 //
 
-SceneBase* Play::Update(float deltaTime)
+SceneBase* PlayScene::Update(float deltaTime)
 {
     //オブジェクト更新
     ObjManager::Update(deltaTime);
@@ -88,7 +88,7 @@ SceneBase* Play::Update(float deltaTime)
 
 // 描画処理 //
 
-void Play::Draw()
+void PlayScene::Draw()
 {
     //オブジェクト描画
     ObjManager::Draw();

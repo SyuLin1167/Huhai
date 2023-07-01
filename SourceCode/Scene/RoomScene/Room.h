@@ -1,21 +1,19 @@
 #pragma once
 #include"../SceneBase/SceneBase.h"
-#include"../../Object/ObjectManager/ObjManager.h"
-#include"../../BlendMode/BlendMode.h"
 
 /*RoomSceneクラス*/
-class Room :public SceneBase
+class RoomScene :public SceneBase
 {
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    Room();
+    RoomScene();
 
     /// <summary>
     /// デストラクタ
     /// </summary>
-    ~Room();
+    ~RoomScene();
 
     /// <summary>
     /// 更新処理
@@ -30,5 +28,6 @@ public:
     void Draw()override;
 
 private:
-    class BlendMode* roomBlend;    //ブレンドモード
+    class Wipe* roomBlend;      //ブレンドモード
+    class Sound* roomSound;     //サウンド
 };

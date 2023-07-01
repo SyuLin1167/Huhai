@@ -1,6 +1,9 @@
 #include "Room.h"
 
-#include "../../Object/CharaObject/Camera/CameraFps.h"
+#include"../../Object/ObjectManager/ObjManager.h"
+#include"../../BlendMode/Wipe.h"
+#include "../../Asset/Sound/Sound.h"
+#include "../../Object/CharaObject/Camera/FpsCamera/FpsCamera.h"
 #include "../../Object/MapObject/Map/Map.h"
 #include "../../Object/MapObject/Furniture/Furniture.h"
 #include "../../Object/MapObject/Bed/Bed.h"
@@ -12,12 +15,17 @@
 
 // コンストラクタ //
 
-Room::Room()
+RoomScene::RoomScene()
     :SceneBase()
     , roomBlend(nullptr)
 {
+    //サウンド生成
+    roomSound = new Sound;
+    roomSound->AddSound("../Assets/Sound/InDoorSE.mp3", SoundTag::InDoor);
+    roomSound->StartSound(SoundTag::InDoor, DX_PLAYTYPE_LOOP);
+
     //カメラ生成
-    ObjManager::Entry(new CameraFps);
+    ObjManager::Entry(new FpsCamera);
 
     //マップ生成
     ObjManager::Entry(new Map(Map::MapTag::ROOM));
@@ -29,7 +37,7 @@ Room::Room()
     ObjManager::Entry(new Bed);
 
     //照明生成
-    ObjManager::Entry(new NomalLight(VGet(40, 32, 0)));
+    ObjManager::Entry(new NomalLight(VGet(40, 33, 0)));
 
     //プレイヤー生成
     ObjManager::Entry(new Player);
@@ -38,30 +46,37 @@ Room::Room()
     ObjManager::Entry(new Remarks(TextType::Opening));
 
     //ブレンドモード生成
-    roomBlend = new BlendMode;
+    roomBlend = new Wipe;
+
 }
 
 // デストラクタ //
 
-Room::~Room()
+RoomScene::~RoomScene()
 {
 }
 
 // 更新処理 //
 
-SceneBase* Room::Update(float deltaTime)
+SceneBase* RoomScene::Update(float deltaTime)
 {
     //オブジェクト更新
     ObjManager::Update(deltaTime);
 
     //オブジェクト当たり判定
     ObjManager::Collision();
-
     //アクションボタンが押されたら
     ObjBase* action = ObjManager::GetFirstObj(ObjectTag::UI);
+
+    if (CheckHitKey(KEY_INPUT_RETURN))
+    {
+        SaveScene::Save(this);
+    }
+
     if (!action->IsVisible())
     {
         //フェードアウト
+        SetDrawMode(DX_DRAWMODE_BILINEAR);
         roomBlend->AddFade(deltaTime);
 
         //シーン移行時の演出が終わったら
@@ -72,8 +87,7 @@ SceneBase* Room::Update(float deltaTime)
             ObjManager::ReleaseAllObj();
 
             //シーンを次の場面にする
-            SaveScene::Save(this);
-            return new Play;
+            return new PlayScene;
         }
     }
     return this;
@@ -81,7 +95,7 @@ SceneBase* Room::Update(float deltaTime)
 
 // 描画処理 //
 
-void Room::Draw()
+void RoomScene::Draw()
 {
     //オブジェクト描画
     ObjManager::Draw();

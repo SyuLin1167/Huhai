@@ -2,20 +2,20 @@
 
 #include "../../Object/ObjectManager/ObjManager.h"
 #include "../../Asset/AssetManager/AssetManager.h"
-#include "../../BlendMode/BlendMode.h"
+#include "../../BlendMode/Wipe.h"
 #include "../../Asset/Sound/Sound.h"
-#include "../../Object/CharaObject/Camera/CameraFps.h"
 #include "../../Object/MapObject/Map/Map.h"
 #include "../../Object/MapObject/Door/Door.h"
 #include "../../Object/MapObject/Light/BlinkingLight/BlinkingLight.h"
 #include "../../Object/MapObject/Light/NomalLight/NomalLight.h"
+#include "../../Object/CharaObject/Camera/FixedCamera/FixedCamera.h"
 #include "../RoomScene/Room.h"
 #include "../EscapeScene/Escape.h"
 #include "../Save/Save.h"
 
 // コンストラクタ //
 
-Title::Title()
+TitleScene::TitleScene()
     :SceneBase()
     ,screenGraph(-1)
 {
@@ -25,16 +25,16 @@ Title::Title()
     BgY = 150;
 
     //ブレンドモード生成
-    titleBlend = new BlendMode;
+    titleBlend = new Wipe;
 
     //サウンド生成
     titleSound = new Sound;
-    titleSound->AddSound("../Assets/Sound/TitleBgm.mp3", SoundTag::Title, 150);
-    titleSound->AddSound("../Assets/Sound/StartSE.mp3", SoundTag::Start, 150);
+    titleSound->AddSound("../Assets/Sound/TitleBgm.mp3", SoundTag::Title);
+    titleSound->AddSound("../Assets/Sound/StartSE.mp3", SoundTag::Start);
     titleSound->StartSound(SoundTag::Title, DX_PLAYTYPE_LOOP);
 
     //カメラ生成
-    ObjManager::Entry(new CameraFps);
+    ObjManager::Entry(new FixedCamera);
 
     //マップ生成
     ObjManager::Entry(new Map(Map::MapTag::TITLE));
@@ -44,8 +44,8 @@ Title::Title()
     ObjManager::Entry(door);
 
     //ライト生成
-    ObjManager::Entry(new BlinkingLight(VGet(-35, 32, 70)));
-    ObjManager::Entry(new NomalLight(VGet(80, 32, 65)));
+    ObjManager::Entry(new BlinkingLight(VGet(-35, 33, 70)));
+    ObjManager::Entry(new NomalLight(VGet(65, 33, 65)));
 
     //選択ボタン生成
     for (auto type : selectTypeAll)
@@ -62,7 +62,7 @@ Title::Title()
 
 // デストラクタ //
 
-Title::~Title()
+TitleScene::~TitleScene()
 {
     //画像ハンドル削除
     if (BgHandle)
@@ -73,7 +73,7 @@ Title::~Title()
 
 // 更新処理 //
 
-SceneBase* Title::Update(float deltaTime)
+SceneBase* TitleScene::Update(float deltaTime)
 {
     //ドアは開く状態にする
     door->MoveAnim(Door::Anim::OPEN);
@@ -120,15 +120,11 @@ SceneBase* Title::Update(float deltaTime)
                     if (type == PLAY)
                     {
                         //PLAY選択時、シーンを次の場面にする
-                        return new Room;
+                        return new RoomScene;
                     }
                     if (type == LOAD)
                     {
                         //LOAD選択時、シーンを保存シーンにする
-                        if (!SaveScene::Load())
-                        {
-                            SaveScene::Save(new Room);
-                        }
                         return SaveScene::Load();
                     }
                 }
@@ -136,29 +132,18 @@ SceneBase* Title::Update(float deltaTime)
         }
     }
 
-    //カメラ設定(後にFixedCameraクラスを作成して、そこで行う)
-    ObjBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
-    if (camera)
-    {
-        camera->SetPos(VGet(70, 6, 75));
-        camera->SetDir(VGet(-1.0f, 0.1f, -0.7f));
-    }
-
-
-    //SetCameraPositionAndTarget_UpVecY(VGet(70, 6, 75), VGet(-10, 10, 25));         //注視点に向けてカメラをセット
-
     return this;
 }
 
 // 描画処理 //
 
-void Title::Draw()
+void TitleScene::Draw()
 {
     //オブジェクト描画
     ObjManager::Draw();
 
     //選択ボタン描画
-    GetDrawScreenGraph(0, 0, 1920, 1080, screenGraph);
+    GetDrawScreenGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, screenGraph);
     DrawExtendGraph(BgX, BgY, BgX + 450, BgY + 200, BgHandle, TRUE);
     for (auto type : selectTypeAll)
     {

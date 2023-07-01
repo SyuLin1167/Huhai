@@ -1,24 +1,30 @@
-#include "BlendMode.h"
+#include "Wipe.h"
+#include<DxLib.h>
+#include<math.h>
+#include"../Object/ObjectBase/ObjectBase.h"
 
-    // コンストラクタ //
+// コンストラクタ //
 
-BlendMode::BlendMode(float FadeSpeed)
+Wipe::Wipe(float FadeSpeed)
     :fadeValue(0.0f)
     , fadeSpeed(FadeSpeed)
     , nowFade(false)
     , nowDark(false)
+    , screenGraph(MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT, TRUE))
+    , gaussGraph(MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT, TRUE))
+    , gaussValue(0.0f)
 {
 }
 
-    // デストラクタ //
+// デストラクタ //
 
-BlendMode::~BlendMode()
+Wipe::~Wipe()
 {
 }
 
-    // フェードアウト //
+// フェードアウト //
 
-void BlendMode::AddFade(float deltaTime)
+void Wipe::AddFade(float deltaTime)
 {
     if (fadeValue <= 255)
     {
@@ -39,7 +45,7 @@ void BlendMode::AddFade(float deltaTime)
 
 // フェードイン //
 
-void BlendMode::SubFade(float deltaTime)
+void Wipe::SubFade(float deltaTime)
 {
     if (fadeValue >= 0)
     {
@@ -60,14 +66,14 @@ void BlendMode::SubFade(float deltaTime)
 
 // フェード //
 
-void BlendMode::Fade()
+void Wipe::Fade()
 {
     SetDrawBlendMode(DX_BLENDMODE_ALPHA, static_cast<int>(fadeValue));
 }
 
 // 暗転処理 //
 
-void BlendMode::Darken()
+void Wipe::Darken()
 {
     if (nowFade)
     {
@@ -82,9 +88,38 @@ void BlendMode::Darken()
     }
 }
 
-    // デフォルト //
+// デフォルト //
 
-void BlendMode::NoBlend()
+void Wipe::NoBlend()
 {
-    SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);                      //ノーブレンドモード
+    //ノーブレンドモード
+    SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+}
+
+// 就寝 //
+
+void Wipe::Sleep(float deltaTime)
+{
+    //瞬きさせる
+    if (gaussValue < DX_PI_F*3)
+    {
+        gaussValue += 0.05f ;
+    }
+}
+
+// 就寝描画処理 //
+
+void Wipe::SleepDraw()
+{
+    //描画先を仮画面にして全体を赤にする
+    SetDrawScreen(screenGraph);
+
+    //ぼかす
+    GraphFilterBlt(screenGraph, gaussGraph, DX_GRAPH_FILTER_GAUSS, 16, 200 * sin(gaussValue));
+
+    //描画先を裏画面に変更
+    SetDrawScreen(DX_SCREEN_BACK);
+
+    //画像描画
+    DrawGraph(0, 0, gaussGraph, TRUE);
 }

@@ -7,8 +7,8 @@ AssetManager* AssetManager::assetMgr = nullptr;
 
 AssetManager::AssetManager()
 {
-    SetEnableXAudioFlag(FALSE);
-    Set3DSoundOneMetre(20.0f);
+    SetEnableXAudioFlag(TRUE);
+    Set3DSoundOneMetre(10.0f);
 }
 
 // デストラクタ //
@@ -105,7 +105,7 @@ int AssetManager::GetSound(std::string fileName)
     return meshID;
 }
 
-    // @brief メッシュの削除 //
+// メッシュの削除 //
 
 void AssetManager::ReleaseMesh(int meshID)
 {
@@ -147,7 +147,7 @@ void AssetManager::ReleaseAllAsset()
         DeleteSoundMem(sound.second);
     }
 
-    //---複製解放---//
+    //複製解放-
     for (auto dup : assetMgr->dupMesh)
     {
         MV1DeleteModel(dup);

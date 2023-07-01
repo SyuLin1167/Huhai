@@ -1,6 +1,6 @@
 #include "Select.h"
 
-#include"../../BlendMode/BlendMode.h"
+#include"../../BlendMode/Wipe.h"
 
 // コンストラクタ //
 
@@ -17,7 +17,7 @@ Select::Select(SelectType type)
     objHandle = LoadGraph(drawHandle[type]);
     objPos = drawPos[type];
 
-    selectBlend = new BlendMode;
+    selectBlend = new Wipe;
 }
 
 // デストラクタ //
@@ -38,13 +38,13 @@ void Select::Update(float deltaTime)
     //ボタンは開幕時フェード処理
     selectBlend->AddFade(deltaTime);
 
-    OnCollisionEnter();
-
+    Collision();
+    Input();
 }
 
 // 当たり判定処理 //
 
-void Select::OnCollisionEnter()
+void Select::Collision()
 {
     //マウスカーソル座標取得
     GetMousePoint(&mouseX, &mouseY);
@@ -55,13 +55,11 @@ void Select::OnCollisionEnter()
     {
         //カーソルがボタン上にあったら選択可能
         canSelect = true;
-        Input();
     }
     else
     {
         //でなかったら選択不可
         canSelect = false;
-        hasInput = false;
     }
 }
 
@@ -72,15 +70,7 @@ void Select::Input()
     //入力可能だったら
     if (canSelect)
     {
-
-    }
-    else
-    {
-        //不可ならクリック中ボタン上から外れた場合を考慮して選択を取り消す
-        //isSelect = false;
-        //hasInput = false;
-    }
-    //ボタン上でクリックされたら
+        //ボタン上でクリックされたら
         if ((GetMouseInput() & MOUSE_INPUT_LEFT))
         {
             //ボタン入力中にする
@@ -92,6 +82,12 @@ void Select::Input()
             isSelect = true;
             hasInput = false;
         }
+    }
+    else
+    {
+        //不可ならクリック中ボタン上から外れた場合を考慮して選択を取り消す
+        hasInput = false;
+    }
 }
 
 // 描画処理 //

@@ -20,8 +20,8 @@ public:
     /// <summary>
     /// ロード処理
     /// </summary>
-    /// <returns></returns>
-    static SceneBase* Load() { return save->saveScene; }
+    /// <returns>:セーブシーン</returns>
+    static SceneBase* Load();
 
     /// <summary>
     /// 後処理

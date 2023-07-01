@@ -1,11 +1,11 @@
-#include "CameraFps.h"
+#include "FpsCamera.h"
 
-#include"../../ObjectManager/ObjManager.h"
-#include"../Player/Player.h"
+#include"../../../ObjectManager/ObjManager.h"
+#include"../../Player/Player.h"
 
-// コンストラクター //
+// コンストラクタ //
 
-CameraFps::CameraFps()
+FpsCamera::FpsCamera()
     :ObjBase(ObjectTag::Camera)
     , mouseX(0)
     , mouseY(0)
@@ -16,27 +16,37 @@ CameraFps::CameraFps()
     objDir = { 0,10,0 };
     SetCameraNearFar(CameraNear, CameraFar);                                    //カメラの描画範囲設定
     SetMouseDispFlag(FALSE);                                                    //マウスは非表示
+}
 
+// デストラクタ //
+
+FpsCamera::~FpsCamera()
+{
 }
 
 // 更新処理 //
 
-void CameraFps::Update(float deltaTime)
+void FpsCamera::Update(float deltaTime)
 {
     //カメラはプレイヤーの目線にする
     ObjBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
     if (player)
     {
-        objPos = player->GetPos() + VGet(0.0f, 22.5f, 0.0f);
+        objPos = player->GetPos();
+        objPos.y = CameraPosY;
 
         Move(deltaTime);
         SetMousePoint(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+    }
+    else
+    {
+        isAlive = false;
     }
 }
 
 // 移動処理 //
 
-void CameraFps::Move(float deltaTime)
+void FpsCamera::Move(float deltaTime)
 {
     //常時マウスポインターは画面の中心
     GetMousePoint(&mouseX, &mouseY);
@@ -59,8 +69,11 @@ void CameraFps::Move(float deltaTime)
     objDir.z = sinf(cameraYaw);
 }
 
-void CameraFps::Draw()
+void FpsCamera::Draw()
 {
-    //カーソルの移動した方向に視点を移動
-    SetCameraPositionAndTarget_UpVecY(objPos, objPos + objDir);
+    if (isVisible)
+    {
+        //カーソルの移動した方向に視点を移動
+        SetCameraPositionAndTarget_UpVecY(objPos, objPos + objDir);
+    }
 }

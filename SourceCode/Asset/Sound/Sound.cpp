@@ -9,6 +9,8 @@ Sound::Sound()
     :soundType(-1)
     , nowSoundTime(0.0f)
     , attachedIndex(0)
+    , prevSoundPos(zeroVec)
+    , prevListnerPos(zeroVec)
 {
 }
 
@@ -21,18 +23,15 @@ Sound::~Sound()
     {
         DeleteSoundMem(soundData[tag].handle);
     }
-
-    //データ削除
-
 }
 
 // 追加処理 //
 
-void Sound::AddSound(std::string fileName, SoundTag tag, int volume, bool isDim)
+void Sound::AddSound(std::string fileName, SoundTag tag, bool isDim)
 {
     //サウンドデータ設定
     SoundData sound = {};
-    sound.volume = volume;
+    sound.volume = 150;
     sound.isDim = isDim;
 
     //サウンド登録&取得
@@ -49,23 +48,32 @@ void Sound::AddSound(std::string fileName, SoundTag tag, int volume, bool isDim)
     soundData.emplace(tag, sound);
 }
 
-// 更新処理 //
+// ドップラー効果 //
 
-void Sound::Update(VECTOR targetPos)
+void Sound::Doppler(SoundTag tag, VECTOR pos)
 {
     //3次元サウンドはカメラの距離に合わせて音量を変える
     ObjBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
-    for (auto tag : soundTagAll)
+    auto& sound = soundData[tag];
+    if (sound.isDim && IsPlaying(tag))
     {
-        auto& sound = soundData[tag];
-        if (sound.isDim && IsPlaying(tag))
+        //サウンドに関わる座標設定
+        if (camera)
         {
-            if (camera)
-            {
-                Set3DSoundListenerPosAndFrontPos_UpVecY(camera->GetPos(), camera->GetDir());
-            }
-            Set3DPositionSoundMem(targetPos, sound.handle);
-        }
+            Set3DPositionSoundMem(pos, sound.handle);
+            Set3DSoundListenerPosAndFrontPos_UpVecY(camera->GetPos(), camera->GetPos() + camera->GetDir());
+
+            //移動速度算出
+            VECTOR soundVel = VScale(VSub(pos, prevSoundPos), 60.0f);
+            Set3DVelocitySoundMem(soundVel, sound.handle);
+            VECTOR listnerVel = VScale(VSub(camera->GetPos(), prevListnerPos), 60.0f);
+            Set3DSoundListenerVelocity(listnerVel);
+
+            //過去の座標に代入
+            prevSoundPos = pos;
+            prevListnerPos = camera->GetPos();
+        };
+
     }
 }
 
@@ -77,11 +85,12 @@ void Sound::StartSound(SoundTag tag, int playType)
     auto& sound = soundData[tag];
     if (!CheckSoundMem(sound.handle))
     {
+        //サウンドの有効範囲設定
         if (sound.isDim)
         {
-            Set3DPositionSoundMem(VGet(0.0f, 0.0f, 0.0f), sound.handle);
-            Set3DRadiusSoundMem(200.0f, sound.handle);
+            Set3DRadiusSoundMem(500.0f, sound.handle);
         }
+
         ChangeVolumeSoundMem(sound.volume, sound.handle);
         PlaySoundMem(sound.handle, playType);
     }
@@ -93,19 +102,10 @@ void Sound::StartSoundOnce(SoundTag tag, int playType)
 {
     //再生されていなかったらサウンド再生
     auto& sound = soundData[tag];
-    if (!sound.playOnce)
+    if (sound.playOnce)
     {
-        if (!CheckSoundMem(sound.handle))
-        {
-            if (sound.isDim)
-            {
-                Set3DPositionSoundMem(VGet(0.0f, 0.0f, 0.0f), sound.handle);
-                Set3DRadiusSoundMem(200.0f, sound.handle);
-            }
-            ChangeVolumeSoundMem(sound.volume, sound.handle);
-            PlaySoundMem(sound.handle, playType);
-            sound.playOnce = true;
-        }
+        StartSound(tag, playType);
+        sound.playOnce = false;
     }
 }
 
@@ -155,6 +155,6 @@ Sound::SoundData::SoundData()
     :handle(-1)
     , volume(0)
     , isDim(false)
-    , playOnce(false)
+    , playOnce(true)
 {
 }

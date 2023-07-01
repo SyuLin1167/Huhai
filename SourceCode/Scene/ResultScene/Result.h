@@ -2,18 +2,18 @@
 #include"../SceneBase/SceneBase.h"
 
 /*ResultSceneクラス*/
-class Result :public SceneBase
+class ResultScene :public SceneBase
 {
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    Result();
+    ResultScene();
 
     /// <summary>
     /// デストラクタ
     /// </summary>
-    ~Result();
+    ~ResultScene();
 
     /// <summary>
     /// 更新処理

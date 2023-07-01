@@ -10,7 +10,7 @@
 
 // コンストラクタ //
 
-Result::Result()
+ResultScene::ResultScene()
     :SceneBase()
 {
     //台詞生成
@@ -22,13 +22,13 @@ Result::Result()
 
 // デストラクタ //
 
-Result::~Result()
+ResultScene::~ResultScene()
 {
 }
 
 // 更新処理 //
 
-SceneBase* Result::Update(float deltaTime)
+SceneBase* ResultScene::Update(float deltaTime)
 {
     //オブジェクト更新
     ObjManager::Update(deltaTime);
@@ -42,14 +42,14 @@ SceneBase* Result::Update(float deltaTime)
 
         //シーンを次の場面にする
         SaveScene::Save(nullptr);
-        return new Title;
+        return new TitleScene;
     }
     return this;
 }
 
 // 描画処理 //
 
-void Result::Draw()
+void ResultScene::Draw()
 {
     //オブジェクト描画
     ObjManager::Draw();

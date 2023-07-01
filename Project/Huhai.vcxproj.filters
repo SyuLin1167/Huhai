@@ -106,12 +106,6 @@
     <Filter Include="ソース ファイル\MapObject\Light\FlashLight">
       <UniqueIdentifier>{8162273c-8545-46cb-b527-a2fa0254e08a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Asset\Model">
-      <UniqueIdentifier>{5cffe36f-bfe5-4fdf-805e-30e7f5a35d70}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\BlendMode">
-      <UniqueIdentifier>{77f50006-b03c-4b71-b631-7644e4897336}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\MapObject\Furniture">
       <UniqueIdentifier>{29722970-cfa5-4c1c-8a31-945172bc3b89}</UniqueIdentifier>
     </Filter>
@@ -129,9 +123,6 @@
     </Filter>
     <Filter Include="ソース ファイル\UI\Action">
       <UniqueIdentifier>{dfdfc7f6-0f13-4a16-a8db-a2f4aa9f58bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\CharaObject\Camera\MoveCamera">
-      <UniqueIdentifier>{2fc0775a-47de-4de3-b7ae-56a2bb5626f1}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\UI\Remarks">
       <UniqueIdentifier>{7911e8e5-15a8-441b-bbfb-d4b034f6e0bc}</UniqueIdentifier>
@@ -159,6 +150,18 @@
     </Filter>
     <Filter Include="ソース ファイル\Scene\Save">
       <UniqueIdentifier>{53aaa834-8626-4162-ba16-65d77b778143}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CharaObject\Camera\FixedCamera">
+      <UniqueIdentifier>{2fc0775a-47de-4de3-b7ae-56a2bb5626f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CharaObject\Camera\FpsCamera">
+      <UniqueIdentifier>{7d0f84eb-8629-4e9e-a22b-704bd601d329}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Wipe">
+      <UniqueIdentifier>{77f50006-b03c-4b71-b631-7644e4897336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\Pause">
+      <UniqueIdentifier>{ad9c7e76-4f18-43f3-816d-7b8e92492df7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -213,9 +216,6 @@
     <ClCompile Include="..\SourceCode\Object\MapObject\Furniture\Furniture.cpp">
       <Filter>ソース ファイル\MapObject\Furniture</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Object\CharaObject\Camera\CameraFps.cpp">
-      <Filter>ソース ファイル\CharaObject\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="..\SourceCode\Object\CharaObject\Player\Player.cpp">
       <Filter>ソース ファイル\CharaObject\Player</Filter>
     </ClCompile>
@@ -243,11 +243,8 @@
     <ClCompile Include="..\SourceCode\Object\MapObject\Light\FlashLight\FlashLight.cpp">
       <Filter>ソース ファイル\MapObject\Light\FlashLight</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Asset\Model\Model.cpp">
-      <Filter>ソース ファイル\Asset\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\BlendMode\BlendMode.cpp">
-      <Filter>ソース ファイル\BlendMode</Filter>
+    <ClCompile Include="..\SourceCode\BlendMode\Wipe.cpp">
+      <Filter>ソース ファイル\Wipe</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Object\MapObject\Bed\Bed.cpp">
       <Filter>ソース ファイル\MapObject\Bed</Filter>
@@ -260,9 +257,6 @@
     </ClCompile>
     <ClCompile Include="..\SourceCode\UI\Action\Action.cpp">
       <Filter>ソース ファイル\UI\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\Object\CharaObject\Camera\MoveCamera\MoveCamera.cpp">
-      <Filter>ソース ファイル\CharaObject\Camera\MoveCamera</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Scene\EscapeScene\Escape.cpp">
       <Filter>ソース ファイル\Scene\Escape</Filter>
@@ -287,6 +281,15 @@
     </ClCompile>
     <ClCompile Include="..\SourceCode\Scene\Save\Save.cpp">
       <Filter>ソース ファイル\Scene\Save</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\CharaObject\Camera\FixedCamera\FixedCamera.cpp">
+      <Filter>ソース ファイル\CharaObject\Camera\FixedCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Object\CharaObject\Camera\FpsCamera\FpsCamera.cpp">
+      <Filter>ソース ファイル\CharaObject\Camera\FpsCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\UI\PauseMenu\Pause.cpp">
+      <Filter>ソース ファイル\UI\Pause</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -344,9 +347,6 @@
     <ClInclude Include="..\SourceCode\Object\MapObject\Furniture\Furniture.h">
       <Filter>ソース ファイル\MapObject\Furniture</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Object\CharaObject\Camera\CameraFps.h">
-      <Filter>ソース ファイル\CharaObject\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="..\SourceCode\Object\CharaObject\Player\Player.h">
       <Filter>ソース ファイル\CharaObject\Player</Filter>
     </ClInclude>
@@ -374,11 +374,8 @@
     <ClInclude Include="..\SourceCode\Object\MapObject\Light\FlashLight\FlashLight.h">
       <Filter>ソース ファイル\MapObject\Light\FlashLight</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Asset\Model\Model.h">
-      <Filter>ソース ファイル\Asset\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\BlendMode\BlendMode.h">
-      <Filter>ソース ファイル\BlendMode</Filter>
+    <ClInclude Include="..\SourceCode\BlendMode\Wipe.h">
+      <Filter>ソース ファイル\Wipe</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Object\MapObject\Bed\Bed.h">
       <Filter>ソース ファイル\MapObject\Bed</Filter>
@@ -391,9 +388,6 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\UI\Action\Action.h">
       <Filter>ソース ファイル\UI\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\Object\CharaObject\Camera\MoveCamera\MoveCamera.h">
-      <Filter>ソース ファイル\CharaObject\Camera\MoveCamera</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Scene\EscapeScene\Escape.h">
       <Filter>ソース ファイル\Scene\Escape</Filter>
@@ -427,6 +421,15 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\Scene\Save\Save.h">
       <Filter>ソース ファイル\Scene\Save</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\CharaObject\Camera\FixedCamera\FixedCamera.h">
+      <Filter>ソース ファイル\CharaObject\Camera\FixedCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Object\CharaObject\Camera\FpsCamera\FpsCamera.h">
+      <Filter>ソース ファイル\CharaObject\Camera\FpsCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\UI\PauseMenu\Pause.h">
+      <Filter>ソース ファイル\UI\Pause</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -52,8 +52,8 @@ void Man::Load()
 
     //サウンド設定
     manSound = new Sound;
-    manSound->AddSound("../Assets/Sound/ManHurtSE.mp3", SoundTag::ManHurt, 300, true);
-    manSound->AddSound("../Assets/Sound/BodyFallSE.mp3", SoundTag::BodyFall, 300, true);
+    manSound->AddSound("../Assets/Sound/ManHurtSE.mp3", SoundTag::ManHurt, true);
+    manSound->AddSound("../Assets/Sound/BodyFallSE.mp3", SoundTag::BodyFall, true);
 
     //アクションボタン生成
     ObjManager::Entry(new Action(objPos + VGet(0, 0, 5)));
@@ -109,7 +109,8 @@ void Man::Update(float deltaTime)
 
     // モデルに回転をセットする
     MV1SetRotationZYAxis(objHandle, negativeVec, VGet(0.0f, 1.0f, 0.0f), 0.0f);
-    manSound->Update(objPos);
+    manSound->Doppler(SoundTag::ManHurt,objPos);
+    manSound->Doppler(SoundTag::BodyFall, objPos);
 }
 
         // @brief Man描画処 //

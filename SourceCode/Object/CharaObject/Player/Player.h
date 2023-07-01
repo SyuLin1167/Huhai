@@ -61,6 +61,7 @@ private:
 
     VECTOR inputVec;						//合成ベクトル
     VECTOR inputVel;						//速度ベクトル
+    float walkStep;                         //Y軸動作
     bool inputKey;							//キー入力判定
     bool canMove;                           //動作状態
 

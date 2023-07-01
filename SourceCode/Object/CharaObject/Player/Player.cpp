@@ -1,6 +1,7 @@
 #include "Player.h"
 
 #include"../../ObjectManager/ObjManager.h"
+#include"../../../UI/PauseMenu/Pause.h"
 #include"../../../Asset/Sound/Sound.h"
 
 // コンストラクタ //
@@ -8,14 +9,15 @@
 Player::Player()
     :ObjBase(ObjectTag::Player)
     , canMove(true)
-    , inputVec(VGet(0.0f,0.0f,0.0f))
-    , UP(VGet(0.0f, 0.0f, 0.0f))
-    , DOWN(VGet(0.0f, 0.0f, 0.0f))
-    , LEFT(VGet(0.0f, 0.0f, 0.0f))
-    , RIGHT(VGet(0.0f, 0.0f, 0.0f))
-    , inputVel(VGet(0.0f, 0.0f, 0.0f))
+    , UP(zeroVec)
+    , DOWN(zeroVec)
+    , LEFT(zeroVec)
+    , RIGHT(zeroVec)
+    , inputVec(zeroVec)
+    , inputVel(zeroVec)
+    , walkStep(0.0f)
     , inputKey(false)
-    , camFront(VGet(0.0f, 0.0f, 0.0f))
+    , camFront(zeroVec)
     , plySound(nullptr)
 {
     //当たり判定設定
@@ -27,7 +29,7 @@ Player::Player()
 
     //サウンド設定
     plySound = new Sound;
-    plySound->AddSound("../Assets/Sound/PlayerWalkSE.mp3", SoundTag::PlayerWalk, 250);
+    plySound->AddSound("../Assets/Sound/PlayerWalkSE.mp3", SoundTag::PlayerWalk);
 }
 
 // デストラクタ //
@@ -45,6 +47,23 @@ void Player::Update(float deltaTime)
     camFront = camFps->GetDir();
     camFront.y = 0;
     camFront = VNorm(camFront);
+
+    //移動時のカメラの上下運動
+    if (PauseMenu::IsMovementCamera())
+    {
+        if (inputKey)
+        {
+            if (walkStep < DX_PI_F)
+            {
+                walkStep += 5.0f * deltaTime;
+            }
+            else
+            {
+                walkStep = 0;
+            }
+            camFps->SetPos(VGet(objPos.x, camFps->GetPos().y + sin(walkStep), objPos.z));
+        }
+    }
 
     //カメラの向きに合わせて移動方向決定
     UP = camFront;

@@ -1,4 +1,6 @@
 #pragma once
+
+#include"../../GameSetting/GameSetting.h"
 #include"../../Object/ObjectBase/ObjectBase.h"
 #include"TextType.h"
 

@@ -2,18 +2,18 @@
 #include"../SceneBase/SceneBase.h"
 
 /* PlaySceneクラス */
-class Play :public SceneBase
+class PlayScene :public SceneBase
 {
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    Play();
+    PlayScene();
 
     /// <summary>
     /// デストラクタ
     /// </summary>
-    ~Play();
+    ~PlayScene();
 
     /// <summary>
     /// 更新処理

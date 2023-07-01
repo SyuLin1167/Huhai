@@ -1,20 +1,22 @@
 #pragma once
+
+#include"../../GameSetting/GameSetting.h"
 #include"../SceneBase/SceneBase.h"
 #include "../../UI/Select/Select.h"
 
 /* TitleSceneクラス */
-class Title :public SceneBase
+class TitleScene :public SceneBase
 {
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    Title();
+    TitleScene();
 
     /// <summary>
     /// デストラクタ
     /// </summary>
-    ~Title();
+    ~TitleScene();
 
     /// <summary>
     /// 更新処理
@@ -32,7 +34,7 @@ private:
     int screenGraph;        //画面保持グラフ
 
     class Door* door = nullptr;                 //ドア
-    class BlendMode* titleBlend;                //ブレンドモード
+    class Wipe* titleBlend;                //ブレンドモード
     class Select* select[SelectTypeSize];       //選択ボタン
     class Sound* titleSound = nullptr;          //サウンド
 };

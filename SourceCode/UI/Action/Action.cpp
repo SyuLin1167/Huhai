@@ -1,7 +1,7 @@
 #include "Action.h"
 
 #include"../../Object/ObjectManager/ObjManager.h"
-#include"../../BlendMode/BlendMode.h"
+#include"../../BlendMode/Wipe.h"
 
 // コンストラクタ //
 
@@ -16,7 +16,7 @@ Action::Action(VECTOR pos)
     objHandle = LoadGraph("../Assets/BackGround/Action.png");
     objPos = pos + VGet(0, 20, 0);
 
-    actionBlend = new BlendMode();
+    actionBlend = new Wipe();
 }
 
 // デストラクタ //

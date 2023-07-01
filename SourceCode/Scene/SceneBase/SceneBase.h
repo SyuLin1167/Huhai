@@ -1,9 +1,6 @@
 #pragma once
 #include <Dxlib.h>
 
-//カラービット数
-constexpr int ColorBit = 16;
-
     /*SceneBaseクラス*/
 class SceneBase
 {

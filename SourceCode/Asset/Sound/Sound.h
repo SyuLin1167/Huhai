@@ -25,15 +25,15 @@ public:
     /// </summary>
     /// <param name="fileName">:ファイル名</param>
     /// <param name="tag">:サウンドタグ</param>
-    /// <param name="volume">:音量</param>
     /// <param name="isDim">:音の次元(デフォルト・2次元)</param>
-    void AddSound(std::string fileName, SoundTag tag, int volume, bool isDim = false);
+    void AddSound(std::string fileName, SoundTag tag, bool isDim = false);
 
     /// <summary>
-    /// 更新処理
+    /// ドップラー効果
     /// </summary>
-    /// <param name="pos"></param>
-    void Update(VECTOR pos);
+    /// <param name="tag">:タグ</param>
+    /// <param name="pos">:座標</param>
+    void Doppler(SoundTag tag, VECTOR pos);
 
     /// <summary>
     /// 再生処理
@@ -88,6 +88,9 @@ private:
     int attachedIndex;                                      //アタッチ後のインデックス
     
     float nowSoundTime;                                     //現在のサウンド時刻
+
+    VECTOR prevSoundPos;                                    //過去のサウンド座標
+    VECTOR prevListnerPos;                                  //過去のリスナー座標
 
     std::unordered_map<SoundTag, SoundData> soundData;      //サウンドデータ
 };

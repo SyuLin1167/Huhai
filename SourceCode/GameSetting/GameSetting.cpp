@@ -5,19 +5,12 @@
 //のちに画面サイズの定数をObjBaseからSceneBaseに移動させる
 #include"../Object/ObjectBase/ObjectBase.h"
 
-//自身へのポインタ定義
-GameSetting* GameSetting::gameSetting = nullptr;
+
 
 // 初期化処理 //
 
 int GameSetting::Init()
 {
-    //インスタンスの中身が空だったら中身を宣言する
-    if (!gameSetting)
-    {
-        gameSetting = new GameSetting;
-    }
-
     //ウィンドウの設定
     ChangeWindowMode(TRUE);
     SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, ColorBit);
@@ -44,6 +37,7 @@ int GameSetting::Init()
 
     //標準ライトを無効化
     SetLightEnable(FALSE);
+    SetUsePixelLighting(TRUE);
 
     //初期化成功
     return 0;
@@ -55,8 +49,5 @@ void GameSetting::Finalize()
 {
     //Dxライブラリの後処理
     DxLib_End();
-
-    //インスタンスの後処理
-    delete gameSetting;
 }
 

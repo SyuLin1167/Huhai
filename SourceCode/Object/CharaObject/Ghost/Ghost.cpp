@@ -33,6 +33,9 @@ Ghost::Ghost()
 
     //移動速度
     objSpeed = 13.0f;
+
+    //サウンド設定
+    gstSound->StartSound(SoundTag::Escape, DX_PLAYTYPE_LOOP);
 }
 
 // デストラクタ //
@@ -71,12 +74,13 @@ void Ghost::Update(float deltaTime)
     //カウントがゼロになったら動作開始
     else if (isFirstMove)
     {
-        //ライトを設置してアニメーションとサウンドを再生
+        //アニメーション&サウンド再生
         if (animType != MOVE)
         {
             animType = MOVE;
             gstAnim->StartAnim(animType);
 
+            //ライト設置
             ObjManager::GetFirstObj(ObjectTag::Light)->SetAlive(false);
             lightHandle = CreatePointLightHandle(objPos, 50.0f, 0.0f, 0.0f, 0.005f);
             SetLightDifColorHandle(lightHandle, GetColorF(1.0f, 0.0f, 0.0f, 1.0f));
@@ -117,7 +121,8 @@ void Ghost::Update(float deltaTime)
     ColUpdate();
 
     //サウンド更新
-    gstSound->Update(objPos);
+    gstSound->Doppler(SoundTag::GhostScream, objPos);
+    gstSound->Doppler(SoundTag::Escape, objPos);
 }
 
 // 描画処理 //
