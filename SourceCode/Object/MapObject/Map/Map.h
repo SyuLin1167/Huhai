@@ -68,7 +68,7 @@ private:
     {
         {MapTag::ROOM,"../Assets/Map/Room/Room.mv1"},
         {MapTag::STAGE,"../Assets/Map/Stage/StageCol.mv1"},
-        {MapTag::ESCAPE,"../Assets/Map/Stage/Escape.mv1"},
-        {MapTag::ESCAPEMAIN,"../Assets/Map/Stage/EscapeMain.mv1"},
+        {MapTag::ESCAPE,"../Assets/Map/Stage/EscapeCol.mv1"},
+        {MapTag::GOAL,"../Assets/Map/Stage/GoalRoom.mv1"},
     };
 };

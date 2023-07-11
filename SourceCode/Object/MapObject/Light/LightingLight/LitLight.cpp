@@ -26,7 +26,7 @@ LitLight::~LitLight()
 void LitLight::Load()
 {
 
-    SetLightEnableHandle(lightHandle,FALSE);
+    SetLightEnableHandle(lightHandle,false);
 }
 
         // XVˆ— //

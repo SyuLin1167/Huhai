@@ -28,8 +28,8 @@ GhostBase::GhostBase()
     //サウンド設定
     gstSound = new Sound;
     gstSound->AddSound("../Assets/Sound/GhostWalkSE.mp3", SoundTag::GhostWalk);
-    gstSound->AddSound("../Assets/Sound/GhostScreamSE.mp3", SoundTag::GhostScream,  true);
-    gstSound->AddSound("../Assets/Sound/EscapeBgm.mp3", SoundTag::Escape, true);
+    gstSound->AddSound("../Assets/Sound/GhostScreamSE.mp3", SoundTag::GhostScream, true, true);
+    gstSound->AddSound("../Assets/Sound/EscapeBgm.mp3", SoundTag::Escape, true, false);
 }
 
 // デストラクタ //

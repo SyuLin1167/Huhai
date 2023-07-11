@@ -2,6 +2,7 @@
 
 #include"../AssetManager/AssetManager.h"
 #include"../../Object/ObjectManager/ObjManager.h"
+#include"../../Scene/PauseMenu/PauseMenu.h"
 
 // コンストラクタ //
 
@@ -27,11 +28,11 @@ Sound::~Sound()
 
 // 追加処理 //
 
-void Sound::AddSound(std::string fileName, SoundTag tag, bool isDim)
+void Sound::AddSound(std::string fileName, SoundTag tag, bool isDim,bool volumeType)
 {
     //サウンドデータ設定
     SoundData sound = {};
-    sound.volume = 150;
+    sound.volumeType = volumeType;
     sound.isDim = isDim;
 
     //サウンド登録&取得
@@ -91,7 +92,17 @@ void Sound::StartSound(SoundTag tag, int playType)
             Set3DRadiusSoundMem(500.0f, sound.handle);
         }
 
+        if (sound.volumeType)
+        {
+            sound.volume = PauseMenu::Parameter("SE");
+        }
+        else
+        {
+            sound.volume = PauseMenu::Parameter("Bgm");
+        }
+
         ChangeVolumeSoundMem(sound.volume, sound.handle);
+
         PlaySoundMem(sound.handle, playType);
     }
 }
@@ -153,7 +164,8 @@ bool Sound::IsPlaying(SoundTag tag)
 
 Sound::SoundData::SoundData()
     :handle(-1)
-    , volume(0)
+    , volume(150)
+    , volumeType(false)
     , isDim(false)
     , playOnce(true)
 {

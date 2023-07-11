@@ -61,8 +61,8 @@ void Door::Load()
 
     //サウンド設定
     doorSound = new Sound;
-    doorSound->AddSound("../Assets/Sound/DoorOpenSE.wav", SoundTag::DoorOpen, true);
-    doorSound->AddSound("../Assets/Sound/DoorCloseSE.wav", SoundTag::DoorClose, true);
+    doorSound->AddSound("../Assets/Sound/DoorOpenSE.wav", SoundTag::DoorOpen, true, true);
+    doorSound->AddSound("../Assets/Sound/DoorCloseSE.wav", SoundTag::DoorClose, true, true);
 }
 
 // 更新処理 //

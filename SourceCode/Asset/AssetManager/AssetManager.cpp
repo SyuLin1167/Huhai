@@ -28,11 +28,37 @@ void AssetManager::Init()
     }
 }
 
+// ƒOƒ‰ƒtæ“¾ //
+
+int AssetManager::GetGraph(std::string fileName)
+{
+    int meshID = 0;
+
+    //ƒtƒ@ƒCƒ‹‚ğŒŸõ‚µ‚Ä“o˜^‚³‚ê‚Ä‚¢‚È‚©‚Á‚½‚ç“o˜^
+    auto findFile = assetMgr->graphMap.find(fileName);
+    if (findFile == assetMgr->graphMap.end())
+    {
+        meshID = LoadGraph(fileName.c_str());
+
+        //ID‚ª‹ó‚È‚ç‚»‚Ì‚Ü‚Ü•Ô‚·
+        if (meshID == -1)
+        {
+            return meshID;
+        }
+
+        assetMgr->graphMap.emplace(fileName, meshID);
+    }
+
+    //ƒOƒ‰ƒtID‚ğ•Ô‚·
+    return assetMgr->graphMap[fileName];
+}
+
 // ƒƒbƒVƒ…æ“¾ //
 
 int AssetManager::GetMesh(std::string fileName)
 {
     int meshID = 0;
+
     //ƒtƒ@ƒCƒ‹‚ğŒŸõ‚µ‚Ä“o˜^‚³‚ê‚Ä‚¢‚È‚©‚Á‚½‚ç“o˜^
     auto iter = assetMgr->meshMap.find(fileName);
     if (iter == assetMgr->meshMap.end())
@@ -59,6 +85,7 @@ int AssetManager::GetMesh(std::string fileName)
 int AssetManager::GetAnim(std::string fileName)
 {
     int animID = 0;
+
     //ƒtƒ@ƒCƒ‹‚ğŒŸõ‚µ‚Ä“o˜^‚³‚ê‚Ä‚¢‚È‚©‚Á‚½‚ç“o˜^
     auto iter = assetMgr->animMap.find(fileName);
     if (iter == assetMgr->animMap.end())
@@ -83,6 +110,7 @@ int AssetManager::GetAnim(std::string fileName)
 int AssetManager::GetSound(std::string fileName)
 {
     int meshID = 0;
+
     //ƒtƒ@ƒCƒ‹‚ğŒŸõ‚µ‚Ä“o˜^‚³‚ê‚Ä‚¢‚È‚©‚Á‚½‚ç“o˜^
     auto iter = assetMgr->soundMap.find(fileName);
 
@@ -129,6 +157,11 @@ void AssetManager::ReleaseMesh(int meshID)
 
 void AssetManager::ReleaseAllAsset()
 {
+    //ƒOƒ‰ƒt‰ğ•ú
+    for (auto& graph : assetMgr->graphMap)
+    {
+        DeleteGraph(graph.second);
+    }
     //ƒAƒjƒ[ƒVƒ‡ƒ“‰ğ•ú
     for (auto& anim : assetMgr->animMap)
     {
@@ -158,6 +191,7 @@ void AssetManager::ReleaseAllAsset()
     }
 
     //ƒAƒZƒbƒg‚Ì—v‘fíœ
+    assetMgr->graphMap.clear();
     assetMgr->animMap.clear();
     assetMgr->meshMap.clear();
     assetMgr->soundMap.clear();

@@ -42,12 +42,18 @@ public:
     void SceneChange();
 
     /// <summary>
+    /// ポーズメニュー処理
+    /// </summary>
+    void Pause();
+
+    /// <summary>
     /// ゲームループ
     /// </summary>
     void GameLoop();
 
 private:
     int keyState[256] = { 0 };                  //キーステータス
+    int nowScreen;                              //現在の画面
 
     std::stack<class SceneBase*> nowScene;      //現在のシーン
     SceneBase* tmpScene;                        //一時的なシーン

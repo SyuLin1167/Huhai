@@ -26,7 +26,8 @@ public:
     /// <param name="fileName">:ファイル名</param>
     /// <param name="tag">:サウンドタグ</param>
     /// <param name="isDim">:音の次元(デフォルト・2次元)</param>
-    void AddSound(std::string fileName, SoundTag tag, bool isDim = false);
+    /// <param name="volumeType">:音量タイプ(デフォルト・Bgm)</param>
+    void AddSound(std::string fileName, SoundTag tag, bool isDim = false, bool volumeType = false);
 
     /// <summary>
     /// ドップラー効果
@@ -77,10 +78,11 @@ public:
         /// </summary>
         SoundData();
 
-        int handle;        //サウンドハンドル
+        int handle;             //サウンドハンドル
         int volume;             //音量
+        bool volumeType;        //音量タイプ
         bool isDim;             //次元
-        bool playOnce;         //再生回数
+        bool playOnce;          //再生回数
     };
 
 private:

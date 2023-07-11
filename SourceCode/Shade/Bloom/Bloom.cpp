@@ -2,14 +2,15 @@
 
 #include"../../Object/ObjectManager/ObjManager.h"
 #include"../../GameSetting/GameSetting.h"
+#include"../../Object/CharaObject/Camera/FpsCamera/FpsCamera.h"
 
 // ÉRÉìÉXÉgÉâÉNÉ^ //
 
 Bloom::Bloom()
-    :ColorScreen(MakeScreen(SCREEN_WIDTH, SCREEN_HEIGHT, FALSE))
-    , HighBrightScreen(MakeScreen(SCREEN_WIDTH, SCREEN_HEIGHT, FALSE))
-    , DownScaleScreen(MakeScreen(DOWN_SCALE_WIDTH, DOWN_SCALE_HEIGHT, FALSE))
-    , GaussScreen(MakeScreen(DOWN_SCALE_WIDTH, DOWN_SCALE_HEIGHT, FALSE))
+    :ColorScreen(MakeScreen(SCREEN_WIDTH, SCREEN_HEIGHT, false))
+    , HighBrightScreen(MakeScreen(SCREEN_WIDTH, SCREEN_HEIGHT, false))
+    , DownScaleScreen(MakeScreen(DOWN_SCALE_WIDTH, DOWN_SCALE_HEIGHT, false))
+    , GaussScreen(MakeScreen(DOWN_SCALE_WIDTH, DOWN_SCALE_HEIGHT, false))
     , GaussParam(200)
 {
     SetBackgroundColor(0, 0, 0);
@@ -27,7 +28,7 @@ Bloom::~Bloom()
 void Bloom::SetColoerScreen()
 {
     SetDrawScreen(ColorScreen);
-    SetCameraNearFar(0.1f, 400.0f);
+    SetCameraNearFar(CameraNear, CameraFar);
 }
 
 // ï`âÊèÄîı //
@@ -36,13 +37,12 @@ void Bloom::SetBloomGraph()
 {
     //ï`âÊåãâ Ç©ÇÁçÇãPìxïîï™Çî≤Ç´èoÇµÇƒÇ⁄Ç©Ç∑
     GraphFilterBlt(ColorScreen, HighBrightScreen, DX_GRAPH_FILTER_BRIGHT_CLIP,
-        DX_CMP_LESS, 230, TRUE, GetColor(0, 0, 0), 255);
+        DX_CMP_LESS, 230, true, GetColor(0, 0, 0), 255);
     GraphFilterBlt(HighBrightScreen, DownScaleScreen, DX_GRAPH_FILTER_DOWN_SCALE, DOWN_SCALE);
     GraphFilterBlt(DownScaleScreen, GaussScreen, DX_GRAPH_FILTER_GAUSS, 16, GaussParam);
 
     //ï`âÊëŒè€Çó†âÊñ Ç…Ç∑ÇÈ
     SetDrawScreen(DX_SCREEN_BACK);
-    ClearDrawScreenZBuffer();
 }
 
 // ï`âÊèàóù //
@@ -50,12 +50,12 @@ void Bloom::SetBloomGraph()
 void Bloom::Draw()
 {
     //í èÌÇÃâÊñ Çï`âÊ
-    DrawGraph(0, 0, ColorScreen, FALSE);
+    DrawGraph(0, 0, ColorScreen, true);
 
     //Ç⁄Ç©ÇµâÊëúï`âÊ
     SetDrawMode(DX_DRAWMODE_BILINEAR);
     SetDrawBlendMode(DX_BLENDMODE_ADD, 255);
-    DrawExtendGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, GaussScreen, FALSE);
+    DrawExtendGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, GaussScreen, false);
     SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
     SetDrawMode(DX_DRAWMODE_NEAREST);
 }

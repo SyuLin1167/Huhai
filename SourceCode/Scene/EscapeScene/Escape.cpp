@@ -12,8 +12,8 @@
 #include "../../Object/MapObject/Light/FlashLight/FlashLight.h"
 #include "../../Object/CharaObject/Player/Player.h"
 #include"../../Object/CharaObject/Ghost/Ghost.h"
-#include"../../BlendMode/Wipe.h"
-#include "../ResultScene/Result.h"
+#include"../../BlendMode/BlendMode.h"
+#include "../Ending/Ending.h"
 #include"../TitleScene/Title.h"
 #include"../RoomScene/Room.h"
 
@@ -55,7 +55,7 @@ EscapeScene::EscapeScene()
     ObjManager::Entry(new Ghost);
 
     //ブレンドモード生成
-    escBlend = new Wipe;
+    escBlend = new Blend;
 
     //サウンド生成
     escSound = new Sound;
@@ -87,7 +87,7 @@ SceneBase* EscapeScene::Update(float deltaTime)
         ObjManager::ReleaseAllObj();
 
         //シーンを次の場面にする
-        return new ResultScene;
+        return new Ending;
     }
     //ゲームオーバーしたら
     else if (!ObjManager::GetFirstObj(ObjectTag::Player)->IsVisible())

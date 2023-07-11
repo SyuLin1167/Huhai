@@ -20,7 +20,7 @@ TimeManager::~TimeManager()
 void TimeManager::Update()
 {
     //フレームレート算出
-    nowTime = (float)GetNowCount();
+    nowTime = static_cast<float>(GetNowCount());
     deltaTime = (nowTime - prevTime) / 1000.0f;
     prevTime = nowTime;
 }

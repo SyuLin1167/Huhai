@@ -1,7 +1,7 @@
 #include "Player.h"
 
 #include"../../ObjectManager/ObjManager.h"
-#include"../../../UI/PauseMenu/Pause.h"
+#include"../../../Scene/PauseMenu/PauseMenu.h"
 #include"../../../Asset/Sound/Sound.h"
 
 // コンストラクタ //
@@ -29,7 +29,7 @@ Player::Player()
 
     //サウンド設定
     plySound = new Sound;
-    plySound->AddSound("../Assets/Sound/PlayerWalkSE.mp3", SoundTag::PlayerWalk);
+    plySound->AddSound("../Assets/Sound/PlayerWalkSE.mp3", SoundTag::PlayerWalk, false, true);
 }
 
 // デストラクタ //
@@ -49,7 +49,7 @@ void Player::Update(float deltaTime)
     camFront = VNorm(camFront);
 
     //移動時のカメラの上下運動
-    if (PauseMenu::IsMovementCamera())
+    if (PauseMenu::HasStatus("MoveCameraY"))
     {
         if (inputKey)
         {

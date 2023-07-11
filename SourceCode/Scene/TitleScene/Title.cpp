@@ -2,7 +2,7 @@
 
 #include "../../Object/ObjectManager/ObjManager.h"
 #include "../../Asset/AssetManager/AssetManager.h"
-#include "../../BlendMode/Wipe.h"
+#include "../../BlendMode/BlendMode.h"
 #include "../../Asset/Sound/Sound.h"
 #include "../../Object/MapObject/Map/Map.h"
 #include "../../Object/MapObject/Door/Door.h"
@@ -10,22 +10,20 @@
 #include "../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../Object/CharaObject/Camera/FixedCamera/FixedCamera.h"
 #include "../RoomScene/Room.h"
-#include "../EscapeScene/Escape.h"
 #include "../Save/Save.h"
 
 // コンストラクタ //
 
 TitleScene::TitleScene()
     :SceneBase()
-    ,screenGraph(-1)
 {
     //タイトルロゴ生成
-    BgHandle = LoadGraph("../Assets/BackGround/Title.png");
+    BgHandle = AssetManager::GetGraph("../Assets/BackGround/Title.png");
     BgX = 180;
     BgY = 150;
 
     //ブレンドモード生成
-    titleBlend = new Wipe;
+    titleBlend = new Blend;
 
     //サウンド生成
     titleSound = new Sound;
@@ -55,9 +53,6 @@ TitleScene::TitleScene()
 
     //グラフ作成
     screenGraph = MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT);
-
-    //マウスポインター表示
-    SetMouseDispFlag(TRUE);
 }
 
 // デストラクタ //
@@ -75,6 +70,9 @@ TitleScene::~TitleScene()
 
 SceneBase* TitleScene::Update(float deltaTime)
 {
+    //マウスポインター表示
+    SetMouseDispFlag(TRUE);
+
     //ドアは開く状態にする
     door->MoveAnim(Door::Anim::OPEN);
 
@@ -85,18 +83,18 @@ SceneBase* TitleScene::Update(float deltaTime)
         select[type]->Update(deltaTime);
 
         //ボタン選択時処理
-        if (select[type]->GetSelect())
+        if (select[type]->GetButtonInput())
         {
             //マウス座標を画面の中心にして非表示にする
             SetMousePoint(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-            SetMouseDispFlag(FALSE);
+            SetMouseDispFlag(false);
 
             //フェードアウト
             titleBlend->AddFade(deltaTime);
 
+            //EXIT選択時、シーンをnullptrにする
             if (type == EXIT)
             {
-                //EXIT選択時、シーンをnullptrにする
                 return nullptr;
             }
             else
@@ -144,10 +142,13 @@ void TitleScene::Draw()
 
     //選択ボタン描画
     GetDrawScreenGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, screenGraph);
-    DrawExtendGraph(BgX, BgY, BgX + 450, BgY + 200, BgHandle, TRUE);
+    DrawExtendGraph(BgX, BgY, BgX + 450, BgY + 200, BgHandle, true);
     for (auto type : selectTypeAll)
     {
-        select[type]->Draw();
+        if (select[type])
+        {
+            select[type]->Draw();
+        }
     }
 
     //フェード処理

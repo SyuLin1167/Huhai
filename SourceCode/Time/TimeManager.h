@@ -27,8 +27,8 @@ public:
     float DeltaTime() const { return deltaTime; }
 
 private:
-    float nowTime;		//現在の時間
-    float prevTime;		//過去の時間
-    float deltaTime;	//フレームレート
+    float nowTime;      //現在の時間
+    float prevTime;     //過去の時間
+    float deltaTime;    //フレームレート
 };
 

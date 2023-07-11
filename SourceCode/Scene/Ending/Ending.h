@@ -1,19 +1,20 @@
 #pragma once
+
 #include"../SceneBase/SceneBase.h"
 
-/*ResultSceneクラス*/
-class ResultScene :public SceneBase
+/*Endingクラス*/
+class Ending :public SceneBase
 {
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    ResultScene();
+    Ending();
 
     /// <summary>
     /// デストラクタ
     /// </summary>
-    ~ResultScene();
+    ~Ending();
 
     /// <summary>
     /// 更新処理

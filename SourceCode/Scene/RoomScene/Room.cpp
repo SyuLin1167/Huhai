@@ -1,7 +1,7 @@
 #include "Room.h"
 
 #include"../../Object/ObjectManager/ObjManager.h"
-#include"../../BlendMode/Wipe.h"
+#include"../../BlendMode/BlendMode.h"
 #include "../../Asset/Sound/Sound.h"
 #include "../../Object/CharaObject/Camera/FpsCamera/FpsCamera.h"
 #include "../../Object/MapObject/Map/Map.h"
@@ -10,6 +10,8 @@
 #include "../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../Object/CharaObject/Player/Player.h"
 #include "../../UI/Reamarks/Remarks.h"
+#include"../PauseMenu/PauseMenu.h"
+#include"../TitleScene/Title.h"
 #include "../PlayScene/Play.h"
 #include"../Save/Save.h"
 
@@ -46,7 +48,7 @@ RoomScene::RoomScene()
     ObjManager::Entry(new Remarks(TextType::Opening));
 
     //ブレンドモード生成
-    roomBlend = new Wipe;
+    roomBlend = new Blend;
 
 }
 
@@ -67,28 +69,39 @@ SceneBase* RoomScene::Update(float deltaTime)
     ObjManager::Collision();
     //アクションボタンが押されたら
     ObjBase* action = ObjManager::GetFirstObj(ObjectTag::UI);
-
-    if (CheckHitKey(KEY_INPUT_RETURN))
+    if (action)
     {
-        SaveScene::Save(this);
+        if (!action->IsVisible())
+        {
+            //フェードアウト
+            roomBlend->AddFade(deltaTime);
+
+            //シーン移行時の演出が終わったら
+            if (!roomBlend->NowFade())
+            {
+
+                //管理クラス内の確保したデータ解放
+                AssetManager::ReleaseAllAsset();
+                ObjManager::ReleaseAllObj();
+
+                //シーンを次の場面にする
+                return new PlayScene;
+            }
+        }
     }
 
-    if (!action->IsVisible())
+    //タイトルへ移動
+    if (PauseMenu::BackToTitle())
     {
-        //フェードアウト
-        SetDrawMode(DX_DRAWMODE_BILINEAR);
-        roomBlend->AddFade(deltaTime);
+        PauseMenu::ResetTitleButton();
 
-        //シーン移行時の演出が終わったら
-        if (!roomBlend->NowFade())
-        {
-            //管理クラス内の確保したデータ解放
-            AssetManager::ReleaseAllAsset();
-            ObjManager::ReleaseAllObj();
+        //管理クラス内の確保したデータ解放
+        AssetManager::ReleaseAllAsset();
+        ObjManager::ReleaseAllObj();
 
-            //シーンを次の場面にする
-            return new PlayScene;
-        }
+        //シーンをタイトルにする
+
+        return new TitleScene;
     }
     return this;
 }

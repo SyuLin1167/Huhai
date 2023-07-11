@@ -1,4 +1,5 @@
 #pragma once
+
 #include"../SceneBase/SceneBase.h"
 
 /*RoomSceneクラス*/
@@ -28,6 +29,6 @@ public:
     void Draw()override;
 
 private:
-    class Wipe* roomBlend;      //ブレンドモード
+    class Blend* roomBlend;     //ブレンドモード
     class Sound* roomSound;     //サウンド
 };

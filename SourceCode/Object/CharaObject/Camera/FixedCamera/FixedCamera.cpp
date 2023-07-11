@@ -14,9 +14,6 @@ FixedCamera::FixedCamera()
 
 void FixedCamera::Draw()
 {
-    if (isVisible)
-    {
-        //注視点に向けてカメラをセット
-        SetCameraPositionAndTarget_UpVecY(objPos, objDir);
-    }
+    //注視点に向けてカメラをセット
+    SetCameraPositionAndTarget_UpVecY(objPos, objDir);
 }

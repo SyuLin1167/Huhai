@@ -32,8 +32,3 @@ protected:
     int BgX;            //îwåiç¿ïWX
     int BgY;            //îwåiç¿ïWY
 };
-
-class Save
-{
-
-};

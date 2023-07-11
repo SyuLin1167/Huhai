@@ -1,4 +1,5 @@
 #pragma once
+
 #include"../SceneBase/SceneBase.h"
 
 /* PlaySceneƒNƒ‰ƒX */

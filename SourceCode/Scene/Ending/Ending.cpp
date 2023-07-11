@@ -1,37 +1,53 @@
-#include "Result.h"
+#include "Ending.h"
 
 #include"../../Object/ObjectManager/ObjManager.h"
 #include"../../Asset/AssetManager/AssetManager.h"
-#include"../../Object/ObjectManager/ObjManager.h"
-#include"../../Asset/AssetManager/AssetManager.h"
+#include"../../Object/CharaObject/Camera/FixedCamera/FixedCamera.h"
+#include"../../Object/MapObject/Map/Map.h"
+#include "../../Object/MapObject/Furniture/Furniture.h"
+#include"../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../UI/Reamarks/Remarks.h"
 #include "../TitleScene/Title.h"
 #include"../Save/Save.h"
 
 // コンストラクタ //
 
-ResultScene::ResultScene()
+Ending::Ending()
     :SceneBase()
 {
+    //カメラ生成
+    ObjManager::Entry(new FixedCamera);
+
+    //マップ生成
+    ObjManager::Entry(new Map(Map::MapTag::ROOM));
+    
+    //家具生成
+    ObjManager::Entry(new Furniture(Furniture::FurName::Room));
+
+    //照明生成
+    ObjManager::Entry(new NomalLight(VGet(40, 33, 0)));
+
     //台詞生成
     ObjManager::Entry(new Remarks(TextType::GameClear));
-
-    //カメラ設定
-    SetCameraPositionAndTarget_UpVecY(VGet(0.0f, 20.0f, 0.0f), VGet(30.0f, 10.0f, 0.0f));
 }
 
 // デストラクタ //
 
-ResultScene::~ResultScene()
+Ending::~Ending()
 {
 }
 
 // 更新処理 //
 
-SceneBase* ResultScene::Update(float deltaTime)
+SceneBase* Ending::Update(float deltaTime)
 {
     //オブジェクト更新
     ObjManager::Update(deltaTime);
+
+    //カメラ設定
+    ObjBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
+    camera->SetPos(VGet(50, 10, 10));
+    camera->SetDir(VGet(10, 10, -10));
 
     //シーン移行時の演出が終わったら
     if (!ObjManager::GetFirstObj(ObjectTag::Remarks))
@@ -49,7 +65,7 @@ SceneBase* ResultScene::Update(float deltaTime)
 
 // 描画処理 //
 
-void ResultScene::Draw()
+void Ending::Draw()
 {
     //オブジェクト描画
     ObjManager::Draw();

@@ -60,6 +60,7 @@ void SaveScene::Save(SceneBase* scene)
 
 SceneBase* SaveScene::Load()
 {
+    //セーブシーンがなかったら初めのRoomSceneを返す
     if (!save->saveScene)
     {
         return new RoomScene;

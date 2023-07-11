@@ -2,6 +2,7 @@
 
 #include"../../../ObjectManager/ObjManager.h"
 #include"../../Player/Player.h"
+#include"../../../../Scene/PauseMenu/PauseMenu.h"
 
 // コンストラクタ //
 
@@ -15,7 +16,7 @@ FpsCamera::FpsCamera()
 {
     objDir = { 0,10,0 };
     SetCameraNearFar(CameraNear, CameraFar);                                    //カメラの描画範囲設定
-    SetMouseDispFlag(FALSE);                                                    //マウスは非表示
+    SetMouseDispFlag(false);                                                    //マウスは非表示
 }
 
 // デストラクタ //
@@ -53,14 +54,15 @@ void FpsCamera::Move(float deltaTime)
     movePos.x = (float)mouseX - static_cast<float>(SCREEN_WIDTH) / 2;
     movePos.y = (float)mouseY - static_cast<float>(SCREEN_HEIGHT) / 2;
 
+     
     //カーソルの移動量取得
     if (abs(movePos.x) > 0)
     {
-        cameraYaw -= movePos.x * deltaTime * DX_PI_F / 30;
+        cameraYaw -= movePos.x * deltaTime * DX_PI_F / (255 - PauseMenu::Parameter("Sensitivity"));
     }
     if (abs(movePos.y) > 0)
     {
-        cameraPitch -= movePos.y * deltaTime * DX_PI_F / 30;
+        cameraPitch -= movePos.y * deltaTime * DX_PI_F / (255 - PauseMenu::Parameter("Sensitivity"));
     }
 
     //カメラの方向設定

@@ -1,4 +1,5 @@
 #pragma once
+
 #include"../SceneBase/SceneBase.h"
 
 /*EscapeSceneクラス*/
@@ -28,7 +29,7 @@ public:
     void Draw()override;
 
 private:
-    class Wipe* escBlend;    //ブレンドモード
+    class Blend* escBlend;    //ブレンドモード
     class Sound* escSound;        //サウンド
 };
 

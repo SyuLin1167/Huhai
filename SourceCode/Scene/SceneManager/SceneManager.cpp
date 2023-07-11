@@ -6,7 +6,7 @@
 #include"../SceneBase/SceneBase.h"
 #include"../../Time/TimeManager.h"
 #include "../TitleScene/Title.h"
-#include"../../UI/PauseMenu/Pause.h"
+#include"../PauseMenu/PauseMenu.h"
 #include "../Save/Save.h"
 
 
@@ -20,6 +20,8 @@ SceneManager::SceneManager()
     //インスタンス生成
     gameSetting = new GameSetting;
     timeMgr = new TimeManager;
+
+    nowScreen = MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
 // デストラクタ //
@@ -51,7 +53,9 @@ int SceneManager::Init()
     ObjManager::Init();
     AssetManager::Init();
 
+    //シーン関連のクラス初期化
     SaveScene::Init();
+    PauseMenu::Init();
 
     //初期シーン設定
     nowScene.push(new TitleScene);
@@ -94,7 +98,6 @@ void SceneManager::Draw()
     //現在のシーンを描画
     ClearDrawScreen();
     nowScene.top()->Draw();
-
     ScreenFlip();
 }
 
@@ -110,6 +113,42 @@ void SceneManager::SceneChange()
     }
 }
 
+// ポーズメニュー処理 //
+
+void SceneManager::Pause()
+{
+    //ポーズメニュー
+    GetHitKeyStateAllEx(keyState);
+    if (keyState[KEY_INPUT_ESCAPE] == 1)
+    {
+        SetMousePoint(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+        //配列のサイズでメニューの表示を切り替える
+        if (nowScene.size() < 2)
+        {
+            //ゲーム画面保存
+            SetDrawScreen(nowScreen);
+            SaveDrawScreenToPNG(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, "../Assets/BackGround/GameScene.png", -1);//PNG保存
+            SetDrawScreen(DX_SCREEN_BACK);
+
+            //メニュー画面表示
+            SetMouseDispFlag(true);
+            nowScene.push(PauseMenu::Init());
+            DeleteGraph(nowScreen);
+        }
+        else
+        {
+            SetMouseDispFlag(false);
+            nowScene.pop();
+        }
+    }
+
+    //タイトル画面移動時メニュー画面を消す
+    if (PauseMenu::BackToTitle() && nowScene.size() > 1)
+    {
+        nowScene.pop();
+    }
+}
+
 // ゲームループ //
 
 void SceneManager::GameLoop()
@@ -118,31 +157,17 @@ void SceneManager::GameLoop()
     while (ProcessMessage() == 0)
     {
         //ポーズメニュー
-        GetHitKeyStateAllEx(keyState);
-        if (keyState[KEY_INPUT_ESCAPE] == 1)
-        {
-            SetMousePoint(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-            if (nowScene.size() < 2)
-            {
-                SetMouseDispFlag(TRUE);                                                    //マウスは表示
-                nowScene.push(PauseMenu::Init());
-            }
-            else
-            {
-                SetMouseDispFlag(FALSE);                                                    //マウスは非表示
-                nowScene.pop();
-            }
-        }
+        Pause();
 
         //更新処理
         Update();
-
 
         //描画処理
         Draw();
 
         //シーン切り替え
         SceneChange();
+
         if (!nowScene.top())
         {
             break;

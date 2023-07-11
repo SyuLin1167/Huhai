@@ -1,6 +1,7 @@
 #include "ObjManager.h"
 
 #include"../../Shade/Bloom/Bloom.h"
+#include"../../Scene/PauseMenu/PauseMenu.h"
 
 //実態へのポインタ定義
 ObjManager* ObjManager::objManager = nullptr;
@@ -111,8 +112,14 @@ void ObjManager::Update(float deltaTime)
     }
 
     //ブルーム用画面
-    //objManager->bloom->SetColoerScreen();
-    SetCameraNearFar(0.1f, 400.0f);
+    if (PauseMenu::HasStatus("Bloom"))
+    {
+        objManager->bloom->SetColoerScreen();
+    }
+    else
+    {
+        SetCameraNearFar(0.1f, 400.0f);
+    }
 
     //一時保存中のオブジェクトをアクティブリストに追加
     for (auto holding : objManager->holdObj)
@@ -173,8 +180,11 @@ void ObjManager::Draw()
     }
 
     //ブルーム描画
-    //objManager->bloom->SetBloomGraph();
-    //objManager->bloom->Draw();
+    if (PauseMenu::HasStatus("Bloom"))
+    {
+        objManager->bloom->SetBloomGraph();
+        objManager->bloom->Draw();
+    }
 }
 
 // 当たり判定処理 //

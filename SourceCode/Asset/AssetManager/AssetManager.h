@@ -13,6 +13,13 @@ public:
     static void Init();
 
     /// <summary>
+    /// グラフ取得
+    /// </summary>
+    /// <param name="fileName">:ファイル名</param>
+    /// <returns>:複製したグラフID</returns>
+    static int GetGraph(std::string fileName);
+
+    /// <summary>
     /// メッシュ取得
     /// </summary>
     /// <param name="fileName">:ファイル名</param>
@@ -60,10 +67,11 @@ private:
     /// </summary>
     ~AssetManager();
 
-    static AssetManager* assetMgr;                      //自身の実態
-    std::unordered_map<std::string, int>meshMap;        //メッシュ(オリジナル)
-    std::unordered_map<std::string, int>animMap;        //アニメーション(オリジナル)
-    std::unordered_map<std::string, int>soundMap;       //サウンド(オリジナル)
-    std::vector<int> dupMesh;                     //メッシュ(複製)
-    std::vector<int> dupSound;                    //サウンド(複製)
+    static AssetManager* assetMgr;                                      //自身の実態
+    std::unordered_map<std::string, int>graphMap;                       //グラフ(オリジナル)
+    std::unordered_map<std::string, int>meshMap;                        //メッシュ(オリジナル)
+    std::unordered_map<std::string, int>animMap;                        //アニメーション(オリジナル)
+    std::unordered_map<std::string, int>soundMap;                       //サウンド(オリジナル)
+    std::vector<int> dupMesh;                                           //メッシュ(複製)
+    std::vector<int> dupSound;                                          //サウンド(複製)
 };

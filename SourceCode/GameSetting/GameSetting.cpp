@@ -32,12 +32,12 @@ int GameSetting::Init()
     SetDrawScreen(DX_SCREEN_BACK);
 
     //Zバッファ設定
-    SetUseZBuffer3D(TRUE);
-    SetWriteZBuffer3D(TRUE);
+    SetUseZBuffer3D(true);
+    SetWriteZBuffer3D(true);
 
     //標準ライトを無効化
-    SetLightEnable(FALSE);
-    SetUsePixelLighting(TRUE);
+    SetLightEnable(false);
+    SetUsePixelLighting(true);
 
     //初期化成功
     return 0;

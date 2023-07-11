@@ -34,7 +34,7 @@ private:
     int screenGraph;        //画面保持グラフ
 
     class Door* door = nullptr;                 //ドア
-    class Wipe* titleBlend;                //ブレンドモード
+    class Blend* titleBlend=nullptr;            //ブレンドモード
     class Select* select[SelectTypeSize];       //選択ボタン
     class Sound* titleSound = nullptr;          //サウンド
 };
