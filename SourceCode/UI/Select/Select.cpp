@@ -1,23 +1,19 @@
 #include "Select.h"
 
-#include"../../BlendMode/Wipe.h"
+#include"../../Asset/AssetManager/AssetManager.h"
+#include"../../BlendMode/BlendMode.h"
 
 // コンストラクタ //
 
 Select::Select(SelectType type)
-    :ObjBase(ObjectTag::UI)
-    , mouseX(0)
-    , mouseY(0)
-    , canSelect(false)
-    , isSelect(false)
-    , hasInput(false)
+    :UIBase(ObjectTag::UI)
     , selectBlend(nullptr)
 {
     //ボタン設定
-    objHandle = LoadGraph(drawHandle[type]);
+    objHandle = AssetManager::GetGraph(drawHandle[type]);
     objPos = drawPos[type];
 
-    selectBlend = new Wipe;
+    selectBlend = new Blend;
 }
 
 // デストラクタ //
@@ -38,56 +34,13 @@ void Select::Update(float deltaTime)
     //ボタンは開幕時フェード処理
     selectBlend->AddFade(deltaTime);
 
-    Collision();
-    Input();
-}
-
-// 当たり判定処理 //
-
-void Select::Collision()
-{
-    //マウスカーソル座標取得
-    GetMousePoint(&mouseX, &mouseY);
-
-    //マウスカーソルとボタンの当たり判定
-    if (mouseX >= objPos.x && mouseX <= objPos.x + 160 &&
-        mouseY >= objPos.y && mouseY <= objPos.y + 50)
+    //ボタン入力処理
+    if (!isInput)
     {
-        //カーソルがボタン上にあったら選択可能
-        canSelect = true;
+        CanClick(BUTTON_WIDTH, BUTTON_HEIGHT);
+        MouseClick();
     }
-    else
-    {
-        //でなかったら選択不可
-        canSelect = false;
-    }
-}
-
-// 入力処理 //
-
-void Select::Input()
-{
-    //入力可能だったら
-    if (canSelect)
-    {
-        //ボタン上でクリックされたら
-        if ((GetMouseInput() & MOUSE_INPUT_LEFT))
-        {
-            //ボタン入力中にする
-            hasInput = true;
-        }
-        else if (hasInput)
-        {
-            //クリックし終わったら選択されたことにする
-            isSelect = true;
-            hasInput = false;
-        }
-    }
-    else
-    {
-        //不可ならクリック中ボタン上から外れた場合を考慮して選択を取り消す
-        hasInput = false;
-    }
+    
 }
 
 // 描画処理 //
@@ -100,12 +53,13 @@ void Select::Draw()
         selectBlend->Fade();
     }
     //暗転処理
-    else if (hasInput)
+    else if (hasMauseClick)
     {
         selectBlend->Darken();
     }
 
     //画像描画
-    DrawExtendGraph((int)objPos.x, (int)objPos.y, (int)objPos.x + 160, (int)objPos.y + 50, objHandle, TRUE);
+    DrawExtendGraph((int)objPos.x, (int)objPos.y,
+        (int)objPos.x + BUTTON_WIDTH, (int)objPos.y + BUTTON_HEIGHT, objHandle, TRUE);
     selectBlend->NoBlend();
 }

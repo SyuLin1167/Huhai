@@ -1,10 +1,11 @@
 #include "Remarks.h"
-#include<unordered_map>
+
+#include"../../Asset/AssetManager/AssetManager.h"
 
 // コンストラクタ //
 
 Remarks::Remarks(TextType texttype)
-    :ObjBase(ObjectTag::Remarks)
+    :UIBase(ObjectTag::Remarks)
     , textType(texttype)
     , stringBuf{}
     , holdBuf{}
@@ -14,13 +15,16 @@ Remarks::Remarks(TextType texttype)
     , waitKey(false)
     , textX(0)
     , textY(0)
-    , graph(MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT))
+    , screenGraph(-1)
 {
     //テキストボックス設定
-    objHandle = LoadGraph("../Assets/BackGround/Remarks.png");
+    objHandle =AssetManager::GetGraph("../Assets/BackGround/Remarks.png");
     objPos = VGet(0.0f, 600.0f, 0.0f);
 
-    SetFontSize(TEXTSIZE);
+    canClick = true;
+
+    //グラフ作成
+    screenGraph = MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
 // デストラクタ //
@@ -45,7 +49,8 @@ void Remarks::Update(float deltaTime)
         if (waitKey)
         {
             //左クリックが押されるまで待機
-            if ((GetMouseInput() & MOUSE_INPUT_LEFT))
+            MouseClick();
+            if (hasMauseClick)
             {
                 waitKey = false;
             }
@@ -139,7 +144,7 @@ char Remarks::GetText(int sn, int sp)
         "最近仕事がうまくいかない...。 ",
         "/|いつも自分を支えてくれた妻を事故で無くし、 ",
         "それからずっと、自分の生きる意味を見出せないでいる。 ",
-        "/もっと妻と触れ合っていれば良かったと、/心底思う。",
+        "/もっと妻と触れ合っていれば良かったと、/心底思う。 ",
         "/|きっと私は、あの時の事をずっと引きずっているのだろう...。 ",
         "/^",
     };
@@ -167,18 +172,23 @@ char Remarks::GetText(int sn, int sp)
         "/|男性「君もアイツに呼ばれてここにいるはずだ。」 ",
         "/男性「いいか? /ここでアイツに捕まったら最期、 ",
         "/翌日には皆謎の死を遂げている。」 ",
-        "/|男性「3日間、 /とにかくヤツから逃げ切るんだ。 ",
+        "/|男性「とにかくヤツから逃げ切るんだ。 ",
         "/そうすれば、アイツから解放される。」 ",
         "/|男性「....!?/まずい、アイツが来る! /俺はもうここまでだ、 ",
-        "/これを持って早くここから逃げるんだ!」  ",
+        "/ライトをやるから、早くここから逃げるんだ!」 ",
         "/^ ",
     };
 
     //クリア
     char GameClear[][256] =
     {
-        "現在プレイできるのはここまでになります。",
-        "/|遊んでいただきありがとうございました!!!",
+        "扉を抜けるとき、妻の声が聞こえた気がした。 ",
+        "/もしかしたら、ずっとそばにいてくれていたのかもしれない。 ",
+        "/|あの夢から、自分は大切なことに気付いたんだ。",
+        "/|「ありがとう、/もう一人でも大丈夫だよ。 ",
+        "/いつか会いに行くまで/見守っていてほしい。」 ",
+        "/|それから、/今日まで充実した日々を送ることが出来ている。 ",
+        "/|君がそばにいてくれたから、/ずっと支えてくれたから...。  ",
         "/^",
     };
 
@@ -216,12 +226,18 @@ void Remarks::NewLine()
 void Remarks::Draw()
 {
     //テキストボックス描画
-    GetDrawScreenGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, graph);
-    DrawExtendGraph((int)objPos.x, (int)objPos.y, (int)objPos.x + 1920, (int)objPos.y + 480, objHandle, TRUE);
+    SetFontSize(TEXTSIZE);
+    GetDrawScreenGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, screenGraph);
+    DrawExtendGraph((int)objPos.x, (int)objPos.y, (int)objPos.x + SCREEN_WIDTH, (int)objPos.y + 480, objHandle, TRUE);
 
     //台詞描画
     for (int i = 0; i < BUFHEIGHT; i++)
     {
         DrawString(i + 620, i * TEXTSIZE + 930, stringBuf[i], GetColor(255, 255, 255));
+    }
+
+    if (waitKey)
+    {
+        DrawString(SCREEN_WIDTH * 9 / 10, SCREEN_HEIGHT * 9 / 10, "Left Click", GetColor(255, 255, 255));
     }
 }

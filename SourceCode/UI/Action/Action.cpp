@@ -1,12 +1,12 @@
 #include "Action.h"
 
 #include"../../Object/ObjectManager/ObjManager.h"
-#include"../../BlendMode/Wipe.h"
+#include"../../BlendMode/BlendMode.h"
 
 // コンストラクタ //
 
 Action::Action(VECTOR pos)
-    :ObjBase(ObjectTag::UI)
+    :UIBase(ObjectTag::UI)
     , toDistance(0)
     , canAction(false)
     , isAction(false)
@@ -16,7 +16,7 @@ Action::Action(VECTOR pos)
     objHandle = LoadGraph("../Assets/BackGround/Action.png");
     objPos = pos + VGet(0, 20, 0);
 
-    actionBlend = new Wipe();
+    actionBlend = new Blend;
 }
 
 // デストラクタ //
@@ -46,7 +46,7 @@ void Action::Update(float deltaTime)
         canAction = true;
 
         //Eキーが押されたら反応中にする
-        if (canAction && CheckHitKey(KEY_INPUT_E))
+        if (canAction && KeyStatus(KEY_INPUT_E) == 1)
         {
             isVisible = false;
             isAction = true;

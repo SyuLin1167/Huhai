@@ -2,10 +2,10 @@
 #include<unordered_map>
 
 #include"SelectType.h"
-#include"../../Object/ObjectBase/ObjectBase.h"
+#include"../../UI/UIBase/UIBase.h"
 
 /*SelectButtonクラス*/
-class Select :public ObjBase
+class Select :public UIBase
 {
 public:
     /// <summary>
@@ -25,32 +25,13 @@ public:
     void Update(float deltaTime)override;
 
     /// <summary>
-    /// 当たり判定処理
-    /// </summary>
-    void Collision();
-
-    /// <summary>
-    /// 入力処理
-    /// </summary>
-    void Input();
-
-    /// <summary>
-    /// 選択フラグ取得
-    /// </summary>
-    /// <returns>選択された:true|されていない:false</returns>
-    bool GetSelect() const { return isSelect; }
-
-    /// <summary>
     /// 描画処理
     /// </summary>
     void Draw()override;
 
 private:
-    int mouseX;                      //マウス座標X
-    int mouseY;                      //マウス座標Y
-    bool canSelect;                  //選択可能状態
-    bool isSelect;                   //選択状態
-    bool hasInput;                   //入力フラグ
+    const int BUTTON_WIDTH = 160;
+    const int BUTTON_HEIGHT = 50;
 
     //描画座標を格納した配列
     std::unordered_map<SelectType, VECTOR> drawPos{
@@ -66,7 +47,7 @@ private:
         {SelectType::EXIT,"../Assets/BackGround/Exit.png"},
     };
 
-    class Wipe* selectBlend;    //ブレンドモード
+    class Blend* selectBlend;    //ブレンドモード
 };
 
 

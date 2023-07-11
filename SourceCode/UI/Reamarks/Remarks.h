@@ -1,7 +1,7 @@
 #pragma once
 
 #include"../../GameSetting/GameSetting.h"
-#include"../../Object/ObjectBase/ObjectBase.h"
+#include"../UIBase/UIBase.h"
 #include"TextType.h"
 
 constexpr int TEXTSIZE = 24;        //テキストサイズ
@@ -9,7 +9,7 @@ constexpr int BUFWIDTH = 50;        //表示制限行
 constexpr int BUFHEIGHT = 20;       //表示制限列
 
 /*Remarksクラス*/
-class Remarks :public ObjBase
+class Remarks :public UIBase
 {
 public:
     /// <summary>
@@ -66,5 +66,5 @@ private:
     int textX;                                          //文字表示位置X
     int textY;                                          //文字表示位置Y
 
-    int graph;                                          //画面保持グラフ
+    int screenGraph;                                    //テキストボックス用スクリーン
 };

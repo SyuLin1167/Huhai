@@ -1,9 +1,9 @@
 #pragma once
-#include"../../Object/ObjectBase/ObjectBase.h"
 
+#include"../../UI/UIBase/UIBase.h"
 
 /*ActionButtonクラス*/
-class Action :public ObjBase
+class Action :public UIBase
 {
 public:
     /// <summary>
@@ -41,5 +41,5 @@ private:
     bool canAction;                     //反応可能状態
     bool isAction;                      //反応状態
 
-    class Wipe* actionBlend;       //ブレンドモード
+    class Blend* actionBlend;       //ブレンドモード
 };
