@@ -154,7 +154,7 @@
     <ClCompile Include="..\SourceCode\Asset\Animation\Animation.cpp" />
     <ClCompile Include="..\SourceCode\Asset\AssetManager\AssetManager.cpp" />
     <ClCompile Include="..\SourceCode\Asset\Sound\Sound.cpp" />
-    <ClCompile Include="..\SourceCode\BlendMode\Wipe.cpp" />
+    <ClCompile Include="..\SourceCode\BlendMode\BlendMode.cpp" />
     <ClCompile Include="..\SourceCode\Collision\Collision.cpp" />
     <ClCompile Include="..\SourceCode\GameSetting\GameSetting.cpp" />
     <ClCompile Include="..\SourceCode\Main.cpp" />
@@ -179,9 +179,10 @@
     <ClCompile Include="..\SourceCode\Object\MapObject\Table\Table.cpp" />
     <ClCompile Include="..\SourceCode\Object\ObjectBase\ObjectBase.cpp" />
     <ClCompile Include="..\SourceCode\Object\ObjectManager\ObjManager.cpp" />
+    <ClCompile Include="..\SourceCode\Scene\Ending\Ending.cpp" />
     <ClCompile Include="..\SourceCode\Scene\EscapeScene\Escape.cpp" />
+    <ClCompile Include="..\SourceCode\Scene\PauseMenu\PauseMenu.cpp" />
     <ClCompile Include="..\SourceCode\Scene\PlayScene\Play.cpp" />
-    <ClCompile Include="..\SourceCode\Scene\ResultScene\Result.cpp" />
     <ClCompile Include="..\SourceCode\Scene\RoomScene\Room.cpp" />
     <ClCompile Include="..\SourceCode\Scene\Save\Save.cpp" />
     <ClCompile Include="..\SourceCode\Scene\SceneBase\SceneBase.cpp" />
@@ -190,16 +191,20 @@
     <ClCompile Include="..\SourceCode\Shade\Bloom\Bloom.cpp" />
     <ClCompile Include="..\SourceCode\Time\TimeManager.cpp" />
     <ClCompile Include="..\SourceCode\UI\Action\Action.cpp" />
-    <ClCompile Include="..\SourceCode\UI\PauseMenu\Pause.cpp" />
     <ClCompile Include="..\SourceCode\UI\Reamarks\Remarks.cpp" />
     <ClCompile Include="..\SourceCode\UI\Select\Select.cpp" />
+    <ClCompile Include="..\SourceCode\UI\SetUp\Base\SetUpBase.cpp" />
+    <ClCompile Include="..\SourceCode\UI\SetUp\Button\Button.cpp" />
+    <ClCompile Include="..\SourceCode\UI\SetUp\ParamButton\ParamButton.cpp" />
+    <ClCompile Include="..\SourceCode\UI\SetUp\TitleButton\TitleButton.cpp" />
+    <ClCompile Include="..\SourceCode\UI\UIBase\UIBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SourceCode\Asset\Animation\Animation.h" />
     <ClInclude Include="..\SourceCode\Asset\AssetManager\AssetManager.h" />
     <ClInclude Include="..\SourceCode\Asset\Sound\Sound.h" />
     <ClInclude Include="..\SourceCode\Asset\Sound\SoundTag.h" />
-    <ClInclude Include="..\SourceCode\BlendMode\Wipe.h" />
+    <ClInclude Include="..\SourceCode\BlendMode\BlendMode.h" />
     <ClInclude Include="..\SourceCode\Collision\Collision.h" />
     <ClInclude Include="..\SourceCode\Collision\CollisionType.h" />
     <ClInclude Include="..\SourceCode\GameSetting\GameSetting.h" />
@@ -225,9 +230,10 @@
     <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectBase.h" />
     <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectTag.h" />
     <ClInclude Include="..\SourceCode\Object\ObjectManager\ObjManager.h" />
+    <ClInclude Include="..\SourceCode\Scene\Ending\Ending.h" />
     <ClInclude Include="..\SourceCode\Scene\EscapeScene\Escape.h" />
+    <ClInclude Include="..\SourceCode\Scene\PauseMenu\PauseMenu.h" />
     <ClInclude Include="..\SourceCode\Scene\PlayScene\Play.h" />
-    <ClInclude Include="..\SourceCode\Scene\ResultScene\Result.h" />
     <ClInclude Include="..\SourceCode\Scene\RoomScene\Room.h" />
     <ClInclude Include="..\SourceCode\Scene\Save\Save.h" />
     <ClInclude Include="..\SourceCode\Scene\SceneBase\SceneBase.h" />
@@ -236,11 +242,15 @@
     <ClInclude Include="..\SourceCode\Shade\Bloom\Bloom.h" />
     <ClInclude Include="..\SourceCode\Time\TimeManager.h" />
     <ClInclude Include="..\SourceCode\UI\Action\Action.h" />
-    <ClInclude Include="..\SourceCode\UI\PauseMenu\Pause.h" />
     <ClInclude Include="..\SourceCode\UI\Reamarks\Remarks.h" />
     <ClInclude Include="..\SourceCode\UI\Reamarks\TextType.h" />
     <ClInclude Include="..\SourceCode\UI\Select\Select.h" />
     <ClInclude Include="..\SourceCode\UI\Select\SelectType.h" />
+    <ClInclude Include="..\SourceCode\UI\SetUp\Base\SetUpBase.h" />
+    <ClInclude Include="..\SourceCode\UI\SetUp\Button\Button.h" />
+    <ClInclude Include="..\SourceCode\UI\SetUp\ParamButton\ParamButton.h" />
+    <ClInclude Include="..\SourceCode\UI\SetUp\TitleButton\TitleButton.h" />
+    <ClInclude Include="..\SourceCode\UI\UIBase\UIBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

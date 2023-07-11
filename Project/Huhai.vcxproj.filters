@@ -31,9 +31,6 @@
     <Filter Include="ソース ファイル\Scene\Play">
       <UniqueIdentifier>{207d36cc-2547-4382-ac9e-4034c623eb41}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Scene\Result">
-      <UniqueIdentifier>{d494d462-4d17-4384-8234-150bc706e628}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Object">
       <UniqueIdentifier>{90793a43-8fd9-4799-bbf6-20256fc217b6}</UniqueIdentifier>
     </Filter>
@@ -157,11 +154,32 @@
     <Filter Include="ソース ファイル\CharaObject\Camera\FpsCamera">
       <UniqueIdentifier>{7d0f84eb-8629-4e9e-a22b-704bd601d329}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Wipe">
+    <Filter Include="ソース ファイル\Scene\PauseMenu">
+      <UniqueIdentifier>{ad9c7e76-4f18-43f3-816d-7b8e92492df7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\SetUp">
+      <UniqueIdentifier>{c17ce6a7-0a17-49d7-b78d-b492a42a4c18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\UIBase">
+      <UniqueIdentifier>{a098c132-2fa0-455b-945e-c0acc911322c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\SetUp\Button">
+      <UniqueIdentifier>{1c68ef68-04d7-4c76-b012-95d0ba2558b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\SetUp\Base">
+      <UniqueIdentifier>{86e826e9-00bd-484a-8f3e-d25d63a68948}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\SetUp\TitleButton">
+      <UniqueIdentifier>{be1b1f35-4184-45f7-a450-bf861d99159f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\SetUp\ParamButton">
+      <UniqueIdentifier>{28534490-080d-4fe8-8db3-65ac735835a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\BlendMode">
       <UniqueIdentifier>{77f50006-b03c-4b71-b631-7644e4897336}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\UI\Pause">
-      <UniqueIdentifier>{ad9c7e76-4f18-43f3-816d-7b8e92492df7}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\Scene\Ending">
+      <UniqueIdentifier>{d494d462-4d17-4384-8234-150bc706e628}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -182,9 +200,6 @@
     </ClCompile>
     <ClCompile Include="..\SourceCode\Object\ObjectManager\ObjManager.cpp">
       <Filter>ソース ファイル\Object\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\Scene\ResultScene\Result.cpp">
-      <Filter>ソース ファイル\Scene\Result</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Scene\PlayScene\Play.cpp">
       <Filter>ソース ファイル\Scene\Play</Filter>
@@ -243,8 +258,8 @@
     <ClCompile Include="..\SourceCode\Object\MapObject\Light\FlashLight\FlashLight.cpp">
       <Filter>ソース ファイル\MapObject\Light\FlashLight</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\BlendMode\Wipe.cpp">
-      <Filter>ソース ファイル\Wipe</Filter>
+    <ClCompile Include="..\SourceCode\BlendMode\BlendMode.cpp">
+      <Filter>ソース ファイル\BlendMode</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Object\MapObject\Bed\Bed.cpp">
       <Filter>ソース ファイル\MapObject\Bed</Filter>
@@ -288,8 +303,26 @@
     <ClCompile Include="..\SourceCode\Object\CharaObject\Camera\FpsCamera\FpsCamera.cpp">
       <Filter>ソース ファイル\CharaObject\Camera\FpsCamera</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\UI\PauseMenu\Pause.cpp">
-      <Filter>ソース ファイル\UI\Pause</Filter>
+    <ClCompile Include="..\SourceCode\Scene\PauseMenu\PauseMenu.cpp">
+      <Filter>ソース ファイル\Scene\PauseMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\UI\UIBase\UIBase.cpp">
+      <Filter>ソース ファイル\UI\UIBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\UI\SetUp\Button\Button.cpp">
+      <Filter>ソース ファイル\UI\SetUp\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\UI\SetUp\Base\SetUpBase.cpp">
+      <Filter>ソース ファイル\UI\SetUp\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\UI\SetUp\TitleButton\TitleButton.cpp">
+      <Filter>ソース ファイル\UI\SetUp\TitleButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\UI\SetUp\ParamButton\ParamButton.cpp">
+      <Filter>ソース ファイル\UI\SetUp\ParamButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Scene\Ending\Ending.cpp">
+      <Filter>ソース ファイル\Scene\Ending</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -310,9 +343,6 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\Object\ObjectManager\ObjManager.h">
       <Filter>ソース ファイル\Object\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\Scene\ResultScene\Result.h">
-      <Filter>ソース ファイル\Scene\Result</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Scene\PlayScene\Play.h">
       <Filter>ソース ファイル\Scene\Play</Filter>
@@ -374,8 +404,8 @@
     <ClInclude Include="..\SourceCode\Object\MapObject\Light\FlashLight\FlashLight.h">
       <Filter>ソース ファイル\MapObject\Light\FlashLight</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\BlendMode\Wipe.h">
-      <Filter>ソース ファイル\Wipe</Filter>
+    <ClInclude Include="..\SourceCode\BlendMode\BlendMode.h">
+      <Filter>ソース ファイル\BlendMode</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Object\MapObject\Bed\Bed.h">
       <Filter>ソース ファイル\MapObject\Bed</Filter>
@@ -428,8 +458,26 @@
     <ClInclude Include="..\SourceCode\Object\CharaObject\Camera\FpsCamera\FpsCamera.h">
       <Filter>ソース ファイル\CharaObject\Camera\FpsCamera</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\UI\PauseMenu\Pause.h">
-      <Filter>ソース ファイル\UI\Pause</Filter>
+    <ClInclude Include="..\SourceCode\Scene\PauseMenu\PauseMenu.h">
+      <Filter>ソース ファイル\Scene\PauseMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\UI\UIBase\UIBase.h">
+      <Filter>ソース ファイル\UI\UIBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\UI\SetUp\Button\Button.h">
+      <Filter>ソース ファイル\UI\SetUp\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\UI\SetUp\Base\SetUpBase.h">
+      <Filter>ソース ファイル\UI\SetUp\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\UI\SetUp\TitleButton\TitleButton.h">
+      <Filter>ソース ファイル\UI\SetUp\TitleButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\UI\SetUp\ParamButton\ParamButton.h">
+      <Filter>ソース ファイル\UI\SetUp\ParamButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\Ending\Ending.h">
+      <Filter>ソース ファイル\Scene\Ending</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
