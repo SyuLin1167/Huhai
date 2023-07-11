@@ -59,5 +59,8 @@ private:
     class Animation* doorAnim;			//アニメーション
     int animType;						//アニメーションタイプ
 
+    bool rotateNow;                     //回転状態
+    VECTOR aimDir;                      //目標方向
+
     class Sound* doorSound;             //サウンド
 };

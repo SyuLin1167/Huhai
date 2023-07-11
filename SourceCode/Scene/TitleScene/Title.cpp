@@ -38,7 +38,7 @@ TitleScene::TitleScene()
     ObjManager::Entry(new Map(Map::MapTag::TITLE));
 
     //ドア生成
-    door = new Door(VGet(0, 0, 66), VGet(0, 0, 0));
+    door = new Door(VGet(0, 0, 66), VGet(-1, 0, 0));
     ObjManager::Entry(door);
 
     //ライト生成

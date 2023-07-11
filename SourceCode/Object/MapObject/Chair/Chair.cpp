@@ -52,6 +52,7 @@ void Chair::Load()
     colSphere.localCenter = VGet(0, 5, 0);
     colSphere.Radius = 15.0f;
     colSphere.worldCenter = objPos;
+    colModel = objHandle;
 
     //サウンド設定
     chairSound = new Sound;
@@ -73,17 +74,17 @@ void Chair::Update(float deltaTime)
         //プレイヤーが一定距離近づいたら動作する
         if (CollisionPair(colSphere, player->GetColSphere()))
         {
-            if (animType != MOVE || animType == IDLE)
+            if (animType != MOVE)
             {
                 animType = MOVE;
                 ChairAnim->StartAnim(animType);
+                colModel = -1;
                 chairSound->StartSoundOnce(SoundTag::MoveChair, DX_PLAYTYPE_BACK);
             }
         }
     }
 
     //当たり判定更新
-    colModel = objHandle;
     ColUpdate();
 
     //サウンド更新

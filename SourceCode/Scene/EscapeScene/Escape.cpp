@@ -33,9 +33,9 @@ EscapeScene::EscapeScene()
     ObjManager::Entry(new Map(Map::MapTag::GOAL));
 
     //ÉhÉAê∂ê¨
-    ObjManager::Entry(new Door(VGet(55, 0, 0), VGet(0, 0, 0)));
-    ObjManager::Entry(new Door(VGet(187, 0, 0), VGet(0, 180, 0)));
-    ObjManager::Entry(new Door(VGet(759, 0, 0), VGet(0, 180, 0)));
+    ObjManager::Entry(new Door(VGet(55, 0, 0), VGet(-1, 0, 0)));
+    ObjManager::Entry(new Door(VGet(187, 0, 0), VGet(1, 0, 0)));
+    ObjManager::Entry(new Door(VGet(759, 0, 0), VGet(1, 0, 0)));
 
     //ä˜ê∂ê¨
     for (int i = 0; i < TableNum; i++)

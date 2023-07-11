@@ -109,16 +109,20 @@ void Man::Update(float deltaTime)
 
     // モデルに回転をセットする
     MV1SetRotationZYAxis(objHandle, negativeVec, VGet(0.0f, 1.0f, 0.0f), 0.0f);
+
+    //サウンド更新
     manSound->Doppler(SoundTag::ManHurt,objPos);
     manSound->Doppler(SoundTag::BodyFall, objPos);
 }
 
-        // @brief Man描画処 //
+// 描画処理 //
 
 void Man::Draw()
 {
     MV1DrawModel(objHandle);
 }
+
+// 回転処理 //
 
 void Man::Rotate()
 {

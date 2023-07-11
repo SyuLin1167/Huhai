@@ -17,10 +17,11 @@ Door::Door()
 
 // コンストラクタ //
 
-Door::Door(VECTOR doorPos, VECTOR doorAngle)
-    :ObjBase(ObjectTag::Furniture, doorPos, doorAngle)
+Door::Door(VECTOR pos, VECTOR angle)
+    :ObjBase(ObjectTag::Furniture, pos, angle)
     , doorAnim(nullptr)
     , doorSound(nullptr)
+    , rotateNow(true)
 {
     Load();
 }
@@ -42,7 +43,6 @@ void Door::Load()
     objHandle = AssetManager::GetMesh("../Assets/Map/Door/Door.mv1");
     MV1SetPosition(objHandle, objPos);
     MV1SetScale(objHandle, VGet(0.11f, 0.12f, 0.11f));
-    MV1SetRotationXYZ(objHandle, VGet(0.0f, objDir.y / 180.0f * DX_PI_F, 0.0f));
 
     //アニメーション設定
     doorAnim = new Animation(objHandle);
@@ -81,6 +81,7 @@ void Door::Update(float deltaTime)
         {
             if (!doorAnim->IsPlaying())
             {
+                
                 //Eキー入力でドア開放
                 if (CheckHitKey(KEY_INPUT_E))
                 {
@@ -98,9 +99,13 @@ void Door::Update(float deltaTime)
                     }
                 }
             }
-
         }
     }
+
+    //モデルの回転
+    MATRIX rotYMat = MGetRotY(90.0f * (float)(DX_PI / 180.0f));
+    VECTOR negativeVec = VTransform(objDir, rotYMat);
+    MV1SetRotationZYAxis(objHandle, negativeVec, VGet(0.0f, 1.0f, 0.0f), 0.0f);
 
     //当たり判定更新
     colModel = objHandle;

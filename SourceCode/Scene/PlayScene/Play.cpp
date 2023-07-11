@@ -33,9 +33,9 @@ PlayScene::PlayScene()
     ObjManager::Entry(new Furniture(Furniture::FurName::Stage));
 
     //ドア生成
-    ObjManager::Entry(new Door(VGet(22, 0, 0), VGet(0, 180, 0)));
-    ObjManager::Entry(new Door(VGet(110, 0, 0), VGet(0, 0, 0)));
-    ObjManager::Entry(new Door(VGet(0, 0, 66), VGet(0, 0, 0)));
+    ObjManager::Entry(new Door(VGet(22, 0, 0), VGet(1, 0, 0)));
+    ObjManager::Entry(new Door(VGet(110, 0, 0), VGet(-1, 0, 0)));
+    ObjManager::Entry(new Door(VGet(0, 0, 66), VGet(-1, 0, 0)));
 
     //イス生成
     ObjManager::Entry(new Chair);

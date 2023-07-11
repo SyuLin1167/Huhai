@@ -49,7 +49,7 @@ void Player::Update(float deltaTime)
     camFront = VNorm(camFront);
 
     //ˆÚ“®‚ÌƒJƒƒ‰‚Ìã‰º‰^“®
-    if (PauseMenu::HasStatus("MoveCameraY"))
+    if (PauseMenu::HasStatus("Camera"))
     {
         if (inputKey)
         {
@@ -89,7 +89,6 @@ void Player::Update(float deltaTime)
     }
 
     //“–‚½‚è”»’èXV
-    colSphere.Move(objPos);
     ColUpdate();
 }
 
@@ -126,9 +125,9 @@ void Player::OnCollisionEnter(const ObjBase* other)
             {
                 camera->SetDir(other->GetPos() - camera->GetPos() + VGet(0, 18.0f, 0));
             }
-            ColUpdate();
         }
     }
+    ColUpdate();
 }
 
 // ‹…‘Ì‚ÌÕ“Ëˆ— //
@@ -142,7 +141,6 @@ void Player::CollHitSphere(int colmodel)
         VECTOR pushBack = CalcSpherePushBackFromMesh(colSphere, colInfo);
         objPos += pushBack;
         MV1CollResultPolyDimTerminate(colInfo);
-        ColUpdate();
     }
 
 }
@@ -156,7 +154,6 @@ void Player::ColHitLine(int colmodel)
     if (CollisionPair(colLine, colmodel, colInfoLine))
     {
         objPos = colInfoLine.HitPosition;
-        ColUpdate();
     }
 }
 
