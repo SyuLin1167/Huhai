@@ -4,22 +4,14 @@
 #include"../../../Asset/Animation/Animation.h"
 #include"../../../Asset/AssetManager/AssetManager.h"
 #include"../../../Asset/Sound/Sound.h"
-
-// コンストラクタ //
-
-Door::Door()
-    :ObjBase(ObjectTag::Furniture)
-    , doorAnim(nullptr)
-    , doorSound(nullptr)
-{
-    Load();
-}
+#include"../../../UI/Action/Action.h"
 
 // コンストラクタ //
 
 Door::Door(VECTOR pos, VECTOR angle)
     :ObjBase(ObjectTag::Furniture, pos, angle)
     , doorAnim(nullptr)
+    , animType(IDLE)
     , doorSound(nullptr)
     , rotateNow(true)
 {
@@ -49,7 +41,6 @@ void Door::Load()
     doorAnim->AddAnimation("../Assets/Map/Door/DoorClose.mv1", 30.0f, false);
     doorAnim->AddAnimation("../Assets/Map/Door/DoorOpen.mv1", 30.0f, false);
     doorAnim->AddAnimation("../Assets/Map/Door/DoorClose.mv1", 30.0f, false);
-    animType = IDLE;
     doorAnim->StartAnim(animType);
     doorAnim->StopAnim();
 
@@ -63,6 +54,10 @@ void Door::Load()
     doorSound = new Sound;
     doorSound->AddSound("../Assets/Sound/DoorOpenSE.wav", SoundTag::DoorOpen, true, true);
     doorSound->AddSound("../Assets/Sound/DoorCloseSE.wav", SoundTag::DoorClose, true, true);
+
+    //アクションボタン追加
+    action = new Action(objPos);
+    ObjManager::Entry(action);
 }
 
 // 更新処理 //
@@ -76,27 +71,28 @@ void Door::Update(float deltaTime)
     player = ObjManager::GetFirstObj(ObjectTag::Player);
     if (player)
     {
-        //プレイヤーが一定距離近づいていたら
-        if (CollisionPair(colSphere, player->GetColSphere()))
+        //プレイヤーが近づいたらボタン表示
+        VECTOR actionPos = player->GetPos() - objPos;
+        actionPos = VNorm(actionPos);
+        action->SetPos(objPos + actionPos + VGet(0, 20, 0));
+
+        if (!doorAnim->IsPlaying())
         {
-            if (!doorAnim->IsPlaying())
+
+            //Eキー入力でドア開放
+            if (!action->IsVisible())
             {
-                
-                //Eキー入力でドア開放
-                if (CheckHitKey(KEY_INPUT_E))
+                if (animType != OPEN)
                 {
-                    if (animType != OPEN)
-                    {
-                        MoveAnim(OPEN);
-                    }
+                    MoveAnim(OPEN);
                 }
-                //Qキー入力でドア閉鎖
-                if (CheckHitKey(KEY_INPUT_Q))
+            }
+            //Qキー入力でドア閉鎖
+            if (CheckHitKey(KEY_INPUT_Q))
+            {
+                if (animType == OPEN)
                 {
-                    if (animType != CLOSE)
-                    {
-                        MoveAnim(CLOSE);
-                    }
+                    MoveAnim(CLOSE);
                 }
             }
         }
@@ -127,6 +123,7 @@ void Door::MoveAnim(int animtype)
         doorAnim->StartAnim(animType);
         if (animtype == OPEN)
         {
+            action->SetVisible(false);
             doorSound->StartSound(SoundTag::DoorOpen, DX_PLAYTYPE_BACK);
         }
         else if (animtype == CLOSE)

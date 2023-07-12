@@ -126,8 +126,8 @@ void Player::OnCollisionEnter(const ObjBase* other)
                 camera->SetDir(other->GetPos() - camera->GetPos() + VGet(0, 18.0f, 0));
             }
         }
+        ColUpdate();
     }
-    ColUpdate();
 }
 
 // ‹…‘Ì‚ÌÕ“Ëˆ— //
@@ -141,6 +141,7 @@ void Player::CollHitSphere(int colmodel)
         VECTOR pushBack = CalcSpherePushBackFromMesh(colSphere, colInfo);
         objPos += pushBack;
         MV1CollResultPolyDimTerminate(colInfo);
+        ColUpdate();
     }
 
 }
@@ -154,6 +155,7 @@ void Player::ColHitLine(int colmodel)
     if (CollisionPair(colLine, colmodel, colInfoLine))
     {
         objPos = colInfoLine.HitPosition;
+        ColUpdate();
     }
 }
 

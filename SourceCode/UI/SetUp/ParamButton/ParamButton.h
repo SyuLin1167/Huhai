@@ -16,6 +16,13 @@ public:
     ParamButton(std::string name, int num,int value);
 
     /// <summary>
+    /// 最小値最大値設定
+    /// </summary>
+    /// <param name="min"></param>
+    /// <param name="max"></param>
+    void ParamMinMax(int min,int max);
+
+    /// <summary>
     /// デストラクタ
     /// </summary>
     ~ParamButton();
@@ -40,8 +47,9 @@ public:
 private:
     const int PARAM_BUTTON_SIZE_X = 70;     //ボタンサイズ
     const int PARAM_BUTTON_SIZE_Y = 45;     //ボタンサイズ
-    const int PARAM_MIN = 1;                //パラメーター最小値
-    const int PARAM_MAX = 255;              //パラメーター最大値
+
+    int paramMin;                           //パラメーター最小値
+    int paramMax;                           //パラメーター最大値
     
     int moveX;                              //移動量X
     int prevMousePosX;                      //過去のマウス座標X

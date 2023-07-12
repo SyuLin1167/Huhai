@@ -5,8 +5,10 @@
 
 // コンストラクタ //
 
-ParamButton::ParamButton(std::string name, int num,int value)
+ParamButton::ParamButton(std::string name, int num, int value)
     :SetUpBase(name)
+    , paramMin(0)
+    , paramMax(255)
     , moveX(0)
     , prevMousePosX(0)
     , param(value)
@@ -19,6 +21,14 @@ ParamButton::ParamButton(std::string name, int num,int value)
     objPos.y = static_cast<float>(SCREEN_HEIGHT) * (num + 3) / 9.0f;
 
     paramButtonBlend = new Blend;
+}
+
+// 最小値最大値設定 //
+
+void ParamButton::ParamMinMax(int min, int max)
+{
+    paramMin = min;
+    paramMax = max;
 }
 
 // デストラクタ //
@@ -43,14 +53,14 @@ void ParamButton::Update(float deltaTime)
     {
         moveX = prevMousePosX - mouseX;
         //値の制限
-        if (param < 1)
+        if (param < paramMin)
         {
-            param = 1;
+            param = paramMin;
             canMove = false;
         }
-        else if (param > 255)
+        else if (param > paramMax)
         {
-            param = 255;
+            param = paramMax;
             canMove = false;
         }
         else

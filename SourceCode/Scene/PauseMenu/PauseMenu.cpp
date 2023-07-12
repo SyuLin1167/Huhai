@@ -18,6 +18,7 @@ PauseMenu::PauseMenu()
     AddParam("Bgm", 150);
     AddParam("SE", 150);
     AddParam("Sensitivity", 220);
+    paramData["Sensitivity"]->ParamMinMax(60, 245);
 }
 
 // デストラクタ //

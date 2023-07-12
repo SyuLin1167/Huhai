@@ -36,28 +36,31 @@ void Action::Update(float deltaTime)
 {
     //プレイヤーとの距離を測る
     ObjBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
-    toDistance = VSize(player->GetPos() - objPos);
-
-    //一定距離近づいたら
-    if (abs(toDistance) < actionRange)
+    if (player)
     {
-        //アイコン表示
-        actionBlend->AddFade(deltaTime);
-        canAction = true;
+        toDistance = VSize(player->GetPos() - objPos);
 
-        //Eキーが押されたら反応中にする
-        if (canAction && KeyStatus(KEY_INPUT_E) == 1)
+        //一定距離近づいたら
+        if (abs(toDistance) < actionRange)
         {
-            isVisible = false;
-            isAction = true;
+            //アイコン表示
+            actionBlend->AddFade(deltaTime);
+            canAction = true;
+
+            //Eキーが押されたら反応中にする
+            if (canAction && KeyStatus(KEY_INPUT_E) == 1)
+            {
+                isVisible = false;
+                isAction = true;
+            }
         }
-    }
-    else
-    {
-        //一定距離離れたら非表示にする
-        actionBlend->SubFade(deltaTime);
-        canAction = false;
-        isAction = false;
+        else
+        {
+            //一定距離離れたら非表示にする
+            actionBlend->SubFade(deltaTime);
+            canAction = false;
+            isAction = false;
+        }
     }
 }
 

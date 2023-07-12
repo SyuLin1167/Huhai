@@ -233,11 +233,11 @@ void Remarks::Draw()
     //‘äŽŒ•`‰æ
     for (int i = 0; i < BUFHEIGHT; i++)
     {
-        DrawString(i + 620, i * TEXTSIZE + 930, stringBuf[i], GetColor(255, 255, 255));
+        DrawString(i + 620, i * TEXTSIZE + 930, stringBuf[i], GetColor(220, 220, 220));
     }
 
     if (waitKey)
     {
-        DrawString(SCREEN_WIDTH * 9 / 10, SCREEN_HEIGHT * 9 / 10, "Left Click", GetColor(255, 255, 255));
+        DrawString(SCREEN_WIDTH * 9 / 10, SCREEN_HEIGHT * 9 / 10, "Left Click", GetColor(220, 220, 220));
     }
 }

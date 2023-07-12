@@ -40,6 +40,7 @@ TitleScene::TitleScene()
     //ドア生成
     door = new Door(VGet(0, 0, 66), VGet(-1, 0, 0));
     ObjManager::Entry(door);
+    door->MoveAnim(Door::AnimType::OPEN);
 
     //ライト生成
     ObjManager::Entry(new BlinkingLight(VGet(-35, 33, 70)));
@@ -72,9 +73,6 @@ SceneBase* TitleScene::Update(float deltaTime)
 {
     //マウスポインター表示
     SetMouseDispFlag(TRUE);
-
-    //ドアは開く状態にする
-    door->MoveAnim(Door::Anim::OPEN);
 
     //オブジェクト更新
     ObjManager::Update(deltaTime);

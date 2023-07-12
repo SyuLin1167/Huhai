@@ -33,7 +33,9 @@ EscapeScene::EscapeScene()
     ObjManager::Entry(new Map(Map::MapTag::GOAL));
 
     //ƒhƒA¶¬
-    ObjManager::Entry(new Door(VGet(55, 0, 0), VGet(-1, 0, 0)));
+    class Door* door = new Door(VGet(55, 0, 0), VGet(-1, 0, 0));
+    ObjManager::Entry(door);
+    door->MoveAnim(Door::AnimType::OPEN);
     ObjManager::Entry(new Door(VGet(187, 0, 0), VGet(1, 0, 0)));
     ObjManager::Entry(new Door(VGet(759, 0, 0), VGet(1, 0, 0)));
 

@@ -71,7 +71,7 @@ void Man::Update(float deltaTime)
     VECTOR negativeVec = VTransform(objDir, rotYMat);
 
     //アクションボタンが押されたらセリフを再生
-    if (!ObjManager::GetFirstObj(ObjectTag::UI)->IsVisible())
+    if (!ObjManager::GetObj(ObjectTag::UI, 3)->IsVisible())
     {
         //プレイヤーの方を向く
         rotateNow = true;

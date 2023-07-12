@@ -6,18 +6,21 @@
 /*Doorクラス*/
 class Door :public ObjBase
 {
-    ObjBase* player;
 public:
-    /// <summary>
-    /// コンストラクタ
-    /// </summary>
-    Door();
+    //アニメーションタイプ
+    enum AnimType
+    {
+        IDLE = 0,       //待機
+        OPEN,           //開
+        CLOSE           //閉
+    };
 
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="pos">:ワールド座標</param>
     /// <param name="dir">:方向</param>
+    /// <param name="type">アニメーションタイプ</param>
     Door(VECTOR pos, VECTOR dir);
 
     /// <summary>
@@ -47,14 +50,6 @@ public:
     /// </summary>
     void Draw()override;
 
-    //アニメーションタイプ
-    enum Anim
-    {
-        IDLE = 0,       //待機
-        OPEN,           //開
-        CLOSE           //閉
-    };
-
 private:
     class Animation* doorAnim;			//アニメーション
     int animType;						//アニメーションタイプ
@@ -63,4 +58,7 @@ private:
     VECTOR aimDir;                      //目標方向
 
     class Sound* doorSound;             //サウンド
+
+    class ObjBase* player;              //プレイヤーオブジェクト
+    class Action* action;               //アクションボタン
 };
