@@ -46,6 +46,10 @@ void LitLight::Update(float deltaTime)
             MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
         }
     }
+
+
+    //パラメーターによる距離減衰
+    AttenByParam();
 }
 
 // 描画処理 //

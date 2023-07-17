@@ -17,6 +17,8 @@ PauseMenu::PauseMenu()
     AddButton("Bloom");
     AddParam("Bgm", 150);
     AddParam("SE", 150);
+    AddParam("Brightness", 60);
+    paramData["Brightness"]->ParamMinMax(10, 95);
     AddParam("Sensitivity", 220);
     paramData["Sensitivity"]->ParamMinMax(60, 245);
 }
@@ -42,7 +44,7 @@ SceneBase* PauseMenu::Init()
 
     //タイトルボタン追加
     delete pause->titleButton;
-    pause->titleButton = new TitleButton(static_cast<int>(pause->buttonData.size()) + 1);
+    pause->titleButton = new TitleButton(static_cast<int>(pause->paramData.size()) + 1);
 
     return pause;
 }

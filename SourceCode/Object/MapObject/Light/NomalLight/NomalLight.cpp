@@ -43,6 +43,10 @@ void NomalLight::Update(float deltaTime)
     //座標更新
     SetLightPositionHandle(lightHandle, objPos + VGet(0.0f, 2.5f, 0.0f));
     MV1SetPosition(objHandle, objPos);
+
+
+    //パラメーターによる距離減衰
+    AttenByParam();
 }
 
 // 描画処理 //

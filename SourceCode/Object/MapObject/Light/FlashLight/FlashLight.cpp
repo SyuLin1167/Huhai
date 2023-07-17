@@ -46,6 +46,10 @@ void FlashLight::Update(float deltaTime)
     ObjBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
     SetLightPositionHandle(lightHandle, camera->GetPos());
     SetLightDirectionHandle(lightHandle, camera->GetDir());
+
+
+    //パラメーターによる距離減衰
+    AttenByParam();
 }
 
 // 描画処理 //

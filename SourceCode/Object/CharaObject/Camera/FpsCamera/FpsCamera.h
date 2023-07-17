@@ -39,10 +39,10 @@ public:
     /// </summary>
     void Draw()override;
 private:
-    int mouseX;             //マウス座標X
-    int mouseY;             //マウス座標Y
-    VECTOR movePos;         //移動座標
+    int mouseX;                     //マウス座標X
+    int mouseY;                     //マウス座標Y
+    VECTOR movePos;                 //移動座標
 
-    float cameraYaw;        //水平方向回転角
-    float cameraPitch;      //垂直方向回転角
+    float cameraYaw;                //水平方向回転角
+    float cameraPitch;              //垂直方向回転角
 };

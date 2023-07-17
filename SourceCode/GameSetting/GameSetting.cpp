@@ -11,10 +11,14 @@
 
 int GameSetting::Init()
 {
+    //ログの非表示
+    SetOutApplicationLogValidFlag(false);
+
     //ウィンドウの設定
-    ChangeWindowMode(TRUE);
+    ChangeWindowMode(true);
     SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, ColorBit);
     SetWindowSizeExtendRate(1.0);
+    SetMainWindowText("Huhai");
 
     //使用するDirect3Dのバージョン設定
     SetUseDirect3DVersion(DX_DIRECT3D_11);

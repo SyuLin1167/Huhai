@@ -32,8 +32,6 @@ BlinkingLight::~BlinkingLight()
 
 void BlinkingLight::Load()
 {
-
-
     //モデル設定
     MV1SetPosition(objHandle, objPos);
     MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
@@ -66,14 +64,17 @@ void BlinkingLight::Update(float deltaTime)
     //点滅時はライトの明るさ変更
     if (isBlinking)
     {
-        SetLightRangeAttenHandle(lightHandle, lightRange, 0.0f, 0.0f, lightAtten2 * 3.0f);
+        SetLightRangeAttenHandle(lightHandle, lightRange, 0.0f, 0.0f, lightAtten2 + 0.001f);
         MV1SetMaterialEmiColor(objHandle, 0, GetColorF(0.8f, 0.8f, 0.8f, 0.8f));
     }
     else
     {
-        SetLightRangeAttenHandle(lightHandle, lightRange, 0.0f, 0.0f, lightAtten2*2.0f);
+        SetLightRangeAttenHandle(lightHandle, lightRange, 0.0f, 0.0f, lightAtten2);
         MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
     }
+
+    //パラメーターによる距離減衰
+    AttenByParam();
 }
 
 // 描画処理 //

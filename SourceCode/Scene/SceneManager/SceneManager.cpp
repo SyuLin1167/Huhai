@@ -22,6 +22,7 @@ SceneManager::SceneManager()
     timeMgr = new TimeManager;
 
     nowScreen = MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT);
+
 }
 
 // デストラクタ //
@@ -59,7 +60,7 @@ int SceneManager::Init()
 
     //初期シーン設定
     nowScene.push(new TitleScene);
-
+    SetDrawBright(255, 255, 255);
     return 0;
 }
 

@@ -31,6 +31,11 @@ public:
     /// </summary>
     void Load();
 
+    /// <summary>
+    /// パラメータによる距離減衰
+    /// </summary>
+    void AttenByParam();
+
 protected:
     int lightHandle;            //ライトハンドル
 

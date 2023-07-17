@@ -37,6 +37,8 @@ void FpsCamera::Update(float deltaTime)
         objPos.y = CameraPosY;
 
         Move(deltaTime);
+
+        //マウスポインターは画面の中心
         SetMousePoint(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
     }
     else
@@ -49,12 +51,16 @@ void FpsCamera::Update(float deltaTime)
 
 void FpsCamera::Move(float deltaTime)
 {
-    //常時マウスポインターは画面の中心
+    //マウス移動量計測
     GetMousePoint(&mouseX, &mouseY);
-    movePos.x = (float)mouseX - static_cast<float>(SCREEN_WIDTH) / 2;
-    movePos.y = (float)mouseY - static_cast<float>(SCREEN_HEIGHT) / 2;
+    if (mouseX > 30 && mouseX < SCREEN_WIDTH - 30 &&
+        mouseY > 30 && mouseY < SCREEN_HEIGHT - 30)
+    {
+        movePos.x = (float)mouseX - static_cast<float>(SCREEN_WIDTH) / 2;
+        movePos.y = (float)mouseY - static_cast<float>(SCREEN_HEIGHT) / 2;
+    }
 
-     
+
     //カーソルの移動量取得
     if (abs(movePos.x) > 0)
     {
@@ -71,11 +77,10 @@ void FpsCamera::Move(float deltaTime)
     objDir.z = sinf(cameraYaw);
 }
 
+// 描画処理 //
+
 void FpsCamera::Draw()
 {
-    if (isVisible)
-    {
-        //カーソルの移動した方向に視点を移動
-        SetCameraPositionAndTarget_UpVecY(objPos, objPos + objDir);
-    }
+    //カーソルの移動した方向に視点を移動
+    SetCameraPositionAndTarget_UpVecY(objPos, objPos + objDir);
 }
