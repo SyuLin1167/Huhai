@@ -85,7 +85,6 @@ SceneBase* EscapeScene::Update(float deltaTime)
     if (!ObjManager::GetObj(ObjectTag::Map, 2))
     {
         //管理クラス内の確保したデータ解放
-        AssetManager::ReleaseAllAsset();
         ObjManager::ReleaseAllObj();
 
         //シーンを次の場面にする

@@ -1,7 +1,9 @@
 #pragma once
 #include<DxLib.h>
 #include<string>
+#include<vector>
 #include<unordered_map>
+#include<algorithm>
 
 /* AssetManagerƒNƒ‰ƒX */
 class AssetManager final

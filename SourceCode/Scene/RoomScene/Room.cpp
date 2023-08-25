@@ -81,7 +81,6 @@ SceneBase* RoomScene::Update(float deltaTime)
             {
 
                 //管理クラス内の確保したデータ解放
-                AssetManager::ReleaseAllAsset();
                 ObjManager::ReleaseAllObj();
 
                 //シーンを次の場面にする

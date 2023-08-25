@@ -78,18 +78,6 @@ void GhostWalkGim::OnCollisionEnter(const ObjBase* other)
                 gstAnim->StartAnim(animType);
                 gstSound->StartSound(SoundTag::GhostWalk, DX_PLAYTYPE_BACK);
                 isMove = true;
-
-                //ライトの位置変更
-                ObjBase* light = ObjManager::GetFirstObj(ObjectTag::Light);
-                if (light)
-                {
-                    light->SetPos(VGet(-32, 33, 75));
-                }
-
-                ////ドア追加(開かせる)
-                //class Door* door = new Door(VGet(0, 0, 66), VGet(-1, 0, 0));
-                //ObjManager::Entry(door);
-                //door->MoveAnim(Door::AnimType::OPEN);
             }
         }
     }

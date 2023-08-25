@@ -181,6 +181,9 @@
     <Filter Include="ソース ファイル\Scene\Ending">
       <UniqueIdentifier>{d494d462-4d17-4384-8234-150bc706e628}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Shade\PointLightShader">
+      <UniqueIdentifier>{9e96effc-6f00-487a-ad21-50f80d1eb11a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SourceCode\Main.cpp">
@@ -323,6 +326,9 @@
     </ClCompile>
     <ClCompile Include="..\SourceCode\Scene\Ending\Ending.cpp">
       <Filter>ソース ファイル\Scene\Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Shade\PointLight\PointLightShader.cpp">
+      <Filter>ソース ファイル\Shade\PointLightShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -478,6 +484,9 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\Scene\Ending\Ending.h">
       <Filter>ソース ファイル\Scene\Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Shade\PointLight\PointLightShader.h">
+      <Filter>ソース ファイル\Shade\PointLightShader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

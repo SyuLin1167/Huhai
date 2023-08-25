@@ -1,5 +1,6 @@
 #include "AssetManager.h"
 
+
 //実態へのポインタ定義
 AssetManager* AssetManager::assetMgr = nullptr;
 
@@ -64,7 +65,7 @@ int AssetManager::GetMesh(std::string fileName)
     if (iter == assetMgr->meshMap.end())
     {
         meshID = MV1LoadModel(fileName.c_str());
-        
+
         //IDが空ならそのまま返す
         if (meshID == -1)
         {
@@ -138,7 +139,7 @@ int AssetManager::GetSound(std::string fileName)
 void AssetManager::ReleaseMesh(int meshID)
 {
     //複製したメッシュ内検索
-    auto iter =find(assetMgr->dupMesh.begin(),
+    auto iter = find(assetMgr->dupMesh.begin(),
         assetMgr->dupMesh.end(), meshID);
 
     //見つからなかったら結果を返す
@@ -149,7 +150,7 @@ void AssetManager::ReleaseMesh(int meshID)
 
     //見つかったら末尾移動して削除
     MV1DeleteModel(meshID);
-    iter_swap(iter, assetMgr->dupMesh.end() - 1);
+    std::iter_swap(iter, assetMgr->dupMesh.end() - 1);
     assetMgr->dupMesh.pop_back();
 }
 

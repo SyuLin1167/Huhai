@@ -3,6 +3,7 @@
 #include"../../GameSetting/GameSetting.h"
 #include"../../Object/ObjectManager/ObjManager.h"
 #include"../../Asset/AssetManager/AssetManager.h"
+#include"../../Shade/PointLight/PointLightShader.h"
 #include"../SceneBase/SceneBase.h"
 #include"../../Time/TimeManager.h"
 #include "../TitleScene/Title.h"
@@ -20,6 +21,7 @@ SceneManager::SceneManager()
     //インスタンス生成
     gameSetting = new GameSetting;
     timeMgr = new TimeManager;
+    plShader = new PointLightShader;
 
     nowScreen = MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -30,14 +32,9 @@ SceneManager::SceneManager()
 SceneManager::~SceneManager()
 {
     //インスタンスの後処理
-    if (gameSetting)
-    {
-        delete gameSetting;
-    }
-    if (timeMgr)
-    {
-        delete timeMgr;
-    }
+    delete gameSetting;
+    delete timeMgr;
+    delete plShader;
 }
 
 // 初期化処理 //

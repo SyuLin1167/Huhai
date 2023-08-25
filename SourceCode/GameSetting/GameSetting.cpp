@@ -20,16 +20,23 @@ int GameSetting::Init()
     SetWindowSizeExtendRate(1.0);
     SetMainWindowText("Huhai");
 
-    //使用するDirect3Dのバージョン設定
-    SetUseDirect3DVersion(DX_DIRECT3D_11);
-
     //アンチエイリアスを設定
     SetFullSceneAntiAliasingMode(4, 2);
+
+    // Direct3D9Ex を使用する
+    SetUseDirect3DVersion(DX_DIRECT3D_9EX);
 
     if (DxLib_Init() == -1)
     {
         //ライブラリ初期化でエラーが起きたら終了
         return -1;
+    }
+
+    if (GetValidShaderVersion() < 300)
+    {
+        //シェーダーモデル３．０が使用できない場合は終了
+        DxLib_End();
+        return 0;
     }
 
     //描画先を裏画面に変更

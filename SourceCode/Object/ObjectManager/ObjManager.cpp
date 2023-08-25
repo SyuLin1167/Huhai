@@ -57,7 +57,7 @@ void ObjManager::Release(ObjBase* releaseObj)
     //オブジェクトが見つかったら末尾に移して削除
     if (iter != objManager->holdObj.end())
     {
-        iter_swap(iter, objManager->holdObj.end() - 1);
+        std::iter_swap(iter, objManager->holdObj.end() - 1);
         objManager->holdObj.pop_back();
         return;
     }
@@ -70,7 +70,7 @@ void ObjManager::Release(ObjBase* releaseObj)
     //オブジェクトが見つかったら末尾に移して削除
     if (iter != objManager->Object[tag].end())
     {
-        iter_swap(iter, objManager->Object[tag].end() - 1);
+        std::iter_swap(iter, objManager->Object[tag].end() - 1);
         delete objManager->Object[tag].back();
     }
 }

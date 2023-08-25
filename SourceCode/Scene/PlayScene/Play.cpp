@@ -44,6 +44,8 @@ PlayScene::PlayScene()
     ObjManager::Entry(new NomalLight(VGet(-10, 33, 0)));
     ObjManager::Entry(new LitLight(VGet(65, 33, 0), 50.0f));
     ObjManager::Entry(new LitLight(VGet(121, 33, 25), 40.0f));
+    ObjManager::Entry(new NomalLight(VGet(40, 33, 67)));
+    ObjManager::Entry(new NomalLight(VGet(-32, 33, 75)));
 
     //プレイヤー生成
     ObjManager::Entry(new Player);
@@ -77,7 +79,6 @@ SceneBase* PlayScene::Update(float deltaTime)
     if (!man)
     {
         //管理クラス内の確保したデータ解放
-        AssetManager::ReleaseAllAsset();
         ObjManager::ReleaseAllObj();
 
         //シーンを次の場面にする

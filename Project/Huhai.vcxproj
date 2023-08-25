@@ -189,6 +189,7 @@
     <ClCompile Include="..\SourceCode\Scene\SceneManager\SceneManager.cpp" />
     <ClCompile Include="..\SourceCode\Scene\TitleScene\Title.cpp" />
     <ClCompile Include="..\SourceCode\Shade\Bloom\Bloom.cpp" />
+    <ClCompile Include="..\SourceCode\Shade\PointLight\PointLightShader.cpp" />
     <ClCompile Include="..\SourceCode\Time\TimeManager.cpp" />
     <ClCompile Include="..\SourceCode\UI\Action\Action.cpp" />
     <ClCompile Include="..\SourceCode\UI\Reamarks\Remarks.cpp" />
@@ -240,6 +241,7 @@
     <ClInclude Include="..\SourceCode\Scene\SceneManager\SceneManager.h" />
     <ClInclude Include="..\SourceCode\Scene\TitleScene\Title.h" />
     <ClInclude Include="..\SourceCode\Shade\Bloom\Bloom.h" />
+    <ClInclude Include="..\SourceCode\Shade\PointLight\PointLightShader.h" />
     <ClInclude Include="..\SourceCode\Time\TimeManager.h" />
     <ClInclude Include="..\SourceCode\UI\Action\Action.h" />
     <ClInclude Include="..\SourceCode\UI\Reamarks\Remarks.h" />

@@ -18,7 +18,7 @@ ParamButton::ParamButton(std::string name, int num, int value)
     buttonWidth = PARAM_BUTTON_SIZE_X;
     buttonHeight = PARAM_BUTTON_SIZE_Y;
     objPos.x = static_cast<float>(SCREEN_WIDTH) * (4.0f / 6.0f);
-    objPos.y = static_cast<float>(SCREEN_HEIGHT) * (num + 3) / 9.0f;
+    objPos.y = static_cast<float>(SCREEN_HEIGHT) * (num + 2) / 9.0f;
 
     paramButtonBlend = new Blend;
 }

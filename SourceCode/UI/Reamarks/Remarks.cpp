@@ -225,6 +225,8 @@ void Remarks::NewLine()
 
 void Remarks::Draw()
 {
+    ChangeFont("MS ゴシック", DX_CHARSET_DEFAULT);
+
     //テキストボックス描画
     SetFontSize(TEXTSIZE);
     GetDrawScreenGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, screenGraph);

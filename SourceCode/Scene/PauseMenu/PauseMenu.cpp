@@ -18,9 +18,12 @@ PauseMenu::PauseMenu()
     AddParam("Bgm", 150);
     AddParam("SE", 150);
     AddParam("Brightness", 60);
-    paramData["Brightness"]->ParamMinMax(10, 95);
+    paramData["Brightness"]->ParamMinMax(10, 75);
     AddParam("Sensitivity", 220);
     paramData["Sensitivity"]->ParamMinMax(60, 245);
+
+    //フォント設定
+    AddFontResourceEx(".. /Assets/Font/KillingFont.otf", FR_PRIVATE, NULL);
 }
 
 // デストラクタ //
@@ -45,6 +48,9 @@ SceneBase* PauseMenu::Init()
     //タイトルボタン追加
     delete pause->titleButton;
     pause->titleButton = new TitleButton(static_cast<int>(pause->paramData.size()) + 1);
+
+    //フォントの読み込み
+    ChangeFont("KillingFont", DX_CHARSET_DEFAULT);
 
     return pause;
 }

@@ -33,7 +33,7 @@ void FlashLight::Load()
 {
     //ÉâÉCÉgê›íË
     DeleteLightHandle(lightHandle);
-    lightHandle = CreateSpotLightHandle(objPos, objDir, DX_PI_F / 4.0f, DX_PI_F / 8.0f, lightRange, 0.0f, 0.0f, lightAtten2);
+    lightHandle = CreateSpotLightHandle(objPos, objDir, DX_PI_F / 4.0f, DX_PI_F / 8.0f, lightRange, 0.0f, 0.0f, 0.0f);
 
     isVisible = false;
 }

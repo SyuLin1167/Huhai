@@ -60,5 +60,6 @@ private:
 
     class GameSetting* gameSetting;             //ゲームセッティング
     class TimeManager* timeMgr;                 //タイムマネージャー
+    class PointLightShader* plShader;           //ポイントライトシェーダー
 };
 
