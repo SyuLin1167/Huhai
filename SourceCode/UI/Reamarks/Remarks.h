@@ -43,6 +43,11 @@ public:
     void NewLine();
 
     /// <summary>
+    /// テキストボックス
+    /// </summary>
+    void TextBox(int lx,int ly,int rx,int ry);
+
+    /// <summary>
     /// 描画処理
     /// </summary>
     void Draw()override;
@@ -66,5 +71,6 @@ private:
     int textX;                                          //文字表示位置X
     int textY;                                          //文字表示位置Y
 
-    int screenGraph;                                    //テキストボックス用スクリーン
+    VERTEX2D textBox[6];                                //テキストボックスポリゴン
+    const int BOUNDARY_POS_Y = 950;                     //ポリゴンとボックスの境界線座標
 };

@@ -1,6 +1,7 @@
 #include "Remarks.h"
 
 #include"../../Asset/AssetManager/AssetManager.h"
+#include"../../BlendMode/BlendMode.h"
 
 // コンストラクタ //
 
@@ -15,16 +16,13 @@ Remarks::Remarks(TextType texttype)
     , waitKey(false)
     , textX(0)
     , textY(0)
-    , screenGraph(-1)
+    , textBox{}
 {
     //テキストボックス設定
     objHandle =AssetManager::GetGraph("../Assets/BackGround/Remarks.png");
     objPos = VGet(0.0f, 600.0f, 0.0f);
 
     canClick = true;
-
-    //グラフ作成
-    screenGraph = MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
 // デストラクタ //
@@ -221,6 +219,38 @@ void Remarks::NewLine()
     textX = 0;
 }
 
+// テキストボックス //
+void Remarks::TextBox(int lx, int ly, int rx, int ry)
+{
+    COLOR_U8 color = { 20,0,0,0 };      //頂点の色
+
+    SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
+
+    //値が変わらないものを一通り設定
+    for (int i = 0; i < 6; i++)
+    {
+        textBox[i].pos.z = 0.0f;
+        textBox[i].rhw = 1.0f;
+        textBox[i].dif = color;
+        textBox[i].u = 0;
+        textBox[i].v = 0;
+    }
+
+
+    //頂点情報
+    textBox[0].pos.x = textBox[2].pos.x = (float)lx;
+    textBox[0].pos.y = textBox[1].pos.y = (float)ly;
+
+    textBox[3].pos.x = textBox[1].pos.x = (float)rx;
+    textBox[3].pos.y = textBox[2].pos.y = (float)ry;
+    textBox[3].dif.a = textBox[2].dif.a = 255;
+
+    //同じ頂点はコピー
+    textBox[4] = textBox[2];
+    textBox[5] = textBox[1];
+
+}
+
 // 描画処理 //
 
 void Remarks::Draw()
@@ -229,8 +259,10 @@ void Remarks::Draw()
 
     //テキストボックス描画
     SetFontSize(TEXTSIZE);
-    GetDrawScreenGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, screenGraph);
-    DrawExtendGraph((int)objPos.x, (int)objPos.y, (int)objPos.x + SCREEN_WIDTH, (int)objPos.y + 480, objHandle, TRUE);
+    DrawBox(0, BOUNDARY_POS_Y, SCREEN_WIDTH, SCREEN_HEIGHT, GetColor(0, 0, 20), TRUE);
+    TextBox(0, BOUNDARY_POS_Y-200, SCREEN_WIDTH, BOUNDARY_POS_Y);
+    DrawPolygon2D(textBox, 2, DX_NONE_GRAPH, TRUE);
+    SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 
     //台詞描画
     for (int i = 0; i < BUFHEIGHT; i++)
@@ -238,8 +270,9 @@ void Remarks::Draw()
         DrawString(i + 620, i * TEXTSIZE + 930, stringBuf[i], GetColor(220, 220, 220));
     }
 
+    //待機アイコン描画
     if (waitKey)
     {
-        DrawString(SCREEN_WIDTH * 9 / 10, SCREEN_HEIGHT * 9 / 10, "Left Click", GetColor(220, 220, 220));
+        DrawString(SCREEN_WIDTH * 8 / 10, SCREEN_HEIGHT * 9 / 10, "▽", GetColor(220, 220, 220));
     }
 }
