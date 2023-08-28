@@ -52,8 +52,8 @@ void Door::Load()
 
     //サウンド設定
     doorSound = new Sound;
-    doorSound->AddSound("../Assets/Sound/DoorOpenSE.wav", SoundTag::DoorOpen, true, true);
-    doorSound->AddSound("../Assets/Sound/DoorCloseSE.wav", SoundTag::DoorClose, true, true);
+    doorSound->AddSound("../Assets/Sound/DoorOpenSE.mp3", SoundTag::DoorOpen, true, true);
+    doorSound->AddSound("../Assets/Sound/DoorCloseSE.mp3", SoundTag::DoorClose, true, true);
 
     //アクションボタン追加
     action = new Action(objPos);

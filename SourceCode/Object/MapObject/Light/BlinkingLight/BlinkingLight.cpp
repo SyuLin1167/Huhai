@@ -25,7 +25,6 @@ BlinkingLight::BlinkingLight(VECTOR pos)
 BlinkingLight::~BlinkingLight()
 {
     DeleteLightHandle(lightHandle);
-    AssetManager::ReleaseMesh(objHandle);
 }
 
 // “Ç‚İ‚İˆ— //

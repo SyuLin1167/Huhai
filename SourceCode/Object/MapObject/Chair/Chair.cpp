@@ -19,9 +19,6 @@ Chair::Chair()
 
 Chair::~Chair()
 {
-    //モデル削除
-    AssetManager::ReleaseMesh(objHandle);
-    
     //インスタンス削除
     delete ChairAnim;
     delete chairSound;

@@ -24,8 +24,6 @@ Man::Man()
 
 Man::~Man()
 {
-    //モデル削除
-    AssetManager::ReleaseMesh(objHandle);
 
     //インスタンス削除
     delete manAnim;

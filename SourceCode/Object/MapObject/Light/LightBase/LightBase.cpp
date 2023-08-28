@@ -32,9 +32,6 @@ LightBase::~LightBase()
 {
     //ƒ‰ƒCƒgíœ
     DeleteLightHandle(lightHandle);
-
-    //ƒ‚ƒfƒ‹íœ
-    AssetManager::ReleaseMesh(objHandle);
 }
 
 // “Ç‚İ‚İˆ— //

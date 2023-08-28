@@ -18,8 +18,6 @@ Bed::Bed()
 
 Bed::~Bed()
 {
-    //ƒ‚ƒfƒ‹íœ
-    AssetManager::ReleaseMesh(objHandle);
 }
 
         // “Ç‚İ‚İˆ— //

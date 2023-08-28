@@ -36,9 +36,6 @@ GhostBase::GhostBase()
 
 GhostBase::~GhostBase()
 {
-    //モデル削除
-    AssetManager::ReleaseMesh(objHandle);
-
     //インスタンス削除
     delete gstAnim;
     delete gstSound;

@@ -18,8 +18,6 @@ Map::Map(MapTag maptag)
 
 Map::~Map()
 {
-    //ƒƒbƒVƒ…íœ
-    AssetManager::ReleaseMesh(objHandle);
 }
 
 // “Ç‚İ‚İˆ— //
