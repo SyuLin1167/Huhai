@@ -1,14 +1,38 @@
+#include<../Rapidjson/istreamwrapper.h>
+#include<../Rapidjson/document.h>
+#include<fstream>
+
 #include "Table.h"
 
 #include"../../../Asset/AssetManager/AssetManager.h"
 
-        // コンストラクタ //
+// コンストラクタ //
 
-Table::Table(int objNum)
+Table::Table(const int objNum)
     :ObjBase(ObjectTag::Furniture)
 {
-    objPos = posData[objNum];
-    objDir.y = dirData[objNum];
+    //ファイル読み込み
+    const std::string dataFile = "../SourceCode/Object/MapObject/Table/TableData.json";
+    std::ifstream ifs(dataFile.c_str());
+    rapidjson::Document doc;
+    if (ifs.good())
+    {
+        rapidjson::IStreamWrapper isw(ifs);
+
+        //解析
+        doc.ParseStream(isw);
+    }
+    ifs.close();
+
+    //データを読み取って座標・向きに代入
+    const std::string tmpkey = std::to_string(objNum);
+    const char* key = tmpkey.c_str();
+    auto& data = doc["data"][key];
+
+    objPos.x = data["pos"].GetArray()[0].GetFloat();
+    objPos.y = data["pos"].GetArray()[1].GetFloat();
+    objPos.z = data["pos"].GetArray()[2].GetFloat();
+    objDir.y = data["dir"].GetFloat();
 
     //モデル設定
     objHandle = AssetManager::GetMesh("../Assets/Map/Table/Table.mv1");

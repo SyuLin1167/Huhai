@@ -88,13 +88,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../../Dxlib_h</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../IncludeFile/Dxlib.h</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../../Dxlib_h</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../IncludeFile/Dxlib.h</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -105,7 +105,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../../Dxlib_h</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../IncludeFile/Dxlib.h</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -113,7 +113,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../../Dxlib_h</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../IncludeFile/Dxlib.h</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -122,13 +122,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../../Dxlib_h</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../IncludeFile/Dxlib.h</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../../Dxlib_h</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../IncludeFile/Dxlib.h</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -139,7 +139,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../../Dxlib_h</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../IncludeFile/Dxlib.h</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -147,7 +147,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../../Dxlib_h</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../IncludeFile/Dxlib.h</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -253,6 +253,9 @@
     <ClInclude Include="..\SourceCode\UI\SetUp\ParamButton\ParamButton.h" />
     <ClInclude Include="..\SourceCode\UI\SetUp\TitleButton\TitleButton.h" />
     <ClInclude Include="..\SourceCode\UI\UIBase\UIBase.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\SourceCode\Object\MapObject\Table\TableData.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

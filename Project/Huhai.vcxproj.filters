@@ -489,4 +489,9 @@
       <Filter>ソース ファイル\Shade\PointLightShader</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\SourceCode\Object\MapObject\Table\TableData.json">
+      <Filter>ソース ファイル\MapObject\Table</Filter>
+    </None>
+  </ItemGroup>
 </Project>
