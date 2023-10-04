@@ -204,11 +204,8 @@
     <ClCompile Include="..\SourceCode\Object\ObjectManager\ObjManager.cpp">
       <Filter>ソース ファイル\Object\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Scene\PlayScene\Play.cpp">
+    <ClCompile Include="..\SourceCode\Scene\PlayScene\PlayScene.cpp">
       <Filter>ソース ファイル\Scene\Play</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\Scene\TitleScene\Title.cpp">
-      <Filter>ソース ファイル\Scene\Title</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Scene\SceneManager\SceneManager.cpp">
       <Filter>ソース ファイル\Scene\Manager</Filter>
@@ -279,7 +276,7 @@
     <ClCompile Include="..\SourceCode\Scene\EscapeScene\Escape.cpp">
       <Filter>ソース ファイル\Scene\Escape</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Scene\RoomScene\Room.cpp">
+    <ClCompile Include="..\SourceCode\Scene\RoomScene\RoomScene.cpp">
       <Filter>ソース ファイル\Scene\Room</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\UI\Reamarks\Remarks.cpp">
@@ -296,9 +293,6 @@
     </ClCompile>
     <ClCompile Include="..\SourceCode\GameSetting\GameSetting.cpp">
       <Filter>ソース ファイル\GameSetting</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\Scene\Save\Save.cpp">
-      <Filter>ソース ファイル\Scene\Save</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Object\CharaObject\Camera\FixedCamera\FixedCamera.cpp">
       <Filter>ソース ファイル\CharaObject\Camera\FixedCamera</Filter>
@@ -330,6 +324,12 @@
     <ClCompile Include="..\SourceCode\Shade\PointLight\PointLightShader.cpp">
       <Filter>ソース ファイル\Shade\PointLightShader</Filter>
     </ClCompile>
+    <ClCompile Include="..\SourceCode\Scene\TitleScene\TitleScene.cpp">
+      <Filter>ソース ファイル\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Scene\SaveScene\SaveScene.cpp">
+      <Filter>ソース ファイル\Scene\Save</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SourceCode\Time\TimeManager.h">
@@ -350,11 +350,8 @@
     <ClInclude Include="..\SourceCode\Object\ObjectManager\ObjManager.h">
       <Filter>ソース ファイル\Object\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Scene\PlayScene\Play.h">
+    <ClInclude Include="..\SourceCode\Scene\PlayScene\PlayScene.h">
       <Filter>ソース ファイル\Scene\Play</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\Scene\TitleScene\Title.h">
-      <Filter>ソース ファイル\Scene\Title</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Scene\SceneManager\SceneManager.h">
       <Filter>ソース ファイル\Scene\Manager</Filter>
@@ -428,7 +425,7 @@
     <ClInclude Include="..\SourceCode\Scene\EscapeScene\Escape.h">
       <Filter>ソース ファイル\Scene\Escape</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Scene\RoomScene\Room.h">
+    <ClInclude Include="..\SourceCode\Scene\RoomScene\RoomScene.h">
       <Filter>ソース ファイル\Scene\Room</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\UI\Reamarks\Remarks.h">
@@ -454,9 +451,6 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\GameSetting\GameSetting.h">
       <Filter>ソース ファイル\GameSetting</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\Scene\Save\Save.h">
-      <Filter>ソース ファイル\Scene\Save</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Object\CharaObject\Camera\FixedCamera\FixedCamera.h">
       <Filter>ソース ファイル\CharaObject\Camera\FixedCamera</Filter>
@@ -487,6 +481,12 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\Shade\PointLight\PointLightShader.h">
       <Filter>ソース ファイル\Shade\PointLightShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\TitleScene\TitleScene.h">
+      <Filter>ソース ファイル\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\SaveScene\SaveScene.h">
+      <Filter>ソース ファイル\Scene\Save</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

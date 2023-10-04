@@ -23,18 +23,21 @@ public:
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     /// <returns>次のフレームのシーン</returns>
-    SceneBase* Update(float deltaTime)override;
+    SceneBase* UpdateScene(const float deltaTime)override;
 
     /// <summary>
     /// 描画処理
     /// </summary>
-    void Draw()override;
+    void DrawScene()override;
 
 private:
-    int screenGraph;        //画面保持グラフ
+    const int TITLE_POS_X = 180;                //タイトルロゴ座標X
+    const int TITLE_POS_Y = 150;                //タイトルロゴ座標Y
+    const int TITLE_SIZE_X = 450;               //タイトルロゴサイズX
+    const int TITLE_SIZE_Y = 200;               //タイトルロゴサイズY
+
+    int screenGraph;                            //画面保持グラフ
 
     class Door* door = nullptr;                 //ドア
-    class Blend* titleBlend=nullptr;            //ブレンドモード
     class Select* select[SelectTypeSize];       //選択ボタン
-    class Sound* titleSound = nullptr;          //サウンド
 };

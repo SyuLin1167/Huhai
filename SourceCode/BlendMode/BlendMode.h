@@ -2,20 +2,20 @@
 
 #include"../GameSetting/GameSetting.h"
 
-/*Blendクラス*/
-class Blend
+/*BlendModeクラス*/
+class BlendMode
 {
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="speed">:フェード速度(デフォルト・80.0)</param>
-    Blend(float speed = 80.0f);
+    BlendMode(float speed = 80.0f);
 
     /// <summary>
     /// デストラクタ
     /// </summary>
-    ~Blend();
+    ~BlendMode();
 
     /// <summary>
     /// フェード

@@ -9,10 +9,15 @@ class PauseMenu:public SceneBase
 {
 public:
     /// <summary>
-    /// 初期化処理
+    /// インスタンス生成処理
     /// </summary>
-    /// <param name="screen">:ゲーム画面</param>
-    static SceneBase* Init();
+    static void CreateInstance();
+
+    /// <summary>
+    /// ポーズメニューのインスタンス取得処理
+    /// </summary>
+    /// <returns></returns>
+    static const SceneBase* GetPauseMenuInstance() { return pauseMenu.get(); }
 
     /// <summary>
     /// 後処理
@@ -38,7 +43,7 @@ public:
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     /// <returns>次フレームのシーン</returns>
-    SceneBase* Update(float deltaTime) override;
+    SceneBase* UpdateScene(float deltaTime) override;
 
     /// <summary>
     /// ステータス状態
@@ -68,7 +73,7 @@ public:
     /// <summary>
     /// 描画処理
     /// </summary>
-    void Draw()override;
+    void DrawScene()override;
 
 private:
     /// <summary>
@@ -81,11 +86,14 @@ private:
     /// </summary>
     ~PauseMenu();
 
-    static PauseMenu* pause;        //自身の実態
+    static std::unique_ptr<PauseMenu> pauseMenu;                        //自身の実態
 
-    std::unordered_map<std::string, class Button*> buttonData;      //ボタンデータ
+    const int PIXEL_WIDTH = 8;                                          //ピクセル幅
+    const int GAUSS_PARAM = 1400;                                       //ぼかし値
+
+    std::unordered_map<std::string, class Button*> buttonData;          //ボタンデータ
     std::unordered_map<std::string, class ParamButton*> paramData;      //パラメーターデータ
 
-    class TitleButton* titleButton;         //タイトルボタン
+    class TitleButton* titleButton;                                     //タイトルボタン
 };
 

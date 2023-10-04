@@ -1,7 +1,11 @@
 #pragma once
-#include <Dxlib.h>
 
-    /*SceneBaseクラス*/
+#include <Dxlib.h>
+#include<memory>
+#include"../../BlendMode/BlendMode.h"
+#include"../../Asset/Sound/Sound.h"
+
+/*SceneBaseクラス*/
 class SceneBase
 {
 public:
@@ -20,15 +24,18 @@ public:
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     /// <returns>現在のシーン</retdeltaTimeurns>
-    virtual SceneBase* Update(float) = 0;
+    virtual SceneBase* UpdateScene(const float deltaTime) = 0;
 
     /// <summary>
     /// シーンの描画
     /// </summary>
-    virtual void Draw() = 0;
+    virtual void DrawScene() = 0;
 
 protected:
     int BgHandle;       //背景画像ハンドル
     int BgX;            //背景座標X
     int BgY;            //背景座標Y
+
+    std::unique_ptr<BlendMode> blendMode;       //ブレンドモード
+    std::unique_ptr<Sound> sound;               //サウンド
 };

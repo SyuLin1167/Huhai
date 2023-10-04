@@ -7,15 +7,15 @@ class SaveScene
 {
 public:
     /// <summary>
-    /// 初期化処理
+    /// インスタンス生成処理
     /// </summary>
-    static void Init();
+    static void CreateInstance();
 
     /// <summary>
     /// セーブ処理
     /// </summary>
-    /// <param name="scene">:シーン</param>
-    static void Save(SceneBase* scene);
+    /// <param name="nowScene">:保存するシーン</param>
+    static void Save(SceneBase* nowScene);
 	
     /// <summary>
     /// ロード処理
@@ -30,7 +30,7 @@ public:
 
 private:
     /// <summary>
-    /// コンストラクタ
+    /// コンストラクタ(シングルトン)
     /// </summary>
     SaveScene();
 
@@ -39,7 +39,7 @@ private:
     /// </summary>
     ~SaveScene();
 
-    static SaveScene* save;          //自身の実態
-    SceneBase* saveScene;       //セーブシーン
+    static std::unique_ptr<SaveScene> saveScene;        //自身の実態
+    std::unique_ptr<SceneBase> scene;                   //セーブシーン
 };
 

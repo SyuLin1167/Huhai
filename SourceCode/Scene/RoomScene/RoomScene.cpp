@@ -1,8 +1,6 @@
-#include "Room.h"
+#include "RoomScene.h"
 
 #include"../../Object/ObjectManager/ObjManager.h"
-#include"../../BlendMode/BlendMode.h"
-#include "../../Asset/Sound/Sound.h"
 #include "../../Object/CharaObject/Camera/FpsCamera/FpsCamera.h"
 #include "../../Object/MapObject/Map/Map.h"
 #include "../../Object/MapObject/Furniture/Furniture.h"
@@ -11,20 +9,18 @@
 #include "../../Object/CharaObject/Player/Player.h"
 #include "../../UI/Reamarks/Remarks.h"
 #include"../PauseMenu/PauseMenu.h"
-#include"../TitleScene/Title.h"
+#include"../TitleScene/TitleScene.h"
 #include "../PlayScene/Play.h"
-#include"../Save/Save.h"
+#include"../SaveScene/SaveScene.h"
 
 // コンストラクタ //
 
 RoomScene::RoomScene()
     :SceneBase()
-    , roomBlend(nullptr)
 {
     //サウンド生成
-    roomSound = new Sound;
-    roomSound->AddSound("../Assets/Sound/InDoorSE.mp3", SoundTag::InDoor);
-    roomSound->StartSound(SoundTag::InDoor, DX_PLAYTYPE_LOOP);
+    sound->AddSound("../Assets/Sound/InDoorSE.mp3", SoundTag::InDoor);
+    sound->StartSound(SoundTag::InDoor, DX_PLAYTYPE_LOOP);
 
     //カメラ生成
     ObjManager::Entry(new FpsCamera);
@@ -46,21 +42,18 @@ RoomScene::RoomScene()
 
     //台詞生成
     ObjManager::Entry(new Remarks(TextType::Opening));
-
-    //ブレンドモード生成
-    roomBlend = new Blend;
-
 }
 
 // デストラクタ //
 
 RoomScene::~RoomScene()
 {
+    //処理なし
 }
 
 // 更新処理 //
 
-SceneBase* RoomScene::Update(float deltaTime)
+SceneBase* RoomScene::UpdateScene(const float deltaTime)
 {
     //オブジェクト更新
     ObjManager::Update(deltaTime);
@@ -74,10 +67,10 @@ SceneBase* RoomScene::Update(float deltaTime)
         if (!action->IsVisible())
         {
             //フェードアウト
-            roomBlend->AddFade(deltaTime);
+            blendMode->AddFade(deltaTime);
 
             //シーン移行時の演出が終わったら
-            if (!roomBlend->NowFade())
+            if (!blendMode->NowFade())
             {
 
                 //管理クラス内の確保したデータ解放
@@ -107,13 +100,13 @@ SceneBase* RoomScene::Update(float deltaTime)
 
 // 描画処理 //
 
-void RoomScene::Draw()
+void RoomScene::DrawScene()
 {
     //オブジェクト描画
     ObjManager::Draw();
 
     //フェード処理
-    roomBlend->Fade();
+    blendMode->Fade();
     DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), true);
-    roomBlend->NoBlend();
+    blendMode->NoBlend();
 }

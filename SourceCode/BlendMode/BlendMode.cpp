@@ -11,6 +11,7 @@ Blend::Blend(float FadeSpeed)
     , nowFade(false)
     , nowDark(false)
 {
+    // 処理なし
 }
 
 // デストラクタ //

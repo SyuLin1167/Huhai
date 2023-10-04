@@ -2,33 +2,29 @@
 
 #include"../SceneBase/SceneBase.h"
 
-/*RoomSceneクラス*/
-class RoomScene :public SceneBase
+/* PlaySceneクラス */
+class PlayScene :public SceneBase
 {
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    RoomScene();
+    PlayScene();
 
     /// <summary>
     /// デストラクタ
     /// </summary>
-    ~RoomScene();
+    ~PlayScene();
 
     /// <summary>
     /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
-    /// <returns>次フレームのシーン</returns>
-    SceneBase* Update(float deltaTime)override;
+    /// <returns>次のフレームのシーン</returns>
+    SceneBase* UpdateScene(const float deltaTime)override;
 
     /// <summary>
     /// 描画処理
     /// </summary>
-    void Draw()override;
-
-private:
-    class Blend* roomBlend;     //ブレンドモード
-    class Sound* roomSound;     //サウンド
+    void DrawScene()override;
 };

@@ -1,4 +1,4 @@
-#include "Play.h"
+#include "PlayScene.h"
 
 #include"../../Object/ObjectManager/ObjManager.h"
 #include"../../Asset/AssetManager/AssetManager.h"
@@ -14,9 +14,9 @@
 #include"../../Object/CharaObject/Man/Man.h"
 #include "../../UI/Reamarks/Remarks.h"
 #include"../PauseMenu/PauseMenu.h"
-#include"../TitleScene/Title.h"
+#include"../TitleScene/TitleScene.h"
 #include"../EscapeScene/Escape.h"
-#include"../Save/Save.h"
+#include"../SaveScene/SaveScene.h"
 
 // コンストラクタ //
 
@@ -66,7 +66,7 @@ PlayScene::~PlayScene()
 
 // 更新処理 //
 
-SceneBase* PlayScene::Update(float deltaTime)
+SceneBase* PlayScene::UpdateScene(const float deltaTime)
 {
     //オブジェクト更新
     ObjManager::Update(deltaTime);
@@ -105,7 +105,7 @@ SceneBase* PlayScene::Update(float deltaTime)
 
 // 描画処理 //
 
-void PlayScene::Draw()
+void PlayScene::DrawScene()
 {
     //オブジェクト描画
     ObjManager::Draw();

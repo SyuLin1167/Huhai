@@ -1,16 +1,14 @@
-#include "Title.h"
+#include "TitleScene.h"
 
 #include "../../Object/ObjectManager/ObjManager.h"
 #include "../../Asset/AssetManager/AssetManager.h"
-#include "../../BlendMode/BlendMode.h"
-#include "../../Asset/Sound/Sound.h"
 #include "../../Object/MapObject/Map/Map.h"
 #include "../../Object/MapObject/Door/Door.h"
 #include "../../Object/MapObject/Light/BlinkingLight/BlinkingLight.h"
 #include "../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../Object/CharaObject/Camera/FixedCamera/FixedCamera.h"
-#include "../RoomScene/Room.h"
-#include "../Save/Save.h"
+#include "../RoomScene/RoomScene.h"
+#include "../SaveScene/SaveScene.h"
 
 // コンストラクタ //
 
@@ -19,17 +17,13 @@ TitleScene::TitleScene()
 {
     //タイトルロゴ生成
     BgHandle = AssetManager::GetGraph("../Assets/BackGround/Title.png");
-    BgX = 180;
-    BgY = 150;
-
-    //ブレンドモード生成
-    titleBlend = new Blend;
+    BgX = TITLE_POS_X;
+    BgY = TITLE_POS_Y;
 
     //サウンド生成
-    titleSound = new Sound;
-    titleSound->AddSound("../Assets/Sound/TitleBgm.mp3", SoundTag::Title);
-    titleSound->AddSound("../Assets/Sound/StartSE.mp3", SoundTag::Start);
-    titleSound->StartSound(SoundTag::Title, DX_PLAYTYPE_LOOP);
+    sound->AddSound("../Assets/Sound/TitleBgm.mp3", SoundTag::Title);
+    sound->AddSound("../Assets/Sound/StartSE.mp3", SoundTag::Start);
+    sound->StartSound(SoundTag::Title, DX_PLAYTYPE_LOOP);
 
     //カメラ生成
     ObjManager::Entry(new FixedCamera);
@@ -69,7 +63,7 @@ TitleScene::~TitleScene()
 
 // 更新処理 //
 
-SceneBase* TitleScene::Update(float deltaTime)
+SceneBase* TitleScene::UpdateScene(const float deltaTime)
 {
     //マウスポインター表示
     SetMouseDispFlag(TRUE);
@@ -88,7 +82,7 @@ SceneBase* TitleScene::Update(float deltaTime)
             SetMouseDispFlag(false);
 
             //フェードアウト
-            titleBlend->AddFade(deltaTime);
+            blendMode->AddFade(deltaTime);
 
             //EXIT選択時、シーンをnullptrにする
             if (type == EXIT)
@@ -98,16 +92,16 @@ SceneBase* TitleScene::Update(float deltaTime)
             else
             {
                 //EXIT以外選択時、SEを再生
-                titleSound->StartSoundOnce(SoundTag::Start, DX_PLAYTYPE_BACK);
+                sound->StartSoundOnce(SoundTag::Start, DX_PLAYTYPE_BACK);
             }
 
             //シーン移行時の演出が終わったら
-            if (!titleSound->IsPlaying(SoundTag::Start))
+            if (!sound->IsPlaying(SoundTag::Start))
             {
-                if (!titleBlend->NowFade())
+                if (!blendMode->NowFade())
                 {
                     //すべてのサウンドを止める
-                    titleSound->StopAllSound();
+                    sound->StopAllSound();
 
                     //管理クラス内の確保したデータ解放
                     AssetManager::ReleaseAllAsset();
@@ -133,14 +127,14 @@ SceneBase* TitleScene::Update(float deltaTime)
 
 // 描画処理 //
 
-void TitleScene::Draw()
+void TitleScene::DrawScene()
 {
     //オブジェクト描画
     ObjManager::Draw();
 
     //選択ボタン描画
     GetDrawScreenGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, screenGraph);
-    DrawExtendGraph(BgX, BgY, BgX + 450, BgY + 200, BgHandle, true);
+    DrawExtendGraph(BgX, BgY, BgX + TITLE_SIZE_X, BgY + TITLE_SIZE_Y, BgHandle, true);
     for (auto type : selectTypeAll)
     {
         if (select[type])
@@ -150,7 +144,7 @@ void TitleScene::Draw()
     }
 
     //フェード処理
-    titleBlend->Fade();
+    blendMode->Fade();
     DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), true);
-    titleBlend->NoBlend();
+    blendMode->NoBlend();
 }
