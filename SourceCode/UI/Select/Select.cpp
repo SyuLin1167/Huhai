@@ -13,7 +13,7 @@ Select::Select(SelectType type)
     objHandle = AssetManager::GetGraph(drawHandle[type]);
     objPos = drawPos[type];
 
-    selectBlend = new Blend;
+    selectBlend = new BlendMode;
 }
 
 // デストラクタ //

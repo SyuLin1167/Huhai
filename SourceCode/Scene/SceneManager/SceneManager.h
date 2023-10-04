@@ -1,5 +1,10 @@
 #pragma once
+
 #include<stack>
+#include<memory>
+#include"../../GameSetting/GameSetting.h"
+#include"../../Time/TimeManager.h"
+#include"../../Shade/PointLight/PointLightShader.h"
 
 /*SceneManagerクラス*/
 class SceneManager
@@ -29,22 +34,22 @@ public:
     /// <summary>
     /// 更新処理
     /// </summary>
-    void Update();
+    void UpdateScene();
 
     /// <summary>
     /// 描画処理
     /// </summary>
-    void Draw();
+    void DrawScene();
 
     /// <summary>
     /// シーン切り替え
     /// </summary>
-    void SceneChange();
+    void SwitchScene();
 
     /// <summary>
-    /// ポーズメニュー処理
+    /// ポーズメニュー判定処理
     /// </summary>
-    void Pause();
+    void CheckPauseMenu();
 
     /// <summary>
     /// ゲームループ
@@ -58,8 +63,8 @@ private:
     std::stack<class SceneBase*> nowScene;      //現在のシーン
     SceneBase* tmpScene;                        //一時的なシーン
 
-    class GameSetting* gameSetting;             //ゲームセッティング
-    class TimeManager* timeMgr;                 //タイムマネージャー
-    class PointLightShader* plShader;           //ポイントライトシェーダー
+    std::unique_ptr<GameSetting> gameSetting;             //ゲームセッティング
+    std::unique_ptr<TimeManager> timeMgr;                 //タイムマネージャー
+    std::unique_ptr<PointLightShader> pointLightShader;           //ポイントライトシェーダー
 };
 

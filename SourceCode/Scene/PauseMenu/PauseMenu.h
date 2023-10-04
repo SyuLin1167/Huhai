@@ -17,7 +17,7 @@ public:
     /// ポーズメニューのインスタンス取得処理
     /// </summary>
     /// <returns></returns>
-    static const SceneBase* GetPauseMenuInstance() { return pauseMenu.get(); }
+    static SceneBase* GetPauseMenuInstance() { return pauseMenu.get(); }
 
     /// <summary>
     /// 後処理
@@ -75,16 +75,16 @@ public:
     /// </summary>
     void DrawScene()override;
 
+    /// <summary>
+    /// デストラクタ
+    /// </summary>
+    ~PauseMenu();
+
 private:
     /// <summary>
     /// コンストラクタ(シングルトン)
     /// </summary>
     PauseMenu();
-
-    /// <summary>
-    /// コンストラクタ
-    /// </summary>
-    ~PauseMenu();
 
     static std::unique_ptr<PauseMenu> pauseMenu;                        //自身の実態
 

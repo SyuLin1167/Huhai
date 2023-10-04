@@ -1,40 +1,30 @@
 #include "SceneManager.h"
 
-#include"../../GameSetting/GameSetting.h"
 #include"../../Object/ObjectManager/ObjManager.h"
 #include"../../Asset/AssetManager/AssetManager.h"
-#include"../../Shade/PointLight/PointLightShader.h"
 #include"../SceneBase/SceneBase.h"
-#include"../../Time/TimeManager.h"
-#include "../TitleScene/Title.h"
+#include "../TitleScene/TitleScene.h"
 #include"../PauseMenu/PauseMenu.h"
-#include "../Save/Save.h"
+#include "../SaveScene/SaveScene.h"
 
 
 // コンストラクタ //
 
 SceneManager::SceneManager()
-    :gameSetting(nullptr)
-    , timeMgr(nullptr)
-    , tmpScene(nullptr)
 {
     //インスタンス生成
-    gameSetting = new GameSetting;
-    timeMgr = new TimeManager;
-    plShader = new PointLightShader;
+    gameSetting.reset(new GameSetting);
+    timeMgr.reset(new TimeManager);
+    pointLightShader.reset(new PointLightShader);
 
     nowScreen = MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT);
-
 }
 
 // デストラクタ //
 
 SceneManager::~SceneManager()
 {
-    //インスタンスの後処理
-    delete gameSetting;
-    delete timeMgr;
-    delete plShader;
+    //処理なし
 }
 
 // 初期化処理 //
@@ -52,8 +42,8 @@ int SceneManager::Init()
     AssetManager::Init();
 
     //シーン関連のクラス初期化
-    SaveScene::Init();
-    PauseMenu::Init();
+    SaveScene::CreateInstance();
+    PauseMenu::CreateInstance();
 
     //初期シーン設定
     nowScene.push(new TitleScene);
@@ -80,28 +70,28 @@ void SceneManager::Finalize()
 
 // 更新処理 //
 
-void SceneManager::Update()
+void SceneManager::UpdateScene()
 {
     //シーンの更新処理
     timeMgr->Update();
 
     //tmpSceneに現在のシーンを代入
-    tmpScene = nowScene.top()->Update(timeMgr->DeltaTime());
+    tmpScene = nowScene.top()->UpdateScene(timeMgr->DeltaTime());
 }
 
 // 描画処理 //
 
-void SceneManager::Draw()
+void SceneManager::DrawScene()
 {
     //現在のシーンを描画
     ClearDrawScreen();
-    nowScene.top()->Draw();
+    nowScene.top()->DrawScene();
     ScreenFlip();
 }
 
 // シーン切り替え //
 
-void SceneManager::SceneChange()
+void SceneManager::SwitchScene()
 {
     if (nowScene.top() != tmpScene)
     {
@@ -113,7 +103,7 @@ void SceneManager::SceneChange()
 
 // ポーズメニュー処理 //
 
-void SceneManager::Pause()
+void SceneManager::CheckPauseMenu()
 {
     //ポーズメニュー
     GetHitKeyStateAllEx(keyState);
@@ -130,7 +120,7 @@ void SceneManager::Pause()
 
             //メニュー画面表示
             SetMouseDispFlag(true);
-            nowScene.push(PauseMenu::Init());
+            nowScene.push(PauseMenu::GetPauseMenuInstance());
             DeleteGraph(nowScreen);
         }
         else
@@ -155,16 +145,16 @@ void SceneManager::GameLoop()
     while (ProcessMessage() == 0)
     {
         //ポーズメニュー
-        Pause();
+        CheckPauseMenu();
 
         //更新処理
-        Update();
+        UpdateScene();
 
         //描画処理
-        Draw();
+        DrawScene();
 
         //シーン切り替え
-        SceneChange();
+        SwitchScene();
 
         if (!nowScene.top())
         {

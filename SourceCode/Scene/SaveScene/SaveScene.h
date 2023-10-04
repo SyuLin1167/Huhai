@@ -28,16 +28,15 @@ public:
     /// </summary>
     static void Finalize();
 
+    /// <summary>
+    /// デストラクタ
+    /// </summary>
+    ~SaveScene();
 private:
     /// <summary>
     /// コンストラクタ(シングルトン)
     /// </summary>
     SaveScene();
-
-    /// <summary>
-    /// デストラクタ
-    /// </summary>
-    ~SaveScene();
 
     static std::unique_ptr<SaveScene> saveScene;        //自身の実態
     std::unique_ptr<SceneBase> scene;                   //セーブシーン

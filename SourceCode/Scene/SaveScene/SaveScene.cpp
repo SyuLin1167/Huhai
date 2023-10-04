@@ -10,12 +10,14 @@ std::unique_ptr<SaveScene> SaveScene::saveScene = nullptr;
 SaveScene::SaveScene()
     :scene(nullptr)
 {
+    //処理なし
 }
 
 // デストラクタ //
 
 SaveScene::~SaveScene()
 {
+    //処理なし
 }
 
 // インスタンス生成処理 //

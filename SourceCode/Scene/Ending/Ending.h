@@ -21,10 +21,10 @@ public:
     /// </summary>
     /// <param name="deltaTime"></param>
     /// <returns>次のフレームのシーン</returns>
-    SceneBase* Update(float deltaTime)override;
+    SceneBase* UpdateScene(const float deltaTime)override;
 
     /// <summary>
     /// 描画処理
     /// </summary>
-    void Draw()override;
+    void DrawScene()override;
 };

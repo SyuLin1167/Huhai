@@ -37,6 +37,6 @@ private:
     const int TITLE_BUTTON_WIDTH = 270;         //タイトルボタン幅
     const int TITLE_BUTTON_HEIGHT = 45;         //タイトルボタン高さ
 
-    class Blend* titleButtonBlend;                    //ブレンドモード
+    class BlendMode* titleButtonBlend;                    //ブレンドモード
 };
 

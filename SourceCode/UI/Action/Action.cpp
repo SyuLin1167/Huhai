@@ -16,7 +16,7 @@ Action::Action(VECTOR pos)
     objHandle = LoadGraph("../Assets/BackGround/Action.png");
     objPos = pos + VGet(0, 20, 0);
 
-    actionBlend = new Blend;
+    actionBlend = new BlendMode;
 }
 
 // デストラクタ //

@@ -1,28 +1,24 @@
 #include "Escape.h"
 
-#include"../../Object/ObjectManager/ObjManager.h"
-#include"../../Asset/AssetManager/AssetManager.h"
-#include"../../Asset/Sound/Sound.h"
+#include "../../Object/ObjectManager/ObjManager.h"
+#include "../../Asset/AssetManager/AssetManager.h"
 #include "../../Object/CharaObject/Camera/FpsCamera/FpsCamera.h"
 #include "../../Object/MapObject/Map/Map.h"
 #include "../../Object/MapObject/Door/Door.h"
-#include"../../Object/MapObject/Table/Table.h"
+#include "../../Object/MapObject/Table/Table.h"
 #include "../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../Object/MapObject/Light/BlinkingLight/BlinkingLight.h"
 #include "../../Object/MapObject/Light/FlashLight/FlashLight.h"
 #include "../../Object/CharaObject/Player/Player.h"
-#include"../../Object/CharaObject/Ghost/Ghost.h"
-#include"../../BlendMode/BlendMode.h"
+#include "../../Object/CharaObject/Ghost/Ghost.h"
 #include "../Ending/Ending.h"
-#include"../TitleScene/Title.h"
-#include"../RoomScene/Room.h"
+#include"../TitleScene/TitleScene.h"
+#include"../RoomScene/RoomScene.h"
 
 // コンストラクタ //
 
 EscapeScene::EscapeScene()
     :SceneBase()
-    , escBlend(nullptr)
-    , escSound(nullptr)
 {
     //カメラ生成
     ObjManager::Entry(new FpsCamera);
@@ -56,12 +52,8 @@ EscapeScene::EscapeScene()
     //ゴースト生成
     ObjManager::Entry(new Ghost);
 
-    //ブレンドモード生成
-    escBlend = new Blend;
-
     //サウンド生成
-    escSound = new Sound;
-    escSound->AddSound("../Assets/Sound/GameOverSE.mp3", SoundTag::GameOver);
+    sound->AddSound("../Assets/Sound/GameOverSE.mp3", SoundTag::GameOver);
 }
 
 // デストラクタ //
@@ -73,7 +65,7 @@ EscapeScene::~EscapeScene()
 
 // 更新処理 //
 
-SceneBase* EscapeScene::Update(float deltaTime)
+SceneBase* EscapeScene::UpdateScene(float deltaTime)
 {
     //オブジェクト更新
     ObjManager::Update(deltaTime);
@@ -94,13 +86,13 @@ SceneBase* EscapeScene::Update(float deltaTime)
     else if (!ObjManager::GetFirstObj(ObjectTag::Player)->IsVisible())
     {
         //フェードアウト
-        escBlend->AddFade(deltaTime);
+        blendMode->AddFade(deltaTime);
 
         //シーン移行時の演出が終わったら
-        escSound->StartSoundOnce(SoundTag::GameOver, DX_PLAYTYPE_BACK);
-        if (!escSound->IsPlaying(SoundTag::GameOver))
+        sound->StartSoundOnce(SoundTag::GameOver, DX_PLAYTYPE_BACK);
+        if (!sound->IsPlaying(SoundTag::GameOver))
         {
-            if (!escBlend->NowFade())
+            if (!blendMode->NowFade())
             {
                 //管理クラス内の確保したデータ解放
                 AssetManager::ReleaseAllAsset();
@@ -116,13 +108,13 @@ SceneBase* EscapeScene::Update(float deltaTime)
 
 // 描画処理 //
 
-void EscapeScene::Draw()
+void EscapeScene::DrawScene()
 {
     //オブジェクト描画
     ObjManager::Draw();
 
     //フェード処理
-    escBlend->Fade();
-    DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), true);
-    escBlend->NoBlend();
+    blendMode->Fade();
+    DrawBox(BgX, BgY, 1920, 1080, GetColor(0, 0, 0), true);
+    blendMode->NoBlend();
 }

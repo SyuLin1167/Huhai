@@ -7,8 +7,8 @@
 #include "../../Object/MapObject/Furniture/Furniture.h"
 #include"../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../UI/Reamarks/Remarks.h"
-#include "../TitleScene/Title.h"
-#include"../Save/Save.h"
+#include "../TitleScene/TitleScene.h"
+#include"../SaveScene/SaveScene.h"
 
 // コンストラクタ //
 
@@ -39,7 +39,7 @@ Ending::~Ending()
 
 // 更新処理 //
 
-SceneBase* Ending::Update(float deltaTime)
+SceneBase* Ending::UpdateScene(const float deltaTime)
 {
     //オブジェクト更新
     ObjManager::Update(deltaTime);
@@ -65,7 +65,7 @@ SceneBase* Ending::Update(float deltaTime)
 
 // 描画処理 //
 
-void Ending::Draw()
+void Ending::DrawScene()
 {
     //オブジェクト描画
     ObjManager::Draw();

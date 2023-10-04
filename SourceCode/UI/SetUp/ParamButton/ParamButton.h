@@ -58,6 +58,6 @@ private:
 
     int param;                              //パラメーター
 
-    class Blend* paramButtonBlend;                //ブレンドモード
+    class BlendMode* paramButtonBlend;                //ブレンドモード
 };
 

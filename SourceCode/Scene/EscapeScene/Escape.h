@@ -21,15 +21,11 @@ public:
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     /// <returns>次のフレームのシーン</returns>
-    SceneBase* Update(float deltaTime)override;
+    SceneBase* UpdateScene(const float deltaTime)override;
 
     /// <summary>
     /// 描画処理
     /// </summary>
-    void Draw()override;
-
-private:
-    class Blend* escBlend;    //ブレンドモード
-    class Sound* escSound;        //サウンド
+    void DrawScene()override;
 };
 

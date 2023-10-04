@@ -47,7 +47,7 @@ private:
         {SelectType::EXIT,"../Assets/BackGround/Exit.png"},
     };
 
-    class Blend* selectBlend;    //ブレンドモード
+    class BlendMode* selectBlend;    //ブレンドモード
 };
 
 

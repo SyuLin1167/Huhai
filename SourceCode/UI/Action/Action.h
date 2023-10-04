@@ -41,5 +41,5 @@ private:
     bool canAction;                     //反応可能状態
     bool isAction;                      //反応状態
 
-    class Blend* actionBlend;       //ブレンドモード
+    class BlendMode* actionBlend;       //ブレンドモード
 };

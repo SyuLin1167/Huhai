@@ -14,7 +14,7 @@ TitleButton::TitleButton(int num)
     objPos.x = static_cast<float>(SCREEN_WIDTH) * (2.5f / 6.0f);
     objPos.y = static_cast<float>(SCREEN_HEIGHT) * (num + 2) / 9.0f;
 
-    titleButtonBlend = new Blend;
+    titleButtonBlend = new BlendMode;
 }
 
 // デストラクタ //

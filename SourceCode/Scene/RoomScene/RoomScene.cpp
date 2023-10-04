@@ -10,7 +10,7 @@
 #include "../../UI/Reamarks/Remarks.h"
 #include"../PauseMenu/PauseMenu.h"
 #include"../TitleScene/TitleScene.h"
-#include "../PlayScene/Play.h"
+#include "../PlayScene/PlayScene.h"
 #include"../SaveScene/SaveScene.h"
 
 // コンストラクタ //
