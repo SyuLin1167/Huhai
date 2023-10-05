@@ -25,7 +25,7 @@ FlashLight::~FlashLight()
 
 void FlashLight::Load()
 {
-
+    //ˆ—‚È‚µ
 }
 
 // XVˆ— //

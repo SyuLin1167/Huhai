@@ -25,7 +25,7 @@ Ending::Ending()
     ObjManager::Entry(new Furniture(Furniture::FurName::Room));
 
     //Æ–¾¶¬
-    ObjManager::Entry(new NomalLight(VGet(40, 33, 0)));
+    ObjManager::Entry(new NomalLight("ending"));
 
     //‘äŒ¶¬
     ObjManager::Entry(new Remarks(TextType::GameClear));

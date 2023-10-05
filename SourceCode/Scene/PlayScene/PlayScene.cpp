@@ -41,11 +41,11 @@ PlayScene::PlayScene()
     ObjManager::Entry(new Chair);
 
     //è∆ñæê∂ê¨
-    ObjManager::Entry(new NomalLight(VGet(-10, 33, 0)));
-    ObjManager::Entry(new LitLight(VGet(65, 33, 0), 50.0f));
-    ObjManager::Entry(new LitLight(VGet(121, 33, 25), 40.0f));
-    ObjManager::Entry(new NomalLight(VGet(40, 33, 67)));
-    ObjManager::Entry(new NomalLight(VGet(-32, 33, 75)));
+    ObjManager::Entry(new NomalLight("play"));
+    ObjManager::Entry(new LitLight("play","1"));
+    ObjManager::Entry(new LitLight("play", "2"));
+    ObjManager::Entry(new NomalLight("play", "3"));
+    ObjManager::Entry(new NomalLight("play", "4"));
 
     //ÉvÉåÉCÉÑÅ[ê∂ê¨
     ObjManager::Entry(new Player);

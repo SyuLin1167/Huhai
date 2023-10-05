@@ -38,8 +38,8 @@ TitleScene::TitleScene()
     door->MoveAnim(Door::AnimType::OPEN);
 
     //ライト生成
-    ObjManager::Entry(new BlinkingLight(VGet(-35, 33, 70)));
-    ObjManager::Entry(new NomalLight(VGet(65, 33, 65)));
+    ObjManager::Entry(new BlinkingLight("title"));
+    ObjManager::Entry(new NomalLight("title", "1"));
 
     //選択ボタン生成
     for (auto type : selectTypeAll)

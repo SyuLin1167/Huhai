@@ -35,7 +35,7 @@ RoomScene::RoomScene()
     ObjManager::Entry(new Bed);
 
     //Æ–¾¶¬
-    ObjManager::Entry(new NomalLight(VGet(40, 33, 0)));
+    ObjManager::Entry(new NomalLight("room"));
 
     //ƒvƒŒƒCƒ„[¶¬
     ObjManager::Entry(new Player);

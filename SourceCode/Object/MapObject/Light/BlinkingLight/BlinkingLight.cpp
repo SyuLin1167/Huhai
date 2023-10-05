@@ -9,8 +9,6 @@ BlinkingLight::BlinkingLight(std::string scene, std::string num)
     , countTimer(0.0f)
     , isBlinking(false)
 {
-    //ƒ‚ƒfƒ‹İ’è
-    MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
 }
 
 
@@ -18,7 +16,6 @@ BlinkingLight::BlinkingLight(std::string scene, std::string num)
 
 BlinkingLight::~BlinkingLight()
 {
-    DeleteLightHandle(lightHandle);
 }
 // XVˆ— //
 

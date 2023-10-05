@@ -29,11 +29,11 @@ EscapeScene::EscapeScene()
     ObjManager::Entry(new Map(Map::MapTag::GOAL));
 
     //ドア生成
-    class Door* door = new Door("play");
+    class Door* door = new Door("escape");
     ObjManager::Entry(door);
     door->MoveAnim(Door::AnimType::OPEN);
-    ObjManager::Entry(new Door("play", "1"));
-    ObjManager::Entry(new Door("play", "2"));
+    ObjManager::Entry(new Door("escape", "1"));
+    ObjManager::Entry(new Door("escape", "2"));
 
     //机生成
     for (int i = 0; i < TableNum; i++)
@@ -42,8 +42,8 @@ EscapeScene::EscapeScene()
     }
 
     //照明生成
-    ObjManager::Entry(new BlinkingLight(VGet(23, 33, 10)));
-    ObjManager::Entry(new NomalLight(VGet(175, 33, -30)));
+    ObjManager::Entry(new BlinkingLight("escape"));
+    ObjManager::Entry(new NomalLight("escape", "1"));
     ObjManager::Entry(new FlashLight);
 
     //プレイヤー生成

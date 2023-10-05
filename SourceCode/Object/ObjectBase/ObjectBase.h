@@ -1,10 +1,5 @@
 #pragma once
 #include<DxLib.h>
-#include<../Rapidjson/istreamwrapper.h>
-#include<../Rapidjson/document.h>
-#include<string.h>
-#include<string>
-#include<fstream>
 
 #include"ObjectTag.h"
 #include"../../Math/Math.h"
@@ -26,12 +21,6 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~ObjBase();
-
-    /// <summary>
-    /// jsonファイル読み込み処理
-    /// </summary>
-    /// <param name="fileName"></param>
-    void LoadJsonFile(std::string fileName);
 
     /// <summary>
     /// 座標取得
@@ -148,8 +137,6 @@ protected:
     /// Collision更新処理
     /// </summary>
     void ColUpdate();
-
-    rapidjson::Document doc;                    //ドキュメント
 
     ObjectTag objTag;                           //オブジェクトタグ
     int objHandle;                              //オブジェクトハンドル

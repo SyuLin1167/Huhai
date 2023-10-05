@@ -1,3 +1,7 @@
+#include<../Rapidjson/istreamwrapper.h>
+#include<../Rapidjson/document.h>
+#include<fstream>
+
 #include "Door.h"
 
 #include"../../ObjectManager/ObjManager.h"
@@ -15,14 +19,29 @@ Door::Door(std::string scene, std::string num)
     , doorSound(nullptr)
     , rotateNow(true)
 {
+
+    //ファイル読み込み
+    std::ifstream ifs("../SourceCode/Object/MapObject/Door/DoorData.json");
+    rapidjson::Document doc;
+
+    //ファイル解析
+    if (ifs.good())
+    {
+        rapidjson::IStreamWrapper isw(ifs);
+
+        doc.ParseStream(isw);
+    }
+    ifs.close();
+
+    //データを読み取って座標・向きに代入
+    auto& data = doc[scene.c_str()][num.c_str()];
+    objPos.x = data["pos"].GetArray()[0].GetFloat();
+    objPos.z = data["pos"].GetArray()[1].GetFloat();
+    objDir.x = data["dir"].GetArray()[0].GetFloat();
+    objDir.z = data["dir"].GetArray()[1].GetFloat();
+
     //モデル設定
     objHandle = AssetManager::GetMesh("../Assets/Map/Door/Door.mv1");
-    LoadJsonFile("DoorData.json");
-    auto& data = doc[scene.c_str()][num.c_str()];
-    objPos.x = data["pos"].GetArray()[0].GetInt();
-    objPos.z = data["pos"].GetArray()[1].GetInt();
-    objDir.x = data["dir"].GetArray()[0].GetInt();
-    objDir.z = data["dir"].GetArray()[1].GetInt();
     MV1SetPosition(objHandle, objPos);
     MV1SetScale(objHandle, VGet(0.11f, 0.12f, 0.11f));
 

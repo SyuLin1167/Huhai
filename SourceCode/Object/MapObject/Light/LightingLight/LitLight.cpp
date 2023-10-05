@@ -6,6 +6,7 @@ LitLight::LitLight(std::string scene, std::string num)
     :LightBase(scene,num)
     , lightDistance(0.0f)
 {
+    //ライト設定
     SetLightEnableHandle(lightHandle,false);
 }
 
@@ -13,8 +14,7 @@ LitLight::LitLight(std::string scene, std::string num)
 
 LitLight::~LitLight()
 {
-    //ライト削除
-    DeleteLightHandle(lightHandle);
+    //処理なし
 }
 
 // 更新処理 //

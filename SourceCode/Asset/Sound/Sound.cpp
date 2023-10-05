@@ -10,8 +10,8 @@ Sound::Sound()
     :soundType(-1)
     , nowSoundTime(0.0f)
     , attachedIndex(0)
-    , prevSoundPos(zeroVec)
-    , prevListnerPos(zeroVec)
+    , prevSoundPos(VGet(0,0,0))
+    , prevListnerPos(VGet(0,0,0))
 {
 }
 

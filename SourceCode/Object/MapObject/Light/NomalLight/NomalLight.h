@@ -9,24 +9,15 @@ public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    NomalLight();
-
-    /// <summary>
-    /// コントラクタ
-    /// </summary>
-    /// <param name="pos">:ワールド座標</param>
-    NomalLight(VECTOR pos);
+    /// <param name="scene">:シーン名</param>
+    /// <param name="num">:オブジェクト番号</param>
+    NomalLight(std::string scene, std::string num = "0");
 
 
     /// <summary>
     /// デストラクタ
     /// </summary>
     ~NomalLight();
-
-    /// <summary>
-    /// 読み込み処理
-    /// </summary>
-    void Load();
 
     /// <summary>
     /// 更新処理

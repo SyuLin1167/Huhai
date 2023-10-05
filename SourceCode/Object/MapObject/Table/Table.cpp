@@ -12,7 +12,17 @@ Table::Table(const int objNum)
     :ObjBase(ObjectTag::Furniture)
 {
     //ファイル読み込み
-    LoadJsonFile("TableData.json");
+    std::ifstream ifs("../SourceCode/Object/MapObject/Table/TableData.json");
+    rapidjson::Document doc;
+
+    //ファイル解析
+    if (ifs.good())
+    {
+        rapidjson::IStreamWrapper isw(ifs);
+
+        doc.ParseStream(isw);
+    }
+    ifs.close();
 
     //データを読み取って座標・向きに代入
     const std::string key = std::to_string(objNum);
