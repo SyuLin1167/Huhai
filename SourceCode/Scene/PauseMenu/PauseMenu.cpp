@@ -12,12 +12,6 @@ std::unique_ptr<PauseMenu> PauseMenu::pauseMenu = nullptr;
 
 PauseMenu::PauseMenu()
 {
-    //ゲーム画面保存
-    pauseMenu->BgHandle = LoadGraph("../Assets/BackGround/GameScene.png");
-
-    //タイトルボタン追加
-    delete pauseMenu->titleButton;
-    pauseMenu->titleButton = new TitleButton(static_cast<int>(pauseMenu->paramData.size()) + 1);
 
     //フォントの読み込み
     ChangeFont("KillingFont", DX_CHARSET_DEFAULT);
@@ -51,6 +45,19 @@ void PauseMenu::CreateInstance()
     {
         pauseMenu.reset(new PauseMenu);
     }
+}
+
+SceneBase* PauseMenu::GetPauseMenuInstance()
+{
+    //ゲーム画面保存
+    pauseMenu->bgHandle = LoadGraph("../Assets/BackGround/GameScene.png");
+
+
+    //タイトルボタン追加
+    delete pauseMenu->titleButton;
+    pauseMenu->titleButton = new TitleButton(static_cast<int>(pauseMenu->paramData.size() + 1));
+
+    return pauseMenu.get();
 }
 
 // 後処理 //
@@ -147,8 +154,8 @@ int PauseMenu::Parameter(std::string name)
 void PauseMenu::DrawScene()
 {
     //ゲーム画面描画
-    DrawGraph(BgX, BgY, pauseMenu->BgHandle, FALSE);
-    GraphFilter(pauseMenu->BgHandle, DX_GRAPH_FILTER_GAUSS, PIXEL_WIDTH, GAUSS_PARAM);
+    DrawGraph(bgX, bgY, pauseMenu->bgHandle, FALSE);
+    GraphFilter(pauseMenu->bgHandle, DX_GRAPH_FILTER_GAUSS, PIXEL_WIDTH, GAUSS_PARAM);
 
     //ボタン描画
     for (auto& iter : buttonData)
@@ -159,5 +166,5 @@ void PauseMenu::DrawScene()
     {
         iter.second->Draw();
     }
-    titleButton->Draw();
+    pauseMenu->titleButton->Draw();
 }

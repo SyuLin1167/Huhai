@@ -9,19 +9,14 @@ public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    /// <param name="pos">:ワールド座標</param>
-    /// <param name="range">:点灯範囲</param>
-    LitLight(VECTOR pos, float range);
+    /// <param name="scene">:シーン名</param>
+    /// <param name="num">:オブジェクト番号</param>
+    LitLight(std::string scene, std::string num = "0");
 
     /// <summary>
     /// デストラクタ
     /// </summary>
     ~LitLight();
-
-    /// <summary>
-    /// 読み込み処理
-    /// </summary>
-    void Load();
 
     /// <summary>
     /// 更新処理
@@ -36,5 +31,5 @@ public:
 
 private:
     float lightDistance;        //ライトからの距離
-    float actionRange;          //反応範囲
+    const float ACTION_RANGE = 55.0f;          //反応範囲
 };

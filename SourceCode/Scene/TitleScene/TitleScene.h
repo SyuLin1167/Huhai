@@ -1,8 +1,7 @@
 #pragma once
 
-#include"../../GameSetting/GameSetting.h"
 #include"../SceneBase/SceneBase.h"
-#include "../../UI/Select/Select.h"
+#include "../../UI/Select/SelectType.h"
 
 /* TitleSceneƒNƒ‰ƒX */
 class TitleScene :public SceneBase

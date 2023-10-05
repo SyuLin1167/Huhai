@@ -22,9 +22,6 @@
     <Filter Include="ソース ファイル\Scene\Manager">
       <UniqueIdentifier>{0ef868ba-6ead-4d40-9049-f2441f35f973}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Timer">
-      <UniqueIdentifier>{8630de40-2f52-4e6c-9bf9-ffb62baee57e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Scene\Title">
       <UniqueIdentifier>{7b3ce8ee-ea24-4f5c-b74d-d5e8f2816147}</UniqueIdentifier>
     </Filter>
@@ -142,9 +139,6 @@
     <Filter Include="ソース ファイル\Asset\Sound">
       <UniqueIdentifier>{82e8c667-400c-4c32-962f-fbadc0d2c170}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\GameSetting">
-      <UniqueIdentifier>{ace7c2f7-44de-45b3-b0f1-d7645b0945f1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Scene\Save">
       <UniqueIdentifier>{53aaa834-8626-4162-ba16-65d77b778143}</UniqueIdentifier>
     </Filter>
@@ -184,13 +178,19 @@
     <Filter Include="ソース ファイル\Shade\PointLightShader">
       <UniqueIdentifier>{9e96effc-6f00-487a-ad21-50f80d1eb11a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameSetting">
+      <UniqueIdentifier>{ace7c2f7-44de-45b3-b0f1-d7645b0945f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Time">
+      <UniqueIdentifier>{8630de40-2f52-4e6c-9bf9-ffb62baee57e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SourceCode\Main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Time\TimeManager.cpp">
-      <Filter>ソース ファイル\Timer</Filter>
+      <Filter>ソース ファイル\Time</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Object\ObjectBase\ObjectBase.cpp">
       <Filter>ソース ファイル\Object\Base</Filter>
@@ -333,7 +333,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SourceCode\Time\TimeManager.h">
-      <Filter>ソース ファイル\Timer</Filter>
+      <Filter>ソース ファイル\Time</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectBase.h">
       <Filter>ソース ファイル\Object\Base</Filter>
@@ -492,6 +492,12 @@
   <ItemGroup>
     <None Include="..\SourceCode\Object\MapObject\Table\TableData.json">
       <Filter>ソース ファイル\MapObject\Table</Filter>
+    </None>
+    <None Include="..\SourceCode\Object\MapObject\Door\DoorData.json">
+      <Filter>ソース ファイル\MapObject\Door</Filter>
+    </None>
+    <None Include="..\SourceCode\Object\MapObject\Light\LightBase\LightData.json">
+      <Filter>ソース ファイル\MapObject\Light\Base</Filter>
     </None>
   </ItemGroup>
 </Project>

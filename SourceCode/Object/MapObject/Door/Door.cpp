@@ -8,31 +8,21 @@
 
 // コンストラクタ //
 
-Door::Door(VECTOR pos, VECTOR angle)
-    :ObjBase(ObjectTag::Furniture, pos, angle)
+Door::Door(std::string scene, std::string num)
+    :ObjBase(ObjectTag::Furniture)
     , doorAnim(nullptr)
     , animType(IDLE)
     , doorSound(nullptr)
     , rotateNow(true)
 {
-    Load();
-}
-
-// デストラクタ //
-
-Door::~Door()
-{
-    //インスタンス削除
-    delete doorAnim;
-    delete doorSound;
-}
-
-// 読み込み処理 //
-
-void Door::Load()
-{
     //モデル設定
     objHandle = AssetManager::GetMesh("../Assets/Map/Door/Door.mv1");
+    LoadJsonFile("DoorData.json");
+    auto& data = doc[scene.c_str()][num.c_str()];
+    objPos.x = data["pos"].GetArray()[0].GetInt();
+    objPos.z = data["pos"].GetArray()[1].GetInt();
+    objDir.x = data["dir"].GetArray()[0].GetInt();
+    objDir.z = data["dir"].GetArray()[1].GetInt();
     MV1SetPosition(objHandle, objPos);
     MV1SetScale(objHandle, VGet(0.11f, 0.12f, 0.11f));
 
@@ -58,6 +48,15 @@ void Door::Load()
     //アクションボタン追加
     action = new Action(objPos);
     ObjManager::Entry(action);
+}
+
+// デストラクタ //
+
+Door::~Door()
+{
+    //インスタンス削除
+    delete doorAnim;
+    delete doorSound;
 }
 
 // 更新処理 //

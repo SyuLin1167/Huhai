@@ -65,6 +65,10 @@ private:
     int Sn;                                             //文字列番号
     int Sp;                                             //文字ポインタ
 
+    const int WHITE_TEXT_COLOR;                         //テキスト色(ホワイト)
+    const int WAIT_ICON_X = SCREEN_WIDTH * 8 / 10;      //待機アイコン座標X
+    const int WAIT_ICON_Y = SCREEN_HEIGHT * 9 / 10;      //待機アイコン座標Y
+
     bool eofFlag;                                       //終了フラグ
     bool waitKey;                                       //待機フラグ
 
@@ -73,4 +77,5 @@ private:
 
     VERTEX2D textBox[6];                                //テキストボックスポリゴン
     const int BOUNDARY_POS_Y = 950;                     //ポリゴンとボックスの境界線座標
+    COLOR_U8 color = { 20,0,0,0 };      //頂点の色
 };

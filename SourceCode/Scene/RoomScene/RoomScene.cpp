@@ -60,6 +60,7 @@ SceneBase* RoomScene::UpdateScene(const float deltaTime)
 
     //オブジェクト当たり判定
     ObjManager::Collision();
+
     //アクションボタンが押されたら
     ObjBase* action = ObjManager::GetFirstObj(ObjectTag::UI);
     if (action)
@@ -107,6 +108,6 @@ void RoomScene::DrawScene()
 
     //フェード処理
     blendMode->Fade();
-    DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), true);
+    DrawBox(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BLACK_SCREEN_COLOR, true);
     blendMode->NoBlend();
 }

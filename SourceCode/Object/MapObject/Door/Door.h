@@ -18,20 +18,14 @@ public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    /// <param name="pos">:ワールド座標</param>
-    /// <param name="dir">:方向</param>
-    /// <param name="type">アニメーションタイプ</param>
-    Door(VECTOR pos, VECTOR dir);
+    /// <param name="scene">:シーン名</param>
+    /// <param name="num">:オブジェクト番号</param>
+    Door(std::string scene, std::string num = "0");
 
     /// <summary>
     /// デストラクタ
     /// </summary>
     ~Door();
-
-    /// <summary>
-    /// 読み込み処理
-    /// </summary>
-    void Load();
 
     /// <summary>
     /// 更新処理

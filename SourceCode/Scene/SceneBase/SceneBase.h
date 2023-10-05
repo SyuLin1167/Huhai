@@ -2,6 +2,7 @@
 
 #include <Dxlib.h>
 #include<memory>
+#include"../../GameSetting/GameSetting.h"
 #include"../../BlendMode/BlendMode.h"
 #include"../../Asset/Sound/Sound.h"
 
@@ -32,9 +33,11 @@ public:
     virtual void DrawScene() = 0;
 
 protected:
-    int BgHandle;       //背景画像ハンドル
-    int BgX;            //背景座標X
-    int BgY;            //背景座標Y
+    int bgHandle;       //背景画像ハンドル
+    int bgX;            //背景座標X
+    int bgY;            //背景座標Y
+
+    const int BLACK_SCREEN_COLOR; //スクリーンの色(ブラック)
 
     std::unique_ptr<BlendMode> blendMode;       //ブレンドモード
     std::unique_ptr<Sound> sound;               //サウンド

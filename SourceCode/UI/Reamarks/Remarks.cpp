@@ -17,6 +17,7 @@ Remarks::Remarks(TextType texttype)
     , textX(0)
     , textY(0)
     , textBox{}
+    , WHITE_TEXT_COLOR(GetColor(255, 255, 255))
 {
     //テキストボックス設定
     objHandle =AssetManager::GetGraph("../Assets/BackGround/Remarks.png");
@@ -222,8 +223,6 @@ void Remarks::NewLine()
 // テキストボックス //
 void Remarks::TextBox(int lx, int ly, int rx, int ry)
 {
-    COLOR_U8 color = { 20,0,0,0 };      //頂点の色
-
     SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
 
     //値が変わらないものを一通り設定
@@ -267,12 +266,12 @@ void Remarks::Draw()
     //台詞描画
     for (int i = 0; i < BUFHEIGHT; i++)
     {
-        DrawString(i + 620, i * TEXTSIZE + 930, stringBuf[i], GetColor(220, 220, 220));
+        DrawString(i + 620, i * TEXTSIZE + 930, stringBuf[i], WHITE_TEXT_COLOR);
     }
 
     //待機アイコン描画
     if (waitKey)
     {
-        DrawString(SCREEN_WIDTH * 8 / 10, SCREEN_HEIGHT * 9 / 10, "▽", GetColor(220, 220, 220));
+        DrawString(WAIT_ICON_X, WAIT_ICON_Y, "▽", WHITE_TEXT_COLOR);
     }
 }

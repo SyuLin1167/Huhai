@@ -7,6 +7,7 @@
 #include "../../Object/MapObject/Light/BlinkingLight/BlinkingLight.h"
 #include "../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../Object/CharaObject/Camera/FixedCamera/FixedCamera.h"
+#include "../../UI/Select/Select.h"
 #include "../RoomScene/RoomScene.h"
 #include "../SaveScene/SaveScene.h"
 
@@ -16,9 +17,9 @@ TitleScene::TitleScene()
     :SceneBase()
 {
     //タイトルロゴ生成
-    BgHandle = AssetManager::GetGraph("../Assets/BackGround/Title.png");
-    BgX = TITLE_POS_X;
-    BgY = TITLE_POS_Y;
+    bgHandle = AssetManager::GetGraph("../Assets/BackGround/Title.png");
+    bgX = TITLE_POS_X;
+    bgY = TITLE_POS_Y;
 
     //サウンド生成
     sound->AddSound("../Assets/Sound/TitleBgm.mp3", SoundTag::Title);
@@ -32,7 +33,7 @@ TitleScene::TitleScene()
     ObjManager::Entry(new Map(Map::MapTag::TITLE));
 
     //ドア生成
-    door = new Door(VGet(0, 0, 66), VGet(-1, 0, 0));
+    door = new Door("title");
     ObjManager::Entry(door);
     door->MoveAnim(Door::AnimType::OPEN);
 
@@ -55,9 +56,9 @@ TitleScene::TitleScene()
 TitleScene::~TitleScene()
 {
     //画像ハンドル削除
-    if (BgHandle)
+    if (bgHandle)
     {
-        DeleteGraph(BgHandle);
+        DeleteGraph(bgHandle);
     }
 }
 
@@ -134,7 +135,7 @@ void TitleScene::DrawScene()
 
     //選択ボタン描画
     GetDrawScreenGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, screenGraph);
-    DrawExtendGraph(BgX, BgY, BgX + TITLE_SIZE_X, BgY + TITLE_SIZE_Y, BgHandle, true);
+    DrawExtendGraph(bgX, bgY, bgX + TITLE_SIZE_X, bgY + TITLE_SIZE_Y, bgHandle, true);
     for (auto type : selectTypeAll)
     {
         if (select[type])
@@ -145,6 +146,6 @@ void TitleScene::DrawScene()
 
     //フェード処理
     blendMode->Fade();
-    DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), true);
+    DrawBox(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BLACK_SCREEN_COLOR, true);
     blendMode->NoBlend();
 }

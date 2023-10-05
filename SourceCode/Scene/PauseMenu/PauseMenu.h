@@ -17,7 +17,7 @@ public:
     /// ポーズメニューのインスタンス取得処理
     /// </summary>
     /// <returns></returns>
-    static SceneBase* GetPauseMenuInstance() { return pauseMenu.get(); }
+    static SceneBase* GetPauseMenuInstance();
 
     /// <summary>
     /// 後処理

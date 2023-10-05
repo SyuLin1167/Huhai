@@ -15,12 +15,14 @@ TimeManager::~TimeManager()
 {
 }
 
-// 更新処理 //
+// DeltaTime取得処理 //
 
-void TimeManager::Update()
+const float TimeManager::DeltaTime()
 {
     //フレームレート算出
     nowTime = static_cast<float>(GetNowCount());
     deltaTime = (nowTime - prevTime) / 1000.0f;
     prevTime = nowTime;
+
+    return deltaTime;
 }

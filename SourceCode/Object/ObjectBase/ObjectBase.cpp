@@ -5,27 +5,8 @@
 ObjBase::ObjBase(ObjectTag tag)
     :objTag(tag)
     , objHandle(-1)
-    , objPos(zeroVec)
+    , objPos(VGet(0,0,0))
     , objDir(VGet(1.0f, 0.0f, 0.0f))
-    , objScale(VGet(0.1f, 0.1f, 0.1f))
-    , objSpeed(20.0f)
-    , isVisible(true)
-    , isAlive(true)
-    , colType()
-    , colLine()
-    , colSphere()
-    , colCapsule()
-    , colModel(-1)
-{
-}
-
-// コンストラクタ(位置・方向セット) //
-
-ObjBase::ObjBase(ObjectTag tag, VECTOR pos, VECTOR dir)
-    :objTag(tag)
-    , objHandle(-1)
-    , objPos(pos)
-    , objDir(dir)
     , objScale(VGet(0.1f, 0.1f, 0.1f))
     , objSpeed(20.0f)
     , isVisible(true)
@@ -42,6 +23,23 @@ ObjBase::ObjBase(ObjectTag tag, VECTOR pos, VECTOR dir)
 
 ObjBase::~ObjBase()
 {
+}
+
+// jsonファイ理読み込み処理 //
+
+void ObjBase::LoadJsonFile(std::string fileName)
+{
+    //ファイル読み込み
+    std::ifstream ifs(fileName.c_str());
+
+    //ファイル解析
+    if (ifs.good())
+    {
+        rapidjson::IStreamWrapper isw(ifs);
+
+        doc.ParseStream(isw);
+    }
+    ifs.close();
 }
 
 // Collision更新処理 //

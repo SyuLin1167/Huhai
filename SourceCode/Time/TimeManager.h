@@ -16,15 +16,10 @@ public:
     ~TimeManager();
 
     /// <summary>
-    /// XVˆ—
-    /// </summary>
-    void Update();
-
-    /// <summary>
-    /// DeltaTimeæ“¾
+    /// DeltaTimeæ“¾ˆ—
     /// </summary>
     /// <returns>deltaTime</returns>
-    float DeltaTime() const { return deltaTime; }
+    const float DeltaTime();
 
 private:
     float nowTime;      //Œ»İ‚ÌŠÔ

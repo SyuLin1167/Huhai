@@ -1,12 +1,15 @@
 #pragma once
 #include<DxLib.h>
+#include<../Rapidjson/istreamwrapper.h>
+#include<../Rapidjson/document.h>
+#include<string.h>
+#include<string>
+#include<fstream>
 
 #include"ObjectTag.h"
 #include"../../Math/Math.h"
 #include"../../Collision/Collision.h"
 #include"../../Collision/CollisionType.h"
-
-const VECTOR zeroVec = VGet(0.0f, 0.0f, 0.0f);    //ベクトル初期値
 
 /*ObjBaseクラス*/
 class ObjBase
@@ -18,18 +21,17 @@ public:
     /// <param name="tag">:タグ</param>
     ObjBase(ObjectTag tag);
 
-    /// <summary>
-    /// コンストラクタ(位置・方向セット)
-    /// </summary>
-    /// <param name="tag">:タグ</param>
-    /// <param name="pos">:座標</param>
-    /// <param name="angle">:方向</param>
-    ObjBase(ObjectTag tag, VECTOR pos, VECTOR dir = zeroVec);
 
     /// <summary>
     /// デストラクタ
     /// </summary>
     virtual ~ObjBase();
+
+    /// <summary>
+    /// jsonファイル読み込み処理
+    /// </summary>
+    /// <param name="fileName"></param>
+    void LoadJsonFile(std::string fileName);
 
     /// <summary>
     /// 座標取得
@@ -147,6 +149,7 @@ protected:
     /// </summary>
     void ColUpdate();
 
+    rapidjson::Document doc;                    //ドキュメント
 
     ObjectTag objTag;                           //オブジェクトタグ
     int objHandle;                              //オブジェクトハンドル

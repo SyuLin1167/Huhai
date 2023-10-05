@@ -11,12 +11,6 @@ public:
     FlashLight();
 
     /// <summary>
-    /// コンストラクタ
-    /// </summary>
-    /// <param name="lightPos">:ライトのワールド座標</param>
-    FlashLight(VECTOR lightPos);
-
-    /// <summary>
     /// デストラクタ
     /// </summary>
     ~FlashLight();

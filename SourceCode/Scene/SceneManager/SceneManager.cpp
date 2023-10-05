@@ -73,10 +73,7 @@ void SceneManager::Finalize()
 void SceneManager::UpdateScene()
 {
     //シーンの更新処理
-    timeMgr->Update();
-
-    //tmpSceneに現在のシーンを代入
-    tmpScene = nowScene.top()->UpdateScene(timeMgr->DeltaTime());
+    storageScene = nowScene.top()->UpdateScene(timeMgr->DeltaTime());
 }
 
 // 描画処理 //
@@ -93,11 +90,11 @@ void SceneManager::DrawScene()
 
 void SceneManager::SwitchScene()
 {
-    if (nowScene.top() != tmpScene)
+    if (nowScene.top() != storageScene)
     {
         //nowSceneがtmpSceneと異なっていたら解放して代入
         nowScene.pop();
-        nowScene.push(tmpScene);
+        nowScene.push(storageScene);
     }
 }
 
@@ -111,7 +108,7 @@ void SceneManager::CheckPauseMenu()
     {
         SetMousePoint(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
         //配列のサイズでメニューの表示を切り替える
-        if (nowScene.size() < 2)
+        if (nowScene.size() < MAX_STACK_SCENE)
         {
             //ゲーム画面保存
             SetDrawScreen(nowScreen);
@@ -122,6 +119,7 @@ void SceneManager::CheckPauseMenu()
             SetMouseDispFlag(true);
             nowScene.push(PauseMenu::GetPauseMenuInstance());
             DeleteGraph(nowScreen);
+
         }
         else
         {
@@ -131,7 +129,7 @@ void SceneManager::CheckPauseMenu()
     }
 
     //タイトル画面移動時メニュー画面を消す
-    if (PauseMenu::BackToTitle() && nowScene.size() > 1)
+    if (PauseMenu::BackToTitle() && nowScene.size() >= MAX_STACK_SCENE)
     {
         nowScene.pop();
     }

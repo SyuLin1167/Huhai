@@ -7,23 +7,42 @@
 LightBase::LightBase()
     :ObjBase(ObjectTag::Light)
     , lightHandle(-1)
-    , lightRange(70.0f)
-    , lightAtten2(0.004f)
+    , lightAtten2(0.008f)
     , lightMatColor{ 1.0f,1.0f,1.0f,1.0f }
 {
-    Load();
+    //ライト設定
+    lightHandle = CreatePointLightHandle(objPos, LIGHT_RANGE, 0.0f, 0.0f, lightAtten2);
+
+    //モデル設定
+    objHandle = AssetManager::GetMesh("../Assets/Map/Light/Light.mv1");
+
+    MV1SetPosition(objHandle, objPos);
+    MV1SetScale(objHandle, objScale);
 }
 
 // コンストラクタ //
 
-LightBase::LightBase(VECTOR pos)
-    :ObjBase(ObjectTag::Light, pos)
+LightBase::LightBase(std::string scene,std::string num)
+    :ObjBase(ObjectTag::Light)
     , lightHandle(-1)
-    , lightRange(70.0f)
-    , lightAtten2(0.004f)
-    , lightMatColor(GetColorF(1.0f, 1.0f, 1.0f, 1.0f))
+    , lightAtten2(0.008f)
+    , lightMatColor{ 1.0f,1.0f,1.0f,1.0f }
 {
-    Load();
+    //ファイル読み込み
+    LoadJsonFile("LightData.json");
+    auto& data = doc[scene.c_str()][num.c_str()];
+    objPos.x = data["pos"].GetArray()[0].GetInt();
+    objPos.y = LIGHT_POS_Y;
+    objPos.z = data["pos"].GetArray()[2].GetInt();
+
+    //ライト設定
+    lightHandle = CreatePointLightHandle(objPos, LIGHT_RANGE, 0.0f, 0.0f, lightAtten2);
+
+    //モデル設定
+    objHandle = AssetManager::GetMesh("../Assets/Map/Light/Light.mv1");
+
+    MV1SetPosition(objHandle, objPos);
+    MV1SetScale(objHandle, objScale);
 }
 
 // デストラクタ //
@@ -34,27 +53,14 @@ LightBase::~LightBase()
     DeleteLightHandle(lightHandle);
 }
 
-// 読み込み処理 //
-
-void LightBase::Load()
-{
-    //ライト設定
-    lightHandle = CreatePointLightHandle(objPos + VGet(0.0f, 2.5f, 0.0f) , lightRange, 0.0f, 0.0f, lightAtten2 * 2.0f);
-
-    //モデル設定
-    objHandle = AssetManager::GetMesh("../Assets/Map/Light/Light.mv1");
-    MV1SetPosition(objHandle, objPos);
-    MV1SetScale(objHandle, objScale);
-}
-
 // パラメータによる距離減衰 //
 
 void LightBase::AttenByParam()
 {
-    float param = 0.01f - (static_cast<float>(PauseMenu::Parameter("Brightness")) / 10000.0f);
+    float param = MIN_ATTEN_PARAM - (static_cast<float>(PauseMenu::Parameter("Brightness")) / 10000.0f);
     if (lightAtten2 != param)
     {
         lightAtten2 = param;
-        SetLightRangeAttenHandle(lightHandle, lightRange, 0.0f, 0.0f, lightAtten2);
+        SetLightRangeAttenHandle(lightHandle, LIGHT_RANGE, 0.0f, 0.0f, lightAtten2);
     }
 }

@@ -1,7 +1,6 @@
 #pragma once
 #include<unordered_map>
 
-#include"LightPosTag.h"
 #include"../../../ObjectBase/ObjectBase.h"
 #include"../../../ObjectManager/ObjManager.h"
 #include"../../../../Asset/AssetManager/AssetManager.h"
@@ -18,18 +17,14 @@ public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    /// <param name="pos">ワールド座標</param>
-    LightBase(VECTOR pos);
+    /// <param name="scene">:シーン名</param>
+    /// <param name="num">:オブジェクト番号</param>
+    LightBase(std::string scene, std::string num);
 
     /// <summary>
     /// デストラクタ
     /// </summary>
     virtual ~LightBase();
-
-    /// <summary>
-    /// 読み込み処理
-    /// </summary>
-    void Load();
 
     /// <summary>
     /// パラメータによる距離減衰
@@ -38,10 +33,12 @@ public:
 
 protected:
     int lightHandle;            //ライトハンドル
+    const float LIGHT_POS_Y = 33.5f;        //ライトの高さ
 
-    float lightRange;			//距離減衰有効距離
-    float lightAtten2;			//距離減衰係数
+    const float LIGHT_RANGE = 70.0f;       //距離減衰有効距離
+    const float MIN_ATTEN_PARAM=0.1f;   //減衰最小値
+    float lightAtten2;            //距離減衰係数
 
-    COLOR_F lightMatColor;		//ライトのマテリアルカラー
+    const COLOR_F lightMatColor;              //ライトのマテリアルカラー
 
 };

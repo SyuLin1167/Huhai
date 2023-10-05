@@ -11,23 +11,14 @@ public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    BlinkingLight();
-
-    /// <summary>
-    /// コンストラクタ
-    /// </summary>
-    /// <param name="pos">:ワールド座標</param>
-    BlinkingLight(VECTOR pos);
+    /// <param name="scene">:シーン名</param>
+    /// <param name="num">:オブジェクト番号</param>
+    BlinkingLight(std::string scene, std::string num = "0");
 
     /// <summary>
     /// デストラクタ
     /// </summary>
     ~BlinkingLight();
-
-    /// <summary>
-    /// 読み込み処理
-    /// </summary>
-    void Load();
 
     /// <summary>
     /// 更新処理
@@ -44,4 +35,7 @@ private:
     float intervalTime;     //インターバル
     float countTimer;       //カウント
     bool isBlinking;        //点滅判定
+
+    const float BLINK_PARAM = 0.001f;                       //点滅値
+    const COLOR_F BLINK_COLOR = { 0.8f, 0.8f, 0.8f, 0.8f }; //点滅色
 };

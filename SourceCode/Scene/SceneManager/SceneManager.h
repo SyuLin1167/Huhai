@@ -60,8 +60,9 @@ private:
     int keyState[256] = { 0 };                  //キーステータス
     int nowScreen;                              //現在の画面
 
+    const int MAX_STACK_SCENE = 2;              //シーン確保最大値
     std::stack<class SceneBase*> nowScene;      //現在のシーン
-    SceneBase* tmpScene;                        //一時的なシーン
+    SceneBase* storageScene;                        //一時的なシーン
 
     std::unique_ptr<GameSetting> gameSetting;             //ゲームセッティング
     std::unique_ptr<TimeManager> timeMgr;                 //タイムマネージャー

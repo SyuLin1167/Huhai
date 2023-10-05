@@ -1,12 +1,12 @@
-
 #include "SceneBase.h"
 
 // コンストラクタ //
 
 SceneBase::SceneBase()
-    :BgHandle(-1)
-    , BgX(0)
-    , BgY(0)
+    :bgHandle(-1)
+    , bgX(0)
+    , bgY(0)
+    , BLACK_SCREEN_COLOR(GetColor(0, 0, 0))
     ,blendMode(new BlendMode)
     ,sound(new Sound)
 {

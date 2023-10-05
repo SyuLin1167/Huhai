@@ -255,6 +255,8 @@
     <ClInclude Include="..\SourceCode\UI\UIBase\UIBase.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\SourceCode\Object\MapObject\Door\DoorData.json" />
+    <None Include="..\SourceCode\Object\MapObject\Light\LightBase\LightData.json" />
     <None Include="..\SourceCode\Object\MapObject\Table\TableData.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -33,9 +33,9 @@ PlayScene::PlayScene()
     ObjManager::Entry(new Furniture(Furniture::FurName::Stage));
 
     //ドア生成
-    ObjManager::Entry(new Door(VGet(22, 0, 0), VGet(1, 0, 0)));
-    ObjManager::Entry(new Door(VGet(110, 0, 0), VGet(-1, 0, 0)));
-    ObjManager::Entry(new Door(VGet(0, 0, 66), VGet(-1, 0, 0)));
+    ObjManager::Entry(new Door("play"));
+    ObjManager::Entry(new Door("play", "1"));
+    ObjManager::Entry(new Door("play", "2"));
 
     //イス生成
     ObjManager::Entry(new Chair);
@@ -87,7 +87,7 @@ SceneBase* PlayScene::UpdateScene(const float deltaTime)
     }
 
 
-    //タイトルへ移動
+    //タイトルへ移動する場合
     if (PauseMenu::BackToTitle())
     {
         PauseMenu::ResetTitleButton();

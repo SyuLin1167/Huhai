@@ -29,11 +29,11 @@ EscapeScene::EscapeScene()
     ObjManager::Entry(new Map(Map::MapTag::GOAL));
 
     //ドア生成
-    class Door* door = new Door(VGet(55, 0, 0), VGet(-1, 0, 0));
+    class Door* door = new Door("play");
     ObjManager::Entry(door);
     door->MoveAnim(Door::AnimType::OPEN);
-    ObjManager::Entry(new Door(VGet(187, 0, 0), VGet(1, 0, 0)));
-    ObjManager::Entry(new Door(VGet(759, 0, 0), VGet(1, 0, 0)));
+    ObjManager::Entry(new Door("play", "1"));
+    ObjManager::Entry(new Door("play", "2"));
 
     //机生成
     for (int i = 0; i < TableNum; i++)
@@ -115,6 +115,6 @@ void EscapeScene::DrawScene()
 
     //フェード処理
     blendMode->Fade();
-    DrawBox(BgX, BgY, 1920, 1080, GetColor(0, 0, 0), true);
+    DrawBox(bgX, bgY, SCREEN_WIDTH, SCREEN_HEIGHT, BLACK_SCREEN_COLOR, true);
     blendMode->NoBlend();
 }
