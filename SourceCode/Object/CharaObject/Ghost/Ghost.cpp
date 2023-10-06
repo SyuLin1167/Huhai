@@ -9,12 +9,11 @@ Ghost::Ghost()
     , moveCount(7.0f)
     , isFirstMove(true)
     , isMove(false)
-    , rotateNow(false)
     ,aimPos(VGet(0.0f, 0.0f, 0.0f))
-    , aimDir(VGet(0.0f, 0.0f, 1.0f))
     , lightHandle(-1)
     , holdPos(VGet(0.0f, 0.0f, 0.0f))
 {
+    aimDir = VGet(0.0f, 0.0f, 1.0f);
     objPos = VGet(0.0f, 0.0f, -45.0f);
 
     //アニメーション設定
@@ -60,7 +59,7 @@ void Ghost::Update(float deltaTime)
     gstAnim->AddAnimTime(deltaTime);
 
     //モデル回転
-    MATRIX rotMatY = MGetRotY(180 * (float)(DX_PI / 180.0f));
+    MATRIX rotMatY = MGetRotY(ONE_HALF_PI * (float)(DX_PI / ONE_HALF_PI));
     VECTOR negativeVec = VTransform(objDir, rotMatY);
     MV1SetRotationZYAxis(objHandle, negativeVec, VGet(0.0f, 1.0f, 0.0f), 0.0f);
     rotateNow = true;
@@ -82,8 +81,8 @@ void Ghost::Update(float deltaTime)
 
             //ライト設置
             ObjManager::GetFirstObj(ObjectTag::Light)->SetAlive(false);
-            lightHandle = CreatePointLightHandle(objPos, 50.0f, 0.0f, 0.0f, 0.005f);
-            SetLightDifColorHandle(lightHandle, GetColorF(1.0f, 0.0f, 0.0f, 1.0f));
+            lightHandle = CreatePointLightHandle(objPos, LIGHT_RANGE, 0.0f, 0.0f, LIGHT_ATTEN2);
+            SetLightDifColorHandle(lightHandle, LIGHT_COLOR);
 
             gstSound->StartSound(SoundTag::GhostScream, DX_PLAYTYPE_BACK);
         }
@@ -114,7 +113,7 @@ void Ghost::Update(float deltaTime)
     //ライト更新
     if (lightHandle)
     {
-        SetLightPositionHandle(lightHandle, objPos + VGet(0.0f, 10.0f, 0.0f));
+        SetLightPositionHandle(lightHandle, objPos + LIGHT_POS);
     }
 
     //当たり判定更新
@@ -165,7 +164,7 @@ void Ghost::OnCollisionEnter(const ObjBase* other)
     //プレイヤーに当たったらゲームオーバーにする
     if (tag == ObjectTag::Player)
     {
-        if (abs(VSize(other->GetPos() - objPos)) < 12.0f && !isFirstMove)
+        if (abs(VSize(other->GetPos() - objPos)) < HIT_DISTANCE && !isFirstMove)
         {
             if (animType != SAD)
             {
@@ -178,39 +177,4 @@ void Ghost::OnCollisionEnter(const ObjBase* other)
         }
     }
 
-}
-
-// 回転処理 //
-
-void Ghost::Rotate()
-{
-    if (rotateNow)
-    {
-        // 回転が目標角度に十分近ければ回転モード終了
-        if (IsSameAngle(aimDir, objDir))
-        {
-            objDir = aimDir;
-            rotateNow = false;
-        }
-        else
-        {
-            // 回転させる
-            VECTOR interPolateDir;
-            interPolateDir = RotForAimY(objDir, aimDir, 5.0f);
-
-            // 回転が目標角度を超えていないか
-            VECTOR cross1, cross2;
-            cross1 = VCross(objDir, aimDir);
-            cross2 = VCross(interPolateDir, aimDir);
-
-            //目標角度を超えたら終了
-            if (cross1.y * cross2.y < 0.0f)
-            {
-                interPolateDir = aimDir;
-                rotateNow = false;
-            }
-            // 目標ベクトルに10度だけ近づけた角度
-            objDir = interPolateDir;
-        }
-    }
 }

@@ -54,18 +54,21 @@ private:
     void Move(float deltaTime);
 
 
-    VECTOR UP;                              //正面
-    VECTOR DOWN;                            //後方
-    VECTOR RIGHT;                           //右
-    VECTOR LEFT;                            //左
+    VECTOR UP;                                      //正面
+    VECTOR DOWN;                                    //後方
+    VECTOR RIGHT;                                   //右
+    VECTOR LEFT;                                    //左
 
-    VECTOR inputVec;						//合成ベクトル
-    VECTOR inputVel;						//速度ベクトル
-    float walkStep;                         //Y軸動作
-    bool inputKey;							//キー入力判定
-    bool canMove;                           //動作状態
+    VECTOR inputVec;                                //合成ベクトル
+    VECTOR inputVel;                                //速度ベクトル
+    float walkStep;                                 //Y軸動作
+    bool inputKey;                                  //キー入力判定
+    bool canMove;                                   //動作状態
 
-    VECTOR camFront;						//カメラ前方向
+    const float HIT_DISTANCE = 12.0f;               //当たり判定距離
+    const VECTOR HIT_AIM_POS = VGet(0, 18, 0);      //判定後視点
 
-    class Sound* plySound;                  //サウンド
+    VECTOR camFront;                                //カメラ前方向
+
+    class Sound* plySound;                          //サウンド
 };

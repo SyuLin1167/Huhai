@@ -62,20 +62,25 @@ private:
     TextType textType;
     char stringBuf[BUFHEIGHT][BUFWIDTH * 2 + 1];        //仮想テキストバッファ
     char holdBuf[3];                                    //文字一時記憶領域
-    int Sn;                                             //文字列番号
-    int Sp;                                             //文字ポインタ
+    int stringNum;                                      //文字列番号
+    int stringPtr;                                      //文字ポインタ
 
-    const int WHITE_TEXT_COLOR;                         //テキスト色(ホワイト)
+    const int WHITE_TEXT_COLOR= GetColor(250, 250, 250);//テキスト色(ホワイト)
     const int WAIT_ICON_X = SCREEN_WIDTH * 8 / 10;      //待機アイコン座標X
-    const int WAIT_ICON_Y = SCREEN_HEIGHT * 9 / 10;      //待機アイコン座標Y
+    const int WAIT_ICON_Y = SCREEN_HEIGHT * 9 / 10;     //待機アイコン座標Y
 
     bool eofFlag;                                       //終了フラグ
     bool waitKey;                                       //待機フラグ
 
+    const int FIRST_TEXT_POS_X = 620;                   //テキスト初期座標X
+    const int FIRST_TEXT_POS_Y = 930;                   //テキスト初期座標Y
     int textX;                                          //文字表示位置X
     int textY;                                          //文字表示位置Y
 
     VERTEX2D textBox[6];                                //テキストボックスポリゴン
-    const int BOUNDARY_POS_Y = 950;                     //ポリゴンとボックスの境界線座標
-    COLOR_U8 color = { 20,0,0,0 };      //頂点の色
+    const int BOUNDARY_POS_LY = 750;                    //ポリゴンとボックスの境界線左上座標
+    const int BOUNDARY_POS_RY = 950;                    //ポリゴンとボックスの境界線右下座標
+    const float UV = 0;                                 //uv
+    COLOR_U8 VERTEX_COLOR = { 20,0,0,0 };               //頂点の色
+    const int TEXTBOX_COLOR = GetColor(0, 0, 20);       //テキストボックスの色
 };

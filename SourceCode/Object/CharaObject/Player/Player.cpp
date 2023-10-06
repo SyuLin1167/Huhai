@@ -116,14 +116,14 @@ void Player::OnCollisionEnter(const ObjBase* other)
     //—H—ì‚É‚Ô‚Â‚©‚Á‚½‚çŽ€–S
     if (tag == ObjectTag::Ghost)
     {
-        if (abs(VSize(other->GetPos() - objPos)) < 12.0f && canMove)
+        if (abs(VSize(other->GetPos() - objPos)) < HIT_DISTANCE && canMove)
         {
             canMove = false;
             isVisible = false;
             ObjBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
             if (camera)
             {
-                camera->SetDir(other->GetPos() - camera->GetPos() + VGet(0, 18.0f, 0));
+                camera->SetDir(other->GetPos() - camera->GetPos() + HIT_AIM_POS);
             }
         }
         ColUpdate();

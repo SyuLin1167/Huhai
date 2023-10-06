@@ -45,14 +45,15 @@ public:
     void Draw()override;
 
 private:
-    class Animation* doorAnim;			//アニメーション
-    int animType;						//アニメーションタイプ
+    class Animation* doorAnim;                          //アニメーション
+    int animType;                                       //アニメーションタイプ
 
-    bool rotateNow;                     //回転状態
-    VECTOR aimDir;                      //目標方向
+    bool rotateNow;                                     //回転状態
+    VECTOR aimDir;                                      //目標方向
+    const VECTOR DOOR_ACION_ICON= VGet(0, 20, 0);       //ドアのアクションアイコン
 
-    class Sound* doorSound;             //サウンド
+    class Sound* doorSound;                             //サウンド
 
-    class ObjBase* player;              //プレイヤーオブジェクト
-    class Action* action;               //アクションボタン
+    class ObjBase* player;                              //プレイヤーオブジェクト
+    class Action* action;                               //アクションボタン
 };

@@ -32,26 +32,22 @@ public:
     /// </summary>
     void Draw()override;
 
-    /// <summary>
-    /// 回転処理
-    /// </summary>
-    void Rotate();
-
     //アニメーションタイプ
     enum Anim
     {
-        CRYING = 0,			//泣き
+        CRYING = 0,         //泣き
         DEAD,               //死亡
     };
 
 private:
-    bool rotateNow;                 //回転状態
-    VECTOR aimDir;                  //目標方向
 
-    class Animation* manAnim;       //アニメーション
-    int animType;                   //アニメーションタイプ
+    class Animation* manAnim;               //アニメーション
+    int animType;                           //アニメーションタイプ
 
-    bool isSpeak;                   //会話状態
 
-    class Sound* manSound;          //サウンド
+    const float ROTATE_VELOCITY = 5.0f;     //回転速度
+
+    bool isSpeak;                           //会話状態
+
+    class Sound* manSound;                  //サウンド
 };

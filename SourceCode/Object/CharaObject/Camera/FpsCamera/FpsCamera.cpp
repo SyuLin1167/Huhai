@@ -53,8 +53,8 @@ void FpsCamera::Move(float deltaTime)
 {
     //マウス移動量計測
     GetMousePoint(&mouseX, &mouseY);
-    if (mouseX > 30 && mouseX < SCREEN_WIDTH - 30 &&
-        mouseY > 30 && mouseY < SCREEN_HEIGHT - 30)
+    if (mouseX > MIN_MOVE_PARAM && mouseX < SCREEN_WIDTH - MIN_MOVE_PARAM &&
+        mouseY > MIN_MOVE_PARAM && mouseY < SCREEN_HEIGHT - MIN_MOVE_PARAM)
     {
         movePos.x = (float)mouseX - static_cast<float>(SCREEN_WIDTH) / 2;
         movePos.y = (float)mouseY - static_cast<float>(SCREEN_HEIGHT) / 2;

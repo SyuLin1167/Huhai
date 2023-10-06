@@ -17,11 +17,6 @@ public:
     ~Bed();
 
     /// <summary>
-    /// 読み込み処理
-    /// </summary>
-    void Load();
-
-    /// <summary>
     /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
@@ -31,4 +26,8 @@ public:
     /// 描画処理
     /// </summary>
     void Draw()override;
+
+private:
+    VECTOR sleepPos;                                //睡眠時座標
+    const VECTOR SLEEP_AIM_POS=VGet(0, 8, 0);       //睡眠時目線座標
 };

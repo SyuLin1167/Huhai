@@ -132,11 +132,23 @@ public:
     /// <returns>当たり判定Model</returns>
     int GetColModel()const { return colModel; }
 
+
+    /// <summary>
+    /// 回転処理
+    /// </summary>
+    void Rotate();
+
 protected:
     /// <summary>
     /// Collision更新処理
     /// </summary>
     void ColUpdate();
+
+    const float ONE_HALF_PI = 180.0f;           //180度
+    const float ONE_QUARTER_PI = 90.0f;         //90度
+    const float ROTATE_VELOCITY = 5.0f;         //回転速度
+    bool rotateNow;                             //回転状態
+    VECTOR aimDir;                              //目標方向
 
     ObjectTag objTag;                           //オブジェクトタグ
     int objHandle;                              //オブジェクトハンドル

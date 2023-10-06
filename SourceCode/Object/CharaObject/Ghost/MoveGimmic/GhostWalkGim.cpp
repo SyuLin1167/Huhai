@@ -38,7 +38,8 @@ void GhostWalkGim::Update(float deltaTime)
     {
         //“–‚½‚è”»’èİ’è
         ObjBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
-        colLine = Line(VGet(7.0f, 5.0f, 0.0f), player->GetPos() - objPos + VGet(0, 5, 0));             //ü•ªİ’è
+        colLine = Line(COL_LINE_FIRST_POS+COL_LINE_HEIGHT,
+            player->GetPos() - objPos + COL_LINE_HEIGHT);             //ü•ªİ’è
 
         objPos.x -= objSpeed * deltaTime;
     }

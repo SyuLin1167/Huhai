@@ -11,6 +11,7 @@
 #include "../../Object/MapObject/Light/FlashLight/FlashLight.h"
 #include "../../Object/CharaObject/Player/Player.h"
 #include "../../Object/CharaObject/Ghost/Ghost.h"
+#include"../PauseMenu/PauseMenu.h"
 #include "../Ending/Ending.h"
 #include"../TitleScene/TitleScene.h"
 #include"../RoomScene/RoomScene.h"
@@ -60,7 +61,7 @@ EscapeScene::EscapeScene()
 
 EscapeScene::~EscapeScene()
 {
-
+    //処理なし
 }
 
 // 更新処理 //
@@ -102,6 +103,19 @@ SceneBase* EscapeScene::UpdateScene(float deltaTime)
                 return new TitleScene;
             }
         }
+    }
+
+    //タイトルへ移動する場合
+    if (PauseMenu::BackToTitle())
+    {
+        PauseMenu::ResetTitleButton();
+
+        //管理クラス内の確保したデータ解放
+        AssetManager::ReleaseAllAsset();
+        ObjManager::ReleaseAllObj();
+
+        //シーンをタイトルにする
+        return new TitleScene;
     }
     return this;
 }

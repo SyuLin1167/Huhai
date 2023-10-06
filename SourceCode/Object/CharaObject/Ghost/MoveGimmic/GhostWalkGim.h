@@ -35,4 +35,7 @@ public:
 
 private:
     bool isMove;        //“®ìó‘Ô
+
+    const VECTOR COL_LINE_HEIGHT = VGet(0, 5, 0);       //ü•ª‚‚³
+    const VECTOR COL_LINE_FIRST_POS = VGet(7, 0, 0);    //ü•ªn“_
 };

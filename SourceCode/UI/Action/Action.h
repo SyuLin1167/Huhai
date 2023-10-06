@@ -35,11 +35,14 @@ public:
     bool IsAction() const { return isAction; }
 
 private:
-    const float actionRange = 30.0f;    //範囲
-    float toDistance;                   //距離
+    const VECTOR ACTION_ICON_POS_Y = { 0,20,0 };        //アイコンの高さ
+    const float actionRange = 30.0f;                    //範囲
+    float toDistance;                                   //距離
 
-    bool canAction;                     //反応可能状態
-    bool isAction;                      //反応状態
+    bool canAction;                                     //反応可能状態
+    bool isAction;                                      //反応状態
 
-    class BlendMode* actionBlend;       //ブレンドモード
+    const float EXTEND_RATE = 0.3f;                     //伸縮値
+
+    class BlendMode* actionBlend;                       //ブレンドモード
 };

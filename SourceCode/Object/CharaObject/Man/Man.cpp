@@ -12,8 +12,6 @@
 Man::Man()
     :ObjBase(ObjectTag::Man)
     , manAnim(nullptr)
-    , rotateNow(false)
-    , aimDir{ 0,0,0 }
     , isSpeak(false)
     , manSound(nullptr)
 {
@@ -65,7 +63,7 @@ void Man::Update(float deltaTime)
     manAnim->AddAnimTime(deltaTime);
 
     //モデルの回転
-    MATRIX rotYMat = MGetRotY(180.0f * (float)(DX_PI / 180.0f));
+    MATRIX rotYMat = MGetRotY(ONE_HALF_PI * (float)(DX_PI / ONE_HALF_PI));
     VECTOR negativeVec = VTransform(objDir, rotYMat);
 
     //アクションボタンが押されたらセリフを再生
@@ -118,39 +116,4 @@ void Man::Update(float deltaTime)
 void Man::Draw()
 {
     MV1DrawModel(objHandle);
-}
-
-// 回転処理 //
-
-void Man::Rotate()
-{
-    if (rotateNow)
-    {
-        // 回転が目標角度に十分近ければ回転モード終了
-        if (IsSameAngle(aimDir, objDir))
-        {
-            objDir = aimDir;
-            rotateNow = false;
-        }
-        else
-        {
-            // 回転させる
-            VECTOR interPolateDir;
-            interPolateDir = RotForAimY(objDir, aimDir, 5.0f);
-
-            // 回転が目標角度を超えていないか
-            VECTOR cross1, cross2;
-            cross1 = VCross(objDir, aimDir);
-            cross2 = VCross(interPolateDir, aimDir);
-
-            //目標角度を超えたら終了
-            if (cross1.y * cross2.y < 0.0f)
-            {
-                interPolateDir = aimDir;
-                rotateNow = false;
-            }
-            // 目標ベクトルに10度だけ近づけた角度
-            objDir = interPolateDir;
-        }
-    }
 }

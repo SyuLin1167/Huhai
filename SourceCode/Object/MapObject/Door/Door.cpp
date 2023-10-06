@@ -44,6 +44,9 @@ Door::Door(std::string scene, std::string num)
     objHandle = AssetManager::GetMesh("../Assets/Map/Door/Door.mv1");
     MV1SetPosition(objHandle, objPos);
     MV1SetScale(objHandle, VGet(0.11f, 0.12f, 0.11f));
+    MATRIX rotYMat = MGetRotY(ONE_QUARTER_PI * (float)(DX_PI / ONE_HALF_PI));
+    VECTOR negativeVec = VTransform(objDir, rotYMat);
+    MV1SetRotationZYAxis(objHandle, negativeVec, VGet(0.0f, 1.0f, 0.0f), 0.0f);
 
     //アニメーション設定
     doorAnim = new Animation(objHandle);
@@ -92,7 +95,7 @@ void Door::Update(float deltaTime)
         //プレイヤーが近づいたらボタン表示
         VECTOR actionPos = player->GetPos() - objPos;
         actionPos = VNorm(actionPos);
-        action->SetPos(objPos + actionPos + VGet(0, 20, 0));
+        action->SetPos(objPos + actionPos + DOOR_ACION_ICON);
 
         if (!doorAnim->IsPlaying())
         {
@@ -115,11 +118,6 @@ void Door::Update(float deltaTime)
             }
         }
     }
-
-    //モデルの回転
-    MATRIX rotYMat = MGetRotY(90.0f * (float)(DX_PI / 180.0f));
-    VECTOR negativeVec = VTransform(objDir, rotYMat);
-    MV1SetRotationZYAxis(objHandle, negativeVec, VGet(0.0f, 1.0f, 0.0f), 0.0f);
 
     //当たり判定更新
     colModel = objHandle;

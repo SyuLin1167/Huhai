@@ -14,7 +14,7 @@ Action::Action(VECTOR pos)
 {
     //アイコン設定
     objHandle = LoadGraph("../Assets/BackGround/Action.png");
-    objPos = pos + VGet(0, 20, 0);
+    objPos = pos + ACTION_ICON_POS_Y;
 
     actionBlend = new BlendMode;
 }
@@ -70,6 +70,6 @@ void Action::Draw()
 {
     //アイコン描画
     actionBlend->Fade();
-    DrawExtendGraph3D(objPos.x, objPos.y, objPos.z, 0.3f, 0.3f, objHandle, TRUE);
+    DrawExtendGraph3D(objPos.x, objPos.y, objPos.z, EXTEND_RATE, EXTEND_RATE, objHandle, TRUE);
     actionBlend->NoBlend();
 }

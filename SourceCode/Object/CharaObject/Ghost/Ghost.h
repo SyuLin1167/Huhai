@@ -8,49 +8,46 @@ class Ghost :public GhostBase
 {
 public:
     /// <summary>
-    /// Ghostのコンストラクター
+    /// コンストラクタ
     /// </summary>
     Ghost();
 
     /// <summary>
-    /// Ghostのデストラクター
+    /// デストラクタ
     /// </summary>
     ~Ghost();
 
     /// <summary>
-    /// Ghost更新処理
+    /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     void Update(float deltaTime)override;
 
     /// <summary>
-    /// Ghost描画処理
+    /// 描画処理
     /// </summary>
     void Draw()override;
 
 
     /// <summary>
-    /// Ghost衝突時処理
+    /// 衝突時処理
     /// </summary>
     /// <param name="other">:オブジェクト</param>
     void OnCollisionEnter(const ObjBase* other)override;
-
-    /// <summary>
-    /// Ghost回転処理
-    /// </summary>
-    void Rotate();
-
 private:
-    float moveCount;        //カウント
-    bool isFirstMove;       //初動状態
-    bool isMove;            //移動状態
+    float moveCount;                                                    //カウント
+    bool isFirstMove;                                                   //初動状態
+    bool isMove;                                                        //移動状態
 
-    VECTOR aimDir;          //目標方向
-    bool rotateNow;         //回転状態
+    VECTOR aimPos;                                                      //目標座標
+    VECTOR holdPos;                                                     //一時保存座標
 
-    VECTOR aimPos;          //目標座標
-    VECTOR holdPos;         //一時保存座標
+    const float HIT_DISTANCE = 12.0f;                                   //当たり判定距離
 
-    int lightHandle;        //ライトハンドル
+    int lightHandle;                                                    //ライトハンドル
+    const VECTOR LIGHT_POS = VGet(0.0f, 10.0f, 0.0f);                   //ライト座標
+    const float LIGHT_RANGE = 50.0f;                                    //距離減衰有効距離
+    const float LIGHT_ATTEN2 = 0.005f;                                  //距離減衰係数
+    const COLOR_F LIGHT_COLOR = GetColorF(1.0f, 0.0f, 0.0f, 1.0f);      //ライトの色
 };
 

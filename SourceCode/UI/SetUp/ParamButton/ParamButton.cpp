@@ -93,7 +93,7 @@ void ParamButton::Draw()
     }
 
     //パラメーター描画
-    DrawFormatString(static_cast<int>(objPos.x), static_cast<int>(objPos.y), GetColor(10, 255, 255), "%d", param);
+    DrawFormatString(static_cast<int>(objPos.x), static_cast<int>(objPos.y), PARAM_COLOR, "%d", param);
     DrawButton(static_cast<int>(objPos.x), static_cast<int>(objPos.y));
 
     paramButtonBlend->NoBlend();

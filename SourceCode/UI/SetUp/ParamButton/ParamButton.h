@@ -48,6 +48,7 @@ private:
     const int PARAM_BUTTON_SIZE_X = 70;     //ボタンサイズ
     const int PARAM_BUTTON_SIZE_Y = 45;     //ボタンサイズ
 
+    const int PARAM_COLOR = GetColor(10, 255, 255);     //パラメーターの色
     int paramMin;                           //パラメーター最小値
     int paramMax;                           //パラメーター最大値
     

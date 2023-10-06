@@ -37,13 +37,13 @@ Table::Table(const int objNum)
     objHandle = AssetManager::GetMesh("../Assets/Map/Table/Table.mv1");
     MV1SetScale(objHandle, objScale);
     MV1SetPosition(objHandle, objPos);
-    MV1SetRotationXYZ(objHandle, VGet(0.0f, objDir.y / 180.0f * DX_PI_F, 0.0f));
+    MV1SetRotationXYZ(objHandle, VGet(0.0f, objDir.y / ONE_HALF_PI * DX_PI_F, 0.0f));
 
     //当たり判定設定
     colModel = AssetManager::GetMesh("../Assets/Map/Table/ColTable.mv1");
     MV1SetPosition(colModel, objPos);
     MV1SetScale(colModel, VGet(0.1f, 0.1f, 0.1f));
-    MV1SetRotationXYZ(colModel, VGet(0.0f, objDir.y / 180.0f * DX_PI_F, 0.0f));            //モデルの向き設定
+    MV1SetRotationXYZ(colModel, VGet(0.0f, objDir.y / ONE_HALF_PI * DX_PI_F, 0.0f));            //モデルの向き設定
 }
 
 // デストラクタ //

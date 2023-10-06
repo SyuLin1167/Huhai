@@ -32,14 +32,14 @@ public:
     void AttenByParam();
 
 protected:
-    int lightHandle;            //ライトハンドル
+    int lightHandle;                        //ライトハンドル
     const float LIGHT_POS_Y = 35.5f;        //ライトの高さ
     const float LIGHTMODEL_POS_Y = 33.0f;   //モデルの高さ
 
-    const float LIGHT_RANGE = 70.0f;       //距離減衰有効距離
-    const float MIN_ATTEN_PARAM=0.01f;   //減衰最小値
-    float lightAtten2;            //距離減衰係数
+    const float LIGHT_RANGE = 70.0f;        //距離減衰有効距離
+    const float MIN_ATTEN_PARAM=0.01f;      //減衰最小値
+    float lightAtten2;                      //距離減衰係数
 
-    const COLOR_F lightMatColor;              //ライトのマテリアルカラー
+    const COLOR_F lightMatColor;            //ライトのマテリアルカラー
 
 };

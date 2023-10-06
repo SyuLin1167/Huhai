@@ -10,14 +10,13 @@ Remarks::Remarks(TextType texttype)
     , textType(texttype)
     , stringBuf{}
     , holdBuf{}
-    , Sn(0)
-    , Sp(0)
+    , stringNum(0)
+    , stringPtr(0)
     , eofFlag(false)
     , waitKey(false)
     , textX(0)
     , textY(0)
     , textBox{}
-    , WHITE_TEXT_COLOR(GetColor(255, 255, 255))
 {
     //テキストボックス設定
     objHandle =AssetManager::GetGraph("../Assets/BackGround/Remarks.png");
@@ -57,7 +56,7 @@ void Remarks::Update(float deltaTime)
         else
         {
             //待機中でなければ台詞を一文字ずつ読み込む
-            char Moji = GetText(Sn, Sp);
+            char Moji = GetText(stringNum, stringPtr);
             switch (Moji)
             {
             case '/':
@@ -65,7 +64,7 @@ void Remarks::Update(float deltaTime)
                 waitKey = true;
 
                 //読み込み文字を1文字進める
-                Sp++;
+                stringPtr++;
                 break;
 
             case '^':
@@ -89,14 +88,14 @@ void Remarks::Update(float deltaTime)
                 textY = 0;
 
                 //読み込み文字を1文字進める
-                Sp++;
+                stringPtr++;
                 break;
 
             default:
                 //その他の文字だったら
                 //1文字分記憶
-                holdBuf[0] = GetText(Sn, Sp);
-                holdBuf[1] = GetText(Sn, Sp + 1);
+                holdBuf[0] = GetText(stringNum, stringPtr);
+                holdBuf[1] = GetText(stringNum, stringPtr + 1);
                 holdBuf[2] = '\0';
 
                 //テキストバッファに記憶した文字を代入
@@ -104,7 +103,7 @@ void Remarks::Update(float deltaTime)
                 stringBuf[textY][textX * 2 + 1] = holdBuf[1];
 
                 //読み込み文字を2文字分進める
-                Sp += 2;
+                stringPtr += 2;
 
                 //文字表示位置を1文字進める
                 textX++;
@@ -116,11 +115,11 @@ void Remarks::Update(float deltaTime)
                 }
 
                 //文が最後まで読み込み終わったら改行して次の文を読み込む
-                if (GetText(Sn, Sp) == '\0')
+                if (GetText(stringNum, stringPtr) == '\0')
                 {
                     NewLine();
-                    Sn++;
-                    Sp = 0;
+                    stringNum++;
+                    stringPtr = 0;
                 }
                 break;
             }
@@ -230,9 +229,9 @@ void Remarks::TextBox(int lx, int ly, int rx, int ry)
     {
         textBox[i].pos.z = 0.0f;
         textBox[i].rhw = 1.0f;
-        textBox[i].dif = color;
-        textBox[i].u = 0;
-        textBox[i].v = 0;
+        textBox[i].dif = VERTEX_COLOR;
+        textBox[i].u = UV;
+        textBox[i].v = UV;
     }
 
 
@@ -258,15 +257,15 @@ void Remarks::Draw()
 
     //テキストボックス描画
     SetFontSize(TEXTSIZE);
-    DrawBox(0, BOUNDARY_POS_Y, SCREEN_WIDTH, SCREEN_HEIGHT, GetColor(0, 0, 20), TRUE);
-    TextBox(0, BOUNDARY_POS_Y-200, SCREEN_WIDTH, BOUNDARY_POS_Y);
+    DrawBox(0, BOUNDARY_POS_RY, SCREEN_WIDTH, SCREEN_HEIGHT, TEXTBOX_COLOR, TRUE);
+    TextBox(0, BOUNDARY_POS_LY, SCREEN_WIDTH, BOUNDARY_POS_RY);
     DrawPolygon2D(textBox, 2, DX_NONE_GRAPH, TRUE);
     SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 
     //台詞描画
     for (int i = 0; i < BUFHEIGHT; i++)
     {
-        DrawString(i + 620, i * TEXTSIZE + 930, stringBuf[i], WHITE_TEXT_COLOR);
+        DrawString(i + FIRST_TEXT_POS_X, i * TEXTSIZE + FIRST_TEXT_POS_Y, stringBuf[i], WHITE_TEXT_COLOR);
     }
 
     //待機アイコン描画

@@ -35,7 +35,7 @@ void Chair::Load()
     objDir = { 0,-90,0 };
     MV1SetPosition(objHandle, objPos);
     MV1SetScale(objHandle, objScale);
-    MV1SetRotationXYZ(objHandle, VGet(0.0f, objDir.y / 180.0f * DX_PI_F, 0.0f));
+    MV1SetRotationXYZ(objHandle, VGet(0.0f, objDir.y / ONE_HALF_PI * DX_PI_F, 0.0f));
 
     //アニメーション設定
     ChairAnim = new Animation(objHandle);
