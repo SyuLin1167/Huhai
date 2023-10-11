@@ -6,7 +6,7 @@
 // コンストラクタ //
 
 Remarks::Remarks(TextType texttype)
-    :UIBase(ObjectTag::Remarks)
+    :UIBase(ObjTag::Remarks)
     , textType(texttype)
     , stringBuf{}
     , holdBuf{}

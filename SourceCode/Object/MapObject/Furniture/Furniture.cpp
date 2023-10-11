@@ -5,7 +5,7 @@
 // コンストラクタ //
 
 Furniture::Furniture(FurName tag)
-    :ObjBase(ObjectTag::Furniture)
+    :ObjBase(ObjTag::Furniture)
 {
     Load(tag);
 }

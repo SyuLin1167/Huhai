@@ -3,7 +3,7 @@
 // コンストラクタ //
 
 FixedCamera::FixedCamera()
-	:ObjBase(ObjectTag::Camera)
+	:ObjBase(ObjTag::Camera)
 {
     objPos = VGet(70, 6, 75);
     objDir = VGet(-10, 10, 25);

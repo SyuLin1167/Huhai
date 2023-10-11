@@ -1,6 +1,6 @@
 #pragma once
 
-#include"../../ObjectBase/ObjectBase.h"
+#include"../../ObjectBase/ObjBase.h"
 
 /*BedƒNƒ‰ƒX*/
 class Bed :public ObjBase

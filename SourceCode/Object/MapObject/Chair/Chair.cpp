@@ -8,7 +8,7 @@
 // コンストラクタ //
 
 Chair::Chair()
-    :ObjBase(ObjectTag::Furniture)
+    :ObjBase(ObjTag::Furniture)
     , ChairAnim(nullptr)
     , chairSound(nullptr)
 {
@@ -65,7 +65,7 @@ void Chair::Update(float deltaTime)
     ChairAnim->AddAnimTime(deltaTime);
 
     //動作処理
-    ObjBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
+    ObjBase* player = ObjManager::GetFirstObj(ObjTag::Player);
     if (player)
     {
         //プレイヤーが一定距離近づいたら動作する

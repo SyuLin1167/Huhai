@@ -1,7 +1,7 @@
 #pragma once
 #include<DxLib.h>
 
-#include"../../ObjectBase/ObjectBase.h"
+#include"../../ObjectBase/ObjBase.h"
 
 /* PlayerƒNƒ‰ƒX */
 class Player :public ObjBase

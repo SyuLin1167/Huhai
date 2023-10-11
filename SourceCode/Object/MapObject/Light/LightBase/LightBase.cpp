@@ -9,7 +9,7 @@
 // コンストラクタ //
 
 LightBase::LightBase()
-    :ObjBase(ObjectTag::Light)
+    :ObjBase(ObjTag::Light)
     , lightHandle(-1)
     , lightAtten2(0.004f)
     , lightMatColor{ 1.0f,1.0f,1.0f,1.0f }
@@ -27,7 +27,7 @@ LightBase::LightBase()
 // コンストラクタ //
 
 LightBase::LightBase(std::string scene,std::string num)
-    :ObjBase(ObjectTag::Light)
+    :ObjBase(ObjTag::Light)
     , lightHandle(-1)
     , lightAtten2(0.008f)
     , lightMatColor{ 1.0f,1.0f,1.0f,1.0f }

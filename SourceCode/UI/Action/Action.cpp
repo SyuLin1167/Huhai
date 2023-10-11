@@ -6,7 +6,7 @@
 // コンストラクタ //
 
 Action::Action(VECTOR pos)
-    :UIBase(ObjectTag::UI)
+    :UIBase(ObjTag::UI)
     , toDistance(0)
     , canAction(false)
     , isAction(false)
@@ -35,7 +35,7 @@ Action::~Action()
 void Action::Update(float deltaTime)
 {
     //プレイヤーとの距離を測る
-    ObjBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
+    ObjBase* player = ObjManager::GetFirstObj(ObjTag::Player);
     if (player)
     {
         toDistance = VSize(player->GetPos() - objPos);

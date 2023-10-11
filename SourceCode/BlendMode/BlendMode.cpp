@@ -1,7 +1,7 @@
 #include "BlendMode.h"
 #include<DxLib.h>
 #include<math.h>
-#include"../Object/ObjectBase/ObjectBase.h"
+#include"../Object/ObjectBase/ObjBase.h"
 
 // コンストラクタ //
 

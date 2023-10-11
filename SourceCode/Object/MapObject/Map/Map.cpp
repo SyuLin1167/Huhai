@@ -7,7 +7,7 @@
 // コンストラクタ //
 
 Map::Map(MapTag maptag)
-    :ObjBase(ObjectTag::Map)
+    :ObjBase(ObjTag::Map)
     , mapSound(nullptr)
     , mapTag(maptag)
 {
@@ -49,10 +49,10 @@ void Map::Update(float deltaTime)
     {
         //ゴールに近づいたら表示してたどり着いたら死亡にする
         MV1SetMaterialEmiColor(objHandle, 0, GetColorF(1.0f, 1.0f, 1.0f, 1.0f));
-        if (ObjManager::GetFirstObj(ObjectTag::Player)->GetPos().x > 730)
+        if (ObjManager::GetFirstObj(ObjTag::Player)->GetPos().x > 730)
         {
             isVisible = true;
-            if (ObjManager::GetFirstObj(ObjectTag::Player)->GetPos().x > 770)
+            if (ObjManager::GetFirstObj(ObjTag::Player)->GetPos().x > 770)
             {
                 isAlive = false;
             }

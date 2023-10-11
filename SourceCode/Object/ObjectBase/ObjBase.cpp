@@ -1,8 +1,10 @@
-#include "ObjectBase.h"
+#include "ObjBase.h"
 
-// コンストラクタ //
-
-ObjBase::ObjBase(ObjectTag tag)
+/// <summary>
+/// コンストラクタ
+/// </summary>
+/// <param name="tag">:オブジェクトタグ</param>
+ObjBase::ObjBase(ObjTag tag)
     :objTag(tag)
     , rotateNow(false)
     , aimDir{ 0,0,0 }
@@ -21,14 +23,16 @@ ObjBase::ObjBase(ObjectTag tag)
 {
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 ObjBase::~ObjBase()
 {
 }
 
-// 回転処理 //
-
+/// <summary>
+/// 回転処理
+/// </summary>
 void ObjBase::Rotate()
 {
     if (rotateNow)
@@ -56,14 +60,16 @@ void ObjBase::Rotate()
                 interPolateDir = aimDir;
                 rotateNow = false;
             }
+
             // 目標ベクトルに10度だけ近づけた角度
             objDir = interPolateDir;
         }
     }
 }
 
-// Collision更新処理 //
-
+/// <summary>
+/// 当たり判定更新処理
+/// </summary>
 void ObjBase::ColUpdate()
 {
     //全当たり判定更新

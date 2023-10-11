@@ -54,7 +54,7 @@ void Sound::AddSound(std::string fileName, SoundTag tag, bool isDim,bool volumeT
 void Sound::Doppler(SoundTag tag, VECTOR pos)
 {
     //3次元サウンドはカメラの距離に合わせて音量を変える
-    ObjBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
+    ObjBase* camera = ObjManager::GetFirstObj(ObjTag::Camera);
     auto& sound = soundData[tag];
     if (sound.isDim && IsPlaying(tag))
     {

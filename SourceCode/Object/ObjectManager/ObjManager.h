@@ -1,13 +1,15 @@
 #pragma once
-
 #include<vector>
 #include<unordered_map>
 #include<algorithm>
+#include<memory>
 
-#include"../ObjectBase/ObjectBase.h"
-#include"../ObjectBase/ObjectTag.h"
+#include"../ObjectBase/ObjBase.h"
+#include"../ObjectBase/ObjTag.h"
 
-/* ObjManagerクラス */
+/// <summary>
+/// ObjManagerクラス
+/// </summary>
 class ObjManager final
 {
 public:
@@ -17,44 +19,44 @@ public:
     static void Init();
 
     /// <summary>
-    /// 登録
+    /// オブジェクト追加処理
     /// </summary>
     /// <param name="newObj">:追加オブジェクト</param>
-    static void Entry(ObjBase* newObj);
+    static void AddObj(ObjBase* newObj);
 
     /// <summary>
-    /// 削除
-    /// </summary>
-    /// <param name="releaseObj">:削除オブジェクト</param>
-    static void Release(ObjBase* releaseObj);
-
-    /// <summary>
-    /// 全削除
-    /// </summary>
-    static void ReleaseAllObj();
-
-    /// <summary>
-    /// 全更新処理
+    /// 全オブジェクト更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
-    static void Update(float deltaTime);
+    static void UpdateAllObj(const float deltaTime);
 
     /// <summary>
-    /// 全描画処理
+    /// 全オブジェクト当たり判定処理
     /// </summary>
-    static void Draw();
+    static void OnCollision();
 
     /// <summary>
-    /// 当たり判定処理
+    /// 全オブジェクト描画処理
     /// </summary>
-    static void Collision();
+    static void DrawAllObj();
+
+    /// <summary>
+    /// オブジェクト削除処理
+    /// </summary>
+    /// <param name="releaseObj">:削除オブジェクト</param>
+    static void DeleteObj(std::shared_ptr<ObjBase> releaseObj);
+
+    /// <summary>
+    /// 全オブジェクト削除処理
+    /// </summary>
+    static void DeleteAllObj();
 
     /// <summary>
     /// タグの先頭オブジェクト取得
     /// </summary>
     /// <param name="tag">:タグ</param>
     /// <returns>オブジェクト</returns>
-    static ObjBase* GetFirstObj(ObjectTag tag);
+    static ObjBase* GetFirstObj(ObjTag tag);
 
     /// <summary>
     /// タグの指定オブジェクト取得
@@ -62,12 +64,17 @@ public:
     /// <param name="tag">:タグ</param>
     /// <param name="tagNum">:オブジェクト番号</param>
     /// <returns>:オブジェクト</returns>
-    static ObjBase* GetObj(ObjectTag tag, int tagNum);
+    static ObjBase* GetObj(ObjTag tag, int tagNum);
 
     /// <summary>
     /// 後処理
     /// </summary>
     static void Finalize();
+
+    /// <summary>
+    /// デストラクタ
+    /// </summary>
+    ~ObjManager();
 
 private:
     /// <summary>
@@ -76,18 +83,14 @@ private:
     ObjManager();
 
     /// <summary>
-    /// デストラクタ
+    /// オブジェクト死亡処理
     /// </summary>
-    ~ObjManager();
+    static void OnDeadObj();
 
-    /// <summary>
-    /// 死亡処理
-    /// </summary>
-    static void Dead();
+    static std::unique_ptr<ObjManager> singleton;       //自身の実態
+    //std::vector<ObjBase*>holdObj;                     //一時保存オブジェクト
+    std::unordered_map<ObjTag, std::vector<
+        std::shared_ptr<ObjBase>>> object;              //オブジェクト
 
-    static ObjManager* objManager;                                  //自身の実態
-    std::vector<ObjBase*>holdObj;                                   //一時保存オブジェクト
-    std::unordered_map<ObjectTag, std::vector<ObjBase*>>Object;     //Object[タグ種類][オブジェクト個数]
-
-    class Bloom* bloom;                                             //ブルーム
+    std::unique_ptr<class Bloom> bloom;                 //ブルーム
 };

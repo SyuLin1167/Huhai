@@ -8,11 +8,11 @@
 // コンストラクタ //
 
 Bed::Bed()
-    :ObjBase(ObjectTag::Furniture)
+    :ObjBase(ObjTag::Furniture)
 {
     //モデル設定
     objHandle = AssetManager::GetMesh("../Assets/Map/Bed/Bed.mv1");
-    objPos = { 55,0,20 };
+    objPos = VGet( 55,0,20 );
     sleepPos = objPos + VGet(5, 0, 0);
     MV1SetPosition(objHandle, objPos);
     MV1SetScale(objHandle, objScale);
@@ -22,7 +22,7 @@ Bed::Bed()
     colModel = objHandle;
 
     //アクションボタン生成
-    ObjManager::Entry(new Action(objPos));
+    ObjManager::AddObj(new Action(objPos));
 }
 
 // デストラクタ //
@@ -37,14 +37,14 @@ Bed::~Bed()
 void Bed::Update(float deltaTime)
 {
     //アクションボタンが押されたら就寝する
-    ObjBase* action = ObjManager::GetFirstObj(ObjectTag::UI);
+    ObjBase* action = ObjManager::GetFirstObj(ObjTag::UI);
     if (!action->IsVisible())
     {
 
 
         //プレイヤーをベッドに移動
         colModel = -1;
-        ObjBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
+        ObjBase* player = ObjManager::GetFirstObj(ObjTag::Player);
         VECTOR movePlyVec = sleepPos - player->GetPos();
         if (abs(VSize(movePlyVec)) >= 0)
         {
@@ -58,7 +58,7 @@ void Bed::Update(float deltaTime)
         {
             aimDir.x -= objSpeed * deltaTime;
         }
-        ObjBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
+        ObjBase* camera = ObjManager::GetFirstObj(ObjTag::Camera);
         camera->SetPos(camera->GetPos() - SLEEP_AIM_POS);
         camera->SetDir(aimDir);
     }

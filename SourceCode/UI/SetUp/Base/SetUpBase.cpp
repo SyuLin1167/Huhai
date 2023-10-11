@@ -3,7 +3,7 @@
 // コンストラクタ //
 
 SetUpBase::SetUpBase(std::string name)
-    :UIBase(ObjectTag::UI)
+    :UIBase(ObjTag::UI)
     , buttonName(name)
     , buttonWidth(0)
     , buttonHeight(0)

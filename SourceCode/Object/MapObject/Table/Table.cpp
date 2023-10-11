@@ -9,7 +9,7 @@
 // コンストラクタ //
 
 Table::Table(const int objNum)
-    :ObjBase(ObjectTag::Furniture)
+    :ObjBase(ObjTag::Furniture)
 {
     //ファイル読み込み
     std::ifstream ifs("../SourceCode/Object/MapObject/Table/TableData.json");

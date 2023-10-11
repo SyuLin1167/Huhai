@@ -6,7 +6,7 @@
 // コンストラクタ //
 
 Select::Select(SelectType type)
-    :UIBase(ObjectTag::UI)
+    :UIBase(ObjTag::UI)
     , selectBlend(nullptr)
 {
     //ボタン設定

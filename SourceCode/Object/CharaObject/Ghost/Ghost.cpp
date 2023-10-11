@@ -80,7 +80,7 @@ void Ghost::Update(float deltaTime)
             gstAnim->StartAnim(animType);
 
             //ライト設置
-            ObjManager::GetFirstObj(ObjectTag::Light)->SetAlive(false);
+            ObjManager::GetFirstObj(ObjTag::Light)->SetAlive(false);
             lightHandle = CreatePointLightHandle(objPos, LIGHT_RANGE, 0.0f, 0.0f, LIGHT_ATTEN2);
             SetLightDifColorHandle(lightHandle, LIGHT_COLOR);
 
@@ -96,7 +96,7 @@ void Ghost::Update(float deltaTime)
     else
     {
         //基本目標座標はプレイヤー座標
-        aimPos = ObjManager::GetFirstObj(ObjectTag::Player)->GetPos();
+        aimPos = ObjManager::GetFirstObj(ObjTag::Player)->GetPos();
     }
 
     //動作中は目標座標に向かって移動
@@ -136,10 +136,10 @@ void Ghost::Draw()
 
 void Ghost::OnCollisionEnter(const ObjBase* other)
 {
-    ObjectTag tag = other->GetTag();
+    ObjTag tag = other->GetTag();
 
     //建物にぶつかったら押し戻す
-    if (tag == ObjectTag::Map)
+    if (tag == ObjTag::Map)
     {
         int colModel = other->GetColModel();
         //球体の当たり判定
@@ -162,7 +162,7 @@ void Ghost::OnCollisionEnter(const ObjBase* other)
     }
 
     //プレイヤーに当たったらゲームオーバーにする
-    if (tag == ObjectTag::Player)
+    if (tag == ObjTag::Player)
     {
         if (abs(VSize(other->GetPos() - objPos)) < HIT_DISTANCE && !isFirstMove)
         {

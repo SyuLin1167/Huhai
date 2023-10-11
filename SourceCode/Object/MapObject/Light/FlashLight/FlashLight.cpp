@@ -33,7 +33,7 @@ void FlashLight::Load()
 void FlashLight::Update(float deltaTime)
 {
     //ƒJƒƒ‰‚Ì•ûŒü‚Éƒ‰ƒCƒg‚ð“–‚Ä‚é
-    ObjBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
+    ObjBase* camera = ObjManager::GetFirstObj(ObjTag::Camera);
     SetLightPositionHandle(lightHandle, camera->GetPos());
     SetLightDirectionHandle(lightHandle, camera->GetDir());
 

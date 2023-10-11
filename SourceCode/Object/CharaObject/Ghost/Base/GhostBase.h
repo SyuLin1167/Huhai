@@ -1,6 +1,6 @@
 #pragma once
 
-#include"../../../ObjectBase/ObjectBase.h"
+#include"../../../ObjectBase/ObjBase.h"
 #include"../../../../Asset/Animation/Animation.h"
 #include"../../../../Asset/Sound/Sound.h"
 

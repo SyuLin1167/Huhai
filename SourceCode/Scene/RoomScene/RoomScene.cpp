@@ -23,25 +23,25 @@ RoomScene::RoomScene()
     sound->StartSound(SoundTag::InDoor, DX_PLAYTYPE_LOOP);
 
     //カメラ生成
-    ObjManager::Entry(new FpsCamera);
+    ObjManager::AddObj(new FpsCamera);
 
     //マップ生成
-    ObjManager::Entry(new Map(Map::MapTag::ROOM));
+    ObjManager::AddObj(new Map(Map::MapTag::ROOM));
 
     //家具生成
-    ObjManager::Entry(new Furniture(Furniture::FurName::Room));
+    ObjManager::AddObj(new Furniture(Furniture::FurName::Room));
 
     //ベッド生成
-    ObjManager::Entry(new Bed);
+    ObjManager::AddObj(new Bed);
 
     //照明生成
-    ObjManager::Entry(new NomalLight("room"));
+    ObjManager::AddObj(new NomalLight("room"));
 
     //プレイヤー生成
-    ObjManager::Entry(new Player);
+    ObjManager::AddObj(new Player);
 
     //台詞生成
-    ObjManager::Entry(new Remarks(TextType::Opening));
+    ObjManager::AddObj(new Remarks(TextType::Opening));
 }
 
 // デストラクタ //
@@ -56,13 +56,13 @@ RoomScene::~RoomScene()
 SceneBase* RoomScene::UpdateScene(const float deltaTime)
 {
     //オブジェクト更新
-    ObjManager::Update(deltaTime);
+    ObjManager::UpdateAllObj(deltaTime);
 
     //オブジェクト当たり判定
-    ObjManager::Collision();
+    ObjManager::OnCollision();
 
     //アクションボタンが押されたら
-    ObjBase* action = ObjManager::GetFirstObj(ObjectTag::UI);
+    ObjBase* action = ObjManager::GetFirstObj(ObjTag::UI);
     if (action)
     {
         if (!action->IsVisible())
@@ -75,7 +75,7 @@ SceneBase* RoomScene::UpdateScene(const float deltaTime)
             {
 
                 //管理クラス内の確保したデータ解放
-                ObjManager::ReleaseAllObj();
+                ObjManager::DeleteAllObj();
 
                 //シーンを次の場面にする
                 return new PlayScene;
@@ -90,7 +90,7 @@ SceneBase* RoomScene::UpdateScene(const float deltaTime)
 
         //管理クラス内の確保したデータ解放
         AssetManager::ReleaseAllAsset();
-        ObjManager::ReleaseAllObj();
+        ObjManager::DeleteAllObj();
 
         //シーンをタイトルにする
 
@@ -104,7 +104,7 @@ SceneBase* RoomScene::UpdateScene(const float deltaTime)
 void RoomScene::DrawScene()
 {
     //オブジェクト描画
-    ObjManager::Draw();
+    ObjManager::DrawAllObj();
 
     //フェード処理
     blendMode->Fade();

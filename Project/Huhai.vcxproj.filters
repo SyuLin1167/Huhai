@@ -192,7 +192,7 @@
     <ClCompile Include="..\SourceCode\Time\TimeManager.cpp">
       <Filter>ソース ファイル\Time</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Object\ObjectBase\ObjectBase.cpp">
+    <ClCompile Include="..\SourceCode\Object\ObjectBase\ObjBase.cpp">
       <Filter>ソース ファイル\Object\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Math\Math.cpp">
@@ -335,10 +335,10 @@
     <ClInclude Include="..\SourceCode\Time\TimeManager.h">
       <Filter>ソース ファイル\Time</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectBase.h">
+    <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjBase.h">
       <Filter>ソース ファイル\Object\Base</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectTag.h">
+    <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjTag.h">
       <Filter>ソース ファイル\Object\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Math\Math.h">

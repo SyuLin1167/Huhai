@@ -1,7 +1,7 @@
 #pragma once
 #include<map>
 
-#include"../../ObjectBase/ObjectBase.h"
+#include"../../ObjectBase/ObjBase.h"
 
 constexpr int TableNum = 19;
 

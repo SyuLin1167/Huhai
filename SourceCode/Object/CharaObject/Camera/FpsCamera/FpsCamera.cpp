@@ -7,7 +7,7 @@
 // コンストラクタ //
 
 FpsCamera::FpsCamera()
-    :ObjBase(ObjectTag::Camera)
+    :ObjBase(ObjTag::Camera)
     , mouseX(0)
     , mouseY(0)
     , movePos{ 0,0,0 }
@@ -30,7 +30,7 @@ FpsCamera::~FpsCamera()
 void FpsCamera::Update(float deltaTime)
 {
     //カメラはプレイヤーの目線にする
-    ObjBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
+    ObjBase* player = ObjManager::GetFirstObj(ObjTag::Player);
     if (player)
     {
         objPos = player->GetPos();

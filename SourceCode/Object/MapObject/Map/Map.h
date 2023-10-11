@@ -3,7 +3,7 @@
 #include<unordered_map>
 #include<string>
 
-#include"../../ObjectBase/ObjectBase.h"
+#include"../../ObjectBase/ObjBase.h"
 
 /*MapƒNƒ‰ƒX*/
 class Map :public ObjBase

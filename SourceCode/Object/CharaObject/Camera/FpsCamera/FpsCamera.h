@@ -1,7 +1,7 @@
 #pragma once
 
 #include"../../../../GameSetting/GameSetting.h"
-#include"../../../ObjectBase/ObjectBase.h"
+#include"../../../ObjectBase/ObjBase.h"
 
 constexpr float CameraNear = 0.1f;       //ƒJƒƒ‰‚Ì•`‰æ”ÍˆÍ(‹ß)
 constexpr float CameraFar = 400.0f;     //ƒJƒƒ‰‚Ì•`‰æ”ÍˆÍ(‰“)

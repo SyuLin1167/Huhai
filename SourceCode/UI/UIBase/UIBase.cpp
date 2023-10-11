@@ -4,7 +4,7 @@ int UIBase::Key[256] = {};
 
 // コンストラクタ //
 
-UIBase::UIBase(ObjectTag tag)
+UIBase::UIBase(ObjTag tag)
     :ObjBase(tag)
     , mouseX(0)
     , mouseY(0)
@@ -12,14 +12,14 @@ UIBase::UIBase(ObjectTag tag)
     , canClick(false)
     , isInput(false)
 {
-
+    //処理なし
 }
 
 // デストラクタ //
 
 UIBase::~UIBase()
 {
-
+    //処理なし
 }
 
 // マウス入力可能状態 //

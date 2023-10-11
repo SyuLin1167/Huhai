@@ -1,7 +1,7 @@
 #pragma once
 #include<unordered_map>
 
-#include"../../../ObjectBase/ObjectBase.h"
+#include"../../../ObjectBase/ObjBase.h"
 #include"../../../ObjectManager/ObjManager.h"
 #include"../../../../Asset/AssetManager/AssetManager.h"
 

@@ -1,271 +1,226 @@
-#include "ObjManager.h"
+#include<assert.h>
 
 #include"../../Shade/Bloom/Bloom.h"
-#include"../../Scene/PauseMenu/PauseMenu.h"
+#include "ObjManager.h"
 
 //実態へのポインタ定義
-ObjManager* ObjManager::objManager = nullptr;
+std::unique_ptr<ObjManager> ObjManager::singleton = nullptr;
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 ObjManager::ObjManager()
-    :Object()
-    , holdObj()
-    , bloom(nullptr)
+    :object()
+    , bloom(new Bloom)
 {
-    bloom = new Bloom;
+    //処理なし
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 ObjManager::~ObjManager()
 {
-    //インスタンス削除
-    if (bloom)
-    {
-        delete bloom;
-    }
+    //処理なし
 }
 
-// 初期化処理 //
-
+/// <summary>
+/// 初期化処理
+/// </summary>
 void ObjManager::Init()
 {
     //インスタンス生成
-    if (!objManager)
+    if (!singleton)
     {
-        objManager = new ObjManager;
+        singleton.reset(new ObjManager);
     }
 }
 
-// 登録 //
-
-void ObjManager::Entry(ObjBase* newObj)
+/// <summary>
+/// オブジェクト追加処理
+/// </summary>
+/// <param name="newObj">:追加オブジェクト</param>
+void ObjManager::AddObj(ObjBase* newObj)
 {
-    //一時保存場所にオブジェクト追加
-    objManager->holdObj.emplace_back(newObj);
+    ObjTag tag = newObj->GetTag();
+    singleton->object[tag].emplace_back(newObj);
 }
 
-// 削除 //
-
-void ObjManager::Release(ObjBase* releaseObj)
+/// <summary>
+/// 全オブジェクト更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
+void ObjManager::UpdateAllObj(const float deltaTime)
 {
-    //保存場所のオブジェクト検索
-    auto iter = find(objManager->holdObj.begin(),
-        objManager->holdObj.end(), releaseObj);
-
-    //オブジェクトが見つかったら末尾に移して削除
-    if (iter != objManager->holdObj.end())
-    {
-        std::iter_swap(iter, objManager->holdObj.end() - 1);
-        objManager->holdObj.pop_back();
-        return;
-    }
-
-	//アクティブにあるタグのオブジェクト検索
-    ObjectTag tag = releaseObj->GetTag();					
-    iter = find(objManager->Object[tag].begin(),
-        objManager->Object[tag].end(), releaseObj);
-
-    //オブジェクトが見つかったら末尾に移して削除
-    if (iter != objManager->Object[tag].end())
-    {
-        std::iter_swap(iter, objManager->Object[tag].end() - 1);
-        delete objManager->Object[tag].back();
-    }
-}
-
-// 全削除 //
-
-void ObjManager::ReleaseAllObj()
-{
-    //一時保存場所の中が空になるまで末尾からオブジェクト削除
-    while (!objManager->holdObj.empty())
-    {
-        delete objManager->holdObj.back();
-        objManager->holdObj.pop_back();
-    }
-
-    //アクティブの中が空になるまで末尾からオブジェクト削除
+    //全タグ分更新処理をまとめて行う
     for (auto& tag : ObjTagAll)
     {
-        while (!objManager->Object[tag].empty())
+        for (int i = 0; i < singleton->object[tag].size(); i++)
         {
-            delete objManager->Object[tag].back();
-            objManager->Object[tag].pop_back();
-        }
-    }
-}
-
-// 全更新処理 //
-
-void ObjManager::Update(float deltaTime)
-{
-
-    // 該当タグにあるすべてのオブジェクトを更新
-    for (auto& tag : ObjTagAll)
-    {
-        for (int i = 0; i < objManager->Object[tag].size(); ++i)
-        {
-            objManager->Object[tag][i]->Update(deltaTime);
+            singleton->object[tag][i]->Update(deltaTime);
         }
     }
 
     //ブルーム用画面
-    if (PauseMenu::HasStatus("Bloom"))
-    {
-        objManager->bloom->SetColoerScreen();
-    }
-    else
-    {
-        SetCameraNearFar(0.1f, 400.0f);
-    }
+    singleton->bloom->SetColoerScreen();
 
-    //一時保存中のオブジェクトをアクティブリストに追加
-    for (auto holding : objManager->holdObj)
-    {
-        ObjectTag tag = holding->GetTag();
-        objManager->Object[tag].emplace_back(holding);
-    }
-
-    //全て移し終わったら保存場所の中身を空にする
-    objManager->holdObj.clear();
-
-    Dead();
+    OnDeadObj();
 }
 
-// 死亡処理 //
-
-void ObjManager::Dead()
+/// <summary>
+/// 全オブジェクト描画処理
+/// </summary>
+void ObjManager::DrawAllObj()
 {
-
-    //死亡したオブジェクトを検索して死亡オブジェクトに移動
-    std::vector<ObjBase*>deadObj;
+    //全タグ分描画処理をまとめて行う
     for (auto& tag : ObjTagAll)
     {
-        for (auto obj : objManager->Object[tag])
+        for (int i = 0; i < singleton->object[tag].size(); i++)
         {
-            if (!obj->IsAlive())
+            //オブジェクトが可視なら描画させる
+            if (singleton->object[tag][i]->IsVisible())
             {
-                deadObj.emplace_back(obj);
-            }
-        }
-        objManager->Object[tag].erase(remove_if(begin(objManager->Object[tag]), end(objManager->Object[tag]),
-            [](ObjBase* dead) {return !dead->IsAlive(); }), cend(objManager->Object[tag]));
-    }
-
-    //死亡オブジェクトの中身が空になるまで削除
-	while (!deadObj.empty())
-    {
-        delete deadObj.back();
-        deadObj.pop_back();
-    }
-}
-
-// 全描画処理 //
-
-void ObjManager::Draw()
-{
-    //該当タグにあるすべてのオブジェクトを描画
-    for (auto& tag : ObjTagAll)
-    {
-
-        for (int i = 0; i < objManager->Object[tag].size(); ++i)
-        {
-            if (objManager->Object[tag][i]->IsVisible())
-            {
-                objManager->Object[tag][i]->Draw();
+                singleton->object[tag][i]->Draw();
             }
         }
     }
 
     //ブルーム描画
-    if (PauseMenu::HasStatus("Bloom"))
+    singleton->bloom->SetBloomGraph();
+    singleton->bloom->Draw();
+}
+
+/// <summary>
+///オブジェクト死亡処理
+/// </summary>
+void ObjManager::OnDeadObj()
+{
+    //全タグ分死亡オブジェクトを探して削除
+    for (auto& tag : ObjTagAll)
     {
-        objManager->bloom->SetBloomGraph();
-        objManager->bloom->Draw();
+        for (auto& dead : singleton->object[tag])
+        {
+            //死んでいたらオブジェクト削除
+            if (!dead->IsAlive())
+            {
+                DeleteObj(dead);
+            }
+        }
     }
 }
 
-// 当たり判定処理 //
+/// <summary>
+/// オブジェクト削除処理
+/// </summary>
+/// <param name="deleteObj">:削除オブジェクト</param>
+void ObjManager::DeleteObj(std::shared_ptr<ObjBase> deleteObj)
+{
+    //削除オブジェクトのタグ取得
+    ObjTag tag = deleteObj->GetTag();
 
-void ObjManager::Collision()
+    //オブジェクトを検索
+    auto endObj = singleton->object[tag].end();
+    auto findObj = std::find(singleton->object[tag].begin(), endObj, deleteObj);
+    assert(findObj != endObj);
+
+    //見つかったら末尾に移動させて削除
+    if (findObj != endObj)
+    {
+        std::swap(findObj, endObj);
+        singleton->object[tag].pop_back();
+        singleton->object[tag].shrink_to_fit();
+    }
+}
+
+/// <summary>
+/// 全オブジェクト削除処理
+/// </summary>
+void ObjManager::DeleteAllObj()
+{
+    //空じゃなかったらオブジェクト削除
+    for (auto& tag : ObjTagAll)
+    {
+        if (!singleton->object[tag].empty())
+        {
+            singleton->object[tag].clear();
+            singleton->object[tag].shrink_to_fit();
+        }
+    }
+}
+
+/// <summary>
+/// 当たり判定処理
+/// </summary>
+void ObjManager::OnCollision()
 {
     //当たり判定の組み合わせ
     //Ghost
-    for (int gstNum = 0; gstNum < objManager->Object[ObjectTag::Ghost].size(); ++gstNum)
+    for (auto& gstCol: singleton->object[ObjTag::Ghost])
     {
-        for (int mapNum = 0; mapNum < objManager->Object[ObjectTag::Map].size(); ++mapNum)
+        for (auto& mapCol :singleton->object[ObjTag::Map])
         {
-            objManager->Object[ObjectTag::Ghost][gstNum]->
-                OnCollisionEnter(objManager->Object[ObjectTag::Map][mapNum]);
+            gstCol->OnCollisionEnter(mapCol.get());
         }
-        for (int plyNum = 0; plyNum < objManager->Object[ObjectTag::Player].size(); ++plyNum)
+        for (auto& plyCol:singleton->object[ObjTag::Player])
         {
-            objManager->Object[ObjectTag::Ghost][gstNum]->
-                OnCollisionEnter(objManager->Object[ObjectTag::Player][plyNum]);
+            gstCol->OnCollisionEnter(plyCol.get());
         }
     }
 
     //Player
-    for (int plyNum = 0; plyNum < objManager->Object[ObjectTag::Player].size(); ++plyNum)
+    for (auto& plyCol :singleton->object[ObjTag::Player])
     {
-        for (int mapNum = 0; mapNum < objManager->Object[ObjectTag::Map].size(); ++mapNum)
+        for (auto& mapCol:singleton->object[ObjTag::Map])
         {
-            objManager->Object[ObjectTag::Player][plyNum]->
-                OnCollisionEnter(objManager->Object[ObjectTag::Map][mapNum]);
+            plyCol->OnCollisionEnter(mapCol.get());
         }
-        for (int furNum = 0; furNum < objManager->Object[ObjectTag::Furniture].size(); ++furNum)
+        for (auto& furCol : singleton->object[ObjTag::Furniture])
         {
-            objManager->Object[ObjectTag::Player][plyNum]->
-                OnCollisionEnter(objManager->Object[ObjectTag::Furniture][furNum]);
+            plyCol->OnCollisionEnter(furCol.get());
         }
-        for (int gstNum = 0; gstNum < objManager->Object[ObjectTag::Ghost].size(); ++gstNum)
+        for (auto& gstCol : singleton->object[ObjTag::Ghost])
         {
-            objManager->Object[ObjectTag::Player][plyNum]->
-                OnCollisionEnter(objManager->Object[ObjectTag::Ghost][gstNum]);
+            plyCol->OnCollisionEnter(gstCol.get());
         }
     }
 }
 
-// タグの先頭オブジェクト取得 //
-
-ObjBase* ObjManager::GetFirstObj(ObjectTag tag)
+/// <summary>
+/// タグの先頭オブジェクト取得
+/// </summary>
+/// <param name="tag">:オブジェクトタグ</param>
+/// <returns>オブジェクト</returns>
+ObjBase* ObjManager::GetFirstObj(ObjTag tag)
 {
     //オブジェクトの数が0だったらnullptrを返す
-    if (objManager->Object[tag].size() == 0)		
+    if (singleton->object[tag].size() == 0)		
     {
         return nullptr;
     }
 
     //タグ種の最初のオブジェクトを返す
-    return objManager->Object[tag][0];
+    return singleton->object[tag][0].get();
 }
 
 // タグの指定オブジェクト取得 //
 
-ObjBase* ObjManager::GetObj(ObjectTag tag, int tagNum)
+ObjBase* ObjManager::GetObj(ObjTag tag, int tagNum)
 {
     //オブジェクトの数が指定数より少なかったらnullptrを返す
-    if (objManager->Object[tag].size() < static_cast<unsigned long long>(tagNum) + 1)
+    if (singleton->object[tag].size() < static_cast<unsigned long long>(tagNum) + 1)
     {
         return nullptr;
     }
 
     //タグ種のtagNum番目のオブジェクトを返す
-    return objManager->Object[tag][tagNum];
+    return singleton->object[tag][tagNum].get();
 }
 
-// 後処理 //
-
+/// <summary>
+/// 後処理
+/// </summary>
 void ObjManager::Finalize()
 {
     //全オブジェクト解放
-    ReleaseAllObj();
-
-    //インスタンス削除
-    if (objManager)
-    {
-        delete objManager;
-    }
+    DeleteAllObj();
 }

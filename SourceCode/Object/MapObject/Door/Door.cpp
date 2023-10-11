@@ -13,7 +13,7 @@
 // コンストラクタ //
 
 Door::Door(std::string scene, std::string num)
-    :ObjBase(ObjectTag::Furniture)
+    :ObjBase(ObjTag::Furniture)
     , doorAnim(nullptr)
     , animType(IDLE)
     , doorSound(nullptr)
@@ -69,7 +69,7 @@ Door::Door(std::string scene, std::string num)
 
     //アクションボタン追加
     action = new Action(objPos);
-    ObjManager::Entry(action);
+    ObjManager::AddObj(action);
 }
 
 // デストラクタ //
@@ -89,7 +89,7 @@ void Door::Update(float deltaTime)
     doorAnim->AddAnimTime(deltaTime);
 
     //ドアの開閉処理
-    player = ObjManager::GetFirstObj(ObjectTag::Player);
+    player = ObjManager::GetFirstObj(ObjTag::Player);
     if (player)
     {
         //プレイヤーが近づいたらボタン表示

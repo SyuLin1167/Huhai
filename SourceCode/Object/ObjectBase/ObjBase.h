@@ -1,20 +1,22 @@
 #pragma once
 #include<DxLib.h>
 
-#include"ObjectTag.h"
+#include"ObjTag.h"
 #include"../../Math/Math.h"
 #include"../../Collision/Collision.h"
 #include"../../Collision/CollisionType.h"
 
-/*ObjBaseクラス*/
+/// <summary>
+/// ObjBaseクラス
+/// </summary>
 class ObjBase
 {
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    /// <param name="tag">:タグ</param>
-    ObjBase(ObjectTag tag);
+    /// <param name="tag">:オブジェクトタグ</param>
+    ObjBase(ObjTag tag);
 
 
     /// <summary>
@@ -75,7 +77,7 @@ public:
     /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
-    virtual void Update(float deltaTime) = 0;
+    virtual void Update(const float deltaTime) = 0;
 
     /// <summary>
     /// 描画処理
@@ -86,21 +88,13 @@ public:
     /// オブジェクトのタグ取得
     /// </summary>
     /// <returns>タグ種類</returns>
-    ObjectTag GetTag()const { return objTag; }
-
-    //---当たり判定関連---//
+    ObjTag GetTag()const { return objTag; }
 
     /// <summary>
     /// 衝突時処理
     /// </summary>
     /// <param name="other">:オブジェクト</param>
     virtual void OnCollisionEnter(const ObjBase* other) {}
-
-    /// <summary>
-    /// 当たり判定処理
-    /// </summary>
-    /// <param name="other">:オブジェクト</param>
-    virtual void ColWithOther(ObjBase* other) {};
 
     /// <summary>
     /// 当たり判定種
@@ -150,7 +144,7 @@ protected:
     bool rotateNow;                             //回転状態
     VECTOR aimDir;                              //目標方向
 
-    ObjectTag objTag;                           //オブジェクトタグ
+    ObjTag objTag;                              //オブジェクトタグ
     int objHandle;                              //オブジェクトハンドル
     VECTOR objPos;                              //ワールド座標
     VECTOR objDir;                              //ワールド方向
@@ -161,7 +155,6 @@ protected:
     bool isVisible;                             //可視化状態
     bool isAlive;                               //生死状態
 
-    //---当たり判定関連---//
     CollisionType colType;                      //当たり判定種
     Line colLine;                               //線分
     Sphere colSphere;                           //球体

@@ -1,6 +1,6 @@
 #pragma once
 
-#include"../../Object/ObjectBase/ObjectBase.h"
+#include"../../Object/ObjectBase/ObjBase.h"
 
 /*UIBaseクラス*/
 class UIBase:public ObjBase
@@ -10,7 +10,7 @@ public:
     /// コンストラクタ
     /// </summary>
     /// <param name="tag">:タグ名</param>
-    UIBase(ObjectTag tag);
+    UIBase(ObjTag tag);
 
     /// <summary>
     /// デストラクタ

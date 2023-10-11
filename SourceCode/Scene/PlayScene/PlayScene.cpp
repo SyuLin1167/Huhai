@@ -24,38 +24,38 @@ PlayScene::PlayScene()
     :SceneBase()
 {
     //カメラ生成
-    ObjManager::Entry(new FpsCamera);
+    ObjManager::AddObj(new FpsCamera);
 
     //マップ生成
-    ObjManager::Entry(new Map(Map::MapTag::STAGE));
+    ObjManager::AddObj(new Map(Map::MapTag::STAGE));
 
     //家具生成
-    ObjManager::Entry(new Furniture(Furniture::FurName::Stage));
+    ObjManager::AddObj(new Furniture(Furniture::FurName::Stage));
 
     //ドア生成
-    ObjManager::Entry(new Door("play"));
-    ObjManager::Entry(new Door("play", "1"));
-    ObjManager::Entry(new Door("play", "2"));
+    ObjManager::AddObj(new Door("play"));
+    ObjManager::AddObj(new Door("play", "1"));
+    ObjManager::AddObj(new Door("play", "2"));
 
     //イス生成
-    ObjManager::Entry(new Chair);
+    ObjManager::AddObj(new Chair);
 
     //照明生成
-    ObjManager::Entry(new NomalLight("play"));
-    ObjManager::Entry(new LitLight("play","1"));
-    ObjManager::Entry(new LitLight("play", "2"));
-    ObjManager::Entry(new NomalLight("play", "3"));
-    ObjManager::Entry(new NomalLight("play", "4"));
+    ObjManager::AddObj(new NomalLight("play"));
+    ObjManager::AddObj(new LitLight("play","1"));
+    ObjManager::AddObj(new LitLight("play", "2"));
+    ObjManager::AddObj(new NomalLight("play", "3"));
+    ObjManager::AddObj(new NomalLight("play", "4"));
 
     //プレイヤー生成
-    ObjManager::Entry(new Player);
+    ObjManager::AddObj(new Player);
 
     //キャラギミック生成
-    ObjManager::Entry(new GhostWalkGim);
-    ObjManager::Entry(new Man);
+    ObjManager::AddObj(new GhostWalkGim);
+    ObjManager::AddObj(new Man);
 
     //台詞生成
-    ObjManager::Entry(new Remarks(TextType::Stage));
+    ObjManager::AddObj(new Remarks(TextType::Stage));
 }
 
 // デストラクタ //
@@ -69,17 +69,17 @@ PlayScene::~PlayScene()
 SceneBase* PlayScene::UpdateScene(const float deltaTime)
 {
     //オブジェクト更新
-    ObjManager::Update(deltaTime);
+    ObjManager::UpdateAllObj(deltaTime);
 
     //オブジェクト当たり判定
-    ObjManager::Collision();
+    ObjManager::OnCollision();
 
     //キャラクターのギミックが作動し終わったら
-    ObjBase* man = ObjManager::GetFirstObj(ObjectTag::Man);
+    ObjBase* man = ObjManager::GetFirstObj(ObjTag::Man);
     if (!man)
     {
         //管理クラス内の確保したデータ解放
-        ObjManager::ReleaseAllObj();
+        ObjManager::DeleteAllObj();
 
         //シーンを次の場面にする
         SaveScene::Save(this);
@@ -94,7 +94,7 @@ SceneBase* PlayScene::UpdateScene(const float deltaTime)
 
         //管理クラス内の確保したデータ解放
         AssetManager::ReleaseAllAsset();
-        ObjManager::ReleaseAllObj();
+        ObjManager::DeleteAllObj();
 
         //シーンをタイトルにする
         return new TitleScene;
@@ -108,5 +108,5 @@ SceneBase* PlayScene::UpdateScene(const float deltaTime)
 void PlayScene::DrawScene()
 {
     //オブジェクト描画
-    ObjManager::Draw();
+    ObjManager::DrawAllObj();
 }

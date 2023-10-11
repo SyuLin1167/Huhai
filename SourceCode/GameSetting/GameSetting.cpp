@@ -3,7 +3,7 @@
 #include"../Scene/SceneBase/SceneBase.h"
 
 //‚Ì‚¿‚É‰æ–ÊƒTƒCƒY‚Ì’è”‚ğObjBase‚©‚çSceneBase‚ÉˆÚ“®‚³‚¹‚é
-#include"../Object/ObjectBase/ObjectBase.h"
+#include"../Object/ObjectBase/ObjBase.h"
 
 
 

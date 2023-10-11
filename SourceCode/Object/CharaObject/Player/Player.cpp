@@ -7,7 +7,7 @@
 // コンストラクタ //
 
 Player::Player()
-    :ObjBase(ObjectTag::Player)
+    :ObjBase(ObjTag::Player)
     , canMove(true)
     , UP(VGet(0,0,0))
     , DOWN(VGet(0,0,0))
@@ -43,7 +43,7 @@ Player::~Player()
 void Player::Update(float deltaTime)
 {
     //カメラの向き取得
-    ObjBase* camFps = ObjManager::GetFirstObj(ObjectTag::Camera);
+    ObjBase* camFps = ObjManager::GetFirstObj(ObjTag::Camera);
     camFront = camFps->GetDir();
     camFront.y = 0;
     camFront = VNorm(camFront);
@@ -79,7 +79,7 @@ void Player::Update(float deltaTime)
     }
 
     //セリフ表示時は動作停止
-    if (ObjManager::GetFirstObj(ObjectTag::Remarks))
+    if (ObjManager::GetFirstObj(ObjTag::Remarks))
     {
         canMove = false;
     }
@@ -102,11 +102,11 @@ void Player::Draw()
 
 void Player::OnCollisionEnter(const ObjBase* other)
 {
-    ObjectTag tag = other->GetTag();
+    ObjTag tag = other->GetTag();
 
     //建物にぶつかったら押し戻す
-    if (tag == ObjectTag::Map ||
-        tag == ObjectTag::Furniture)
+    if (tag == ObjTag::Map ||
+        tag == ObjTag::Furniture)
     {
         int mapColModel = other->GetColModel();
         CollHitSphere(mapColModel);
@@ -114,13 +114,13 @@ void Player::OnCollisionEnter(const ObjBase* other)
     }
 
     //幽霊にぶつかったら死亡
-    if (tag == ObjectTag::Ghost)
+    if (tag == ObjTag::Ghost)
     {
         if (abs(VSize(other->GetPos() - objPos)) < HIT_DISTANCE && canMove)
         {
             canMove = false;
             isVisible = false;
-            ObjBase* camera = ObjManager::GetFirstObj(ObjectTag::Camera);
+            ObjBase* camera = ObjManager::GetFirstObj(ObjTag::Camera);
             if (camera)
             {
                 camera->SetDir(other->GetPos() - camera->GetPos() + HIT_AIM_POS);

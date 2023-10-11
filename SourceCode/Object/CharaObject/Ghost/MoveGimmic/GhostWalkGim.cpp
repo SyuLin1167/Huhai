@@ -37,7 +37,7 @@ void GhostWalkGim::Update(float deltaTime)
     if (isMove)
     {
         //当たり判定設定
-        ObjBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
+        ObjBase* player = ObjManager::GetFirstObj(ObjTag::Player);
         colLine = Line(COL_LINE_FIRST_POS+COL_LINE_HEIGHT,
             player->GetPos() - objPos + COL_LINE_HEIGHT);             //線分設定
 
@@ -65,10 +65,10 @@ void GhostWalkGim::Draw()
 
 void GhostWalkGim::OnCollisionEnter(const ObjBase* other)
 {
-    ObjectTag tag = other->GetTag();
+    ObjTag tag = other->GetTag();
 
     //プレイヤーが一定距離近づいたら動作開始
-    if (tag == ObjectTag::Player)
+    if (tag == ObjTag::Player)
     {
         if (CollisionPair(colSphere, other->GetColSphere()))
         {
@@ -84,8 +84,8 @@ void GhostWalkGim::OnCollisionEnter(const ObjBase* other)
     }
 
     //自身とプレイヤー間の線分が建物にぶつかったら死亡する
-    if (tag == ObjectTag::Map ||
-        tag == ObjectTag::Furniture)
+    if (tag == ObjTag::Map ||
+        tag == ObjTag::Furniture)
     {
         int mapColModel = other->GetColModel();
         MV1_COLL_RESULT_POLY colInfoLine;

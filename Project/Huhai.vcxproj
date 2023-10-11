@@ -177,7 +177,7 @@
     <ClCompile Include="..\SourceCode\Object\MapObject\Light\NomalLight\NomalLight.cpp" />
     <ClCompile Include="..\SourceCode\Object\MapObject\Map\Map.cpp" />
     <ClCompile Include="..\SourceCode\Object\MapObject\Table\Table.cpp" />
-    <ClCompile Include="..\SourceCode\Object\ObjectBase\ObjectBase.cpp" />
+    <ClCompile Include="..\SourceCode\Object\ObjectBase\ObjBase.cpp" />
     <ClCompile Include="..\SourceCode\Object\ObjectManager\ObjManager.cpp" />
     <ClCompile Include="..\SourceCode\Scene\Ending\Ending.cpp" />
     <ClCompile Include="..\SourceCode\Scene\EscapeScene\Escape.cpp" />
@@ -228,8 +228,8 @@
     <ClInclude Include="..\SourceCode\Object\MapObject\Light\NomalLight\NomalLight.h" />
     <ClInclude Include="..\SourceCode\Object\MapObject\Map\Map.h" />
     <ClInclude Include="..\SourceCode\Object\MapObject\Table\Table.h" />
-    <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectBase.h" />
-    <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjectTag.h" />
+    <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjBase.h" />
+    <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjTag.h" />
     <ClInclude Include="..\SourceCode\Object\ObjectManager\ObjManager.h" />
     <ClInclude Include="..\SourceCode\Scene\Ending\Ending.h" />
     <ClInclude Include="..\SourceCode\Scene\EscapeScene\Escape.h" />

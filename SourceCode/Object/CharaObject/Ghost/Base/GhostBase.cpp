@@ -6,7 +6,7 @@
 // コンストラクタ //
 
 GhostBase::GhostBase()
-    :ObjBase(ObjectTag::Ghost)
+    :ObjBase(ObjTag::Ghost)
     , gstAnim(nullptr)
     , animType(IDLE)
     , gstSound(nullptr)

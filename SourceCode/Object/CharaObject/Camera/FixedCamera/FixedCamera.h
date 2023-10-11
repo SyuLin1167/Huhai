@@ -1,5 +1,5 @@
 #pragma once
-#include"../../../ObjectBase/ObjectBase.h"
+#include"../../../ObjectBase/ObjBase.h"
 
 /*FixedCameraƒNƒ‰ƒX*/
 class FixedCamera :public ObjBase

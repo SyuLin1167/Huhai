@@ -27,19 +27,19 @@ TitleScene::TitleScene()
     sound->StartSound(SoundTag::Title, DX_PLAYTYPE_LOOP);
 
     //カメラ生成
-    ObjManager::Entry(new FixedCamera);
+    ObjManager::AddObj(new FixedCamera);
 
     //マップ生成
-    ObjManager::Entry(new Map(Map::MapTag::TITLE));
+    ObjManager::AddObj(new Map(Map::MapTag::TITLE));
 
     //ドア生成
     door = new Door("title");
-    ObjManager::Entry(door);
+    ObjManager::AddObj(door);
     door->MoveAnim(Door::AnimType::OPEN);
 
     //ライト生成
-    ObjManager::Entry(new BlinkingLight("title"));
-    ObjManager::Entry(new NomalLight("title", "1"));
+    ObjManager::AddObj(new BlinkingLight("title"));
+    ObjManager::AddObj(new NomalLight("title", "1"));
 
     //選択ボタン生成
     for (auto type : selectTypeAll)
@@ -70,7 +70,7 @@ SceneBase* TitleScene::UpdateScene(const float deltaTime)
     SetMouseDispFlag(TRUE);
 
     //オブジェクト更新
-    ObjManager::Update(deltaTime);
+    ObjManager::UpdateAllObj(deltaTime);
     for (auto type : selectTypeAll)
     {
         select[type]->Update(deltaTime);
@@ -106,7 +106,7 @@ SceneBase* TitleScene::UpdateScene(const float deltaTime)
 
                     //管理クラス内の確保したデータ解放
                     AssetManager::ReleaseAllAsset();
-                    ObjManager::ReleaseAllObj();
+                    ObjManager::DeleteAllObj();
 
                     if (type == PLAY)
                     {
@@ -131,7 +131,7 @@ SceneBase* TitleScene::UpdateScene(const float deltaTime)
 void TitleScene::DrawScene()
 {
     //オブジェクト描画
-    ObjManager::Draw();
+    ObjManager::DrawAllObj();
 
     //選択ボタン描画
     GetDrawScreenGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, screenGraph);

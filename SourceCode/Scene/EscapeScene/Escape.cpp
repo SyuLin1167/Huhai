@@ -22,36 +22,36 @@ EscapeScene::EscapeScene()
     :SceneBase()
 {
     //カメラ生成
-    ObjManager::Entry(new FpsCamera);
+    ObjManager::AddObj(new FpsCamera);
 
     //マップ生成
-    ObjManager::Entry(new Map(Map::MapTag::ESCAPE));
-    ObjManager::Entry(new Map(Map::MapTag::ESCAPEMAIN));
-    ObjManager::Entry(new Map(Map::MapTag::GOAL));
+    ObjManager::AddObj(new Map(Map::MapTag::ESCAPE));
+    ObjManager::AddObj(new Map(Map::MapTag::ESCAPEMAIN));
+    ObjManager::AddObj(new Map(Map::MapTag::GOAL));
 
     //ドア生成
     class Door* door = new Door("escape");
-    ObjManager::Entry(door);
+    ObjManager::AddObj(door);
     door->MoveAnim(Door::AnimType::OPEN);
-    ObjManager::Entry(new Door("escape", "1"));
-    ObjManager::Entry(new Door("escape", "2"));
+    ObjManager::AddObj(new Door("escape", "1"));
+    ObjManager::AddObj(new Door("escape", "2"));
 
     //机生成
     for (int i = 0; i < TableNum; i++)
     {
-        ObjManager::Entry(new Table(i));
+        ObjManager::AddObj(new Table(i));
     }
 
     //照明生成
-    ObjManager::Entry(new BlinkingLight("escape"));
-    ObjManager::Entry(new NomalLight("escape", "1"));
-    ObjManager::Entry(new FlashLight);
+    ObjManager::AddObj(new BlinkingLight("escape"));
+    ObjManager::AddObj(new NomalLight("escape", "1"));
+    ObjManager::AddObj(new FlashLight);
 
     //プレイヤー生成
-    ObjManager::Entry(new Player);
+    ObjManager::AddObj(new Player);
 
     //ゴースト生成
-    ObjManager::Entry(new Ghost);
+    ObjManager::AddObj(new Ghost);
 
     //サウンド生成
     sound->AddSound("../Assets/Sound/GameOverSE.mp3", SoundTag::GameOver);
@@ -69,22 +69,22 @@ EscapeScene::~EscapeScene()
 SceneBase* EscapeScene::UpdateScene(float deltaTime)
 {
     //オブジェクト更新
-    ObjManager::Update(deltaTime);
+    ObjManager::UpdateAllObj(deltaTime);
 
     //オブジェクト当たり判定
-    ObjManager::Collision();
+    ObjManager::OnCollision();
 
     //クリアしたら
-    if (!ObjManager::GetObj(ObjectTag::Map, 2))
+    if (!ObjManager::GetObj(ObjTag::Map, 2))
     {
         //管理クラス内の確保したデータ解放
-        ObjManager::ReleaseAllObj();
+        ObjManager::DeleteAllObj();
 
         //シーンを次の場面にする
         return new Ending;
     }
     //ゲームオーバーしたら
-    else if (!ObjManager::GetFirstObj(ObjectTag::Player)->IsVisible())
+    else if (!ObjManager::GetFirstObj(ObjTag::Player)->IsVisible())
     {
         //フェードアウト
         blendMode->AddFade(deltaTime);
@@ -97,7 +97,7 @@ SceneBase* EscapeScene::UpdateScene(float deltaTime)
             {
                 //管理クラス内の確保したデータ解放
                 AssetManager::ReleaseAllAsset();
-                ObjManager::ReleaseAllObj();
+                ObjManager::DeleteAllObj();
 
                 //シーンを次の場面にする
                 return new TitleScene;
@@ -112,7 +112,7 @@ SceneBase* EscapeScene::UpdateScene(float deltaTime)
 
         //管理クラス内の確保したデータ解放
         AssetManager::ReleaseAllAsset();
-        ObjManager::ReleaseAllObj();
+        ObjManager::DeleteAllObj();
 
         //シーンをタイトルにする
         return new TitleScene;
@@ -125,7 +125,7 @@ SceneBase* EscapeScene::UpdateScene(float deltaTime)
 void EscapeScene::DrawScene()
 {
     //オブジェクト描画
-    ObjManager::Draw();
+    ObjManager::DrawAllObj();
 
     //フェード処理
     blendMode->Fade();

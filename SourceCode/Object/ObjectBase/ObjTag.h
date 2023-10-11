@@ -1,7 +1,7 @@
 #pragma once
 
 /*オブジェクトタグ*/
-enum class ObjectTag :unsigned char
+enum class ObjTag :unsigned char
 {
     Camera,     //カメラ
     Map,        //マップ
@@ -15,16 +15,16 @@ enum class ObjectTag :unsigned char
 };
 
 /*全タグ*/
-constexpr static ObjectTag ObjTagAll[] =
+constexpr static ObjTag ObjTagAll[] =
 {
-    ObjectTag::Camera,
-    ObjectTag::Map,
-    ObjectTag::Furniture,
-    ObjectTag::Light,
-    ObjectTag::Player,
-    ObjectTag::Ghost,
-    ObjectTag::Man,
-    ObjectTag::UI,
-    ObjectTag::Remarks,
+    ObjTag::Camera,
+    ObjTag::Map,
+    ObjTag::Furniture,
+    ObjTag::Light,
+    ObjTag::Player,
+    ObjTag::Ghost,
+    ObjTag::Man,
+    ObjTag::UI,
+    ObjTag::Remarks,
 };
 

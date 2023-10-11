@@ -10,7 +10,7 @@
 // コンストラクタ //
 
 Man::Man()
-    :ObjBase(ObjectTag::Man)
+    :ObjBase(ObjTag::Man)
     , manAnim(nullptr)
     , isSpeak(false)
     , manSound(nullptr)
@@ -52,7 +52,7 @@ void Man::Load()
     manSound->AddSound("../Assets/Sound/BodyFallSE.mp3", SoundTag::BodyFall, true);
 
     //アクションボタン生成
-    ObjManager::Entry(new Action(objPos + VGet(0, 0, 5)));
+    ObjManager::AddObj(new Action(objPos + VGet(0, 0, 5)));
 }
 
 // 更新処理 //
@@ -67,16 +67,16 @@ void Man::Update(float deltaTime)
     VECTOR negativeVec = VTransform(objDir, rotYMat);
 
     //アクションボタンが押されたらセリフを再生
-    if (!ObjManager::GetObj(ObjectTag::UI, 3)->IsVisible())
+    if (!ObjManager::GetObj(ObjTag::UI, 3)->IsVisible())
     {
         //プレイヤーの方を向く
         rotateNow = true;
-        aimDir = VSub(ObjManager::GetFirstObj(ObjectTag::Player)->GetPos(), objPos);
+        aimDir = VSub(ObjManager::GetFirstObj(ObjTag::Player)->GetPos(), objPos);
         aimDir = VNorm(aimDir);
         Rotate();
 
         //セリフが終わったら男性を死亡させる
-        ObjBase* remarks = ObjManager::GetFirstObj(ObjectTag::Remarks);
+        ObjBase* remarks = ObjManager::GetFirstObj(ObjTag::Remarks);
         if (!remarks && isSpeak)
         {
             if (animType != DEAD)
@@ -98,7 +98,7 @@ void Man::Update(float deltaTime)
         //向き終わったら会話中にする
         if (!rotateNow && !isSpeak)
         {
-            ObjManager::Entry(new Remarks(TextType::ManSpeak));
+            ObjManager::AddObj(new Remarks(TextType::ManSpeak));
             isSpeak = true;
         }
     }

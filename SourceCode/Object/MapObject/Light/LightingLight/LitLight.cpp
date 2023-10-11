@@ -22,7 +22,7 @@ LitLight::~LitLight()
 void LitLight::Update(float deltaTime)
 {
     //ˆê’è‹——£‹ß‚Ã‚¢‚½‚ç”­Œõ
-    ObjBase* player = ObjManager::GetFirstObj(ObjectTag::Player);
+    ObjBase* player = ObjManager::GetFirstObj(ObjTag::Player);
     if (player)
     {
         lightDistance = VSize(player->GetPos() - objPos);

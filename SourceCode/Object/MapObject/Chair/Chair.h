@@ -1,6 +1,6 @@
 #pragma once
 
-#include"../../ObjectBase/ObjectBase.h"
+#include"../../ObjectBase/ObjBase.h"
 
 /*ChairƒNƒ‰ƒX*/
 class Chair :public ObjBase
