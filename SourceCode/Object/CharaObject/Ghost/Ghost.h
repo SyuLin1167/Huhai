@@ -3,7 +3,9 @@
 #include"Base/GhostBase.h"
 
 
-/* Ghostクラス */
+/// <summary>
+/// Ghostクラス
+/// </summary>
 class Ghost :public GhostBase
 {
 public:
@@ -21,23 +23,22 @@ public:
     /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
-    void Update(float deltaTime)override;
+    void Update(float deltaTime) override;
 
     /// <summary>
     /// 描画処理
     /// </summary>
-    void Draw()override;
+    void Draw() override;
 
 
     /// <summary>
-    /// 衝突時処理
+    /// 当たり判定処理
     /// </summary>
     /// <param name="other">:オブジェクト</param>
-    void OnCollisionEnter(const ObjBase* other)override;
+    void OnCollisionEnter(const ObjBase* other) override;
 private:
     float moveCount;                                                    //カウント
     bool isFirstMove;                                                   //初動状態
-    bool isMove;                                                        //移動状態
 
     VECTOR aimPos;                                                      //目標座標
     VECTOR holdPos;                                                     //一時保存座標

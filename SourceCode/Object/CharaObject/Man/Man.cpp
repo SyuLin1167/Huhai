@@ -7,13 +7,14 @@
 #include"../../../UI/Reamarks/Remarks.h"
 #include"../../../Asset/Sound/Sound.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 Man::Man()
     :ObjBase(ObjTag::Man)
-    , manAnim(nullptr)
     , isSpeak(false)
-    , manSound(nullptr)
+    , manAnim(new Animation(objHandle))
+    , manSound(new Sound)
 {
     Load();
 }
@@ -22,10 +23,6 @@ Man::Man()
 
 Man::~Man()
 {
-
-    //インスタンス削除
-    delete manAnim;
-    delete manSound;
 }
 
 // 読み込み処理 //
@@ -40,14 +37,12 @@ void Man::Load()
     MV1SetScale(objHandle, VGet(0.02f, 0.02f, 0.02f));
 
     //アニメーション設定
-    manAnim = new Animation(objHandle);
     manAnim->AddAnimation("../Assets/Chara/Man/ManCrying.mv1");
     manAnim->AddAnimation("../Assets/Chara/Man/ManDying.mv1", 30.0f, false);
     animType = CRYING;
     manAnim->StartAnim(animType);
 
     //サウンド設定
-    manSound = new Sound;
     manSound->AddSound("../Assets/Sound/ManHurtSE.mp3", SoundTag::ManHurt, true);
     manSound->AddSound("../Assets/Sound/BodyFallSE.mp3", SoundTag::BodyFall, true);
 

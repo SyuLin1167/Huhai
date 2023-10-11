@@ -3,13 +3,15 @@
 #include"../../../ObjectManager/ObjManager.h"
 #include"../../../../Asset/AssetManager/AssetManager.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 GhostBase::GhostBase()
     :ObjBase(ObjTag::Ghost)
-    , gstAnim(nullptr)
-    , animType(IDLE)
-    , gstSound(nullptr)
+    , isMove(false)
+    , ghostAnim(new Animation(objHandle))
+    , animType(Anim::IDLE)
+    , ghostSound(new Sound)
 {
     //モデル設定
     objHandle = AssetManager::GetMesh("../Assets/Chara/Ghost/GhostModel.mv1");
@@ -18,25 +20,22 @@ GhostBase::GhostBase()
     MV1SetScale(objHandle, VGet(0.02f, 0.02f, 0.02f));
 
     //アニメーション設定
-    gstAnim = new Animation(objHandle);
-    gstAnim->AddAnimation("../Assets/Chara/Ghost/GhostIdle.mv1");
-    gstAnim->AddAnimation("../Assets/Chara/Ghost/GhostWalk.mv1");
-    gstAnim->AddAnimation("../Assets/Chara/Ghost/GhostSad.mv1");
-    gstAnim->AddAnimation("../Assets/Chara/Ghost/GhostMove.mv1");
-    gstAnim->StartAnim(animType);
+    ghostAnim->AddAnimation("../Assets/Chara/Ghost/GhostIdle.mv1");
+    ghostAnim->AddAnimation("../Assets/Chara/Ghost/GhostWalk.mv1");
+    ghostAnim->AddAnimation("../Assets/Chara/Ghost/GhostSad.mv1");
+    ghostAnim->AddAnimation("../Assets/Chara/Ghost/GhostMove.mv1");
+    ghostAnim->StartAnim(animType);
 
     //サウンド設定
-    gstSound = new Sound;
-    gstSound->AddSound("../Assets/Sound/GhostWalkSE.mp3", SoundTag::GhostWalk);
-    gstSound->AddSound("../Assets/Sound/GhostScreamSE.mp3", SoundTag::GhostScream, true, true);
-    gstSound->AddSound("../Assets/Sound/EscapeBgm.mp3", SoundTag::Escape, true, false);
+    ghostSound->AddSound("../Assets/Sound/GhostWalkSE.mp3", SoundTag::GhostWalk);
+    ghostSound->AddSound("../Assets/Sound/GhostScreamSE.mp3", SoundTag::GhostScream, true, true);
+    ghostSound->AddSound("../Assets/Sound/EscapeBgm.mp3", SoundTag::Escape, true, false);
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 GhostBase::~GhostBase()
 {
-    //インスタンス削除
-    delete gstAnim;
-    delete gstSound;
+    //処理なし
 }

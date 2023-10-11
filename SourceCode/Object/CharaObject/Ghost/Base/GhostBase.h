@@ -1,10 +1,13 @@
 #pragma once
+#include<memory>
 
 #include"../../../ObjectBase/ObjBase.h"
 #include"../../../../Asset/Animation/Animation.h"
 #include"../../../../Asset/Sound/Sound.h"
 
-/*GhostBaseクラス*/
+/// <summary>
+/// GhostBaseクラス
+/// </summary>
 class GhostBase :public ObjBase
 {
 public:
@@ -30,8 +33,10 @@ public:
     };
 
 protected:
-    class Animation* gstAnim;       //アニメーション
-    int animType;                   //アニメーションタイプ
+    bool isMove;                                    //移動状態
 
-    class Sound* gstSound;          //サウンド
+    std::unique_ptr<class Animation> ghostAnim;     //アニメーション
+    int animType;                                   //アニメーションタイプ
+
+    std::unique_ptr<class Sound> ghostSound;        //サウンド
 };

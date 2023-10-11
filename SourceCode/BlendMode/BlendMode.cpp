@@ -3,8 +3,10 @@
 #include<math.h>
 #include"../Object/ObjectBase/ObjBase.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
+/// <param name="speed">:フェード速度(デフォルト・80.0)</param>
 BlendMode::BlendMode(float FadeSpeed)
     :fadeValue(0.0f)
     , fadeSpeed(FadeSpeed)
@@ -14,14 +16,16 @@ BlendMode::BlendMode(float FadeSpeed)
     // 処理なし
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 BlendMode::~BlendMode()
 {
 }
 
-// フェードアウト //
-
+/// <summary>
+/// フェードアウト
+/// </summary>
 void BlendMode::AddFade(float deltaTime)
 {
     if (fadeValue <= 255)
@@ -41,8 +45,9 @@ void BlendMode::AddFade(float deltaTime)
     }
 }
 
-// フェードイン //
-
+/// <summary>
+/// フェードイン
+/// </summary>
 void BlendMode::SubFade(float deltaTime)
 {
     if (fadeValue >= 0)
@@ -62,15 +67,17 @@ void BlendMode::SubFade(float deltaTime)
     }
 }
 
-// フェード //
-
+/// <summary>
+/// フェード
+/// </summary>
 void BlendMode::Fade()
 {
     SetDrawBlendMode(DX_BLENDMODE_ALPHA, static_cast<int>(fadeValue));
 }
 
-// 暗転処理 //
-
+/// <summary>
+/// 暗転処理
+/// </summary>
 void BlendMode::Darken()
 {
     if (nowFade)
@@ -86,8 +93,9 @@ void BlendMode::Darken()
     }
 }
 
-// デフォルト //
-
+/// <summary>
+/// デフォルト
+/// </summary>
 void BlendMode::NoBlend()
 {
     //ノーブレンドモード

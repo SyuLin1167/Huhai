@@ -11,23 +11,19 @@ class GameSetting
 {
 public:
     /// <summary>
-    /// コンストラクタ(シングルトン)
+    /// コンストラクタ
     /// </summary>
-    GameSetting() {};
+    GameSetting();
 
     /// <summary>
     /// デストラクタ
     /// </summary>
-    ~GameSetting() { Finalize(); }
+    ~GameSetting();
 
     /// <summary>
     /// 初期化処理
     /// </summary>
+    /// <returns>初期化できたかどうか</returns>
     int Init();
-
-    /// <summary>
-    /// 後処理
-    /// </summary>
-    void Finalize();
 };
 

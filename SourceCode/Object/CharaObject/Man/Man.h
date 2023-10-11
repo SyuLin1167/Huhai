@@ -1,8 +1,11 @@
 #pragma once
+#include<memory>
 
 #include"../../ObjectBase/ObjBase.h"
 
-/*Manクラス*/
+/// <summary>
+/// Manクラス
+/// </summary>
 class Man :public ObjBase
 {
 public:
@@ -32,7 +35,9 @@ public:
     /// </summary>
     void Draw()override;
 
-    //アニメーションタイプ
+    /// <summary>
+    /// アニメーションタイプ
+    /// </summary>
     enum Anim
     {
         CRYING = 0,         //泣き
@@ -40,14 +45,11 @@ public:
     };
 
 private:
+    const float ROTATE_VELOCITY = 5.0f;             //回転速度
+    bool isSpeak;                                   //会話状態
 
-    class Animation* manAnim;               //アニメーション
-    int animType;                           //アニメーションタイプ
+    std::unique_ptr<class Animation> manAnim;       //アニメーション
+    int animType;                                   //アニメーションタイプ
 
-
-    const float ROTATE_VELOCITY = 5.0f;     //回転速度
-
-    bool isSpeak;                           //会話状態
-
-    class Sound* manSound;                  //サウンド
+    std::unique_ptr<class Sound> manSound;          //サウンド
 };

@@ -14,6 +14,11 @@ class ObjManager final
 {
 public:
     /// <summary>
+    /// デストラクタ
+    /// </summary>
+    ~ObjManager();
+
+    /// <summary>
     /// 初期化処理
     /// </summary>
     static void Init();
@@ -65,16 +70,6 @@ public:
     /// <param name="tagNum">:オブジェクト番号</param>
     /// <returns>:オブジェクト</returns>
     static ObjBase* GetObj(ObjTag tag, int tagNum);
-
-    /// <summary>
-    /// 後処理
-    /// </summary>
-    static void Finalize();
-
-    /// <summary>
-    /// デストラクタ
-    /// </summary>
-    ~ObjManager();
 
 private:
     /// <summary>

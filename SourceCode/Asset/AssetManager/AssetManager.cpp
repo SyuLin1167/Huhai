@@ -2,42 +2,50 @@
 
 
 //実態へのポインタ定義
-AssetManager* AssetManager::assetMgr = nullptr;
+std::unique_ptr<AssetManager> AssetManager::singleton = nullptr;
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 AssetManager::AssetManager()
 {
     SetEnableXAudioFlag(TRUE);
     Set3DSoundOneMetre(10.0f);
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 AssetManager::~AssetManager()
 {
+    //全アセット削除
+    ReleaseAllAsset();
 }
 
-// 初期化処理 //
-
+/// <summary>
+/// 初期化処理
+/// </summary>
 void AssetManager::Init()
 {
     //インスタンス生成
-    if (!assetMgr)
+    if (!singleton)
     {
-        assetMgr = new AssetManager;
+        singleton.reset(new AssetManager);
     }
 }
 
-// グラフ取得 //
-
+/// <summary>
+/// グラフ取得
+/// </summary>
+/// <param name="fileName">:ファイル名</param>
+/// <returns>:複製したグラフID</returns>
 int AssetManager::GetGraph(std::string fileName)
 {
     int meshID = 0;
 
     //ファイルを検索して登録されていなかったら登録
-    auto findFile = assetMgr->graphMap.find(fileName);
-    if (findFile == assetMgr->graphMap.end())
+    auto findFile = singleton->graphMap.find(fileName);
+    if (findFile == singleton->graphMap.end())
     {
         meshID = LoadGraph(fileName.c_str());
 
@@ -47,22 +55,26 @@ int AssetManager::GetGraph(std::string fileName)
             return meshID;
         }
 
-        assetMgr->graphMap.emplace(fileName, meshID);
+        singleton->graphMap.emplace(fileName, meshID);
     }
 
     //グラフIDを返す
-    return assetMgr->graphMap[fileName];
+    return singleton->graphMap[fileName];
 }
 
-// メッシュ取得 //
 
+/// <summary>
+/// メッシュ取得
+/// </summary>
+/// <param name="fileName">:ファイル名</param>
+/// <returns>複製したメッシュID</returns>
 int AssetManager::GetMesh(std::string fileName)
 {
     int meshID = 0;
 
     //ファイルを検索して登録されていなかったら登録
-    auto iter = assetMgr->meshMap.find(fileName);
-    if (iter == assetMgr->meshMap.end())
+    auto iter = singleton->meshMap.find(fileName);
+    if (iter == singleton->meshMap.end())
     {
         meshID = MV1LoadModel(fileName.c_str());
 
@@ -72,24 +84,27 @@ int AssetManager::GetMesh(std::string fileName)
             return meshID;
         }
 
-        assetMgr->meshMap.emplace(fileName, meshID);
+        singleton->meshMap.emplace(fileName, meshID);
     }
 
     //複製したメッシュIDを返す
-    meshID = MV1DuplicateModel(assetMgr->meshMap[fileName]);
-    assetMgr->dupMesh.push_back(meshID);
+    meshID = MV1DuplicateModel(singleton->meshMap[fileName]);
+    singleton->dupMesh.push_back(meshID);
     return meshID;
 }
 
-// アニメーション取得 //
-
+/// <summary>
+/// アニメーション取得
+/// </summary>
+/// <param name="fileName">:ファイル名</param>
+/// <returns>アニメーションID</returns>
 int AssetManager::GetAnim(std::string fileName)
 {
     int animID = 0;
 
     //ファイルを検索して登録されていなかったら登録
-    auto iter = assetMgr->animMap.find(fileName);
-    if (iter == assetMgr->animMap.end())
+    auto iter = singleton->animMap.find(fileName);
+    if (iter == singleton->animMap.end())
     {
         animID = MV1LoadModel(fileName.c_str());
 
@@ -99,23 +114,26 @@ int AssetManager::GetAnim(std::string fileName)
             return animID;
         }
 
-        assetMgr->animMap.emplace(fileName, animID);
+        singleton->animMap.emplace(fileName, animID);
     }
 
     //アニメーションIDを返す
-    return assetMgr->animMap[fileName];
+    return singleton->animMap[fileName];
 }
 
-// サウンド取得 //
-
+/// <summary>
+/// サウンド取得
+/// </summary>
+/// <param name="fileName">:ファイル名</param>
+/// <returns>複製したサウンドID</returns>
 int AssetManager::GetSound(std::string fileName)
 {
     int meshID = 0;
 
     //ファイルを検索して登録されていなかったら登録
-    auto iter = assetMgr->soundMap.find(fileName);
+    auto iter = singleton->soundMap.find(fileName);
 
-    if (iter == assetMgr->soundMap.end())
+    if (iter == singleton->soundMap.end())
     {
         meshID = LoadSoundMem(fileName.c_str());
 
@@ -125,33 +143,35 @@ int AssetManager::GetSound(std::string fileName)
             return meshID;
         }
 
-        assetMgr->meshMap.emplace(fileName, meshID);
+        singleton->meshMap.emplace(fileName, meshID);
     }
 
     //複製したサウンドIDを返す
-    meshID = DuplicateSoundMem(assetMgr->meshMap[fileName]);
-    assetMgr->dupMesh.push_back(meshID);
+    meshID = DuplicateSoundMem(singleton->meshMap[fileName]);
+    singleton->dupMesh.push_back(meshID);
     return meshID;
 }
 
-// メッシュの削除 //
-
+/// <summary>
+/// メッシュ削除
+/// </summary>
+/// <param name="meshID">:メッシュID</param>
 void AssetManager::ReleaseMesh(int meshID)
 {
     //複製したメッシュ内検索
-    auto iter = find(assetMgr->dupMesh.begin(),
-        assetMgr->dupMesh.end(), meshID);
+    auto iter = find(singleton->dupMesh.begin(),
+        singleton->dupMesh.end(), meshID);
 
     //見つからなかったら結果を返す
-    if (iter == assetMgr->dupMesh.end())
+    if (iter == singleton->dupMesh.end())
     {
         return;
     }
 
     //見つかったら末尾移動して削除
     MV1DeleteModel(meshID);
-    std::iter_swap(iter, assetMgr->dupMesh.end() - 1);
-    assetMgr->dupMesh.pop_back();
+    std::iter_swap(iter, singleton->dupMesh.end() - 1);
+    singleton->dupMesh.pop_back();
 }
 
 // 全アセット削除 //
@@ -159,59 +179,45 @@ void AssetManager::ReleaseMesh(int meshID)
 void AssetManager::ReleaseAllAsset()
 {
     //グラフ解放
-    for (auto& graph : assetMgr->graphMap)
+    for (auto& graph : singleton->graphMap)
     {
         DeleteGraph(graph.second);
     }
     //アニメーション解放
-    for (auto& anim : assetMgr->animMap)
+    for (auto& anim : singleton->animMap)
     {
         MV1DeleteModel(anim.second);
     }
 
     //メッシュ解放
-    for (auto& mesh : assetMgr->meshMap)
+    for (auto& mesh : singleton->meshMap)
     {
         MV1DeleteModel(mesh.second);
     }
 
     //サウンド解放
-    for (auto& sound : assetMgr->soundMap)
+    for (auto& sound : singleton->soundMap)
     {
         DeleteSoundMem(sound.second);
     }
 
     //複製解放-
-    for (auto dup : assetMgr->dupMesh)
+    for (auto dup : singleton->dupMesh)
     {
         MV1DeleteModel(dup);
     }
-    for (auto dup : assetMgr->dupSound)
+    for (auto dup : singleton->dupSound)
     {
         DeleteSoundMem(dup);
     }
 
     //アセットの要素削除
-    assetMgr->graphMap.clear();
-    assetMgr->animMap.clear();
-    assetMgr->meshMap.clear();
-    assetMgr->soundMap.clear();
+    singleton->graphMap.clear();
+    singleton->animMap.clear();
+    singleton->meshMap.clear();
+    singleton->soundMap.clear();
 
     //複製の要素削除
-    assetMgr->dupMesh.clear();
-    assetMgr->dupSound.clear();
-}
-
-// 後処理 //
-
-void AssetManager::Finalize()
-{
-    //全アセット削除
-    ReleaseAllAsset();
-
-    //インスタンス削除
-    if (assetMgr)
-    {
-        delete assetMgr;
-    }
+    singleton->dupMesh.clear();
+    singleton->dupSound.clear();
 }

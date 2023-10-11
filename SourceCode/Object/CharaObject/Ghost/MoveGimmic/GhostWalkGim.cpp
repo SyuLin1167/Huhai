@@ -4,11 +4,11 @@
 #include"../../../MapObject/Door/Door.h"
 #include"../../Man/Man.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 GhostWalkGim::GhostWalkGim()
     :GhostBase()
-    , isMove(false)
 {
     objPos = VGet(120.0f, 0.0f, 65.0f);
     objSpeed = 17.0f;
@@ -20,18 +20,22 @@ GhostWalkGim::GhostWalkGim()
     colSphere.worldCenter = objPos;
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 GhostWalkGim::~GhostWalkGim()
 {
+    //処理なし
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime"></param>
 void GhostWalkGim::Update(float deltaTime)
 {
     //アニメーション時間再生
-    gstAnim->AddAnimTime(deltaTime);
+    ghostAnim->AddAnimTime(deltaTime);
 
     //動作中は移動
     if (isMove)
@@ -39,7 +43,7 @@ void GhostWalkGim::Update(float deltaTime)
         //当たり判定設定
         ObjBase* player = ObjManager::GetFirstObj(ObjTag::Player);
         colLine = Line(COL_LINE_FIRST_POS+COL_LINE_HEIGHT,
-            player->GetPos() - objPos + COL_LINE_HEIGHT);             //線分設定
+            player->GetPos() - objPos + COL_LINE_HEIGHT);
 
         objPos.x -= objSpeed * deltaTime;
     }
@@ -53,16 +57,19 @@ void GhostWalkGim::Update(float deltaTime)
     ColUpdate();
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void GhostWalkGim::Draw()
 {
     //モデル描画
     MV1DrawModel(objHandle);
 }
 
-// 衝突時処理 //
-
+/// <summary>
+/// 当たり判定処理
+/// </summary>
+/// <param name="other">:オブジェクト</param>
 void GhostWalkGim::OnCollisionEnter(const ObjBase* other)
 {
     ObjTag tag = other->GetTag();
@@ -76,8 +83,8 @@ void GhostWalkGim::OnCollisionEnter(const ObjBase* other)
             if (animType != WALK)
             {
                 animType = WALK;
-                gstAnim->StartAnim(animType);
-                gstSound->StartSound(SoundTag::GhostWalk, DX_PLAYTYPE_BACK);
+                ghostAnim->StartAnim(animType);
+                ghostSound->StartSound(SoundTag::GhostWalk, DX_PLAYTYPE_BACK);
                 isMove = true;
             }
         }
@@ -92,7 +99,7 @@ void GhostWalkGim::OnCollisionEnter(const ObjBase* other)
         if (CollisionPair(colLine, mapColModel, colInfoLine))
         {
             isVisible = false;
-            if (!gstSound->IsPlaying(SoundTag::GhostWalk))
+            if (!ghostSound->IsPlaying(SoundTag::GhostWalk))
             {
                 isAlive = false;
             }

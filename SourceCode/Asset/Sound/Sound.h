@@ -1,12 +1,13 @@
 #pragma once
-
 #include<DxLib.h>
 #include<unordered_map>
 #include<string>
 
 #include"SoundTag.h"
 
-/*Soundクラス*/
+/// <summary>
+/// Soundクラス
+/// </summary>
 class Sound
 {
 public:
@@ -68,7 +69,7 @@ public:
     bool IsPlaying(SoundTag tag);
 
     /// <summary>
-    /// サウンド一個分のデータ構造体
+    /// サウンドデータ
     /// </summary>
     struct SoundData
     {

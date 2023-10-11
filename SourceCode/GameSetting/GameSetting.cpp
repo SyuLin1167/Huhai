@@ -2,13 +2,27 @@
 #include <DxLib.h>
 #include"../Scene/SceneBase/SceneBase.h"
 
-//のちに画面サイズの定数をObjBaseからSceneBaseに移動させる
-#include"../Object/ObjectBase/ObjBase.h"
+/// <summary>
+/// コンストラクタ
+/// </summary>
+GameSetting::GameSetting()
+{
+    //処理なし
+}
 
+/// <summary>
+/// デストラクタ
+/// </summary>
+GameSetting::~GameSetting()
+{
+    //Dxライブラリの後処理
+    DxLib_End();
+}
 
-
-// 初期化処理 //
-
+/// <summary>
+/// 初期化処理
+/// </summary>
+/// <returns>初期化できたかどうか</returns>
 int GameSetting::Init()
 {
     //ログの非表示
@@ -52,13 +66,5 @@ int GameSetting::Init()
 
     //初期化成功
     return 0;
-}
-
-// 後処理 //
-
-void GameSetting::Finalize()
-{
-    //Dxライブラリの後処理
-    DxLib_End();
 }
 

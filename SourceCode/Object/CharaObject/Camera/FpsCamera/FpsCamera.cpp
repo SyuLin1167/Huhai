@@ -4,8 +4,9 @@
 #include"../../Player/Player.h"
 #include"../../../../Scene/PauseMenu/PauseMenu.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 FpsCamera::FpsCamera()
     :ObjBase(ObjTag::Camera)
     , mouseX(0)
@@ -19,14 +20,17 @@ FpsCamera::FpsCamera()
     SetMouseDispFlag(false);                                                    //マウスは非表示
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 FpsCamera::~FpsCamera()
 {
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
 void FpsCamera::Update(float deltaTime)
 {
     //カメラはプレイヤーの目線にする
@@ -47,8 +51,10 @@ void FpsCamera::Update(float deltaTime)
     }
 }
 
-// 移動処理 //
-
+/// <summary>
+/// 移動処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
 void FpsCamera::Move(float deltaTime)
 {
     //マウス移動量計測
@@ -77,8 +83,9 @@ void FpsCamera::Move(float deltaTime)
     objDir.z = sinf(cameraYaw);
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void FpsCamera::Draw()
 {
     //カーソルの移動した方向に視点を移動

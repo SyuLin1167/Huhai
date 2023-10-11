@@ -4,8 +4,9 @@
 #include"../../Object/ObjectManager/ObjManager.h"
 #include"../../Scene/PauseMenu/PauseMenu.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 Sound::Sound()
     :soundType(-1)
     , nowSoundTime(0.0f)
@@ -15,8 +16,9 @@ Sound::Sound()
 {
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 Sound::~Sound()
 {
     //サウンド削除
@@ -26,8 +28,13 @@ Sound::~Sound()
     }
 }
 
-// 追加処理 //
-
+/// <summary>
+/// 追加処理
+/// </summary>
+/// <param name="fileName">:ファイル名</param>
+/// <param name="tag">:サウンドタグ</param>
+/// <param name="isDim">:音の次元(デフォルト・2次元)</param>
+/// <param name="volumeType">:音量タイプ(デフォルト・Bgm)</param>
 void Sound::AddSound(std::string fileName, SoundTag tag, bool isDim,bool volumeType)
 {
     //サウンドデータ設定
@@ -49,8 +56,11 @@ void Sound::AddSound(std::string fileName, SoundTag tag, bool isDim,bool volumeT
     soundData.emplace(tag, sound);
 }
 
-// ドップラー効果 //
-
+/// <summary>
+/// ドップラー効果
+/// </summary>
+/// <param name="tag">:タグ</param>
+/// <param name="pos">:座標</param>
 void Sound::Doppler(SoundTag tag, VECTOR pos)
 {
     //3次元サウンドはカメラの距離に合わせて音量を変える
@@ -78,8 +88,11 @@ void Sound::Doppler(SoundTag tag, VECTOR pos)
     }
 }
 
-// 再生処理 //
-
+/// <summary>
+/// 再生処理
+/// </summary>
+/// <param name="tag">:サウンドタグ</param>
+/// <param name="soundType">:再生タイプ</param>
 void Sound::StartSound(SoundTag tag, int playType)
 {
     //再生されていなかったらサウンド再生
@@ -107,8 +120,11 @@ void Sound::StartSound(SoundTag tag, int playType)
     }
 }
 
-// 一度だけ再生処理 //
-
+/// <summary>
+/// 一度だけ再生処理
+/// </summary>
+/// <param name="tag">:サウンドタグ</param>
+/// <param name="playType">:再生タイプ</param>
 void Sound::StartSoundOnce(SoundTag tag, int playType)
 {
     //再生されていなかったらサウンド再生
@@ -120,8 +136,9 @@ void Sound::StartSoundOnce(SoundTag tag, int playType)
     }
 }
 
-// 停止処理 //
-
+/// <summary>
+/// 停止処理
+/// </summary>
 void Sound::StopSound(SoundTag tag)
 {
     //サウンドが再生されていたら停止
@@ -132,8 +149,9 @@ void Sound::StopSound(SoundTag tag)
     }
 }
 
-// 全サウンド停止処理 //
-
+/// <summary>
+/// 全サウンド停止処理
+/// </summary>
 void Sound::StopAllSound()
 {
     //すべてのサウンドに停止処理をする
@@ -143,8 +161,10 @@ void Sound::StopAllSound()
     }
 }
 
-// 再生状態 //
-
+/// <summary>
+/// 再生状態
+/// </summary>
+/// <returns>再生中:true|停止中:false</returns>
 bool Sound::IsPlaying(SoundTag tag)
 {
     //再生されていたら再生中にする
@@ -160,8 +180,9 @@ bool Sound::IsPlaying(SoundTag tag)
     }
 }
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 Sound::SoundData::SoundData()
     :handle(-1)
     , volume(150)

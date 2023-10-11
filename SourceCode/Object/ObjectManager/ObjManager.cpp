@@ -21,7 +21,7 @@ ObjManager::ObjManager()
 /// </summary>
 ObjManager::~ObjManager()
 {
-    //処理なし
+    DeleteAllObj();
 }
 
 /// <summary>
@@ -214,13 +214,4 @@ ObjBase* ObjManager::GetObj(ObjTag tag, int tagNum)
 
     //タグ種のtagNum番目のオブジェクトを返す
     return singleton->object[tag][tagNum].get();
-}
-
-/// <summary>
-/// 後処理
-/// </summary>
-void ObjManager::Finalize()
-{
-    //全オブジェクト解放
-    DeleteAllObj();
 }

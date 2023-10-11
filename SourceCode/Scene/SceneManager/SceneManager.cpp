@@ -55,17 +55,11 @@ int SceneManager::Init()
 
 void SceneManager::Finalize()
 {
-    //管理クラスの後処理
-    ObjManager::Finalize();
-    AssetManager::Finalize();
-
+    //シーン解放
     while(!nowScene.empty())
     {
         nowScene.pop();
     }
-
-    //セッティングの後処理
-    gameSetting->Finalize();
 }
 
 // 更新処理 //

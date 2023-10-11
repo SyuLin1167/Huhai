@@ -2,13 +2,13 @@
 #include"../Player/Player.h"
 #include"../../MapObject/Light/FlashLight/FlashLight.h"
 
-/* コンストラクタ */
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 Ghost::Ghost()
     :GhostBase()
     , moveCount(7.0f)
     , isFirstMove(true)
-    , isMove(false)
     ,aimPos(VGet(0.0f, 0.0f, 0.0f))
     , lightHandle(-1)
     , holdPos(VGet(0.0f, 0.0f, 0.0f))
@@ -20,7 +20,7 @@ Ghost::Ghost()
     if (animType != SAD)
     {
         animType = SAD;
-        gstAnim->StartAnim(animType);
+        ghostAnim->StartAnim(animType);
     }
 
     //当たり判定設定
@@ -34,11 +34,12 @@ Ghost::Ghost()
     objSpeed = 13.0f;
 
     //サウンド設定
-    gstSound->StartSound(SoundTag::Escape, DX_PLAYTYPE_LOOP);
+    ghostSound->StartSound(SoundTag::Escape, DX_PLAYTYPE_LOOP);
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 Ghost::~Ghost()
 {
     //ライト削除
@@ -51,12 +52,14 @@ Ghost::~Ghost()
     }
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
 void Ghost::Update(float deltaTime)
 {
     //アニメーション時間再生
-    gstAnim->AddAnimTime(deltaTime);
+    ghostAnim->AddAnimTime(deltaTime);
 
     //モデル回転
     MATRIX rotMatY = MGetRotY(ONE_HALF_PI * (float)(DX_PI / ONE_HALF_PI));
@@ -77,14 +80,14 @@ void Ghost::Update(float deltaTime)
         if (animType != MOVE)
         {
             animType = MOVE;
-            gstAnim->StartAnim(animType);
+            ghostAnim->StartAnim(animType);
 
             //ライト設置
             ObjManager::GetFirstObj(ObjTag::Light)->SetAlive(false);
             lightHandle = CreatePointLightHandle(objPos, LIGHT_RANGE, 0.0f, 0.0f, LIGHT_ATTEN2);
             SetLightDifColorHandle(lightHandle, LIGHT_COLOR);
 
-            gstSound->StartSound(SoundTag::GhostScream, DX_PLAYTYPE_BACK);
+            ghostSound->StartSound(SoundTag::GhostScream, DX_PLAYTYPE_BACK);
         }
         //目標座標に近づいたら初動終了
         if (abs(VSize(aimPos - objPos)) < 2.0f)
@@ -120,20 +123,23 @@ void Ghost::Update(float deltaTime)
     ColUpdate();
 
     //サウンド更新
-    gstSound->Doppler(SoundTag::GhostScream, objPos);
-    gstSound->Doppler(SoundTag::Escape, objPos);
+    ghostSound->Doppler(SoundTag::GhostScream, objPos);
+    ghostSound->Doppler(SoundTag::Escape, objPos);
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void Ghost::Draw()
 {
     //モデル描画
     MV1DrawModel(objHandle);
 }
 
-// 当たり判定処理 //
-
+/// <summary>
+/// 当たり判定処理
+/// </summary>
+/// <param name="other">:オブジェクト</param>
 void Ghost::OnCollisionEnter(const ObjBase* other)
 {
     ObjTag tag = other->GetTag();
@@ -169,7 +175,7 @@ void Ghost::OnCollisionEnter(const ObjBase* other)
             if (animType != SAD)
             {
                 animType = SAD;
-                gstAnim->StartAnim(animType);
+                ghostAnim->StartAnim(animType);
             }
             isMove = false;
             aimDir = VScale(VNorm(aimPos - objPos), 0.1f);

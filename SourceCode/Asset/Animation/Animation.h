@@ -4,7 +4,9 @@
 #include<string>
 #include<vector>
 
-/* Animationクラス */
+/// <summary>
+/// Animationクラス
+/// </summary>
 class Animation
 {
 public:
@@ -23,10 +25,10 @@ public:
     /// 追加処理
     /// </summary>
     /// <param name="fileName">:ファイル名</param>
-    /// <param name="Fps">:再生速度(デフォルト・30fps)</param>
+    /// <param name="animSpeed">:再生速度(デフォルト・30fps)</param>
     /// <param name="loopState">:ループ状態(デフォルト・ループさせる)</param>
     /// <returns>animData配列の添え字番号</returns>
-    int AddAnimation(std::string fileName, float Fps = 30.0f, bool loopState = true);
+    int AddAnimation(std::string fileName, float animSpeed = 30.0f, bool loopState = true);
 
     /// <summary>
     /// アニメーション時間経過
@@ -51,7 +53,9 @@ public:
     /// <returns>再生中:true|停止中:false</returns>
     bool IsPlaying();
 
-    /* アニメーション１個分のデータ構造体 */
+    /// <summary>
+    /// アニメーションデータ
+    /// </summary>
     struct AnimData
     {
     public:
@@ -60,19 +64,20 @@ public:
         /// </summary>
         AnimData();
 
-        int animHandle;					//アニメーションハンドル
-        int animIndex;					//アタッチするアニメーション番号
-        float totalTime;				//総再生時間
-        float animFps;					//再生速度
-        bool isLoop;					//ループ再生するかどうか
+        int handle;                     //アニメーションハンドル
+        int index;                      //アタッチするアニメーション番号
+        float totalTime;                //総再生時間
+        float speed;                    //再生速度
+        bool isLoop;                    //ループ再生するかどうか
     };
+
 private:
-    int modelHandle;					//モデルハンドル
-    int nowAnimType;					//現在のアニメーションID
+    int modelHandle;                    //モデルハンドル
+    int nowAnimType;                    //現在のアニメーションID
 
-    int attachedIndex;					//アタッチ後のインデックス
+    int attachedIndex;                  //アタッチ後のインデックス
 
-    float nowAnimTime;					//現在のアニメーション時刻
+    float nowAnimTime;                  //現在のアニメーション時刻
 
-    std::vector<AnimData> animData;		//アニメーション複数登録用
+    std::vector<AnimData> animData;     //アニメーション複数登録用
 };

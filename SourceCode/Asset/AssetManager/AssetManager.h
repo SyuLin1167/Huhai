@@ -4,11 +4,19 @@
 #include<vector>
 #include<unordered_map>
 #include<algorithm>
+#include<memory>
 
-/* AssetManagerクラス */
+/// <summary>
+/// AssetManagerクラス
+/// </summary>
 class AssetManager final
 {
 public:
+    /// <summary>
+    /// デストラクタ
+    /// </summary>
+    ~AssetManager();
+
     /// <summary>
     /// 初期化処理
     /// </summary>
@@ -53,27 +61,17 @@ public:
     /// </summary>
     static void ReleaseAllAsset();
 
-    /// <summary>
-    /// 後処理
-    /// </summary>
-    static void Finalize();
-
 private:
     /// <summary>
     /// コンストラクタ(シングルトン)
     /// </summary>
     AssetManager();
 
-    /// <summary>
-    /// デストラクタ
-    /// </summary>
-    ~AssetManager();
-
-    static AssetManager* assetMgr;                                      //自身の実態
-    std::unordered_map<std::string, int>graphMap;                       //グラフ(オリジナル)
-    std::unordered_map<std::string, int>meshMap;                        //メッシュ(オリジナル)
-    std::unordered_map<std::string, int>animMap;                        //アニメーション(オリジナル)
-    std::unordered_map<std::string, int>soundMap;                       //サウンド(オリジナル)
-    std::vector<int> dupMesh;                                           //メッシュ(複製)
-    std::vector<int> dupSound;                                          //サウンド(複製)
+    static std::unique_ptr<AssetManager> singleton;     //自身の実態
+    std::unordered_map<std::string, int>graphMap;       //グラフ(オリジナル)
+    std::unordered_map<std::string, int>meshMap;        //メッシュ(オリジナル)
+    std::unordered_map<std::string, int>animMap;        //アニメーション(オリジナル)
+    std::unordered_map<std::string, int>soundMap;       //サウンド(オリジナル)
+    std::vector<int> dupMesh;                           //メッシュ(複製)
+    std::vector<int> dupSound;                          //サウンド(複製)
 };

@@ -2,7 +2,9 @@
 
 #include"../GameSetting/GameSetting.h"
 
-/*BlendModeクラス*/
+/// <summary>
+/// BlendModeクラス
+/// </summary>
 class BlendMode
 {
 public:
@@ -18,19 +20,9 @@ public:
     ~BlendMode();
 
     /// <summary>
-    /// フェード
-    /// </summary>
-    void Fade();
-
-    /// <summary>
     /// 暗転処理
     /// </summary>
     void Darken();
-
-    /// <summary>
-    /// デフォルト
-    /// </summary>
-    void NoBlend();
 
     /// <summary>
     /// フェードアウト
@@ -43,10 +35,20 @@ public:
     void SubFade(float deltaTime);
 
     /// <summary>
+    /// フェード
+    /// </summary>
+    void Fade();
+
+    /// <summary>
     /// フェードフラグ
     /// </summary>
     /// <returns>フェード中:true|でない:false</returns>
     bool NowFade() { return nowFade; }
+
+    /// <summary>
+    /// デフォルト
+    /// </summary>
+    void NoBlend();
 
 private:
     bool nowFade;                   //フェードフラグ

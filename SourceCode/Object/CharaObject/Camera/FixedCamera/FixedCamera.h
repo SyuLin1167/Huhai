@@ -1,7 +1,9 @@
 #pragma once
 #include"../../../ObjectBase/ObjBase.h"
 
-/*FixedCameraクラス*/
+/// <summary>
+/// FixedCameraクラス
+/// </summary>
 class FixedCamera :public ObjBase
 {
 public:
@@ -13,17 +15,17 @@ public:
     /// <summary>
     /// デストラクタ
     /// </summary>
-    ~FixedCamera() {};
+    ~FixedCamera();
 
     /// <summary>
     /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
-    void Update(float deltaTime)override {};
+    void Update(const float deltaTime) override;
 
     /// <summary>
     /// 描画
     /// </summary>
-    void Draw()override ;
+    void Draw() override ;
 };
 

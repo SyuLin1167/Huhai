@@ -1,6 +1,8 @@
 #pragma once
 
-/*SoundTagクラス*/
+/// <summary>
+/// サウンドタグ
+/// </summary>
 enum class SoundTag :unsigned char
 {
     Title,
@@ -19,7 +21,9 @@ enum class SoundTag :unsigned char
     FallingChair,
 };
 
-/*全サウンド*/
+/// <summary>
+/// ループ制御用タグ配列
+/// </summary>
 constexpr static SoundTag soundTagAll[] =
 {
     SoundTag::Title,
