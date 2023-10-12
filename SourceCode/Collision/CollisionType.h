@@ -1,10 +1,12 @@
 #pragma once
 
-/*コリジョン形状クラス*/
+/// <summary>
+/// コリジョン形状タイプ
+/// </summary>
 enum class CollisionType
 {
-	Line,				//線分
-	Sphere,				//球体
-	Capsule,			//カプセル
-	Model				//モデル
+    Line,               //線分
+    Sphere,             //球体
+    Capsule,            //カプセル
+    Model               //モデル
 };

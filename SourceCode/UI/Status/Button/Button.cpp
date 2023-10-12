@@ -1,10 +1,13 @@
 #include "Button.h"
 #include"../../../GameSetting/GameSetting.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
+/// <param name="name">:ボタン名</param>
+/// <param name="num">:ボタン番号</param>
 Button::Button(std::string name, int num)
-    :SetUpBase(name)
+    :StatusBase(name)
 {
     //ボタン設定
     buttonWidth = BUTTON_SIZE;
@@ -15,21 +18,26 @@ Button::Button(std::string name, int num)
     isInput = true;
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 Button::~Button()
 {
+    //処理なし
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
 void Button::Update(float deltaTime)
 {
     ProcessInput();
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void Button::Draw()
 {
     //ボタン名描画

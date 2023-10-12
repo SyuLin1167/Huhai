@@ -5,30 +5,14 @@
 #include"../../../Asset/Animation/Animation.h"
 #include"../../../Asset/Sound/Sound.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 Chair::Chair()
     :ObjBase(ObjTag::Furniture)
     , ChairAnim(nullptr)
     , chairSound(nullptr)
 {
-    Load();
-}
-
-// デストラクタ //
-
-Chair::~Chair()
-{
-    //インスタンス削除
-    delete ChairAnim;
-    delete chairSound;
-}
-
-// 読み込み処理 //
-
-void Chair::Load()
-{
-
     //モデル設定
     objHandle = AssetManager::GetMesh("../Assets/Map/Chair/Chair.mv1");
     objPos = { 66,0,4 };
@@ -57,8 +41,20 @@ void Chair::Load()
     chairSound->AddSound("../Assets/Sound/FallingChairSE.mp3", SoundTag::FallingChair, true, true);
 }
 
-        // 更新処理 //
+/// <summary>
+/// デストラクタ
+/// </summary>
+Chair::~Chair()
+{
+    //インスタンス削除
+    delete ChairAnim;
+    delete chairSound;
+}
 
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
 void Chair::Update(float deltaTime)
 {
     //アニメーション時間再生
@@ -89,8 +85,9 @@ void Chair::Update(float deltaTime)
     chairSound->Doppler(SoundTag::FallingChair, objPos);
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void Chair::Draw()
 {
     //モデル描画

@@ -1,7 +1,10 @@
 #include "LitLight.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
+/// <param name="scene">:シーン名</param>
+/// <param name="num">:オブジェクト番号</param>
 LitLight::LitLight(std::string scene, std::string num)
     :LightBase(scene,num)
     , lightDistance(0.0f)
@@ -10,15 +13,18 @@ LitLight::LitLight(std::string scene, std::string num)
     SetLightEnableHandle(lightHandle,false);
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 LitLight::~LitLight()
 {
     //処理なし
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
 void LitLight::Update(float deltaTime)
 {
     //一定距離近づいたら発光
@@ -39,8 +45,9 @@ void LitLight::Update(float deltaTime)
     AttenByParam();
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void LitLight::Draw()
 {
     //モデル描画

@@ -1,7 +1,9 @@
 #pragma once
 #include <DxLib.h>
 
-/*TimeManagerクラス*/
+/// <summary>
+/// TimeManagerクラス
+/// </summary>
 class TimeManager
 {
 public:

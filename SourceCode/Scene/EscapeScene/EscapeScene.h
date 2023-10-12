@@ -2,24 +2,26 @@
 
 #include"../SceneBase/SceneBase.h"
 
-/*Endingクラス*/
-class Ending :public SceneBase
+/// <summary>
+/// EscapeSceneクラス
+/// </summary>
+class EscapeScene :public SceneBase
 {
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    Ending();
+    EscapeScene();
 
     /// <summary>
     /// デストラクタ
     /// </summary>
-    ~Ending();
+    ~EscapeScene();
 
     /// <summary>
     /// 更新処理
     /// </summary>
-    /// <param name="deltaTime"></param>
+    /// <param name="deltaTime">:フレームレート</param>
     /// <returns>次のフレームのシーン</returns>
     SceneBase* UpdateScene(const float deltaTime)override;
 
@@ -28,3 +30,4 @@ public:
     /// </summary>
     void DrawScene()override;
 };
+

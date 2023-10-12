@@ -3,8 +3,10 @@
 #include"../../Asset/AssetManager/AssetManager.h"
 #include"../../BlendMode/BlendMode.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
+/// <param name="type">:ボタンタイプ</param>
 Select::Select(SelectType type)
     :UIBase(ObjTag::UI)
     , selectBlend(nullptr)
@@ -16,8 +18,9 @@ Select::Select(SelectType type)
     selectBlend = new BlendMode;
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 Select::~Select()
 {
     //画像ハンドル削除
@@ -27,8 +30,10 @@ Select::~Select()
     }
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
 void Select::Update(float deltaTime)
 {
     //ボタンは開幕時フェード処理
@@ -43,8 +48,9 @@ void Select::Update(float deltaTime)
     
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void Select::Draw()
 {
     //フェード処理

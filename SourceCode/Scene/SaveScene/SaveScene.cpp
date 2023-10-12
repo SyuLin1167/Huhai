@@ -5,23 +5,26 @@
 //実態へのポインタ定義
 std::unique_ptr<SaveScene> SaveScene::saveScene = nullptr;
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ(シングルトン)
+/// </summary>
 SaveScene::SaveScene()
     :scene(nullptr)
 {
     //処理なし
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 SaveScene::~SaveScene()
 {
     //処理なし
 }
 
-// インスタンス生成処理 //
-
+/// <summary>
+/// インスタンス生成処理
+/// </summary>
 void SaveScene::CreateInstance()
 {
     //インスタンス生成
@@ -31,15 +34,10 @@ void SaveScene::CreateInstance()
     }
 }
 
-// 後処理 //
-
-
-void SaveScene::Finalize()
-{
-}
-
-// セーブ処理 //
-
+/// <summary>
+/// セーブ処理
+/// </summary>
+/// <param name="nowScene">:保存するシーン</param>
 void SaveScene::Save(SceneBase* nowScene)
 {
     //シーンをセーブ
@@ -49,8 +47,10 @@ void SaveScene::Save(SceneBase* nowScene)
     }
 }
 
-// ロード処理 //
-
+/// <summary>
+/// ロード処理
+/// </summary>
+/// <returns>:セーブシーン</returns>
 SceneBase* SaveScene::Load()
 {
     //セーブシーンがなかったら初めのRoomSceneを返す

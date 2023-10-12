@@ -4,7 +4,9 @@
 
 #include"../../Scene/SceneBase/SceneBase.h"
 
-/*PauseMenuクラス*/
+/// <summary>
+/// PauseMenuクラス
+/// </summary>
 class PauseMenu:public SceneBase
 {
 public:
@@ -16,13 +18,8 @@ public:
     /// <summary>
     /// ポーズメニューのインスタンス取得処理
     /// </summary>
-    /// <returns></returns>
+    /// <returns>ポーズメニュー</returns>
     static SceneBase* GetPauseMenuInstance();
-
-    /// <summary>
-    /// 後処理
-    /// </summary>
-    static void Finalize();
 
     /// <summary>
     /// ボタン追加処理

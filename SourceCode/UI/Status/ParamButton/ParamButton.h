@@ -1,10 +1,12 @@
 #pragma once
 #include<string>
 
-#include"../Base/SetUpBase.h"
+#include"../Base/StatusBase.h"
 
-/*ParamButtonクラス*/
-class ParamButton :public SetUpBase
+/// <summary>
+/// ParamBottonクラス
+/// </summary>
+class ParamButton :public StatusBase
 {
 public:
     /// <summary>

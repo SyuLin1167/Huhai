@@ -1,6 +1,8 @@
 #pragma once
 
-/*PointLightShaderクラス*/
+/// <summary>
+/// PointLIghtShaderクラス
+/// </summary>
 class PointLightShader
 {
 public:

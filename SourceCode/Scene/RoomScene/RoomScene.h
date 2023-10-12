@@ -2,7 +2,9 @@
 
 #include"../SceneBase/SceneBase.h"
 
-/*RoomSceneクラス*/
+/// <summary>
+/// RoomSceneクラス
+/// </summary>
 class RoomScene :public SceneBase
 {
 public:

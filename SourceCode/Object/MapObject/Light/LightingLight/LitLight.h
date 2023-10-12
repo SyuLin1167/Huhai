@@ -2,7 +2,9 @@
 
 #include"../LightBase/LightBase.h"
 
-/*LitLightクラス*/
+/// <summary>
+/// LitLightクラス
+/// </summary>
 class LitLight :public LightBase
 {
 public:

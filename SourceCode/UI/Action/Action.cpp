@@ -3,8 +3,10 @@
 #include"../../Object/ObjectManager/ObjManager.h"
 #include"../../BlendMode/BlendMode.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
+/// <param name="pos">:描画座標</param>
 Action::Action(VECTOR pos)
     :UIBase(ObjTag::UI)
     , toDistance(0)
@@ -19,8 +21,9 @@ Action::Action(VECTOR pos)
     actionBlend = new BlendMode;
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 Action::~Action()
 {
     //画像ハンドル削除
@@ -30,8 +33,10 @@ Action::~Action()
     }
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
 void Action::Update(float deltaTime)
 {
     //プレイヤーとの距離を測る
@@ -64,8 +69,9 @@ void Action::Update(float deltaTime)
     }
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void Action::Draw()
 {
     //アイコン描画

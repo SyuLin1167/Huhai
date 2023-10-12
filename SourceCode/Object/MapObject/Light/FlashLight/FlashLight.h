@@ -1,7 +1,9 @@
 #pragma once
 #include"../LightBase/LightBase.h"
 
-/*FlashLighitクラス*/
+/// <summary>
+/// FlashLightクラス
+/// </summary>
 class FlashLight :public LightBase
 {
 public:
@@ -14,11 +16,6 @@ public:
     /// デストラクタ
     /// </summary>
     ~FlashLight();
-
-    /// <summary>
-    /// 読み込み処理
-    /// </summary>
-    void Load();
 
     /// <summary>
     /// 更新処理

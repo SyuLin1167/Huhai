@@ -4,13 +4,16 @@
 #include"SelectType.h"
 #include"../../UI/UIBase/UIBase.h"
 
-/*SelectButtonクラス*/
+/// <summary>
+/// Selectクラス
+/// </summary>
 class Select :public UIBase
 {
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
+    /// <param name="type">:ボタンタイプ</param>
     Select(SelectType type);
 
     /// <summary>

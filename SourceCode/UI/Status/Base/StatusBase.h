@@ -3,20 +3,22 @@
 
 #include"../../UIBase/UIBase.h"
 
-/*SetUpBaseクラス*/
-class SetUpBase :public UIBase
+/// <summary>
+/// StatusBaseクラス
+/// </summary>
+class StatusBase :public UIBase
 {
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="name">:ボタン名</param>
-    SetUpBase(std::string name);
+    StatusBase(std::string name);
 
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~SetUpBase();
+    virtual ~StatusBase();
 
     /// <summary>
     /// 入力処理

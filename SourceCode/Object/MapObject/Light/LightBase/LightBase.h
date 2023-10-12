@@ -5,7 +5,9 @@
 #include"../../../ObjectManager/ObjManager.h"
 #include"../../../../Asset/AssetManager/AssetManager.h"
 
-/*Light基底クラス*/
+/// <summary>
+/// LightBaseクラス
+/// </summary>
 class LightBase :public ObjBase
 {
 public:

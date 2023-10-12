@@ -2,22 +2,28 @@
 
 #include"../../../Asset/AssetManager/AssetManager.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
+/// <param name="tag">:タグ</param>
 Furniture::Furniture(FurName tag)
     :ObjBase(ObjTag::Furniture)
 {
     Load(tag);
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 Furniture::~Furniture()
 {
+    //処理なし
 }
 
-// 読み込み処理 //
-
+/// <summary>
+/// 読み込み処理
+/// </summary>
+/// <param name="tag">:タグ</param>
 void Furniture::Load(FurName tag)
 {
     //モデル設定
@@ -32,16 +38,19 @@ void Furniture::Load(FurName tag)
     MV1SetPosition(colModel, objPos);
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
 void Furniture::Update(float deltaTime)
 {
     //当たり判定更新
     ColUpdate();
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void Furniture::Draw()
 {
     //モデル描画

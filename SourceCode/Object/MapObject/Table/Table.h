@@ -5,7 +5,9 @@
 
 constexpr int TableNum = 19;
 
-/*Tableクラス*/
+/// <summary>
+/// Tableクラス
+/// </summary>
 class Table :public ObjBase
 {
 public:

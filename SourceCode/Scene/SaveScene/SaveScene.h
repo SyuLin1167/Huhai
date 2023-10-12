@@ -2,7 +2,9 @@
 
 #include"../SceneBase/SceneBase.h"
 
-/*SaveSceneクラス*/
+/// <summary>
+/// SaveScene
+/// </summary>
 class SaveScene
 {
 public:
@@ -22,11 +24,6 @@ public:
     /// </summary>
     /// <returns>:セーブシーン</returns>
     static SceneBase* Load();
-
-    /// <summary>
-    /// 後処理
-    /// </summary>
-    static void Finalize();
 
     /// <summary>
     /// デストラクタ

@@ -13,8 +13,9 @@
 #include "../PlayScene/PlayScene.h"
 #include"../SaveScene/SaveScene.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 RoomScene::RoomScene()
     :SceneBase()
 {
@@ -44,15 +45,19 @@ RoomScene::RoomScene()
     ObjManager::AddObj(new Remarks(TextType::Opening));
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 RoomScene::~RoomScene()
 {
     //処理なし
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
+/// <returns>次フレームのシーン</returns>
 SceneBase* RoomScene::UpdateScene(const float deltaTime)
 {
     //オブジェクト更新
@@ -99,8 +104,9 @@ SceneBase* RoomScene::UpdateScene(const float deltaTime)
     return this;
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void RoomScene::DrawScene()
 {
     //オブジェクト描画

@@ -6,7 +6,9 @@
 #include"../../BlendMode/BlendMode.h"
 #include"../../Asset/Sound/Sound.h"
 
-/*SceneBaseクラス*/
+/// <summary>
+/// SceneBaseクラス
+/// </summary>
 class SceneBase
 {
 public:

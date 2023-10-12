@@ -3,7 +3,9 @@
 #include"../SceneBase/SceneBase.h"
 #include "../../UI/Select/SelectType.h"
 
-/* TitleSceneクラス */
+/// <summary>
+/// TitleSceneクラス
+/// </summary>
 class TitleScene :public SceneBase
 {
 public:

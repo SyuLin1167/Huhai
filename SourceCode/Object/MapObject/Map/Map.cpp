@@ -4,25 +4,14 @@
 #include"../../../Asset/AssetManager/AssetManager.h"
 #include"../../../Asset/Sound/Sound.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
+/// <param name="maptag"></param>
 Map::Map(MapTag maptag)
     :ObjBase(ObjTag::Map)
     , mapSound(nullptr)
     , mapTag(maptag)
-{
-    LoadModel();
-}
-
-// デストラクタ //
-
-Map::~Map()
-{
-}
-
-// 読み込み処理 //
-
-void Map::LoadModel()
 {
     //モデル設定
     objHandle = AssetManager::GetMesh(mapFile[mapTag]);
@@ -40,8 +29,18 @@ void Map::LoadModel()
     mapSound->StartSound(SoundTag::InDoor, DX_PLAYTYPE_LOOP);
 }
 
-// 更新処理 //
+/// <summary>
+/// デストラクタ
+/// </summary>
+Map::~Map()
+{
+    //処理なし
+}
 
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
 void Map::Update(float deltaTime)
 {
     //ゴール地点の処理
@@ -67,8 +66,9 @@ void Map::Update(float deltaTime)
     ColUpdate();
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void Map::Draw()
 {
     //モデル描画

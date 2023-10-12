@@ -3,8 +3,10 @@
 #include"../../Asset/AssetManager/AssetManager.h"
 #include"../../BlendMode/BlendMode.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
+/// <param name="type">:テキストの種類</param>
 Remarks::Remarks(TextType texttype)
     :UIBase(ObjTag::Remarks)
     , textType(texttype)
@@ -25,8 +27,9 @@ Remarks::Remarks(TextType texttype)
     canClick = true;
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 Remarks::~Remarks()
 {
     //画像ハンドル削除
@@ -36,8 +39,10 @@ Remarks::~Remarks()
     }
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
 void Remarks::Update(float deltaTime)
 {
     //文字の読み込み中なら
@@ -132,8 +137,12 @@ void Remarks::Update(float deltaTime)
     }
 }
 
-// 文字列取得処理 //
-
+/// <summary>
+/// 文字列取得処理
+/// </summary>
+/// <param name="sn">:文字列番号</param>
+/// <param name="sp">:文字ポインタ</param>
+/// <returns>指定場所の文字</returns>
 char Remarks::GetText(int sn, int sp)
 {
     //オープニング
@@ -210,8 +219,9 @@ char Remarks::GetText(int sn, int sp)
     return -1;
 }
 
-// 改行処理 //
-
+/// <summary>
+/// 改行処理
+/// </summary>
 void Remarks::NewLine()
 {
     //改行して表示位置を左端からにする
@@ -219,7 +229,13 @@ void Remarks::NewLine()
     textX = 0;
 }
 
-// テキストボックス //
+/// <summary>
+/// テキストボックス
+/// </summary>
+/// <param name="lx">:左上座標</param>
+/// <param name="ly">:左上座標</param>
+/// <param name="rx">:右下座標</param>
+/// <param name="ry">:右下座標</param>
 void Remarks::TextBox(int lx, int ly, int rx, int ry)
 {
     SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
@@ -249,8 +265,9 @@ void Remarks::TextBox(int lx, int ly, int rx, int ry)
 
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void Remarks::Draw()
 {
     ChangeFont("MS ゴシック", DX_CHARSET_DEFAULT);

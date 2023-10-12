@@ -3,7 +3,9 @@
 
 #include"../../ObjectBase/ObjBase.h"
 
-/* Playerクラス */
+/// <summary>
+/// Playerクラス
+/// </summary>
 class Player :public ObjBase
 {
 public:
@@ -48,7 +50,7 @@ public:
 
 private:
     /// <summary>
-    /// Player移動処理
+    /// 移動処理
     /// </summary>
     /// <param name="deltaTime">:フレームレート</param>
     void Move(float deltaTime);

@@ -11,8 +11,9 @@
 #include "../RoomScene/RoomScene.h"
 #include "../SaveScene/SaveScene.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 TitleScene::TitleScene()
     :SceneBase()
 {
@@ -51,8 +52,9 @@ TitleScene::TitleScene()
     screenGraph = MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 TitleScene::~TitleScene()
 {
     //画像ハンドル削除
@@ -62,8 +64,11 @@ TitleScene::~TitleScene()
     }
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
+/// <returns>次のフレームのシーン</returns>
 SceneBase* TitleScene::UpdateScene(const float deltaTime)
 {
     //マウスポインター表示
@@ -126,8 +131,9 @@ SceneBase* TitleScene::UpdateScene(const float deltaTime)
     return this;
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void TitleScene::DrawScene()
 {
     //オブジェクト描画

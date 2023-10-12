@@ -5,11 +5,15 @@
 
 #include"../../ObjectBase/ObjBase.h"
 
-/*Furnitureクラス*/
+/// <summary>
+/// Furnitureクラス
+/// </summary>
 class Furniture :public ObjBase
 {
 public:
-    //家具タグ
+    /// <summary>
+    /// 家具種類
+    /// </summary>
     enum FurName
     {
         Room = 0,

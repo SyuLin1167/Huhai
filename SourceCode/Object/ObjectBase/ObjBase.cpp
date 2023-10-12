@@ -21,6 +21,7 @@ ObjBase::ObjBase(ObjTag tag)
     , colCapsule()
     , colModel(-1)
 {
+    //ˆ—‚È‚µ
 }
 
 /// <summary>
@@ -28,6 +29,7 @@ ObjBase::ObjBase(ObjTag tag)
 /// </summary>
 ObjBase::~ObjBase()
 {
+    //ˆ—‚È‚µ
 }
 
 /// <summary>

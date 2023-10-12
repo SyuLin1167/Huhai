@@ -4,8 +4,9 @@
 #include"../../../Scene/PauseMenu/PauseMenu.h"
 #include"../../../Asset/Sound/Sound.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 Player::Player()
     :ObjBase(ObjTag::Player)
     , canMove(true)
@@ -32,14 +33,18 @@ Player::Player()
     plySound->AddSound("../Assets/Sound/PlayerWalkSE.mp3", SoundTag::PlayerWalk, false, true);
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 Player::~Player()
 {
+    //処理なし
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
 void Player::Update(float deltaTime)
 {
     //カメラの向き取得
@@ -92,14 +97,18 @@ void Player::Update(float deltaTime)
     ColUpdate();
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void Player::Draw()
 {
+    //処理なし
 }
 
-// 衝突時処理 //
-
+/// <summary>
+/// 当たり判定処理
+/// </summary>
+/// <param name="other">:オブジェクト</param>
 void Player::OnCollisionEnter(const ObjBase* other)
 {
     ObjTag tag = other->GetTag();
@@ -130,8 +139,10 @@ void Player::OnCollisionEnter(const ObjBase* other)
     }
 }
 
-// 球体の衝突時処理 //
-
+/// <summary>
+/// 球体の衝突時処理
+/// </summary>
+/// <param name="colmodel">:当たり判定モデル</param>
 void Player::CollHitSphere(int colmodel)
 {
     //球体がモデルの当たったら押し戻す
@@ -146,8 +157,10 @@ void Player::CollHitSphere(int colmodel)
 
 }
 
-// 線分の衝突時処理 //
-
+/// <summary>
+/// 線分の衝突時処理
+/// </summary>
+/// <param name="colmodel">:当たり判定モデル</param>
 void Player::ColHitLine(int colmodel)
 {
     //線分がモデルに当たったら足元の座標に合わせる
@@ -159,8 +172,10 @@ void Player::ColHitLine(int colmodel)
     }
 }
 
-// 移動処理 //
-
+/// <summary>
+/// 移動処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
 void Player::Move(float deltaTime)
 {
     //通常は未入力

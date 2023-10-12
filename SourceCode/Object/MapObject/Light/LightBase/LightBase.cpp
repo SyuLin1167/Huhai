@@ -6,8 +6,9 @@
 
 #include"../../../../Scene/PauseMenu/PauseMenu.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 LightBase::LightBase()
     :ObjBase(ObjTag::Light)
     , lightHandle(-1)
@@ -24,8 +25,11 @@ LightBase::LightBase()
     MV1SetScale(objHandle, objScale);
 }
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
+/// <param name="scene">:シーン名</param>
+/// <param name="num">:オブジェクト番号</param>
 LightBase::LightBase(std::string scene,std::string num)
     :ObjBase(ObjTag::Light)
     , lightHandle(-1)
@@ -62,16 +66,18 @@ LightBase::LightBase(std::string scene,std::string num)
     MV1SetScale(objHandle, objScale);
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 LightBase::~LightBase()
 {
     //ライト削除
     DeleteLightHandle(lightHandle);
 }
 
-// パラメータによる距離減衰 //
-
+/// <summary>
+/// パラメータによる距離減衰
+/// </summary>
 void LightBase::AttenByParam()
 {
     float param = MIN_ATTEN_PARAM - (static_cast<float>(PauseMenu::Parameter("Brightness")) / 10000.0f);

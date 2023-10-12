@@ -1,7 +1,8 @@
 #include "SceneBase.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 SceneBase::SceneBase()
     :bgHandle(-1)
     , bgX(0)
@@ -13,8 +14,9 @@ SceneBase::SceneBase()
     //処理なし
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 SceneBase::~SceneBase()
 {
     //処理なし

@@ -2,7 +2,9 @@
 
 #include"../../Object/ObjectBase/ObjBase.h"
 
-/*UIBaseクラス*/
+/// <summary>
+/// UIBaseクラス
+/// </summary>
 class UIBase:public ObjBase
 {
 public:
@@ -33,7 +35,7 @@ public:
     /// ボタン入力状態取得
     /// </summary>
     /// <returns>入力:true|未入力:false</returns>
-    bool GetButtonInput() { return isInput; }
+    bool GetButtonInput() const { return isInput; }
 
     /// <summary>
     /// キー入力状態取得

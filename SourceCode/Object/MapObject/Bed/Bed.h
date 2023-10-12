@@ -2,7 +2,9 @@
 
 #include"../../ObjectBase/ObjBase.h"
 
-/*Bedクラス*/
+/// <summary>
+/// Bedクラス
+/// </summary>
 class Bed :public ObjBase
 {
 public:

@@ -8,8 +8,9 @@
 #include "../SaveScene/SaveScene.h"
 
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 SceneManager::SceneManager()
 {
     //インスタンス生成
@@ -20,15 +21,18 @@ SceneManager::SceneManager()
     nowScreen = MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 SceneManager::~SceneManager()
 {
     //処理なし
 }
 
-// 初期化処理 //
-
+/// <summary>
+/// 初期化処理
+/// </summary>
+/// <returns></returns>
 int SceneManager::Init()
 {
     //ゲームのセッティング
@@ -51,8 +55,9 @@ int SceneManager::Init()
     return 0;
 }
 
-// 後処理 //
-
+/// <summary>
+/// 後処理
+/// </summary>
 void SceneManager::Finalize()
 {
     //シーン解放
@@ -62,16 +67,18 @@ void SceneManager::Finalize()
     }
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
 void SceneManager::UpdateScene()
 {
     //シーンの更新処理
     storageScene = nowScene.top()->UpdateScene(timeMgr->DeltaTime());
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void SceneManager::DrawScene()
 {
     //現在のシーンを描画
@@ -80,8 +87,9 @@ void SceneManager::DrawScene()
     ScreenFlip();
 }
 
-// シーン切り替え //
-
+/// <summary>
+/// シーン切り替え
+/// </summary>
 void SceneManager::SwitchScene()
 {
     if (nowScene.top() != storageScene)
@@ -92,8 +100,9 @@ void SceneManager::SwitchScene()
     }
 }
 
-// ポーズメニュー処理 //
-
+/// <summary>
+/// ポーズメニュー処理
+/// </summary>
 void SceneManager::CheckPauseMenu()
 {
     //ポーズメニュー
@@ -129,8 +138,9 @@ void SceneManager::CheckPauseMenu()
     }
 }
 
-// ゲームループ //
-
+/// <summary>
+/// ゲームループ
+/// </summary>
 void SceneManager::GameLoop()
 {
     //ウィンドウが閉じられるまでループする

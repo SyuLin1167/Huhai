@@ -2,7 +2,9 @@
 
 #include"../../ObjectBase/ObjBase.h"
 
-/*Chairクラス*/
+/// <summary>
+/// Chairクラス
+/// </summary>
 class Chair :public ObjBase
 {
 public:
@@ -15,11 +17,6 @@ public:
     /// デストラクタ
     /// </summary>
     ~Chair();
-
-    /// <summary>
-    /// 読み込み処理
-    /// </summary>
-    void Load();
 
     /// <summary>
     /// 更新処理
@@ -35,13 +32,13 @@ public:
     //アニメーションタイプ
     enum Anim
     {
-        IDLE = 0,			//待機
+        IDLE = 0,           //待機
         MOVE,               //動く
     };
 
 private:
-    class Animation* ChairAnim;			//アニメーション
-    int animType;						//アニメーション状態
+    class Animation* ChairAnim;         //アニメーション
+    int animType;                       //アニメーション状態
 
     class Sound* chairSound;            //サウンド
 };

@@ -2,7 +2,9 @@
 
 #include"../SceneBase/SceneBase.h"
 
-/* PlaySceneクラス */
+/// <summary>
+/// PlaySceneクラス
+/// </summary>
 class PlayScene :public SceneBase
 {
 public:

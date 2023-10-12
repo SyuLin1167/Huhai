@@ -1,4 +1,4 @@
-#include "Ending.h"
+#include "EndingScene.h"
 
 #include"../../Object/ObjectManager/ObjManager.h"
 #include"../../Asset/AssetManager/AssetManager.h"
@@ -10,9 +10,10 @@
 #include "../TitleScene/TitleScene.h"
 #include"../SaveScene/SaveScene.h"
 
-// コンストラクタ //
-
-Ending::Ending()
+/// <summary>
+/// コンストラクタ
+/// </summary>
+EndingScene::EndingScene()
     :SceneBase()
 {
     //カメラ生成
@@ -23,23 +24,27 @@ Ending::Ending()
     
     //家具生成
     ObjManager::AddObj(new Furniture(Furniture::FurName::Room));
-
     //照明生成
-    ObjManager::AddObj(new NomalLight("ending"));
+    ObjManager::AddObj(new NomalLight("EndingScene"));
 
     //台詞生成
     ObjManager::AddObj(new Remarks(TextType::GameClear));
 }
 
-// デストラクタ //
-
-Ending::~Ending()
+/// <summary>
+/// デストラクタ
+/// </summary>
+EndingScene::~EndingScene()
 {
+    //処理なし
 }
 
-// 更新処理 //
-
-SceneBase* Ending::UpdateScene(const float deltaTime)
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
+/// <returns></returns>
+SceneBase* EndingScene::UpdateScene(const float deltaTime)
 {
     //オブジェクト更新
     ObjManager::UpdateAllObj(deltaTime);
@@ -63,9 +68,10 @@ SceneBase* Ending::UpdateScene(const float deltaTime)
     return this;
 }
 
-// 描画処理 //
-
-void Ending::DrawScene()
+/// <summary>
+/// 描画処理
+/// </summary>
+void EndingScene::DrawScene()
 {
     //オブジェクト描画
     ObjManager::DrawAllObj();

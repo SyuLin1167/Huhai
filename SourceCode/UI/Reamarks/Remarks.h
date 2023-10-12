@@ -8,7 +8,9 @@ constexpr int TEXTSIZE = 24;        //テキストサイズ
 constexpr int BUFWIDTH = 50;        //表示制限行
 constexpr int BUFHEIGHT = 20;       //表示制限列
 
-/*Remarksクラス*/
+/// <summary>
+/// Remarksクラス
+/// </summary>
 class Remarks :public UIBase
 {
 public:
@@ -45,6 +47,10 @@ public:
     /// <summary>
     /// テキストボックス
     /// </summary>
+    /// <param name="lx">:左上座標</param>
+    /// <param name="ly">:左上座標</param>
+    /// <param name="rx">:右下座標</param>
+    /// <param name="ry">:右下座標</param>
     void TextBox(int lx,int ly,int rx,int ry);
 
     /// <summary>

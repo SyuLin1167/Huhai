@@ -6,7 +6,9 @@
 #include"../../Time/TimeManager.h"
 #include"../../Shade/PointLight/PointLightShader.h"
 
-/*SceneManagerクラス*/
+/// <summary>
+/// SceneManagerクラス
+/// </summary>
 class SceneManager
 {
 

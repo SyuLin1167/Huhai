@@ -2,7 +2,9 @@
 
 #include"../../UI/UIBase/UIBase.h"
 
-/*ActionButtonクラス*/
+/// <summary>
+/// Actionクラス
+/// </summary>
 class Action :public UIBase
 {
 public:

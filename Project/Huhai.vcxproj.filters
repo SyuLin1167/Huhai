@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="リソース ファイル">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -121,9 +117,6 @@
     <Filter Include="ソース ファイル\UI\Remarks">
       <UniqueIdentifier>{7911e8e5-15a8-441b-bbfb-d4b034f6e0bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Scene\Escape">
-      <UniqueIdentifier>{a9817ddc-b635-44b9-8d10-58a863fd6df5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Scene\Room">
       <UniqueIdentifier>{b50aa5a5-e753-40ad-8de5-45562dd12299}</UniqueIdentifier>
     </Filter>
@@ -151,23 +144,8 @@
     <Filter Include="ソース ファイル\Scene\PauseMenu">
       <UniqueIdentifier>{ad9c7e76-4f18-43f3-816d-7b8e92492df7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\UI\SetUp">
-      <UniqueIdentifier>{c17ce6a7-0a17-49d7-b78d-b492a42a4c18}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\UI\UIBase">
       <UniqueIdentifier>{a098c132-2fa0-455b-945e-c0acc911322c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\UI\SetUp\Button">
-      <UniqueIdentifier>{1c68ef68-04d7-4c76-b012-95d0ba2558b8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\UI\SetUp\Base">
-      <UniqueIdentifier>{86e826e9-00bd-484a-8f3e-d25d63a68948}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\UI\SetUp\TitleButton">
-      <UniqueIdentifier>{be1b1f35-4184-45f7-a450-bf861d99159f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\UI\SetUp\ParamButton">
-      <UniqueIdentifier>{28534490-080d-4fe8-8db3-65ac735835a4}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\BlendMode">
       <UniqueIdentifier>{77f50006-b03c-4b71-b631-7644e4897336}</UniqueIdentifier>
@@ -183,6 +161,28 @@
     </Filter>
     <Filter Include="ソース ファイル\Time">
       <UniqueIdentifier>{8630de40-2f52-4e6c-9bf9-ffb62baee57e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\Status">
+      <UniqueIdentifier>{c17ce6a7-0a17-49d7-b78d-b492a42a4c18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\Status\Button">
+      <UniqueIdentifier>{1c68ef68-04d7-4c76-b012-95d0ba2558b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\Status\Base">
+      <UniqueIdentifier>{86e826e9-00bd-484a-8f3e-d25d63a68948}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\Status\TitleButton">
+      <UniqueIdentifier>{be1b1f35-4184-45f7-a450-bf861d99159f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\Status\ParamButton">
+      <UniqueIdentifier>{28534490-080d-4fe8-8db3-65ac735835a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\EscapeScene">
+      <UniqueIdentifier>{a9817ddc-b635-44b9-8d10-58a863fd6df5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -273,8 +273,8 @@
     <ClCompile Include="..\SourceCode\UI\Action\Action.cpp">
       <Filter>ソース ファイル\UI\Action</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Scene\EscapeScene\Escape.cpp">
-      <Filter>ソース ファイル\Scene\Escape</Filter>
+    <ClCompile Include="..\SourceCode\Scene\EscapeScene\EscapeScene.cpp">
+      <Filter>ソース ファイル\Scene\EscapeScene</Filter>
     </ClCompile>
     <ClCompile Include="..\SourceCode\Scene\RoomScene\RoomScene.cpp">
       <Filter>ソース ファイル\Scene\Room</Filter>
@@ -306,21 +306,6 @@
     <ClCompile Include="..\SourceCode\UI\UIBase\UIBase.cpp">
       <Filter>ソース ファイル\UI\UIBase</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\UI\SetUp\Button\Button.cpp">
-      <Filter>ソース ファイル\UI\SetUp\Button</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\UI\SetUp\Base\SetUpBase.cpp">
-      <Filter>ソース ファイル\UI\SetUp\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\UI\SetUp\TitleButton\TitleButton.cpp">
-      <Filter>ソース ファイル\UI\SetUp\TitleButton</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\UI\SetUp\ParamButton\ParamButton.cpp">
-      <Filter>ソース ファイル\UI\SetUp\ParamButton</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SourceCode\Scene\Ending\Ending.cpp">
-      <Filter>ソース ファイル\Scene\Ending</Filter>
-    </ClCompile>
     <ClCompile Include="..\SourceCode\Shade\PointLight\PointLightShader.cpp">
       <Filter>ソース ファイル\Shade\PointLightShader</Filter>
     </ClCompile>
@@ -329,6 +314,21 @@
     </ClCompile>
     <ClCompile Include="..\SourceCode\Scene\SaveScene\SaveScene.cpp">
       <Filter>ソース ファイル\Scene\Save</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\UI\Status\Base\StatusBase.cpp">
+      <Filter>ソース ファイル\UI\Status\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\UI\Status\Button\Button.cpp">
+      <Filter>ソース ファイル\UI\Status\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\UI\Status\ParamButton\ParamButton.cpp">
+      <Filter>ソース ファイル\UI\Status\ParamButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\UI\Status\TitleButton\TitleButton.cpp">
+      <Filter>ソース ファイル\UI\Status\TitleButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Scene\EndingScene\EndingScene.cpp">
+      <Filter>ソース ファイル\Scene\Ending</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -422,8 +422,8 @@
     <ClInclude Include="..\SourceCode\UI\Action\Action.h">
       <Filter>ソース ファイル\UI\Action</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Scene\EscapeScene\Escape.h">
-      <Filter>ソース ファイル\Scene\Escape</Filter>
+    <ClInclude Include="..\SourceCode\Scene\EscapeScene\EscapeScene.h">
+      <Filter>ソース ファイル\Scene\EscapeScene</Filter>
     </ClInclude>
     <ClInclude Include="..\SourceCode\Scene\RoomScene\RoomScene.h">
       <Filter>ソース ファイル\Scene\Room</Filter>
@@ -464,21 +464,6 @@
     <ClInclude Include="..\SourceCode\UI\UIBase\UIBase.h">
       <Filter>ソース ファイル\UI\UIBase</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\UI\SetUp\Button\Button.h">
-      <Filter>ソース ファイル\UI\SetUp\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\UI\SetUp\Base\SetUpBase.h">
-      <Filter>ソース ファイル\UI\SetUp\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\UI\SetUp\TitleButton\TitleButton.h">
-      <Filter>ソース ファイル\UI\SetUp\TitleButton</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\UI\SetUp\ParamButton\ParamButton.h">
-      <Filter>ソース ファイル\UI\SetUp\ParamButton</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SourceCode\Scene\Ending\Ending.h">
-      <Filter>ソース ファイル\Scene\Ending</Filter>
-    </ClInclude>
     <ClInclude Include="..\SourceCode\Shade\PointLight\PointLightShader.h">
       <Filter>ソース ファイル\Shade\PointLightShader</Filter>
     </ClInclude>
@@ -487,6 +472,21 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\Scene\SaveScene\SaveScene.h">
       <Filter>ソース ファイル\Scene\Save</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\UI\Status\Base\StatusBase.h">
+      <Filter>ソース ファイル\UI\Status\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\UI\Status\Button\Button.h">
+      <Filter>ソース ファイル\UI\Status\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\UI\Status\ParamButton\ParamButton.h">
+      <Filter>ソース ファイル\UI\Status\ParamButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\UI\Status\TitleButton\TitleButton.h">
+      <Filter>ソース ファイル\UI\Status\TitleButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\EndingScene\EndingScene.h">
+      <Filter>ソース ファイル\Scene\Ending</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

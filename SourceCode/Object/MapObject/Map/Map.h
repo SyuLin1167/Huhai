@@ -5,11 +5,15 @@
 
 #include"../../ObjectBase/ObjBase.h"
 
-/*Mapクラス*/
+/// <summary>
+/// Mapクラス
+/// </summary>
 class Map :public ObjBase
 {
 public:
-    //マップタグ
+    /// <summary>
+    /// マップタグ
+    /// </summary>
     enum MapTag
     {
         TITLE = 0,
@@ -30,11 +34,6 @@ public:
     /// デストラクタ
     /// </summary>
     ~Map();
-
-    /// <summary>
-    /// 読み込み処理
-    /// </summary>
-    void LoadModel();
 
     /// <summary>
     /// 更新処理

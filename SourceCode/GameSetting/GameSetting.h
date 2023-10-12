@@ -6,7 +6,9 @@ constexpr int ColorBit = 16;
 constexpr auto SCREEN_WIDTH = 1920;       //スクリーン幅
 constexpr auto SCREEN_HEIGHT = 1080;      //スクリーン高さ
 
-/*GameSettingクラス*/
+/// <summary>
+/// GameSettingクラス
+/// </summary>
 class GameSetting
 {
 public:

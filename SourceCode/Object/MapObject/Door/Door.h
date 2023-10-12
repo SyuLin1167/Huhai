@@ -3,11 +3,15 @@
 
 #include"../../ObjectBase/ObjBase.h"
 
-/*Doorクラス*/
+/// <summary>
+/// Doorクラス
+/// </summary>
 class Door :public ObjBase
 {
 public:
-    //アニメーションタイプ
+    /// <summary>
+    /// アニメーションタイプ
+    /// </summary>
     enum AnimType
     {
         IDLE = 0,       //待機
@@ -49,7 +53,7 @@ private:
     int animType;                                       //アニメーションタイプ
 
     bool rotateNow;                                     //回転状態
-    VECTOR aimDir;                                      //目標方向
+
     const VECTOR DOOR_ACION_ICON= VGet(0, 20, 0);       //ドアのアクションアイコン
 
     class Sound* doorSound;                             //サウンド

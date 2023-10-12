@@ -3,10 +3,14 @@
 #include"../../../GameSetting/GameSetting.h"
 #include"../../../BlendMode/BlendMode.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
+/// <param name="name">:ボタン名</param>
+/// <param name="num">:ボタン番号</param>
+/// <param name="value">:パラメーター初期値</param>
 ParamButton::ParamButton(std::string name, int num, int value)
-    :SetUpBase(name)
+    :StatusBase(name)
     , paramMin(0)
     , paramMax(255)
     , moveX(0)
@@ -23,22 +27,29 @@ ParamButton::ParamButton(std::string name, int num, int value)
     paramButtonBlend = new BlendMode;
 }
 
-// 最小値最大値設定 //
-
+/// <summary>
+/// 最小値最大値設定
+/// </summary>
+/// <param name="min"></param>
+/// <param name="max"></param>
 void ParamButton::ParamMinMax(int min, int max)
 {
     paramMin = min;
     paramMax = max;
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 ParamButton::~ParamButton()
 {
+    //処理なし
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
 void ParamButton::Update(float deltaTime)
 {
     //マウス入力処理
@@ -78,8 +89,9 @@ void ParamButton::Update(float deltaTime)
     isInput = false;
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void ParamButton::Draw()
 {
     //パラメーター名描画

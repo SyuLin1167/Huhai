@@ -1,4 +1,4 @@
-#include "Escape.h"
+#include "EscapeScene.h"
 
 #include "../../Object/ObjectManager/ObjManager.h"
 #include "../../Asset/AssetManager/AssetManager.h"
@@ -12,12 +12,13 @@
 #include "../../Object/CharaObject/Player/Player.h"
 #include "../../Object/CharaObject/Ghost/Ghost.h"
 #include"../PauseMenu/PauseMenu.h"
-#include "../Ending/Ending.h"
+#include "../EndingScene/EndingScene.h"
 #include"../TitleScene/TitleScene.h"
 #include"../RoomScene/RoomScene.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 EscapeScene::EscapeScene()
     :SceneBase()
 {
@@ -57,15 +58,19 @@ EscapeScene::EscapeScene()
     sound->AddSound("../Assets/Sound/GameOverSE.mp3", SoundTag::GameOver);
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 EscapeScene::~EscapeScene()
 {
     //処理なし
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
+/// <returns></returns>
 SceneBase* EscapeScene::UpdateScene(float deltaTime)
 {
     //オブジェクト更新
@@ -81,7 +86,7 @@ SceneBase* EscapeScene::UpdateScene(float deltaTime)
         ObjManager::DeleteAllObj();
 
         //シーンを次の場面にする
-        return new Ending;
+        return new EndingScene;
     }
     //ゲームオーバーしたら
     else if (!ObjManager::GetFirstObj(ObjTag::Player)->IsVisible())
@@ -120,8 +125,9 @@ SceneBase* EscapeScene::UpdateScene(float deltaTime)
     return this;
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void EscapeScene::DrawScene()
 {
     //オブジェクト描画

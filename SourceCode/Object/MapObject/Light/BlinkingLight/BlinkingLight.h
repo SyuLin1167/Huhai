@@ -4,7 +4,9 @@
 
 #include"../LightBase/LightBase.h"
 
-        /*BlinkingLighitクラス*/
+/// <summary>
+/// BrinkingLightクラス
+/// </summary>
 class BlinkingLight :public LightBase
 {
 public:

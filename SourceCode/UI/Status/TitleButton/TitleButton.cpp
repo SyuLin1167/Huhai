@@ -3,10 +3,12 @@
 #include"../../../GameSetting/GameSetting.h"
 #include"../../../BlendMode/BlendMode.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
+/// <param name="num">:ボタン番号</param>
 TitleButton::TitleButton(int num)
-    :SetUpBase("BackToTitle")
+    :StatusBase("BackToTitle")
 {
     //ボタン設定
     buttonWidth = TITLE_BUTTON_WIDTH;
@@ -17,21 +19,26 @@ TitleButton::TitleButton(int num)
     titleButtonBlend = new BlendMode;
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 TitleButton::~TitleButton()
 {
+    //処理なし
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
 void TitleButton::Update(float deltaTime)
 {
     ProcessInput();
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void TitleButton::Draw()
 {
     SetFontSize(45);

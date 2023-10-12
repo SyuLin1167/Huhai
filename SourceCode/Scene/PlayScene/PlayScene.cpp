@@ -15,11 +15,12 @@
 #include "../../UI/Reamarks/Remarks.h"
 #include"../PauseMenu/PauseMenu.h"
 #include"../TitleScene/TitleScene.h"
-#include"../EscapeScene/Escape.h"
+#include"../EscapeScene/EscapeScene.h"
 #include"../SaveScene/SaveScene.h"
 
-// コンストラクタ //
-
+/// <summary>
+/// コンストラクタ
+/// </summary>
 PlayScene::PlayScene()
     :SceneBase()
 {
@@ -58,14 +59,19 @@ PlayScene::PlayScene()
     ObjManager::AddObj(new Remarks(TextType::Stage));
 }
 
-// デストラクタ //
-
+/// <summary>
+/// デストラクタ
+/// </summary>
 PlayScene::~PlayScene()
 {
+    //処理なし
 }
 
-// 更新処理 //
-
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
+/// <returns>次のフレームのシーン</returns>
 SceneBase* PlayScene::UpdateScene(const float deltaTime)
 {
     //オブジェクト更新
@@ -103,8 +109,9 @@ SceneBase* PlayScene::UpdateScene(const float deltaTime)
     return this;
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void PlayScene::DrawScene()
 {
     //オブジェクト描画

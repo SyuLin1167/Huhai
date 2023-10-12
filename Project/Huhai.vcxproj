@@ -179,8 +179,8 @@
     <ClCompile Include="..\SourceCode\Object\MapObject\Table\Table.cpp" />
     <ClCompile Include="..\SourceCode\Object\ObjectBase\ObjBase.cpp" />
     <ClCompile Include="..\SourceCode\Object\ObjectManager\ObjManager.cpp" />
-    <ClCompile Include="..\SourceCode\Scene\Ending\Ending.cpp" />
-    <ClCompile Include="..\SourceCode\Scene\EscapeScene\Escape.cpp" />
+    <ClCompile Include="..\SourceCode\Scene\EndingScene\EndingScene.cpp" />
+    <ClCompile Include="..\SourceCode\Scene\EscapeScene\EscapeScene.cpp" />
     <ClCompile Include="..\SourceCode\Scene\PauseMenu\PauseMenu.cpp" />
     <ClCompile Include="..\SourceCode\Scene\PlayScene\PlayScene.cpp" />
     <ClCompile Include="..\SourceCode\Scene\RoomScene\RoomScene.cpp" />
@@ -194,10 +194,10 @@
     <ClCompile Include="..\SourceCode\UI\Action\Action.cpp" />
     <ClCompile Include="..\SourceCode\UI\Reamarks\Remarks.cpp" />
     <ClCompile Include="..\SourceCode\UI\Select\Select.cpp" />
-    <ClCompile Include="..\SourceCode\UI\SetUp\Base\SetUpBase.cpp" />
-    <ClCompile Include="..\SourceCode\UI\SetUp\Button\Button.cpp" />
-    <ClCompile Include="..\SourceCode\UI\SetUp\ParamButton\ParamButton.cpp" />
-    <ClCompile Include="..\SourceCode\UI\SetUp\TitleButton\TitleButton.cpp" />
+    <ClCompile Include="..\SourceCode\UI\Status\Base\StatusBase.cpp" />
+    <ClCompile Include="..\SourceCode\UI\Status\Button\Button.cpp" />
+    <ClCompile Include="..\SourceCode\UI\Status\ParamButton\ParamButton.cpp" />
+    <ClCompile Include="..\SourceCode\UI\Status\TitleButton\TitleButton.cpp" />
     <ClCompile Include="..\SourceCode\UI\UIBase\UIBase.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -231,8 +231,8 @@
     <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjBase.h" />
     <ClInclude Include="..\SourceCode\Object\ObjectBase\ObjTag.h" />
     <ClInclude Include="..\SourceCode\Object\ObjectManager\ObjManager.h" />
-    <ClInclude Include="..\SourceCode\Scene\Ending\Ending.h" />
-    <ClInclude Include="..\SourceCode\Scene\EscapeScene\Escape.h" />
+    <ClInclude Include="..\SourceCode\Scene\EndingScene\EndingScene.h" />
+    <ClInclude Include="..\SourceCode\Scene\EscapeScene\EscapeScene.h" />
     <ClInclude Include="..\SourceCode\Scene\PauseMenu\PauseMenu.h" />
     <ClInclude Include="..\SourceCode\Scene\PlayScene\PlayScene.h" />
     <ClInclude Include="..\SourceCode\Scene\RoomScene\RoomScene.h" />
@@ -248,10 +248,10 @@
     <ClInclude Include="..\SourceCode\UI\Reamarks\TextType.h" />
     <ClInclude Include="..\SourceCode\UI\Select\Select.h" />
     <ClInclude Include="..\SourceCode\UI\Select\SelectType.h" />
-    <ClInclude Include="..\SourceCode\UI\SetUp\Base\SetUpBase.h" />
-    <ClInclude Include="..\SourceCode\UI\SetUp\Button\Button.h" />
-    <ClInclude Include="..\SourceCode\UI\SetUp\ParamButton\ParamButton.h" />
-    <ClInclude Include="..\SourceCode\UI\SetUp\TitleButton\TitleButton.h" />
+    <ClInclude Include="..\SourceCode\UI\Status\Base\StatusBase.h" />
+    <ClInclude Include="..\SourceCode\UI\Status\Button\Button.h" />
+    <ClInclude Include="..\SourceCode\UI\Status\ParamButton\ParamButton.h" />
+    <ClInclude Include="..\SourceCode\UI\Status\TitleButton\TitleButton.h" />
     <ClInclude Include="..\SourceCode\UI\UIBase\UIBase.h" />
   </ItemGroup>
   <ItemGroup>
