@@ -8,7 +8,7 @@
 #include "../../Object/MapObject/Light/NomalLight/NomalLight.h"
 #include "../../Object/CharaObject/Player/Player.h"
 #include "../../UI/Reamarks/Remarks.h"
-#include"../PauseMenu/PauseMenu.h"
+#include"../PauseScene/PauseMenu/PauseMenu.h"
 #include"../TitleScene/TitleScene.h"
 #include "../PlayScene/PlayScene.h"
 #include"../SaveScene/SaveScene.h"

@@ -11,7 +11,7 @@
 #include "../../Object/MapObject/Light/FlashLight/FlashLight.h"
 #include "../../Object/CharaObject/Player/Player.h"
 #include "../../Object/CharaObject/Ghost/Ghost.h"
-#include"../PauseMenu/PauseMenu.h"
+#include"../PauseScene/PauseMenu/PauseMenu.h"
 #include "../EndingScene/EndingScene.h"
 #include"../TitleScene/TitleScene.h"
 #include"../RoomScene/RoomScene.h"

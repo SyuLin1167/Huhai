@@ -4,7 +4,7 @@
 #include"../../Asset/AssetManager/AssetManager.h"
 #include"../SceneBase/SceneBase.h"
 #include "../TitleScene/TitleScene.h"
-#include"../PauseMenu/PauseMenu.h"
+#include"../PauseScene/PauseMenu/PauseMenu.h"
 #include "../SaveScene/SaveScene.h"
 
 
@@ -12,12 +12,11 @@
 /// コンストラクタ
 /// </summary>
 SceneManager::SceneManager()
+    :pause(new PauseScene)
+    , gameSetting(new GameSetting)
+    , timeMgr(new TimeManager)
+    , pointLightShader(new PointLightShader)
 {
-    //インスタンス生成
-    gameSetting.reset(new GameSetting);
-    timeMgr.reset(new TimeManager);
-    pointLightShader.reset(new PointLightShader);
-
     nowScreen = MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
@@ -96,6 +95,7 @@ void SceneManager::SwitchScene()
     {
         //nowSceneがtmpSceneと異なっていたら解放して代入
         nowScene.pop();
+        PauseMenu::ResetTitleButton();
         nowScene.push(storageScene);
     }
 }
@@ -120,9 +120,8 @@ void SceneManager::CheckPauseMenu()
 
             //メニュー画面表示
             SetMouseDispFlag(true);
-            nowScene.push(PauseMenu::GetPauseMenuInstance());
+            nowScene.push(new PauseScene);
             DeleteGraph(nowScreen);
-
         }
         else
         {

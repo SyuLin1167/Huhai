@@ -2,7 +2,7 @@
 
 #include"../AssetManager/AssetManager.h"
 #include"../../Object/ObjectManager/ObjManager.h"
-#include"../../Scene/PauseMenu/PauseMenu.h"
+#include"../../Scene/PauseScene/PauseMenu/PauseMenu.h"
 
 /// <summary>
 /// コンストラクタ

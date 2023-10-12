@@ -4,7 +4,7 @@
 
 #include "LightBase.h"
 
-#include"../../../../Scene/PauseMenu/PauseMenu.h"
+#include"../../../../Scene/PauseScene/PauseMenu/PauseMenu.h"
 
 /// <summary>
 /// コンストラクタ

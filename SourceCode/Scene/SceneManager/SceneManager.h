@@ -2,6 +2,7 @@
 
 #include<stack>
 #include<memory>
+#include"../PauseScene/PauseScene.h"
 #include"../../GameSetting/GameSetting.h"
 #include"../../Time/TimeManager.h"
 #include"../../Shade/PointLight/PointLightShader.h"
@@ -59,15 +60,16 @@ public:
     void GameLoop();
 
 private:
-    int keyState[256] = { 0 };                  //キーステータス
-    int nowScreen;                              //現在の画面
+    int keyState[256] = { 0 };                              //キーステータス
+    int nowScreen;                                          //現在の画面
 
-    const int MAX_STACK_SCENE = 2;              //シーン確保最大値
-    std::stack<class SceneBase*> nowScene;      //現在のシーン
-    SceneBase* storageScene;                        //一時的なシーン
+    const int MAX_STACK_SCENE = 2;                          //シーン確保最大値
+    std::stack<class SceneBase*> nowScene;                  //現在のシーン
+    SceneBase* storageScene;                                //一時的なシーン
 
-    std::unique_ptr<GameSetting> gameSetting;             //ゲームセッティング
-    std::unique_ptr<TimeManager> timeMgr;                 //タイムマネージャー
-    std::unique_ptr<PointLightShader> pointLightShader;           //ポイントライトシェーダー
+    std::unique_ptr<PauseScene> pause;                      //ポーズシーン
+    std::unique_ptr<GameSetting> gameSetting;               //ゲームセッティング
+    std::unique_ptr<TimeManager> timeMgr;                   //タイムマネージャー
+    std::unique_ptr<PointLightShader> pointLightShader;     //ポイントライトシェーダー
 };
 

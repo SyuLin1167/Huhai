@@ -2,7 +2,7 @@
 
 #include"../../GameSetting/GameSetting.h"
 #include"../../Object/CharaObject/Camera/FpsCamera/FpsCamera.h"
-#include"../../Scene/PauseMenu/PauseMenu.h"
+#include"../../Scene/PauseScene/PauseMenu/PauseMenu.h"
 
 /// <summary>
 /// コンストラクタ

@@ -1,7 +1,7 @@
 #include "Player.h"
 
 #include"../../ObjectManager/ObjManager.h"
-#include"../../../Scene/PauseMenu/PauseMenu.h"
+#include"../../../Scene/PauseScene/PauseMenu/PauseMenu.h"
 #include"../../../Asset/Sound/Sound.h"
 
 /// <summary>

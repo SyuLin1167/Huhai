@@ -34,6 +34,17 @@ void PauseScene::InitPauesMenu()
 }
 
 /// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:フレームレート</param>
+/// <returns>次のフレームのシーン</returns>
+SceneBase* PauseScene::UpdateScene(const float deltaTime)
+{
+    PauseMenu::Update(deltaTime);
+    return this;
+}
+
+/// <summary>
 /// 描画処理
 /// </summary>
 void PauseScene::DrawScene()
@@ -41,4 +52,6 @@ void PauseScene::DrawScene()
     //ゲーム画面描画
     DrawGraph(bgX, bgY, bgHandle, FALSE);
     GraphFilter(bgHandle, DX_GRAPH_FILTER_GAUSS, PIXEL_WIDTH, GAUSS_PARAM);
+
+    PauseMenu::Draw();
 }
