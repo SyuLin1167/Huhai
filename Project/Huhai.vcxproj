@@ -260,6 +260,7 @@
     <None Include="..\SourceCode\Object\MapObject\Door\DoorData.json" />
     <None Include="..\SourceCode\Object\MapObject\Light\LightBase\LightData.json" />
     <None Include="..\SourceCode\Object\MapObject\Table\TableData.json" />
+    <None Include="..\SourceCode\UI\Reamarks\RemarksData.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

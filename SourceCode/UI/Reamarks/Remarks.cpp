@@ -1,15 +1,18 @@
-#include "Remarks.h"
+#include<../Rapidjson/istreamwrapper.h>
+#include<../Rapidjson/document.h>
+#include<fstream>
 
+#include "Remarks.h"
 #include"../../Asset/AssetManager/AssetManager.h"
 #include"../../BlendMode/BlendMode.h"
 
 /// <summary>
 /// コンストラクタ
 /// </summary>
-/// <param name="type">:テキストの種類</param>
-Remarks::Remarks(TextType texttype)
+    /// <param name="type">:テキスト種類</param>
+Remarks::Remarks(TextType type)
     :UIBase(ObjTag::Remarks)
-    , textType(texttype)
+    , textType(type)
     , stringBuf{}
     , holdBuf{}
     , stringNum(0)
@@ -23,6 +26,18 @@ Remarks::Remarks(TextType texttype)
     //テキストボックス設定
     objHandle =AssetManager::GetGraph("../Assets/BackGround/Remarks.png");
     objPos = VGet(0.0f, 600.0f, 0.0f);
+
+    //ファイル読み込み
+    std::ifstream ifs("../SourceCode/UI/Remarks/RemarksData.json");
+
+    //ファイル解析
+    if (ifs.good())
+    {
+        rapidjson::IStreamWrapper isw(ifs);
+
+        doc.ParseStream(isw);
+    }
+    ifs.close();
 
     canClick = true;
 }
@@ -61,7 +76,7 @@ void Remarks::Update(float deltaTime)
         else
         {
             //待機中でなければ台詞を一文字ずつ読み込む
-            char Moji = GetText(stringNum, stringPtr);
+            char Moji = GetText(stringNum, stringPtr).c_str();
             switch (Moji)
             {
             case '/':
@@ -143,60 +158,64 @@ void Remarks::Update(float deltaTime)
 /// <param name="sn">:文字列番号</param>
 /// <param name="sp">:文字ポインタ</param>
 /// <returns>指定場所の文字</returns>
-char Remarks::GetText(int sn, int sp)
+std::string Remarks::GetText(int sn, int sp)
 {
     //オープニング
-    char Opening[][256] =
+    auto& opening = doc["opening"];
+    std::string Opening[][256] =
     {
-        "最近仕事がうまくいかない...。 ",
-        "/|いつも自分を支えてくれた妻を事故で無くし、 ",
-        "それからずっと、自分の生きる意味を見出せないでいる。 ",
-        "/もっと妻と触れ合っていれば良かったと、/心底思う。 ",
-        "/|きっと私は、あの時の事をずっと引きずっているのだろう...。 ",
-        "/^",
+        opening.GetArray()[0].GetString(),
+        opening.GetArray()[1].GetString(),
+        opening.GetArray()[2].GetString(),
+        opening.GetArray()[3].GetString(),
+        opening.GetArray()[4].GetString(),
+        opening.GetArray()[5].GetString(),
     };
 
     //ステージ
-    char Stage[][256] =
+    auto& stage = doc["stage"];
+    std::string Stage[][256] =
     {
-        "ここは一体...。 ",
-        "/さっきまで自室で寝ていたはずだが? ",
-        "/|夢にしては感覚がしっかりしている...。 ",
-        "/|気味が悪いが、進むしかないのだろうか? ",
-        "/^ ",
+        stage.GetArray()[0].GetString(),
+        stage.GetArray()[1].GetString(),
+        stage.GetArray()[2].GetString(),
+        stage.GetArray()[3].GetString(),
+        stage.GetArray()[4].GetString(),
     };
 
     //男性セリフ
-    char ManSpeak[][256] =
+    auto& manSpeak = doc["manspeak"];
+    std::string ManSpeak[][256] =
     {
-        "男性「...!?」 ",
-        "/|男性「なぜ君はここにいる!」 ",
-        "/|答えようとしたが声が出せない、/夢だからだろうか? ",
-        "/今は彼の話を聞くことしかできないようだ。 ",
-        "/|男性「ここは、/過去に囚われているものが集まる場所。」 ",
-        "/男性「過去のせいで前に進めない人がよく呼ばれる。 ",
-        "/多分アイツが呼んでいるんだと俺は思う。」 ",
-        "/|男性「君もアイツに呼ばれてここにいるはずだ。」 ",
-        "/男性「いいか? /ここでアイツに捕まったら最期、 ",
-        "/翌日には皆謎の死を遂げている。」 ",
-        "/|男性「とにかくヤツから逃げ切るんだ。 ",
-        "/そうすれば、アイツから解放される。」 ",
-        "/|男性「....!?/まずい、アイツが来る! /俺はもうここまでだ、 ",
-        "/ライトをやるから、早くここから逃げるんだ!」 ",
-        "/^ ",
+        manSpeak.GetArray()[0].GetString(),
+        manSpeak.GetArray()[1].GetString(),
+        manSpeak.GetArray()[2].GetString(),
+        manSpeak.GetArray()[3].GetString(),
+        manSpeak.GetArray()[4].GetString(),
+        manSpeak.GetArray()[5].GetString(),
+        manSpeak.GetArray()[6].GetString(),
+        manSpeak.GetArray()[7].GetString(),
+        manSpeak.GetArray()[8].GetString(),
+        manSpeak.GetArray()[9].GetString(),
+        manSpeak.GetArray()[10].GetString(),
+        manSpeak.GetArray()[11].GetString(),
+        manSpeak.GetArray()[12].GetString(),
+        manSpeak.GetArray()[13].GetString(),
+        manSpeak.GetArray()[14].GetString(),
     };
 
     //クリア
-    char GameClear[][256] =
+    auto& clear = doc["clear"];
+    std::string GameClear[][256] =
     {
-        "扉を抜けるとき、妻の声が聞こえた気がした。 ",
-        "/もしかしたら、ずっとそばにいてくれていたのかもしれない。 ",
-        "/|あの夢から、自分は大切なことに気付いたんだ。",
-        "/|「ありがとう、/もう一人でも大丈夫だよ。 ",
-        "/いつか会いに行くまで/見守っていてほしい。」 ",
-        "/|それから、/今日まで充実した日々を送ることが出来ている。 ",
-        "/|君がそばにいてくれたから、/ずっと支えてくれたから...。  ",
-        "/^",
+        clear.GetArray()[0].GetString(),
+        clear.GetArray()[1].GetString(),
+        clear.GetArray()[2].GetString(),
+        clear.GetArray()[3].GetString(),
+        clear.GetArray()[4].GetString(),
+        clear.GetArray()[5].GetString(),
+        clear.GetArray()[6].GetString(),
+        clear.GetArray()[7].GetString(),
     };
 
     //タイプに合わせたセリフの文字を返す
@@ -216,7 +235,7 @@ char Remarks::GetText(int sn, int sp)
         break;
     }
 
-    return -1;
+    return "";
 }
 
 /// <summary>

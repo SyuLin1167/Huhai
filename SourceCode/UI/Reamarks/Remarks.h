@@ -17,7 +17,7 @@ public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    /// <param name="type">:テキストの種類</param>
+    /// <param name="type">:テキスト種類</param>
     Remarks(TextType type);
 
     /// <summary>
@@ -37,7 +37,7 @@ public:
     /// <param name="sn">:文字列番号</param>
     /// <param name="sp">:文字ポインタ</param>
     /// <returns>指定場所の文字</returns>
-    char GetText(int sn, int sp);
+    std::string GetText(int sn, int sp);
 
     /// <summary>
     /// 改行処理
@@ -66,6 +66,7 @@ public:
 
 private:
     TextType textType;
+    rapidjson::Document doc;
     char stringBuf[BUFHEIGHT][BUFWIDTH * 2 + 1];        //仮想テキストバッファ
     char holdBuf[3];                                    //文字一時記憶領域
     int stringNum;                                      //文字列番号

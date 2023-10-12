@@ -508,5 +508,8 @@
     <None Include="..\SourceCode\Object\MapObject\Light\LightBase\LightData.json">
       <Filter>ソース ファイル\MapObject\Light\Base</Filter>
     </None>
+    <None Include="..\SourceCode\UI\Reamarks\RemarksData.json">
+      <Filter>ソース ファイル\UI\Remarks</Filter>
+    </None>
   </ItemGroup>
 </Project>
