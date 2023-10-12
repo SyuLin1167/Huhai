@@ -1,9 +1,9 @@
 #include "PauseMenu.h"
 
-#include"../../UI/Status/Button/Button.h"
-#include"../../UI/Status/TitleButton/TitleButton.h"
-#include"../../Scene/TitleScene/TitleScene.h"
-#include"../../UI/Status/ParamButton/ParamButton.h"
+#include"../../../UI/Status/Button/Button.h"
+#include"../../../UI/Status/TitleButton/TitleButton.h"
+#include"../../../Scene/TitleScene/TitleScene.h"
+#include"../../../UI/Status/ParamButton/ParamButton.h"
 
 //実態へのポインタ定義
 std::unique_ptr<PauseMenu> PauseMenu::pauseMenu = nullptr;
@@ -13,7 +13,6 @@ std::unique_ptr<PauseMenu> PauseMenu::pauseMenu = nullptr;
 /// </summary>
 PauseMenu::PauseMenu()
 {
-
     //フォントの読み込み
     ChangeFont("KillingFont", DX_CHARSET_DEFAULT);
 
@@ -52,23 +51,6 @@ void PauseMenu::CreateInstance()
 }
 
 /// <summary>
-/// ポーズメニューのインスタンス取得処理
-/// </summary>
-/// <returns>ポーズメニュー</returns>
-SceneBase* PauseMenu::GetPauseMenuInstance()
-{
-    //ゲーム画面保存
-    pauseMenu->bgHandle = LoadGraph("../Assets/BackGround/GameScene.png");
-
-
-    //タイトルボタン追加
-    delete pauseMenu->titleButton;
-    pauseMenu->titleButton = new TitleButton(static_cast<int>(pauseMenu->paramData.size() + 1));
-
-    return pauseMenu.get();
-}
-
-/// <summary>
 /// ボタン追加処理
 /// </summary>
 /// <param name="name">:登録名</param>
@@ -98,22 +80,19 @@ void PauseMenu::AddParam(std::string name,int value)
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-/// <returns>次フレームのシーン</returns>
-SceneBase* PauseMenu::UpdateScene(float deltaTime)
+    /// <param name="deltaTime">:デルタタイム</param>
+void PauseMenu::Update(float deltaTime)
 {
     //ボタン更新
-    for (auto& iter : buttonData)
+    for (auto& iter : pauseMenu->buttonData)
     {
         iter.second->Update(deltaTime);
     }
-    for (auto& iter : paramData)
+    for (auto& iter : pauseMenu->paramData)
     {
         iter.second->Update(deltaTime);
     }
-    titleButton->Update(deltaTime);
-
-    return pauseMenu.get();
+    pauseMenu->titleButton->Update(deltaTime);
 }
 
 /// <summary>
@@ -150,6 +129,13 @@ bool PauseMenu::BackToTitle()
 /// </summary>
 void PauseMenu::ResetTitleButton()
 {
+    //タイトルボタン追加
+    delete pauseMenu->titleButton;
+    pauseMenu->titleButton = new TitleButton(static_cast<int>(pauseMenu->paramData.size() + 1));
+
+    //タイトルボタン追加
+    delete pauseMenu->titleButton;
+    pauseMenu->titleButton = new TitleButton(static_cast<int>(pauseMenu->paramData.size() + 1));
     pauseMenu->titleButton->ChangeToFalse();
 }
 
@@ -171,18 +157,14 @@ int PauseMenu::Parameter(std::string name)
 /// <summary>
 /// 描画処理
 /// </summary>
-void PauseMenu::DrawScene()
+void PauseMenu::Draw()
 {
-    //ゲーム画面描画
-    DrawGraph(bgX, bgY, pauseMenu->bgHandle, FALSE);
-    GraphFilter(pauseMenu->bgHandle, DX_GRAPH_FILTER_GAUSS, PIXEL_WIDTH, GAUSS_PARAM);
-
     //ボタン描画
-    for (auto& iter : buttonData)
+    for (auto& iter : pauseMenu->buttonData)
     {
         iter.second->Draw();
     }
-    for (auto& iter : paramData)
+    for (auto& iter : pauseMenu->paramData)
     {
         iter.second->Draw();
     }

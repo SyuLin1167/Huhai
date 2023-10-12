@@ -141,9 +141,6 @@
     <Filter Include="ソース ファイル\CharaObject\Camera\FpsCamera">
       <UniqueIdentifier>{7d0f84eb-8629-4e9e-a22b-704bd601d329}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Scene\PauseMenu">
-      <UniqueIdentifier>{ad9c7e76-4f18-43f3-816d-7b8e92492df7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\UI\UIBase">
       <UniqueIdentifier>{a098c132-2fa0-455b-945e-c0acc911322c}</UniqueIdentifier>
     </Filter>
@@ -183,6 +180,12 @@
     </Filter>
     <Filter Include="ソース ファイル\Scene\EscapeScene">
       <UniqueIdentifier>{a9817ddc-b635-44b9-8d10-58a863fd6df5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Pause">
+      <UniqueIdentifier>{dffb0562-d8e3-4b8c-ac9c-6bdf51417f79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Pause\PauseMenu">
+      <UniqueIdentifier>{ad9c7e76-4f18-43f3-816d-7b8e92492df7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -300,9 +303,6 @@
     <ClCompile Include="..\SourceCode\Object\CharaObject\Camera\FpsCamera\FpsCamera.cpp">
       <Filter>ソース ファイル\CharaObject\Camera\FpsCamera</Filter>
     </ClCompile>
-    <ClCompile Include="..\SourceCode\Scene\PauseMenu\PauseMenu.cpp">
-      <Filter>ソース ファイル\Scene\PauseMenu</Filter>
-    </ClCompile>
     <ClCompile Include="..\SourceCode\UI\UIBase\UIBase.cpp">
       <Filter>ソース ファイル\UI\UIBase</Filter>
     </ClCompile>
@@ -329,6 +329,12 @@
     </ClCompile>
     <ClCompile Include="..\SourceCode\Scene\EndingScene\EndingScene.cpp">
       <Filter>ソース ファイル\Scene\Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Scene\PauseScene\PauseMenu\PauseMenu.cpp">
+      <Filter>ソース ファイル\Scene\Pause\PauseMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SourceCode\Scene\PauseScene\PauseScene.cpp">
+      <Filter>ソース ファイル\Scene\Pause</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -458,9 +464,6 @@
     <ClInclude Include="..\SourceCode\Object\CharaObject\Camera\FpsCamera\FpsCamera.h">
       <Filter>ソース ファイル\CharaObject\Camera\FpsCamera</Filter>
     </ClInclude>
-    <ClInclude Include="..\SourceCode\Scene\PauseMenu\PauseMenu.h">
-      <Filter>ソース ファイル\Scene\PauseMenu</Filter>
-    </ClInclude>
     <ClInclude Include="..\SourceCode\UI\UIBase\UIBase.h">
       <Filter>ソース ファイル\UI\UIBase</Filter>
     </ClInclude>
@@ -487,6 +490,12 @@
     </ClInclude>
     <ClInclude Include="..\SourceCode\Scene\EndingScene\EndingScene.h">
       <Filter>ソース ファイル\Scene\Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\PauseScene\PauseMenu\PauseMenu.h">
+      <Filter>ソース ファイル\Scene\Pause\PauseMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\PauseScene\PauseScene.h">
+      <Filter>ソース ファイル\Scene\Pause</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
