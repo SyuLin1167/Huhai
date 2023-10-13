@@ -17,14 +17,14 @@ PauseMenu::PauseMenu()
     ChangeFont("KillingFont", DX_CHARSET_DEFAULT);
 
     //ボタンの追加
-    AddButton("Camera");
-    AddButton("Bloom");
-    AddParam("Bgm", 150);
-    AddParam("SE", 150);
-    AddParam("Brightness", 60);
-    paramData["Brightness"]->ParamMinMax(10, 75);
-    AddParam("Sensitivity", 220);
-    paramData["Sensitivity"]->ParamMinMax(60, 245);
+    AddButton(buttonName.camera);
+    AddButton(buttonName.bloom);
+    AddParam(buttonName.bgm, FIRST_SOUND_PARAM);
+    AddParam(buttonName.se, FIRST_SOUND_PARAM);
+    AddParam(buttonName.bright, FIRST_BRIGHT_PARAM);
+    paramData[buttonName.bright]->ParamMinMax(MIN_BRIGHT_PARAM, MAX_BRIGHT_PARAM);
+    AddParam(buttonName.sensi, FIRST_SENSITIVITY);
+    paramData[buttonName.sensi]->ParamMinMax(MIN_SENSITIVITY, MAX_SENSITIVITY);
 
     //フォント設定
     AddFontResourceEx(".. /Assets/Font/KillingFont.otf", FR_PRIVATE, NULL);

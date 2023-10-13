@@ -111,7 +111,7 @@ void Sound::StartSound(SoundTag tag, int playType)
         }
         else
         {
-            sound.volume = PauseMenu::Parameter("Bgm");
+            sound.volume = PauseMenu::Parameter("BGM");
         }
 
         ChangeVolumeSoundMem(sound.volume, sound.handle);

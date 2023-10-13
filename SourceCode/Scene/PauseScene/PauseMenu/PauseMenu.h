@@ -69,11 +69,34 @@ public:
     /// </summary>
     ~PauseMenu();
 
+    /// <summary>
+    /// ボタン名構造体
+    /// </summary>
+    struct ButtonName
+    {
+        const std::string camera = "Camera";
+        const std::string bloom = "Bloom";
+        const std::string bgm = "BGM";
+        const std::string se = "SE";
+        const std::string bright = "Brightness";
+        const std::string sensi = "Sensitivity";
+    }buttonName;
+
 private:
     /// <summary>
     /// コンストラクタ(シングルトン)
     /// </summary>
     PauseMenu();
+
+    const int FIRST_SOUND_PARAM = 150;                                  //音量初期値
+
+    const int FIRST_BRIGHT_PARAM = 60;                                  //明るさ初期値
+    const int MAX_BRIGHT_PARAM = 75;                                    //明るさ最大値
+    const int MIN_BRIGHT_PARAM = 10;                                    //明るさ最小値
+
+    const int FIRST_SENSITIVITY = 220;                                  //感度初期値
+    const int MAX_SENSITIVITY = 245;                                    //感度最大値
+    const int MIN_SENSITIVITY = 60;                                     //感度最小値
 
     static std::unique_ptr<PauseMenu> pauseMenu;                        //自身の実態
 
