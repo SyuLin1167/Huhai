@@ -23,16 +23,18 @@ public:
     /// 暗転処理
     /// </summary>
     void Darken();
-
+    
     /// <summary>
     /// フェードアウト
     /// </summary>
-    void AddFade(float deltaTime);
+    /// <param name="deltaTime">:デルタタイム</param>
+    void AddFade(const float deltaTime);
 
     /// <summary>
     /// フェードイン
     /// </summary>
-    void SubFade(float deltaTime);
+    /// <param name="deltaTime">:デルタタイム</param>
+    void SubFade(const float deltaTime);
 
     /// <summary>
     /// フェード

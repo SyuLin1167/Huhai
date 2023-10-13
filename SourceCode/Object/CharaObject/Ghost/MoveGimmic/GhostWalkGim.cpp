@@ -31,8 +31,8 @@ GhostWalkGim::~GhostWalkGim()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime"></param>
-void GhostWalkGim::Update(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void GhostWalkGim::Update(const float deltaTime)
 {
     //アニメーション時間再生
     ghostAnim->AddAnimTime(deltaTime);

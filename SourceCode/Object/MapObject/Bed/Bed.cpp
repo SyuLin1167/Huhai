@@ -37,8 +37,8 @@ Bed::~Bed()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-void Bed::Update(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void Bed::Update(const float deltaTime)
 {
     //アクションボタンが押されたら就寝する
     ObjBase* action = ObjManager::GetFirstObj(ObjTag::UI);

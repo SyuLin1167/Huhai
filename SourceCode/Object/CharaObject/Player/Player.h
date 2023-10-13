@@ -22,8 +22,8 @@ public:
     /// <summary>
     /// 更新処理
     /// </summary>
-    /// <param name="deltaTime">:フレームレート</param>
-    void Update(float deltaTime) override;
+    /// <param name="deltaTime">:デルタタイム</param>
+    void Update(const float deltaTime) override;
 
     /// <summary>
     /// 描画処理
@@ -34,7 +34,7 @@ public:
     /// 当たり判定処理
     /// </summary>
     /// <param name="other">:オブジェクト</param>
-    void OnCollisionEnter(const ObjBase* other)override;
+    void OnCollisionEnter(const ObjBase* other) override;
 
     /// <summary>
     /// 球体の衝突時処理

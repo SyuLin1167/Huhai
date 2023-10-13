@@ -88,8 +88,8 @@ Door::~Door()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-void Door::Update(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void Door::Update(const float deltaTime)
 {
     //アニメーション時間再生
     doorAnim->AddAnimTime(deltaTime);

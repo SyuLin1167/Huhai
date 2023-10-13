@@ -44,8 +44,8 @@ Player::~Player()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-void Player::Update(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void Player::Update(const float deltaTime)
 {
     //カメラの向き取得
     ObjBase* camFps = ObjManager::GetFirstObj(ObjTag::Camera);

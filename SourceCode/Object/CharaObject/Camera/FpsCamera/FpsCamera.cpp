@@ -25,13 +25,14 @@ FpsCamera::FpsCamera()
 /// </summary>
 FpsCamera::~FpsCamera()
 {
+    //処理なし
 }
 
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-void FpsCamera::Update(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void FpsCamera::Update(const float deltaTime)
 {
     //カメラはプレイヤーの目線にする
     ObjBase* player = ObjManager::GetFirstObj(ObjTag::Player);

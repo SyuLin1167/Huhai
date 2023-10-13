@@ -16,19 +16,6 @@ Man::Man()
     , manAnim(new Animation(objHandle))
     , manSound(new Sound)
 {
-    Load();
-}
-
-// デストラクタ //
-
-Man::~Man()
-{
-}
-
-// 読み込み処理 //
-
-void Man::Load()
-{
     //モデル設定
     objHandle = AssetManager::GetMesh("../Assets/Chara/Man/ManModel.mv1");
     objPos = { -55.0f,0.0f,30.0f };
@@ -50,9 +37,19 @@ void Man::Load()
     ObjManager::AddObj(new Action(objPos + VGet(0, 0, 5)));
 }
 
-// 更新処理 //
+/// <summary>
+/// デストラクタ
+/// </summary>
+Man::~Man()
+{
+    //処理なし
+}
 
-void Man::Update(float deltaTime)
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="deltaTime">:デルタタイム</param>
+void Man::Update(const float deltaTime)
 {
     //アニメーション時間再生
     manAnim->AddAnimTime(deltaTime);
@@ -106,8 +103,9 @@ void Man::Update(float deltaTime)
     manSound->Doppler(SoundTag::BodyFall, objPos);
 }
 
-// 描画処理 //
-
+/// <summary>
+/// 描画処理
+/// </summary>
 void Man::Draw()
 {
     MV1DrawModel(objHandle);

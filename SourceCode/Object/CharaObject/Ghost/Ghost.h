@@ -22,7 +22,7 @@ public:
     /// <summary>
     /// 更新処理
     /// </summary>
-    /// <param name="deltaTime">:フレームレート</param>
+    /// <param name="deltaTime">:デルタタイム</param>
     void Update(float deltaTime) override;
 
     /// <summary>

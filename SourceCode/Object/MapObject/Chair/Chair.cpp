@@ -54,8 +54,8 @@ Chair::~Chair()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-void Chair::Update(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void Chair::Update(const float deltaTime)
 {
     //アニメーション時間再生
     ChairAnim->AddAnimTime(deltaTime);

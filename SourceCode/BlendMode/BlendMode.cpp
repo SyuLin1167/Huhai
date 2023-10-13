@@ -26,7 +26,8 @@ BlendMode::~BlendMode()
 /// <summary>
 /// フェードアウト
 /// </summary>
-void BlendMode::AddFade(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void BlendMode::AddFade(const float deltaTime)
 {
     if (fadeValue <= 255)
     {
@@ -48,7 +49,8 @@ void BlendMode::AddFade(float deltaTime)
 /// <summary>
 /// フェードイン
 /// </summary>
-void BlendMode::SubFade(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void BlendMode::SubFade(const float deltaTime)
 {
     if (fadeValue >= 0)
     {

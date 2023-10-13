@@ -21,7 +21,7 @@ FixedCamera::~FixedCamera()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime"></param>
+/// <param name="deltaTime">:デルタタイム</param>
 void FixedCamera::Update(const float deltaTime)
 {
     //処理なし

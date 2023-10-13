@@ -27,13 +27,13 @@ public:
     /// <summary>
     /// 更新処理
     /// </summary>
-    /// <param name="deltaTime">:フレームレート</param>
-    void Update(const float deltaTime)override;
+    /// <param name="deltaTime">:デルタタイム</param>
+    void Update(const float deltaTime) override;
 
     /// <summary>
     /// 描画処理
     /// </summary>
-    void Draw()override;
+    void Draw() override;
 private:
     /// <summary>
     /// 移動処理
