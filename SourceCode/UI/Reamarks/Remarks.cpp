@@ -12,7 +12,9 @@
     /// <param name="type">:テキスト種類</param>
 Remarks::Remarks(TextType type)
     :UIBase(ObjTag::Remarks)
-    , textType(type)
+    , fileHandle(-1)
+    , text()
+    , lineCounter(0)
     , stringBuf{}
     , holdBuf{}
     , stringNum(0)
@@ -23,21 +25,33 @@ Remarks::Remarks(TextType type)
     , textY(0)
     , textBox{}
 {
-    //テキストボックス設定
-    objHandle =AssetManager::GetGraph("../Assets/BackGround/Remarks.png");
-    objPos = VGet(0.0f, 600.0f, 0.0f);
-
     //ファイル読み込み
-    std::ifstream ifs("../SourceCode/UI/Remarks/RemarksData.json");
-
-    //ファイル解析
-    if (ifs.good())
+    switch (type)
     {
-        rapidjson::IStreamWrapper isw(ifs);
+    case TextType::Opening:
+        fileHandle = FileRead_open("..//SourceCode/UI/Reamarks/RemarksData/Opening.txt");
+        break;
 
-        doc.ParseStream(isw);
+    case TextType::Stage:
+        fileHandle = FileRead_open("..//SourceCode/UI/Reamarks/RemarksData/Stage.txt");
+        break;
+
+    case TextType::ManSpeak:
+        fileHandle = FileRead_open("..//SourceCode/UI/Reamarks/RemarksData/ManSpeak.txt");
+        break;
+
+    case TextType::GameClear:
+        fileHandle = FileRead_open("..//SourceCode/UI/Reamarks/RemarksData/GameClear.txt");
+        break;
     }
-    ifs.close();
+
+    //ファイルデータ解析
+    while(FileRead_eof(fileHandle)==0)
+    {
+        FileRead_gets(text[lineCounter], sizeof(text[lineCounter]), fileHandle);
+        lineCounter++;
+    }
+    FileRead_close(fileHandle);
 
     canClick = true;
 }
@@ -47,11 +61,7 @@ Remarks::Remarks(TextType type)
 /// </summary>
 Remarks::~Remarks()
 {
-    //画像ハンドル削除
-    if (objHandle)
-    {
-        DeleteGraph(objHandle);
-    }
+    //処理なし
 }
 
 /// <summary>
@@ -76,7 +86,7 @@ void Remarks::Update(float deltaTime)
         else
         {
             //待機中でなければ台詞を一文字ずつ読み込む
-            char Moji = GetText(stringNum, stringPtr).c_str();
+            char Moji = GetText(stringNum, stringPtr);
             switch (Moji)
             {
             case '/':
@@ -155,87 +165,12 @@ void Remarks::Update(float deltaTime)
 /// <summary>
 /// 文字列取得処理
 /// </summary>
-/// <param name="sn">:文字列番号</param>
-/// <param name="sp">:文字ポインタ</param>
+/// <param name="strnnum">:文字列番号</param>
+/// <param name="strptr">:文字ポインタ</param>
 /// <returns>指定場所の文字</returns>
-std::string Remarks::GetText(int sn, int sp)
+char Remarks::GetText(int strnnum, int strptr)
 {
-    //オープニング
-    auto& opening = doc["opening"];
-    std::string Opening[][256] =
-    {
-        opening.GetArray()[0].GetString(),
-        opening.GetArray()[1].GetString(),
-        opening.GetArray()[2].GetString(),
-        opening.GetArray()[3].GetString(),
-        opening.GetArray()[4].GetString(),
-        opening.GetArray()[5].GetString(),
-    };
-
-    //ステージ
-    auto& stage = doc["stage"];
-    std::string Stage[][256] =
-    {
-        stage.GetArray()[0].GetString(),
-        stage.GetArray()[1].GetString(),
-        stage.GetArray()[2].GetString(),
-        stage.GetArray()[3].GetString(),
-        stage.GetArray()[4].GetString(),
-    };
-
-    //男性セリフ
-    auto& manSpeak = doc["manspeak"];
-    std::string ManSpeak[][256] =
-    {
-        manSpeak.GetArray()[0].GetString(),
-        manSpeak.GetArray()[1].GetString(),
-        manSpeak.GetArray()[2].GetString(),
-        manSpeak.GetArray()[3].GetString(),
-        manSpeak.GetArray()[4].GetString(),
-        manSpeak.GetArray()[5].GetString(),
-        manSpeak.GetArray()[6].GetString(),
-        manSpeak.GetArray()[7].GetString(),
-        manSpeak.GetArray()[8].GetString(),
-        manSpeak.GetArray()[9].GetString(),
-        manSpeak.GetArray()[10].GetString(),
-        manSpeak.GetArray()[11].GetString(),
-        manSpeak.GetArray()[12].GetString(),
-        manSpeak.GetArray()[13].GetString(),
-        manSpeak.GetArray()[14].GetString(),
-    };
-
-    //クリア
-    auto& clear = doc["clear"];
-    std::string GameClear[][256] =
-    {
-        clear.GetArray()[0].GetString(),
-        clear.GetArray()[1].GetString(),
-        clear.GetArray()[2].GetString(),
-        clear.GetArray()[3].GetString(),
-        clear.GetArray()[4].GetString(),
-        clear.GetArray()[5].GetString(),
-        clear.GetArray()[6].GetString(),
-        clear.GetArray()[7].GetString(),
-    };
-
-    //タイプに合わせたセリフの文字を返す
-    switch (textType)
-    {
-    case TextType::Opening:
-        return Opening[sn][sp];
-        break;
-    case TextType::Stage:
-        return Stage[sn][sp];
-        break;
-    case TextType::ManSpeak:
-        return ManSpeak[sn][sp];
-        break;
-    case TextType::GameClear:
-        return GameClear[sn][sp];
-        break;
-    }
-
-    return "";
+    return text[strnnum][strptr];
 }
 
 /// <summary>

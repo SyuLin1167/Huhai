@@ -32,6 +32,8 @@ public:
     void Draw()override;
 
 private:
-    float lightDistance;        //ライトからの距離
-    const float ACTION_RANGE = 55.0f;          //反応範囲
+    const COLOR_F LIT_MAT_COLOR;                //消灯時のライトのマテリアルカラー
+
+    float lightDistance;                        //ライトからの距離
+    const float ACTION_RANGE = 55.0f;           //反応範囲
 };

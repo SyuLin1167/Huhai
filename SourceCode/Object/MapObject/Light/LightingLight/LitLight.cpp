@@ -6,11 +6,15 @@
 /// <param name="scene">:シーン名</param>
 /// <param name="num">:オブジェクト番号</param>
 LitLight::LitLight(std::string scene, std::string num)
-    :LightBase(scene,num)
+    :LightBase(scene, num)
+    , LIT_MAT_COLOR{ 0.2f,0.2f,0.2f,1.0f }
     , lightDistance(0.0f)
 {
     //ライト設定
     SetLightEnableHandle(lightHandle,false);
+
+    //モデル設定
+    MV1SetMaterialEmiColor(objHandle, 0, LIT_MAT_COLOR);
 }
 
 /// <summary>
@@ -36,7 +40,7 @@ void LitLight::Update(float deltaTime)
         if (abs(lightDistance) < ACTION_RANGE)
         {
             SetLightEnableHandle(lightHandle, TRUE);
-            MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
+            MV1SetMaterialEmiColor(objHandle, 0, LIGHT_MAT_COLOR);
         }
     }
 

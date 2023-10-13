@@ -59,7 +59,7 @@ void BlinkingLight::Update(float deltaTime)
     else
     {
         SetLightRangeAttenHandle(lightHandle, LIGHT_RANGE, 0.0f, 0.0f, lightAtten2);
-        MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
+        MV1SetMaterialEmiColor(objHandle, 0, LIGHT_MAT_COLOR);
     }
 
     //パラメーターによる距離減衰

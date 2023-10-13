@@ -34,10 +34,10 @@ public:
     /// <summary>
     /// 文字列取得処理
     /// </summary>
-    /// <param name="sn">:文字列番号</param>
-    /// <param name="sp">:文字ポインタ</param>
+    /// <param name="strnnum">:文字列番号</param>
+    /// <param name="strptr">:文字ポインタ</param>
     /// <returns>指定場所の文字</returns>
-    std::string GetText(int sn, int sp);
+    char GetText(int strnum, int strptr);
 
     /// <summary>
     /// 改行処理
@@ -65,14 +65,16 @@ public:
     bool RemarksEof() { return eofFlag; }
 
 private:
-    TextType textType;
-    rapidjson::Document doc;
+    int fileHandle;                                     //ファイルハンドル
+    char text[256][256];                              //テキスト
+    int lineCounter;                                    //行カウンター
+
     char stringBuf[BUFHEIGHT][BUFWIDTH * 2 + 1];        //仮想テキストバッファ
     char holdBuf[3];                                    //文字一時記憶領域
     int stringNum;                                      //文字列番号
     int stringPtr;                                      //文字ポインタ
 
-    const int WHITE_TEXT_COLOR= GetColor(250, 250, 250);//テキスト色(ホワイト)
+    const int WHITE_TEXT_COLOR= GetColor(240, 240, 240);//テキスト色(ホワイト)
     const int WAIT_ICON_X = SCREEN_WIDTH * 8 / 10;      //待機アイコン座標X
     const int WAIT_ICON_Y = SCREEN_HEIGHT * 9 / 10;     //待機アイコン座標Y
 

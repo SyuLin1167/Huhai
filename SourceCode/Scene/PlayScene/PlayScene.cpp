@@ -13,7 +13,7 @@
 #include "../../Object/CharaObject/Ghost/MoveGimmic/GhostWalkGim.h"
 #include"../../Object/CharaObject/Man/Man.h"
 #include "../../UI/Reamarks/Remarks.h"
-#include"../PauseScene/PauseScene.h"
+#include"../PauseScene/PauseMenu/PauseMenu.h"
 #include"../TitleScene/TitleScene.h"
 #include"../EscapeScene/EscapeScene.h"
 #include"../SaveScene/SaveScene.h"
@@ -92,6 +92,20 @@ SceneBase* PlayScene::UpdateScene(const float deltaTime)
         //シーンを次の場面にする
         SaveScene::Save(this);
         return new EscapeScene;
+    }
+
+    //タイトルへ移動
+    if (PauseMenu::BackToTitle())
+    {
+        PauseMenu::ResetTitleButton();
+
+        //管理クラス内の確保したデータ解放
+        AssetManager::ReleaseAllAsset();
+        ObjManager::DeleteAllObj();
+
+        //シーンをタイトルにする
+
+        return new TitleScene;
     }
 
     return this;

@@ -13,14 +13,14 @@ LightBase::LightBase()
     :ObjBase(ObjTag::Light)
     , lightHandle(-1)
     , lightAtten2(0.004f)
-    , lightMatColor{ 1.0f,1.0f,1.0f,1.0f }
+    , LIGHT_MAT_COLOR{ 1.0f,1.0f,1.0f,1.0f }
 {
     //ライト設定
     lightHandle = CreatePointLightHandle(objPos, LIGHT_RANGE, 0.0f, 0.0f, lightAtten2);
 
     //モデル設定
     objHandle = AssetManager::GetMesh("../Assets/Map/Light/Light.mv1");
-    MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
+    MV1SetMaterialEmiColor(objHandle, 0, LIGHT_MAT_COLOR);
     MV1SetPosition(objHandle, objPos);
     MV1SetScale(objHandle, objScale);
 }
@@ -34,7 +34,7 @@ LightBase::LightBase(std::string scene,std::string num)
     :ObjBase(ObjTag::Light)
     , lightHandle(-1)
     , lightAtten2(0.008f)
-    , lightMatColor{ 1.0f,1.0f,1.0f,1.0f }
+    , LIGHT_MAT_COLOR{ 1.0f,1.0f,1.0f,1.0f }
 {
     //ファイル読み込み
     std::ifstream ifs("../SourceCode/Object/MapObject/Light/LightBase/LightData.json");
@@ -61,7 +61,7 @@ LightBase::LightBase(std::string scene,std::string num)
     //モデル設定
     objPos.y = LIGHTMODEL_POS_Y;
     objHandle = AssetManager::GetMesh("../Assets/Map/Light/Light.mv1");
-    MV1SetMaterialEmiColor(objHandle, 0, lightMatColor);
+    MV1SetMaterialEmiColor(objHandle, 0, LIGHT_MAT_COLOR);
     MV1SetPosition(objHandle, objPos);
     MV1SetScale(objHandle, objScale);
 }

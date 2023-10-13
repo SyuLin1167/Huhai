@@ -42,6 +42,6 @@ protected:
     const float MIN_ATTEN_PARAM=0.01f;      //減衰最小値
     float lightAtten2;                      //距離減衰係数
 
-    const COLOR_F lightMatColor;            //ライトのマテリアルカラー
+    const COLOR_F LIGHT_MAT_COLOR;            //ライトのマテリアルカラー
 
 };
