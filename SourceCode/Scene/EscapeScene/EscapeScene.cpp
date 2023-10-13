@@ -69,9 +69,9 @@ EscapeScene::~EscapeScene()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-/// <returns></returns>
-SceneBase* EscapeScene::UpdateScene(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+/// <returns>次フレームのシーン</returns>
+SceneBase* EscapeScene::UpdateScene(const float deltaTime)
 {
     //オブジェクト更新
     ObjManager::UpdateAllObj(deltaTime);

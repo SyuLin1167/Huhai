@@ -25,7 +25,7 @@ public:
     /// <summary>
     /// Scene更新処理
     /// </summary>
-    /// <param name="deltaTime">:フレームレート</param>
+    /// <param name="deltaTime">:デルタタイム</param>
     /// <returns>現在のシーン</retdeltaTimeurns>
     virtual SceneBase* UpdateScene(const float deltaTime) = 0;
 

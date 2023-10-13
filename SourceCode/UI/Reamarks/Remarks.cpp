@@ -67,8 +67,8 @@ Remarks::~Remarks()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-void Remarks::Update(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void Remarks::Update(const float deltaTime)
 {
     //文字の読み込み中なら
     if (!eofFlag)

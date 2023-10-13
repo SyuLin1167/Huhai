@@ -28,8 +28,8 @@ LitLight::~LitLight()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-void LitLight::Update(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void LitLight::Update(const float deltaTime)
 {
     //一定距離近づいたら発光
     ObjBase* player = ObjManager::GetFirstObj(ObjTag::Player);

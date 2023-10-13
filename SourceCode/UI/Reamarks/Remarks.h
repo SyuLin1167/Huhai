@@ -28,8 +28,8 @@ public:
     /// <summary>
     /// 更新処理
     /// </summary>
-    /// <param name="deltaTime">:フレームレート</param>
-    void Update(float deltaTime)override;
+    /// <param name="deltaTime">:デルタタイム</param>
+    void Update(float deltaTime) override;
 
     /// <summary>
     /// 文字列取得処理
@@ -56,7 +56,7 @@ public:
     /// <summary>
     /// 描画処理
     /// </summary>
-    void Draw()override;
+    void Draw() override;
 
     /// <summary>
     /// 終了フラグ

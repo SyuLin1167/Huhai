@@ -35,7 +35,7 @@ public:
     /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:デルタタイム</param>
-    void Update(float deltaTime) override;
+    void Update(const float deltaTime) override;
 
     /// <summary>
     /// アニメーション処理

@@ -36,8 +36,8 @@ Action::~Action()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-void Action::Update(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void Action::Update(const float deltaTime)
 {
     //プレイヤーとの距離を測る
     ObjBase* player = ObjManager::GetFirstObj(ObjTag::Player);

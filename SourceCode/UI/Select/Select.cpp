@@ -34,7 +34,7 @@ Select::~Select()
 /// 更新処理
 /// </summary>
 /// <param name="deltaTime">:フレームレート</param>
-void Select::Update(float deltaTime)
+void Select::Update(const float deltaTime)
 {
     //ボタンは開幕時フェード処理
     selectBlend->AddFade(deltaTime);

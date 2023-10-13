@@ -41,8 +41,8 @@ void Furniture::Load(FurName tag)
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-void Furniture::Update(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void Furniture::Update(const float deltaTime)
 {
     //当たり判定更新
     ColUpdate();

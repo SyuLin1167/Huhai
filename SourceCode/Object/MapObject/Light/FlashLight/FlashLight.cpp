@@ -26,8 +26,8 @@ FlashLight::~FlashLight()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-void FlashLight::Update(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void FlashLight::Update(const float deltaTime)
 {
     //カメラの方向にライトを当てる
     ObjBase* camera = ObjManager::GetFirstObj(ObjTag::Camera);

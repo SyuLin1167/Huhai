@@ -22,12 +22,12 @@ public:
     /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:デルタタイム</param>
-    void Update(const float deltaTime)override;
+    void Update(const float deltaTime) override;
 
     /// <summary>
     /// 描画処理
     /// </summary>
-    void Draw()override;
+    void Draw() override;
 
     //アニメーションタイプ
     enum Anim

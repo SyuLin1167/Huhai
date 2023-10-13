@@ -56,7 +56,7 @@ RoomScene::~RoomScene()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
+/// <param name="deltaTime">:デルタタイム</param>
 /// <returns>次フレームのシーン</returns>
 SceneBase* RoomScene::UpdateScene(const float deltaTime)
 {

@@ -29,8 +29,8 @@ Button::~Button()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-void Button::Update(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void Button::Update(const float deltaTime)
 {
     ProcessInput();
 }

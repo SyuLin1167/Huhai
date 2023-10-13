@@ -58,8 +58,8 @@ Table::~Table()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-void Table::Update(float delataTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void Table::Update(const float delataTime)
 {
     //当たり判定更新
     ColUpdate();

@@ -27,8 +27,8 @@ BlinkingLight::~BlinkingLight()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-void BlinkingLight::Update(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void BlinkingLight::Update(const float deltaTime)
 {
     //カウントがインターバルを超えるたびに乱数を生成
     countTimer += deltaTime;

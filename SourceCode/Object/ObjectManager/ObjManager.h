@@ -32,7 +32,7 @@ public:
     /// <summary>
     /// 全オブジェクト更新処理
     /// </summary>
-    /// <param name="deltaTime">:フレームレート</param>
+    /// <param name="deltaTime">:デルタタイム</param>
     static void UpdateAllObj(const float deltaTime);
 
     /// <summary>

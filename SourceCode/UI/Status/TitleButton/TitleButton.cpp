@@ -30,8 +30,8 @@ TitleButton::~TitleButton()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-void TitleButton::Update(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void TitleButton::Update(const float deltaTime)
 {
     ProcessInput();
 }

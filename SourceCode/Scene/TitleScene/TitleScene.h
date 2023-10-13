@@ -22,14 +22,14 @@ public:
     /// <summary>
     /// 更新処理
     /// </summary>
-    /// <param name="deltaTime">:フレームレート</param>
+    /// <param name="deltaTime">:デルタタイム</param>
     /// <returns>次のフレームのシーン</returns>
-    SceneBase* UpdateScene(const float deltaTime)override;
+    SceneBase* UpdateScene(const float deltaTime) override;
 
     /// <summary>
     /// 描画処理
     /// </summary>
-    void DrawScene()override;
+    void DrawScene() override;
 
 private:
     const int TITLE_POS_X = 180;                //タイトルロゴ座標X

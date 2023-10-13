@@ -42,8 +42,8 @@ EndingScene::~EndingScene()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-/// <returns></returns>
+/// <param name="deltaTime">:デルタタイム</param>
+/// <returns>次フレームのシーン</returns>
 SceneBase* EndingScene::UpdateScene(const float deltaTime)
 {
     //オブジェクト更新

@@ -20,8 +20,8 @@ public:
     /// <summary>
     /// 最小値最大値設定
     /// </summary>
-    /// <param name="min"></param>
-    /// <param name="max"></param>
+    /// <param name="min">:パラメーター最大値</param>
+    /// <param name="max">:パラメーター最小値</param>
     void ParamMinMax(int min,int max);
 
     /// <summary>
@@ -32,13 +32,13 @@ public:
     /// <summary>
     /// 更新処理
     /// </summary>
-    /// <param name="deltaTime">:フレームレート</param>
-    void Update(float deltaTime)override;
+    /// <param name="deltaTime">:デルタタイム</param>
+    void Update(const float deltaTime) override;
 
     /// <summary>
     /// 描画処理
     /// </summary>
-    void Draw()override;
+    void Draw() override;
 
     /// <summary>
     /// パラメーター取得

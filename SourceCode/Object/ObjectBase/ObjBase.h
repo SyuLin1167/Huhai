@@ -72,11 +72,10 @@ public:
     /// <param name="alive">:生きているかどうか</param>
     void SetAlive(const bool alive) { isAlive = alive; }
 
-
     /// <summary>
     /// 更新処理
     /// </summary>
-    /// <param name="deltaTime">:フレームレート</param>
+    /// <param name="deltaTime">:デルタタイム</param>
     virtual void Update(const float deltaTime) = 0;
 
     /// <summary>

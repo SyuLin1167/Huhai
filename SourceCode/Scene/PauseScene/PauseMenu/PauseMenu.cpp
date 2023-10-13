@@ -81,7 +81,7 @@ void PauseMenu::AddParam(std::string name,int value)
 /// 更新処理
 /// </summary>
     /// <param name="deltaTime">:デルタタイム</param>
-void PauseMenu::Update(float deltaTime)
+void PauseMenu::Update(const float deltaTime)
 {
     //ボタン更新
     for (auto& iter : pauseMenu->buttonData)

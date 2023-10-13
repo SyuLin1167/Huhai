@@ -57,7 +57,7 @@ public:
     /// 更新処理
     /// </summary>
     /// <param name="deltaTime">:デルタタイム</param>
-    static void Update(float deltaTime);
+    static void Update(const float deltaTime);
 
     /// <summary>
     /// 描画処理

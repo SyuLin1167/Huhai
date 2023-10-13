@@ -49,8 +49,8 @@ ParamButton::~ParamButton()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-void ParamButton::Update(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void ParamButton::Update(const float deltaTime)
 {
     //マウス入力処理
     ProcessInput();

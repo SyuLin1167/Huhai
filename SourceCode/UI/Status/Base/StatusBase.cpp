@@ -19,6 +19,7 @@ StatusBase::StatusBase(std::string name)
 /// </summary>
 StatusBase::~StatusBase()
 {
+    //ˆ—‚È‚µ
 }
 
 /// <summary>

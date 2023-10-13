@@ -40,8 +40,8 @@ Map::~Map()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
-void Map::Update(float deltaTime)
+/// <param name="deltaTime">:デルタタイム</param>
+void Map::Update(const float deltaTime)
 {
     //ゴール地点の処理
     if (mapTag == GOAL)

@@ -36,7 +36,7 @@ void PauseScene::InitPauesMenu()
 /// <summary>
 /// 更新処理
 /// </summary>
-/// <param name="deltaTime">:フレームレート</param>
+/// <param name="deltaTime">:デルタタイム</param>
 /// <returns>次のフレームのシーン</returns>
 SceneBase* PauseScene::UpdateScene(const float deltaTime)
 {
