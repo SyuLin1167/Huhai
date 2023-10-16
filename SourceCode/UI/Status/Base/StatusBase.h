@@ -1,6 +1,7 @@
 #pragma once
 #include<string>
 
+#include"../../../GameSetting/GameSetting.h"
 #include"../../UIBase/UIBase.h"
 
 /// <summary>

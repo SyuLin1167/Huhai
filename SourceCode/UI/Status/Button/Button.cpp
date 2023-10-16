@@ -1,5 +1,4 @@
 #include "Button.h"
-#include"../../../GameSetting/GameSetting.h"
 
 /// <summary>
 /// コンストラクタ
@@ -12,8 +11,8 @@ Button::Button(std::string name, int num)
     //ボタン設定
     buttonWidth = BUTTON_SIZE;
     buttonHeight = BUTTON_SIZE;
-    objPos.x = static_cast<float>(SCREEN_WIDTH) * (2.5f / 6.0f);
-    objPos.y = static_cast<float>(SCREEN_HEIGHT) * (num + 2) / 9.0f;
+    objPos.x = BUTTON_POS_X;
+    objPos.y = BUTTON_POS_Y * (num + 2);
 
     isInput = true;
 }

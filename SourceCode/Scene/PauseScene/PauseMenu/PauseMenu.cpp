@@ -27,7 +27,7 @@ PauseMenu::PauseMenu()
     paramData[buttonName.sensi]->ParamMinMax(MIN_SENSITIVITY, MAX_SENSITIVITY);
 
     //ÉtÉHÉìÉgê›íË
-    AddFontResourceEx(".. /Assets/Font/KillingFont.otf", FR_PRIVATE, NULL);
+    AddFontResourceEx("../Assets/Font/KillingFont.otf", FR_PRIVATE, NULL);
 }
 
 /// <summary>

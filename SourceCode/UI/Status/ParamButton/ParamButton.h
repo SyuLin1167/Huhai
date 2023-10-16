@@ -47,6 +47,8 @@ public:
     int GetParam() { return param; }
 
 private:
+    const float PARAM_BUTTON_POS_X = SCREEN_WIDTH * 0.7f;     //ボタン座標X
+    const float PARAM_BUTTON_POS_Y = SCREEN_HEIGHT / 9.0f;    //ボタン座標Y
     const int PARAM_BUTTON_SIZE_X = 70;     //ボタンサイズ
     const int PARAM_BUTTON_SIZE_Y = 45;     //ボタンサイズ
 

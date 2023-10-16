@@ -36,9 +36,11 @@ public:
     /// </summary>
     void ChangeToFalse() { isInput = false; }
 private:
-    const int TITLE_BUTTON_WIDTH = 270;         //タイトルボタン幅
-    const int TITLE_BUTTON_HEIGHT = 45;         //タイトルボタン高さ
+    const float TITLE_BUTTON_POS_X = SCREEN_WIDTH * 0.41f;      //ボタン座標X
+    const float TITLE_BUTTON_POS_Y = SCREEN_HEIGHT / 9.0f;      //ボタン座標Y
+    const int TITLE_BUTTON_WIDTH = 270;                         //タイトルボタン幅
+    const int TITLE_BUTTON_HEIGHT = 45;                         //タイトルボタン高さ
 
-    class BlendMode* titleButtonBlend;                    //ブレンドモード
+    class BlendMode* titleButtonBlend;                          //ブレンドモード
 };
 

@@ -33,6 +33,9 @@ public:
     void Draw() override;
 
 private:
+    const float BUTTON_POS_X = SCREEN_WIDTH * 0.4f;     //ボタン座標X
+    const float BUTTON_POS_Y = SCREEN_HEIGHT / 9.0f;    //ボタン座標Y
+
     const int BUTTON_SIZE = 45;                         //ボタンサイズ
 };
 
