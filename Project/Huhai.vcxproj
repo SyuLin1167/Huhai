@@ -234,6 +234,7 @@
     <ClInclude Include="..\SourceCode\Object\ObjectManager\ObjManager.h" />
     <ClInclude Include="..\SourceCode\Scene\EndingScene\EndingScene.h" />
     <ClInclude Include="..\SourceCode\Scene\EscapeScene\EscapeScene.h" />
+    <ClInclude Include="..\SourceCode\Scene\PauseScene\PauseMenu\ButtonName.h" />
     <ClInclude Include="..\SourceCode\Scene\PauseScene\PauseMenu\PauseMenu.h" />
     <ClInclude Include="..\SourceCode\Scene\PauseScene\PauseScene.h" />
     <ClInclude Include="..\SourceCode\Scene\PlayScene\PlayScene.h" />

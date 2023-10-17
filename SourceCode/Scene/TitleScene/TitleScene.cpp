@@ -84,7 +84,7 @@ SceneBase* TitleScene::UpdateScene(const float deltaTime)
         if (select[type]->GetButtonInput())
         {
             //マウス座標を画面の中心にして非表示にする
-            SetMousePoint(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+            SetMousePoint(SCREEN_CENTER_WIDTH, SCREEN_CENTER_HEIGHT);
             SetMouseDispFlag(false);
 
             //フェードアウト

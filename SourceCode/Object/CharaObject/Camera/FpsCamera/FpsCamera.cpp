@@ -63,19 +63,21 @@ void FpsCamera::Move(float deltaTime)
     if (mouseX > MIN_MOVE_PARAM && mouseX < SCREEN_WIDTH - MIN_MOVE_PARAM &&
         mouseY > MIN_MOVE_PARAM && mouseY < SCREEN_HEIGHT - MIN_MOVE_PARAM)
     {
-        movePos.x = (float)mouseX - static_cast<float>(SCREEN_WIDTH) / 2;
-        movePos.y = (float)mouseY - static_cast<float>(SCREEN_HEIGHT) / 2;
+        movePos.x = static_cast<float>(mouseX - SCREEN_CENTER_WIDTH);
+        movePos.y = static_cast<float>(mouseY - SCREEN_CENTER_WIDTH);
     }
 
 
     //カーソルの移動量取得
     if (abs(movePos.x) > 0)
     {
-        cameraYaw -= movePos.x * deltaTime * DX_PI_F / (255 - PauseMenu::Parameter("Sensitivity"));
+        cameraYaw -= movePos.x * deltaTime * DX_PI_F /
+            (CONTROL_SENSI - PauseMenu::Parameter(buttonName.sensi));
     }
     if (abs(movePos.y) > 0)
     {
-        cameraPitch -= movePos.y * deltaTime * DX_PI_F / (255 - PauseMenu::Parameter("Sensitivity"));
+        cameraPitch -= movePos.y * deltaTime * DX_PI_F /
+            (CONTROL_SENSI - PauseMenu::Parameter(buttonName.sensi));
     }
 
     //カメラの方向設定

@@ -109,7 +109,7 @@ void SceneManager::CheckPauseMenu()
     GetHitKeyStateAllEx(keyState);
     if (keyState[KEY_INPUT_ESCAPE] == 1)
     {
-        SetMousePoint(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+        SetMousePoint(SCREEN_CENTER_WIDTH, SCREEN_CENTER_HEIGHT);
         //配列のサイズでメニューの表示を切り替える
         if (nowScene.size() < MAX_STACK_SCENE)
         {

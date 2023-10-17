@@ -497,6 +497,9 @@
     <ClInclude Include="..\SourceCode\Scene\PauseScene\PauseScene.h">
       <Filter>ソース ファイル\Scene\Pause</Filter>
     </ClInclude>
+    <ClInclude Include="..\SourceCode\Scene\PauseScene\PauseMenu\ButtonName.h">
+      <Filter>ソース ファイル\Scene\Pause\PauseMenu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SourceCode\Object\MapObject\Table\TableData.json">

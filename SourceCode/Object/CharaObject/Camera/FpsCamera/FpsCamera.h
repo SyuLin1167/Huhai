@@ -41,7 +41,7 @@ private:
     /// <param name="deltaTime">:フレームレート</param>
     void Move(const float deltaTime);
 
-    const int MAX_SENSI_PARAM = 255;        //最大感度値
+    const int CONTROL_SENSI = 255;          //感度制御用
 
     int mouseX;                             //マウス座標X
     int mouseY;                             //マウス座標Y

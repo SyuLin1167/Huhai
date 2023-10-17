@@ -14,7 +14,7 @@ std::unique_ptr<PauseMenu> PauseMenu::pauseMenu = nullptr;
 PauseMenu::PauseMenu()
 {
     //フォントの読み込み
-    ChangeFont("KillingFont", DX_CHARSET_DEFAULT);
+    ChangeFont(fontName.c_str(), DX_CHARSET_DEFAULT);
 
     //ボタンの追加
     AddButton(buttonName.camera);
@@ -170,3 +170,4 @@ void PauseMenu::Draw()
     }
     pauseMenu->titleButton->Draw();
 }
+

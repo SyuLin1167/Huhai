@@ -3,6 +3,8 @@
 #include<string>
 #include<memory>
 
+#include"ButtonName.h"
+
 /// <summary>
 /// PauseMenuクラス
 /// </summary>
@@ -68,25 +70,13 @@ public:
     /// デストラクタ
     /// </summary>
     ~PauseMenu();
-
-    /// <summary>
-    /// ボタン名構造体
-    /// </summary>
-    struct ButtonName
-    {
-        const std::string camera = "Camera";
-        const std::string bloom = "Bloom";
-        const std::string bgm = "BGM";
-        const std::string se = "SE";
-        const std::string bright = "Brightness";
-        const std::string sensi = "Sensitivity";
-    }buttonName;
-
 private:
     /// <summary>
     /// コンストラクタ(シングルトン)
     /// </summary>
     PauseMenu();
+
+    const std::string fontName = "KillingFont";                         //フォント名
 
     const int FIRST_SOUND_PARAM = 150;                                  //音量初期値
 
