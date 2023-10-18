@@ -60,7 +60,7 @@ private:
     int prevMousePosX;                      //過去のマウス座標X
     bool canMove;                           //移動可能状態
 
-
+    int GIDE_FONT_SIZE = 25;                //フォントサイズ
     int param;                              //パラメーター
 
     class BlendMode* paramButtonBlend;                //ブレンドモード

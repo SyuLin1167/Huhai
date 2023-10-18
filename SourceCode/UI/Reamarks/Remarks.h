@@ -66,7 +66,7 @@ public:
 
 private:
     int fileHandle;                                     //ファイルハンドル
-    char text[256][256];                              //テキスト
+    char text[256][256];                                //テキスト
     int lineCounter;                                    //行カウンター
 
     char stringBuf[BUFHEIGHT][BUFWIDTH * 2 + 1];        //仮想テキストバッファ
@@ -86,10 +86,13 @@ private:
     int textX;                                          //文字表示位置X
     int textY;                                          //文字表示位置Y
 
+    const int POLYGON_NUM = 2;                          //ポリゴン数
+    const int MAX_VERTEX = 6;                           //最大頂点数
     VERTEX2D textBox[6];                                //テキストボックスポリゴン
     const int BOUNDARY_POS_LY = 750;                    //ポリゴンとボックスの境界線左上座標
     const int BOUNDARY_POS_RY = 950;                    //ポリゴンとボックスの境界線右下座標
     const float UV = 0;                                 //uv
     COLOR_U8 VERTEX_COLOR = { 20,0,0,0 };               //頂点の色
     const int TEXTBOX_COLOR = GetColor(0, 0, 20);       //テキストボックスの色
+    const int MAX_ALPHA = 255;                          //α最大値
 };

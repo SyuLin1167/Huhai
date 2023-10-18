@@ -41,7 +41,7 @@ void TitleButton::Update(const float deltaTime)
 /// </summary>
 void TitleButton::Draw()
 {
-    SetFontSize(45);
+    SetFontSize(FONT_SIZE);
     //ƒ{ƒ^ƒ“•`‰æ
     if (hasMauseClick)
     {

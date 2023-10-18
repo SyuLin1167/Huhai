@@ -6,7 +6,7 @@
 #include"../../../UI/Status/ParamButton/ParamButton.h"
 
 //実態へのポインタ定義
-std::unique_ptr<PauseMenu> PauseMenu::pauseMenu = nullptr;
+std::unique_ptr<PauseMenu> PauseMenu::singleton = nullptr;
 
 /// <summary>
 /// コンストラクタ
@@ -44,9 +44,9 @@ PauseMenu::~PauseMenu()
 void PauseMenu::CreateInstance()
 {
     //インスタンス生成
-    if (!pauseMenu.get())
+    if (!singleton.get())
     {
-        pauseMenu.reset(new PauseMenu);
+        singleton.reset(new PauseMenu);
     }
 }
 
@@ -84,15 +84,15 @@ void PauseMenu::AddParam(std::string name,int value)
 void PauseMenu::Update(const float deltaTime)
 {
     //ボタン更新
-    for (auto& iter : pauseMenu->buttonData)
+    for (auto& iter : singleton->buttonData)
     {
         iter.second->Update(deltaTime);
     }
-    for (auto& iter : pauseMenu->paramData)
+    for (auto& iter : singleton->paramData)
     {
         iter.second->Update(deltaTime);
     }
-    pauseMenu->titleButton->Update(deltaTime);
+    singleton->titleButton->Update(deltaTime);
 }
 
 /// <summary>
@@ -102,9 +102,9 @@ void PauseMenu::Update(const float deltaTime)
 /// <returns>オン:true|オフ:false</returns>
 bool PauseMenu::HasStatus(std::string name)
 {
-    if (pauseMenu)
+    if (singleton)
     {
-        return pauseMenu->buttonData[name]->GetButtonInput();
+        return singleton->buttonData[name]->GetButtonInput();
     }
 
     return false;
@@ -116,9 +116,9 @@ bool PauseMenu::HasStatus(std::string name)
 /// <returns>移動する:true|しない:false</returns>
 bool PauseMenu::BackToTitle()
 {
-    if (pauseMenu->titleButton)
+    if (singleton->titleButton)
     {
-        return pauseMenu->titleButton->GetButtonInput();
+        return singleton->titleButton->GetButtonInput();
     }
 
     return false;
@@ -130,13 +130,13 @@ bool PauseMenu::BackToTitle()
 void PauseMenu::ResetTitleButton()
 {
     //タイトルボタン追加
-    delete pauseMenu->titleButton;
-    pauseMenu->titleButton = new TitleButton(static_cast<int>(pauseMenu->paramData.size() + 1));
+    delete singleton->titleButton;
+    singleton->titleButton = new TitleButton(static_cast<int>(singleton->paramData.size() + 1));
 
     //タイトルボタン追加
-    delete pauseMenu->titleButton;
-    pauseMenu->titleButton = new TitleButton(static_cast<int>(pauseMenu->paramData.size() + 1));
-    pauseMenu->titleButton->ChangeToFalse();
+    delete singleton->titleButton;
+    singleton->titleButton = new TitleButton(static_cast<int>(singleton->paramData.size() + 1));
+    singleton->titleButton->ChangeToFalse();
 }
 
 /// <summary>
@@ -146,9 +146,9 @@ void PauseMenu::ResetTitleButton()
 /// <returns>:パラメーター</returns>
 int PauseMenu::Parameter(std::string name)
 {
-    if (pauseMenu.get())
+    if (singleton.get())
     {
-        return pauseMenu->paramData[name]->GetParam();
+        return singleton->paramData[name]->GetParam();
     }
 
     return -1;
@@ -160,14 +160,14 @@ int PauseMenu::Parameter(std::string name)
 void PauseMenu::Draw()
 {
     //ボタン描画
-    for (auto& iter : pauseMenu->buttonData)
+    for (auto& iter : singleton->buttonData)
     {
         iter.second->Draw();
     }
-    for (auto& iter : pauseMenu->paramData)
+    for (auto& iter : singleton->paramData)
     {
         iter.second->Draw();
     }
-    pauseMenu->titleButton->Draw();
+    singleton->titleButton->Draw();
 }
 

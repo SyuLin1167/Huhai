@@ -8,7 +8,7 @@ PauseScene::PauseScene()
     :SceneBase()
 {
     //ƒQ[ƒ€‰æ–Ê•Û‘¶
-    bgHandle = LoadGraph("../Assets/BackGround/GameScene.png");
+    bgHandle = LoadGraph(GAME_SCENE);
 
     PauseMenu::CreateInstance();
     PauseMenu::ResetTitleButton();

@@ -192,10 +192,10 @@ void Remarks::NewLine()
 /// <param name="ry">:右下座標</param>
 void Remarks::TextBox(int lx, int ly, int rx, int ry)
 {
-    SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
+    SetDrawBlendMode(DX_BLENDMODE_ALPHA, MAX_ALPHA);
 
     //値が変わらないものを一通り設定
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < MAX_VERTEX; i++)
     {
         textBox[i].pos.z = 0.0f;
         textBox[i].rhw = 1.0f;
@@ -211,7 +211,7 @@ void Remarks::TextBox(int lx, int ly, int rx, int ry)
 
     textBox[3].pos.x = textBox[1].pos.x = (float)rx;
     textBox[3].pos.y = textBox[2].pos.y = (float)ry;
-    textBox[3].dif.a = textBox[2].dif.a = 255;
+    textBox[3].dif.a = textBox[2].dif.a = MAX_ALPHA;
 
     //同じ頂点はコピー
     textBox[4] = textBox[2];
@@ -230,8 +230,8 @@ void Remarks::Draw()
     SetFontSize(TEXTSIZE);
     DrawBox(0, BOUNDARY_POS_RY, SCREEN_WIDTH, SCREEN_HEIGHT, TEXTBOX_COLOR, TRUE);
     TextBox(0, BOUNDARY_POS_LY, SCREEN_WIDTH, BOUNDARY_POS_RY);
-    DrawPolygon2D(textBox, 2, DX_NONE_GRAPH, TRUE);
-    SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
+    DrawPolygon2D(textBox, POLYGON_NUM, DX_NONE_GRAPH, TRUE);
+    SetDrawBlendMode(DX_BLENDMODE_NOBLEND, MAX_ALPHA);
 
     //台詞描画
     for (int i = 0; i < BUFHEIGHT; i++)

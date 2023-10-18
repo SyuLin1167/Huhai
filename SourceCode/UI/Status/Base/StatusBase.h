@@ -45,6 +45,8 @@ protected:
     int buttonWidth;            //ボタン幅
     int buttonHeight;           //ボタン高さ
 
+    const int FONT_SIZE = 45;   //フォントサイズ
+
     const int StrSpace = 300;   //ボタンとの間隔
 
     const int whiteColor;       //白色

@@ -88,7 +88,7 @@ private:
     const int MAX_SENSITIVITY = 245;                                    //感度最大値
     const int MIN_SENSITIVITY = 60;                                     //感度最小値
 
-    static std::unique_ptr<PauseMenu> pauseMenu;                        //自身の実態
+    static std::unique_ptr<PauseMenu> singleton;                        //自身の実態
 
     std::unordered_map<std::string, class Button*> buttonData;          //ボタンデータ
     std::unordered_map<std::string, class ParamButton*> paramData;      //パラメーターデータ

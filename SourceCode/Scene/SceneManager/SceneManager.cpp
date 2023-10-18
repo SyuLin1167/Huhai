@@ -115,7 +115,7 @@ void SceneManager::CheckPauseMenu()
         {
             //ゲーム画面保存
             SetDrawScreen(nowScreen);
-            SaveDrawScreenToPNG(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, "../Assets/BackGround/GameScene.png", -1);//PNG保存
+            SaveDrawScreenToPNG(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, GAME_SCENE, -1);//PNG保存
             SetDrawScreen(DX_SCREEN_BACK);
 
             //メニュー画面表示

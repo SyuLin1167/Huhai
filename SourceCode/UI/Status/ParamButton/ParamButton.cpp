@@ -93,7 +93,7 @@ void ParamButton::Update(const float deltaTime)
 void ParamButton::Draw()
 {
     //パラメーター名描画
-    SetFontSize(45);
+    SetFontSize(FONT_SIZE);
     DrawStr(static_cast<int>(objPos.x) - StrSpace, static_cast<int>(objPos.y));
 
     //クリック時の演出
@@ -111,7 +111,7 @@ void ParamButton::Draw()
     //ガイド描画
     if (canMove)
     {
-        SetFontSize(25);
-        DrawString(mouseX-PARAM_BUTTON_SIZE_Y/2, mouseY, "<  >", whiteColor);
+        SetFontSize(GIDE_FONT_SIZE);
+        DrawString(mouseX - PARAM_BUTTON_SIZE_Y / 2, mouseY, "<  >", whiteColor);
     }
 }

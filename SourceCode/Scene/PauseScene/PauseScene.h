@@ -1,5 +1,9 @@
 #pragma once
+#include<string>
+
 #include"../SceneBase/SceneBase.h"
+
+constexpr auto GAME_SCENE = "../Assets/BackGround/GameScene.png" ;
 
 /// <summary>
 /// PauseSceneƒNƒ‰ƒX

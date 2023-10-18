@@ -40,8 +40,8 @@ void Button::Update(const float deltaTime)
 void Button::Draw()
 {
     //ƒ{ƒ^ƒ“–¼•`‰æ
-    SetFontSize(45);
-    DrawStr(static_cast<int>(objPos.x) - StrSpace, static_cast<int>(objPos.y));
+    SetFontSize(FONT_SIZE);
+    DrawStr(static_cast<int>(objPos.x - StrSpace), static_cast<int>(objPos.y));
 
     //ƒ{ƒ^ƒ“•`‰æ
     DrawButton(static_cast<int>(objPos.x), static_cast<int>(objPos.y));
