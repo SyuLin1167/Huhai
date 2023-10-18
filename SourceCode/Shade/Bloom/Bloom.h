@@ -1,10 +1,6 @@
 #pragma once
 #include<DxLib.h>
 
-#define DOWN_SCALE 8                                    //フィルターを掛ける画像が何分の１か
-#define DOWN_SCALE_WIDTH (SCREEN_WIDTH/DOWN_SCALE)         //フィルターをかける画像の横幅
-#define DOWN_SCALE_HEIGHT (SCREEN_HEIGHT/DOWN_SCALE)       //フィルターをかける画像の縦幅
-
 /// <summary>
 /// Bloomクラス
 /// </summary>
@@ -36,7 +32,15 @@ public:
     /// </summary>
     void Draw();
 private:
-    int GaussParam;             //ガウスのぼかし具合
+    const int DOWN_SCALE = 8;                                       //フィルターを掛ける画像が何分の１か
+    const int DOWN_SCALE_WIDTH = (SCREEN_WIDTH / DOWN_SCALE);       //フィルターをかける画像の横幅
+    const int DOWN_SCALE_HEIGHT = (SCREEN_HEIGHT / DOWN_SCALE);     //フィルターをかける画像の縦幅
+
+    const int GAUSS_PIXEL = 16;       //ぼかしのピクセル値
+    const int GAUSS_PARAM = 200;      //ガウスのぼかし具合
+    const int CLIP_PARAM = 230;       //クリップパラメーター
+    const int CLIP_ALPHA = 250;       //クリップアルファ値
+
     int ColorScreen;            //普通の描画結果用スクリーン
     int HighBrightScreen;       //描画結果から高輝度部分抜き出し用スクリーン
     int DownScaleScreen;        //高輝度部分縮小用スクリーン

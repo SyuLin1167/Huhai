@@ -12,7 +12,6 @@ Bloom::Bloom()
     , HighBrightScreen(MakeScreen(SCREEN_WIDTH, SCREEN_HEIGHT, false))
     , DownScaleScreen(MakeScreen(DOWN_SCALE_WIDTH, DOWN_SCALE_HEIGHT, false))
     , GaussScreen(MakeScreen(DOWN_SCALE_WIDTH, DOWN_SCALE_HEIGHT, false))
-    , GaussParam(200)
 {
     SetBackgroundColor(0, 0, 0);
 }
@@ -47,9 +46,9 @@ void Bloom::SetBloomGraph()
     {
         //ï`âÊåãâ Ç©ÇÁçÇãPìxïîï™Çî≤Ç´èoÇµÇƒÇ⁄Ç©Ç∑
         GraphFilterBlt(ColorScreen, HighBrightScreen, DX_GRAPH_FILTER_BRIGHT_CLIP,
-            DX_CMP_LESS, 230, true, GetColor(0, 0, 0), 255);
+            DX_CMP_LESS, CLIP_PARAM, true, GetColor(0, 0, 0), CLIP_ALPHA);
         GraphFilterBlt(HighBrightScreen, DownScaleScreen, DX_GRAPH_FILTER_DOWN_SCALE, DOWN_SCALE);
-        GraphFilterBlt(DownScaleScreen, GaussScreen, DX_GRAPH_FILTER_GAUSS, 16, GaussParam);
+        GraphFilterBlt(DownScaleScreen, GaussScreen, DX_GRAPH_FILTER_GAUSS, GAUSS_PIXEL, GAUSS_PARAM);
 
         //ï`âÊëŒè€Çó†âÊñ Ç…Ç∑ÇÈ
         SetDrawScreen(DX_SCREEN_BACK);

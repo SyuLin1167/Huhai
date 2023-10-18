@@ -44,7 +44,7 @@ void FpsCamera::Update(const float deltaTime)
         Move(deltaTime);
 
         //マウスポインターは画面の中心
-        SetMousePoint(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+        SetMousePoint(SCREEN_CENTER_WIDTH, SCREEN_CENTER_HEIGHT);
     }
     else
     {
