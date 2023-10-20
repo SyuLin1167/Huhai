@@ -6,8 +6,8 @@
 FixedCamera::FixedCamera()
 	:ObjBase(ObjTag::Camera)
 {
-    objPos = VGet(70, 6, 75);
-    objDir = VGet(-10, 10, 25);
+    objPos = FIRST_POS;
+    objDir = FIRST_AIM_POS;
 }
 
 /// <summary>

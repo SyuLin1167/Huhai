@@ -54,7 +54,8 @@ void Player::Update(const float deltaTime)
     camFront = VNorm(camFront);
 
     //ˆÚ“®‚ÌƒJƒƒ‰‚Ìã‰º‰^“®
-    if (PauseMenu::HasStatus("Camera"))
+    ButtonName buttonName;
+    if (PauseMenu::HasStatus(buttonName.camera))
     {
         if (inputKey)
         {

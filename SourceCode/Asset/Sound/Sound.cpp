@@ -40,6 +40,7 @@ void Sound::AddSound(std::string fileName, SoundTag tag, bool isDim,bool volumeT
     //サウンドデータ設定
     SoundData sound = {};
     sound.volumeType = volumeType;
+    sound.volume = FIRST_VOLUME;
     sound.isDim = isDim;
 
     //サウンド登録&取得
@@ -75,9 +76,10 @@ void Sound::Doppler(SoundTag tag, VECTOR pos)
             Set3DSoundListenerPosAndFrontPos_UpVecY(camera->GetPos(), camera->GetPos() + camera->GetDir());
 
             //移動速度算出
-            VECTOR soundVel = VScale(VSub(pos, prevSoundPos), 60.0f);
+            const float SCALE = 60.0f;
+            VECTOR soundVel = VScale(VSub(pos, prevSoundPos), SCALE);
             Set3DVelocitySoundMem(soundVel, sound.handle);
-            VECTOR listnerVel = VScale(VSub(camera->GetPos(), prevListnerPos), 60.0f);
+            VECTOR listnerVel = VScale(VSub(camera->GetPos(), prevListnerPos), SCALE);
             Set3DSoundListenerVelocity(listnerVel);
 
             //過去の座標に代入
@@ -102,9 +104,10 @@ void Sound::StartSound(SoundTag tag, int playType)
         //サウンドの有効範囲設定
         if (sound.isDim)
         {
-            Set3DRadiusSoundMem(500.0f, sound.handle);
+            Set3DRadiusSoundMem(RADIUS_SOUND, sound.handle);
         }
 
+        ButtonName buttonName;
         if (sound.volumeType)
         {
             sound.volume = PauseMenu::Parameter(buttonName.se);
@@ -185,7 +188,7 @@ bool Sound::IsPlaying(SoundTag tag)
 /// </summary>
 Sound::SoundData::SoundData()
     :handle(-1)
-    , volume(150)
+    , volume()
     , volumeType(false)
     , isDim(false)
     , playOnce(true)

@@ -29,14 +29,14 @@ BlendMode::~BlendMode()
 /// <param name="deltaTime">:デルタタイム</param>
 void BlendMode::AddFade(const float deltaTime)
 {
-    if (fadeValue <= 255)
+    if (fadeValue <= MAX_ALPHA)
     {
         //値が255以下だったらフェードアウトする
         nowFade = true;
         fadeValue += fadeSpeed * deltaTime;
-        if (fadeValue <= 0)
+        if (fadeValue <= MIN_ALPHA)
         {
-            fadeValue = 0;
+            fadeValue = static_cast<float>(MIN_ALPHA);
         }
     }
     else
@@ -90,7 +90,7 @@ void BlendMode::Darken()
     else
     {
         //フェード中でないなら暗転する
-        SetDrawBlendMode(DX_BLENDMODE_ADD, darkValue);
+        SetDrawBlendMode(DX_BLENDMODE_ADD, DARK_VALUE);
         nowDark = true;
     }
 }
@@ -101,5 +101,5 @@ void BlendMode::Darken()
 void BlendMode::NoBlend()
 {
     //ノーブレンドモード
-    SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+    SetDrawBlendMode(DX_BLENDMODE_NOBLEND, MIN_ALPHA);
 }

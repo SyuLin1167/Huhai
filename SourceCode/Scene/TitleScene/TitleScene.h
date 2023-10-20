@@ -39,6 +39,6 @@ private:
 
     int screenGraph;                            //画面保持グラフ
 
-    class Door* door = nullptr;                 //ドア
+    class Door* door;                           //ドア
     class Select* select[SelectTypeSize];       //選択ボタン
 };

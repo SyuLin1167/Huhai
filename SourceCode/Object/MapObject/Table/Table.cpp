@@ -38,13 +38,13 @@ Table::Table(const int objNum)
     objHandle = AssetManager::GetMesh("../Assets/Map/Table/Table.mv1");
     MV1SetScale(objHandle, objScale);
     MV1SetPosition(objHandle, objPos);
-    MV1SetRotationXYZ(objHandle, VGet(0.0f, objDir.y / ONE_HALF_PI * DX_PI_F, 0.0f));
+    MV1SetRotationXYZ(objHandle, VGet(0.0f, objDir.y / PI_DEGREE * DX_PI_F, 0.0f));
 
     //“–‚½‚è”»’èİ’è
     colModel = AssetManager::GetMesh("../Assets/Map/Table/ColTable.mv1");
     MV1SetPosition(colModel, objPos);
     MV1SetScale(colModel, VGet(0.1f, 0.1f, 0.1f));
-    MV1SetRotationXYZ(colModel, VGet(0.0f, objDir.y / ONE_HALF_PI * DX_PI_F, 0.0f));            //ƒ‚ƒfƒ‹‚ÌŒü‚«İ’è
+    MV1SetRotationXYZ(colModel, VGet(0.0f, objDir.y / PI_DEGREE * DX_PI_F, 0.0f));            //ƒ‚ƒfƒ‹‚ÌŒü‚«İ’è
 }
 
 /// <summary>

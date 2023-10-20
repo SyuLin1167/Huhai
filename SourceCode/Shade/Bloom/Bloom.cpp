@@ -1,6 +1,5 @@
 #include "Bloom.h"
 
-#include"../../GameSetting/GameSetting.h"
 #include"../../Object/CharaObject/Camera/FpsCamera/FpsCamera.h"
 #include"../../Scene/PauseScene/PauseMenu/PauseMenu.h"
 

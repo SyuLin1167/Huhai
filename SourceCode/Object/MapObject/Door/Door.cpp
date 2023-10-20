@@ -20,6 +20,7 @@ Door::Door(std::string scene, std::string num)
     , doorAnim(nullptr)
     , animType(IDLE)
     , doorSound(nullptr)
+    , player(nullptr)
     , rotateNow(true)
 {
 
@@ -47,7 +48,7 @@ Door::Door(std::string scene, std::string num)
     objHandle = AssetManager::GetMesh("../Assets/Map/Door/Door.mv1");
     MV1SetPosition(objHandle, objPos);
     MV1SetScale(objHandle, VGet(0.11f, 0.12f, 0.11f));
-    MATRIX rotYMat = MGetRotY(ONE_QUARTER_PI * (float)(DX_PI / ONE_HALF_PI));
+    MATRIX rotYMat = MGetRotY(ONE_HALF_PI_DEGREE * (float)(DX_PI / PI_DEGREE));
     VECTOR negativeVec = VTransform(objDir, rotYMat);
     MV1SetRotationZYAxis(objHandle, negativeVec, VGet(0.0f, 1.0f, 0.0f), 0.0f);
 

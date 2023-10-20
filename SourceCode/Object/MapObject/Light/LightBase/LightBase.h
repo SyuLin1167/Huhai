@@ -34,6 +34,8 @@ public:
     void AttenByParam();
 
 protected:
+    const float DECIMAL_CONV = 10000.0f;    //十進数変換用
+
     int lightHandle;                        //ライトハンドル
     const float LIGHT_POS_Y = 35.5f;        //ライトの高さ
     const float LIGHTMODEL_POS_Y = 33.0f;   //モデルの高さ

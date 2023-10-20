@@ -55,7 +55,7 @@ void Man::Update(const float deltaTime)
     manAnim->AddAnimTime(deltaTime);
 
     //モデルの回転
-    MATRIX rotYMat = MGetRotY(ONE_HALF_PI * (float)(DX_PI / ONE_HALF_PI));
+    MATRIX rotYMat = MGetRotY(PI_DEGREE * (float)(DX_PI / PI_DEGREE));
     VECTOR negativeVec = VTransform(objDir, rotYMat);
 
     //アクションボタンが押されたらセリフを再生

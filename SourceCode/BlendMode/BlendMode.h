@@ -53,11 +53,14 @@ public:
     void NoBlend();
 
 private:
+    const int MAX_ALPHA = 250;      //最大α
+    const int MIN_ALPHA = 0;        //最少α
+
     bool nowFade;                   //フェードフラグ
-    float fadeValue;                  //フェード値
-    float fadeSpeed;                  //フェード速度
+    float fadeValue;                //フェード値
+    float fadeSpeed;                //フェード速度
 
     bool nowDark;                   //暗転フラグ
-    const int darkValue = 150;      //暗転値
+    const int DARK_VALUE = 150;      //暗転値
 };
 

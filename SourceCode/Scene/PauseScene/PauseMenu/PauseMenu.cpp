@@ -14,9 +14,10 @@ std::unique_ptr<PauseMenu> PauseMenu::singleton = nullptr;
 PauseMenu::PauseMenu()
 {
     //フォントの読み込み
-    ChangeFont(fontName.c_str(), DX_CHARSET_DEFAULT);
+    ChangeFont(killingFont, DX_CHARSET_DEFAULT);
 
     //ボタンの追加
+    ButtonName buttonName;
     AddButton(buttonName.camera);
     AddButton(buttonName.bloom);
     AddParam(buttonName.bgm, FIRST_SOUND_PARAM);

@@ -137,8 +137,8 @@ protected:
     /// </summary>
     void ColUpdate();
 
-    const float ONE_HALF_PI = 180.0f;           //180度
-    const float ONE_QUARTER_PI = 90.0f;         //90度
+    const float PI_DEGREE = 180.0f;             //180度
+    const float ONE_HALF_PI_DEGREE = 90.0f;     //90度
     const float ROTATE_VELOCITY = 5.0f;         //回転速度
     bool rotateNow;                             //回転状態
     VECTOR aimDir;                              //目標方向

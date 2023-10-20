@@ -5,6 +5,7 @@
 #include "Remarks.h"
 #include"../../Asset/AssetManager/AssetManager.h"
 #include"../../BlendMode/BlendMode.h"
+#include"../Status/Base/StatusBase.h"
 
 /// <summary>
 /// コンストラクタ
@@ -224,7 +225,7 @@ void Remarks::TextBox(int lx, int ly, int rx, int ry)
 /// </summary>
 void Remarks::Draw()
 {
-    ChangeFont("MS ゴシック", DX_CHARSET_DEFAULT);
+    ChangeFont(msGothic, DX_CHARSET_DEFAULT);
 
     //テキストボックス描画
     SetFontSize(TEXTSIZE);

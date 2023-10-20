@@ -11,11 +11,11 @@ FpsCamera::FpsCamera()
     :ObjBase(ObjTag::Camera)
     , mouseX(0)
     , mouseY(0)
-    , movePos{ 0,0,0 }
+    , movePos(VGet(0,0,0))
     , cameraYaw(0)
     , cameraPitch(-1)
 {
-    objDir = { 0,10,0 };
+    objDir = VGet(0, 10, 0);
     SetCameraNearFar(CameraNear, CameraFar);                                    //カメラの描画範囲設定
     SetMouseDispFlag(false);                                                    //マウスは非表示
 }
@@ -64,11 +64,12 @@ void FpsCamera::Move(float deltaTime)
         mouseY > MIN_MOVE_PARAM && mouseY < SCREEN_HEIGHT - MIN_MOVE_PARAM)
     {
         movePos.x = static_cast<float>(mouseX - SCREEN_CENTER_WIDTH);
-        movePos.y = static_cast<float>(mouseY - SCREEN_CENTER_WIDTH);
+        movePos.y = static_cast<float>(mouseY - SCREEN_CENTER_HEIGHT);
     }
 
 
     //カーソルの移動量取得
+    ButtonName buttonName;
     if (abs(movePos.x) > 0)
     {
         cameraYaw -= movePos.x * deltaTime * DX_PI_F /

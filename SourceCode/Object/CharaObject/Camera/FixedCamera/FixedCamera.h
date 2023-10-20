@@ -27,5 +27,9 @@ public:
     /// •`‰æ
     /// </summary>
     void Draw() override ;
+
+private:
+    const VECTOR FIRST_POS = VGet(70, 6, 75);           //‰ŠúÀ•W
+    const VECTOR FIRST_AIM_POS = VGet(-10, 10, 25);     //‰Šú–Ú•WÀ•W
 };
 

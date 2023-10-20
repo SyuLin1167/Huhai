@@ -87,6 +87,9 @@ public:
     };
 
 private:
+    const int FIRST_VOLUME = 150;                           //初期音量
+    const float RADIUS_SOUND = 500.0f;                      //サウンド範囲
+
     int soundType;                                          //サウンドID
     int attachedIndex;                                      //アタッチ後のインデックス
     

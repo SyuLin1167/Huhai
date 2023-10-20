@@ -80,7 +80,7 @@ LightBase::~LightBase()
 /// </summary>
 void LightBase::AttenByParam()
 {
-    float param = MIN_ATTEN_PARAM - (static_cast<float>(PauseMenu::Parameter("Brightness")) / 10000.0f);
+    float param = MIN_ATTEN_PARAM - (static_cast<float>(PauseMenu::Parameter("Brightness")) / DECIMAL_CONV);
     if (lightAtten2 != param)
     {
         lightAtten2 = param;

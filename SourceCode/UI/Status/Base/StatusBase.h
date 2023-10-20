@@ -4,6 +4,9 @@
 #include"../../../GameSetting/GameSetting.h"
 #include"../../UIBase/UIBase.h"
 
+constexpr auto killingFont = "KillingFont";    //フォント名
+constexpr auto msGothic = "ＭＳ　ゴシック";    //フォント名
+
 /// <summary>
 /// StatusBaseクラス
 /// </summary>

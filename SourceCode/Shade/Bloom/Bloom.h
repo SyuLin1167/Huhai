@@ -1,5 +1,6 @@
 #pragma once
 #include<DxLib.h>
+#include "../../GameSetting/GameSetting.h"
 
 /// <summary>
 /// BloomƒNƒ‰ƒX

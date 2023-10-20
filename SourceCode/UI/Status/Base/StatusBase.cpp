@@ -38,9 +38,9 @@ void StatusBase::ProcessInput()
 /// <param name="y">:ç¿ïWY</param>
 void StatusBase::DrawStr(int x, int y)
 {
-    ChangeFont("KillingFont", DX_CHARSET_DEFAULT);
+    ChangeFont(killingFont, DX_CHARSET_DEFAULT);
     DrawString(x, y, const_cast<const char*>(buttonName.c_str()), whiteColor);
-    ChangeFont("ÇlÇrÅ@ÉSÉVÉbÉN", DX_CHARSET_DEFAULT);
+    ChangeFont(msGothic, DX_CHARSET_DEFAULT);
 }
 
 /// <summary>

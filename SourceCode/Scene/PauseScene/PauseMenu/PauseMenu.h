@@ -76,8 +76,6 @@ private:
     /// </summary>
     PauseMenu();
 
-    const std::string fontName = "KillingFont";                         //フォント名
-
     const int FIRST_SOUND_PARAM = 150;                                  //音量初期値
 
     const int FIRST_BRIGHT_PARAM = 60;                                  //明るさ初期値

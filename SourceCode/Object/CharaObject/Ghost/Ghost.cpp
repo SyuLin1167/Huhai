@@ -62,7 +62,7 @@ void Ghost::Update(float deltaTime)
     ghostAnim->AddAnimTime(deltaTime);
 
     //ƒ‚ƒfƒ‹‰ñ“]
-    MATRIX rotMatY = MGetRotY(ONE_HALF_PI * (float)(DX_PI / ONE_HALF_PI));
+    MATRIX rotMatY = MGetRotY(PI_DEGREE * (float)(DX_PI / PI_DEGREE));
     VECTOR negativeVec = VTransform(objDir, rotMatY);
     MV1SetRotationZYAxis(objHandle, negativeVec, VGet(0.0f, 1.0f, 0.0f), 0.0f);
     rotateNow = true;
