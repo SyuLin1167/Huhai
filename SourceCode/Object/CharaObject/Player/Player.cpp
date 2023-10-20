@@ -19,7 +19,7 @@ Player::Player()
     , walkStep(0.0f)
     , inputKey(false)
     , camFront(VGet(0,0,0))
-    , plySound(nullptr)
+    , plySound(new Sound)
 {
     //“–‚½‚è”»’èÝ’è
     colType = CollisionType::Sphere;
@@ -29,7 +29,6 @@ Player::Player()
     colLine = Line(VGet(0.0f, 2.0f, 0.0f), VGet(0.0f, -3.0f, 0.0f));
 
     //ƒTƒEƒ“ƒhÝ’è
-    plySound = new Sound;
     plySound->AddSound("../Assets/Sound/PlayerWalkSE.mp3", SoundTag::PlayerWalk, false, true);
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 #include<DxLib.h>
+#include<memory>
 
 #include"../../ObjectBase/ObjBase.h"
 
@@ -72,5 +73,5 @@ private:
 
     VECTOR camFront;                                //カメラ前方向
 
-    class Sound* plySound;                          //サウンド
+    std::unique_ptr<class Sound> plySound;          //サウンド
 };

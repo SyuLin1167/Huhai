@@ -36,7 +36,6 @@ TitleScene::TitleScene()
     //ドア生成
     door = new Door("title");
     ObjManager::AddObj(door);
-    door->MoveAnim(Door::AnimType::OPEN);
 
     //ライト生成
     ObjManager::AddObj(new BlinkingLight("title"));
@@ -76,6 +75,8 @@ SceneBase* TitleScene::UpdateScene(const float deltaTime)
 
     //オブジェクト更新
     ObjManager::UpdateAllObj(deltaTime);
+    door->MoveAnim(Door::AnimType::OPEN);
+
     for (auto type : selectTypeAll)
     {
         select[type]->Update(deltaTime);

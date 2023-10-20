@@ -9,7 +9,6 @@
 GhostBase::GhostBase()
     :ObjBase(ObjTag::Ghost)
     , isMove(false)
-    , ghostAnim(new Animation(objHandle))
     , animType(Anim::IDLE)
     , ghostSound(new Sound)
 {
@@ -20,6 +19,7 @@ GhostBase::GhostBase()
     MV1SetScale(objHandle, VGet(0.02f, 0.02f, 0.02f));
 
     //アニメーション設定
+    ghostAnim.reset(new Animation(objHandle));
     ghostAnim->AddAnimation("../Assets/Chara/Ghost/GhostIdle.mv1");
     ghostAnim->AddAnimation("../Assets/Chara/Ghost/GhostWalk.mv1");
     ghostAnim->AddAnimation("../Assets/Chara/Ghost/GhostSad.mv1");

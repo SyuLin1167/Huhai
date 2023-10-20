@@ -1,7 +1,7 @@
 #pragma once
-
 #include<unordered_map>
 #include<string>
+#include<memory>
 
 #include"../../ObjectBase/ObjBase.h"
 
@@ -48,7 +48,7 @@ public:
 
 
 private:
-    class Sound* mapSound;      //サウンド
+    std::unique_ptr<class Sound> mapSound;      //サウンド
     MapTag mapTag;                 //タグ
 
     //マップファイルデータ

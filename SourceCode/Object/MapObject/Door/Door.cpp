@@ -17,9 +17,8 @@
 /// <param name="num">:オブジェクト番号</param>
 Door::Door(std::string scene, std::string num)
     :ObjBase(ObjTag::Furniture)
-    , doorAnim(nullptr)
     , animType(IDLE)
-    , doorSound(nullptr)
+    , doorSound(new Sound)
     , player(nullptr)
     , rotateNow(true)
 {
@@ -53,7 +52,7 @@ Door::Door(std::string scene, std::string num)
     MV1SetRotationZYAxis(objHandle, negativeVec, VGet(0.0f, 1.0f, 0.0f), 0.0f);
 
     //アニメーション設定
-    doorAnim = new Animation(objHandle);
+    doorAnim.reset(new Animation(objHandle));
     doorAnim->AddAnimation("../Assets/Map/Door/DoorClose.mv1", 30.0f, false);
     doorAnim->AddAnimation("../Assets/Map/Door/DoorOpen.mv1", 30.0f, false);
     doorAnim->AddAnimation("../Assets/Map/Door/DoorClose.mv1", 30.0f, false);
@@ -67,7 +66,6 @@ Door::Door(std::string scene, std::string num)
     colSphere.worldCenter = objPos;
 
     //サウンド設定
-    doorSound = new Sound;
     doorSound->AddSound("../Assets/Sound/DoorOpenSE.mp3", SoundTag::DoorOpen, true, true);
     doorSound->AddSound("../Assets/Sound/DoorCloseSE.mp3", SoundTag::DoorClose, true, true);
 
@@ -81,9 +79,7 @@ Door::Door(std::string scene, std::string num)
 /// </summary>
 Door::~Door()
 {
-    //インスタンス削除
-    delete doorAnim;
-    delete doorSound;
+    //処理なし
 }
 
 /// <summary>

@@ -1,5 +1,6 @@
 #pragma once
 #include<DxLib.h>
+#include<memory>
 
 #include"../../ObjectBase/ObjBase.h"
 
@@ -49,14 +50,14 @@ public:
     void Draw() override;
 
 private:
-    class Animation* doorAnim;                          //アニメーション
+    std::unique_ptr<class Animation> doorAnim;          //アニメーション
     int animType;                                       //アニメーションタイプ
 
     bool rotateNow;                                     //回転状態
 
     const VECTOR DOOR_ACION_ICON= VGet(0, 20, 0);       //ドアのアクションアイコン
 
-    class Sound* doorSound;                             //サウンド
+    std::unique_ptr<class Sound> doorSound;             //サウンド
 
     class ObjBase* player;                              //プレイヤーオブジェクト
     class Action* action;                               //アクションボタン

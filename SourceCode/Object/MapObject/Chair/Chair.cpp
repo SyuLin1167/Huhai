@@ -10,8 +10,7 @@
 /// </summary>
 Chair::Chair()
     :ObjBase(ObjTag::Furniture)
-    , ChairAnim(nullptr)
-    , chairSound(nullptr)
+    , chairSound(new Sound)
 {
     //モデル設定
     objHandle = AssetManager::GetMesh("../Assets/Map/Chair/Chair.mv1");
@@ -22,11 +21,11 @@ Chair::Chair()
     MV1SetRotationXYZ(objHandle, VGet(0.0f, objDir.y / PI_DEGREE * DX_PI_F, 0.0f));
 
     //アニメーション設定
-    ChairAnim = new Animation(objHandle);
-    ChairAnim->AddAnimation("../Assets/Map/Chair/Chair.mv1");
-    ChairAnim->AddAnimation("../Assets/Map/Chair/ChairMove.mv1", 30.0f, false);
+    chairAnim.reset(new Animation(objHandle));
+    chairAnim->AddAnimation("../Assets/Map/Chair/Chair.mv1");
+    chairAnim->AddAnimation("../Assets/Map/Chair/ChairMove.mv1", 30.0f, false);
     animType = IDLE;
-    ChairAnim->StartAnim(animType);
+    chairAnim->StartAnim(animType);
 
     //当たり判定設定
     colType = CollisionType::Sphere;
@@ -36,7 +35,6 @@ Chair::Chair()
     colModel = objHandle;
 
     //サウンド設定
-    chairSound = new Sound;
     chairSound->AddSound("../Assets/Sound/MoveChairSE.mp3", SoundTag::MoveChair, true, true);
     chairSound->AddSound("../Assets/Sound/FallingChairSE.mp3", SoundTag::FallingChair, true, true);
 }
@@ -46,9 +44,7 @@ Chair::Chair()
 /// </summary>
 Chair::~Chair()
 {
-    //インスタンス削除
-    delete ChairAnim;
-    delete chairSound;
+    //処理なし
 }
 
 /// <summary>
@@ -58,7 +54,7 @@ Chair::~Chair()
 void Chair::Update(const float deltaTime)
 {
     //アニメーション時間再生
-    ChairAnim->AddAnimTime(deltaTime);
+    chairAnim->AddAnimTime(deltaTime);
 
     //動作処理
     ObjBase* player = ObjManager::GetFirstObj(ObjTag::Player);
@@ -70,7 +66,7 @@ void Chair::Update(const float deltaTime)
             if (animType != MOVE)
             {
                 animType = MOVE;
-                ChairAnim->StartAnim(animType);
+                chairAnim->StartAnim(animType);
                 colModel = -1;
                 chairSound->StartSoundOnce(SoundTag::MoveChair, DX_PLAYTYPE_BACK);
             }

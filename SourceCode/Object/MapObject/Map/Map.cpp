@@ -10,7 +10,7 @@
 /// <param name="maptag"></param>
 Map::Map(MapTag maptag)
     :ObjBase(ObjTag::Map)
-    , mapSound(nullptr)
+    , mapSound(new Sound)
     , mapTag(maptag)
 {
     //モデル設定
@@ -24,7 +24,6 @@ Map::Map(MapTag maptag)
     MV1SetScale(colModel, VGet(0.11f, 0.12f, 0.11f));
 
     //サウンド設定
-    mapSound = new Sound;
     mapSound->AddSound("../Assets/Sound/InDoorSE.mp3", SoundTag::InDoor);
     mapSound->StartSound(SoundTag::InDoor, DX_PLAYTYPE_LOOP);
 }

@@ -13,7 +13,6 @@
 Man::Man()
     :ObjBase(ObjTag::Man)
     , isSpeak(false)
-    , manAnim(new Animation(objHandle))
     , manSound(new Sound)
 {
     //モデル設定
@@ -24,6 +23,7 @@ Man::Man()
     MV1SetScale(objHandle, VGet(0.02f, 0.02f, 0.02f));
 
     //アニメーション設定
+    manAnim.reset(new Animation(objHandle));
     manAnim->AddAnimation("../Assets/Chara/Man/ManCrying.mv1");
     manAnim->AddAnimation("../Assets/Chara/Man/ManDying.mv1", 30.0f, false);
     animType = CRYING;

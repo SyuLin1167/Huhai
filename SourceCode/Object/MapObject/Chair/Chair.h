@@ -1,4 +1,5 @@
 #pragma once
+#include<memory>
 
 #include"../../ObjectBase/ObjBase.h"
 
@@ -37,9 +38,9 @@ public:
     };
 
 private:
-    class Animation* ChairAnim;         //アニメーション
+    std::unique_ptr<class Animation> chairAnim;         //アニメーション
     int animType;                       //アニメーション状態
 
-    class Sound* chairSound;            //サウンド
+    std::unique_ptr<class Sound> chairSound;            //サウンド
 };
 
