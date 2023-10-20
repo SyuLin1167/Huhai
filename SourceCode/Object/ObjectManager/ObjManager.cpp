@@ -55,16 +55,16 @@ void ObjManager::UpdateAllObj(const float deltaTime)
     //全タグ分更新処理をまとめて行う
     for (auto& tag : ObjTagAll)
     {
-        for (int i = 0; i < singleton->object[tag].size(); i++)
+        for (auto& obj : singleton->object[tag])
         {
-            singleton->object[tag][i]->Update(deltaTime);
+            obj->Update(deltaTime);
         }
     }
+    singleton->OnDeadObj();
 
     //ブルーム用画面
     singleton->bloom->SetColoerScreen();
 
-    OnDeadObj();
 }
 
 /// <summary>
@@ -75,12 +75,12 @@ void ObjManager::DrawAllObj()
     //全タグ分描画処理をまとめて行う
     for (auto& tag : ObjTagAll)
     {
-        for (int i = 0; i < singleton->object[tag].size(); i++)
+        for (auto& obj : singleton->object[tag])
         {
             //オブジェクトが可視なら描画させる
-            if (singleton->object[tag][i]->IsVisible())
+            if (obj->IsVisible())
             {
-                singleton->object[tag][i]->Draw();
+                obj->Draw();
             }
         }
     }
@@ -103,7 +103,7 @@ void ObjManager::OnDeadObj()
             //死んでいたらオブジェクト削除
             if (!dead->IsAlive())
             {
-                DeleteObj(dead);
+                singleton->DeleteObj(dead);
             }
         }
     }
@@ -121,14 +121,13 @@ void ObjManager::DeleteObj(std::shared_ptr<ObjBase> deleteObj)
     //オブジェクトを検索
     auto endObj = singleton->object[tag].end();
     auto findObj = std::find(singleton->object[tag].begin(), endObj, deleteObj);
-    assert(findObj != endObj);
+    assert(findObj == endObj);
 
     //見つかったら末尾に移動させて削除
     if (findObj != endObj)
     {
         std::swap(findObj, endObj);
         singleton->object[tag].pop_back();
-        singleton->object[tag].shrink_to_fit();
     }
 }
 
@@ -193,7 +192,7 @@ void ObjManager::OnCollision()
 ObjBase* ObjManager::GetFirstObj(ObjTag tag)
 {
     //オブジェクトの数が0だったらnullptrを返す
-    if (singleton->object[tag].size() == 0)		
+    if (singleton->object[tag].size() == 0)
     {
         return nullptr;
     }
@@ -202,8 +201,13 @@ ObjBase* ObjManager::GetFirstObj(ObjTag tag)
     return singleton->object[tag][0].get();
 }
 
-// タグの指定オブジェクト取得 //
 
+/// <summary>
+/// タグの指定オブジェクト取得
+/// </summary>
+/// <param name="tag">:タグ</param>
+/// <param name="tagNum">:オブジェクト番号</param>
+/// <returns>:オブジェクト</returns>
 ObjBase* ObjManager::GetObj(ObjTag tag, int tagNum)
 {
     //オブジェクトの数が指定数より少なかったらnullptrを返す

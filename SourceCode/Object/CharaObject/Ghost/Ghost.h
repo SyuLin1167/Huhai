@@ -37,6 +37,8 @@ public:
     /// <param name="other">:オブジェクト</param>
     void OnCollisionEnter(const ObjBase* other) override;
 private:
+    const float GHOST_MOVE_POS_Y = 1.2f;                                //移動時のY座標
+
     float moveCount;                                                    //カウント
     bool isFirstMove;                                                   //初動状態
 

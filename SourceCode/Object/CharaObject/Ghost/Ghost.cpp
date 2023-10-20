@@ -90,7 +90,7 @@ void Ghost::Update(float deltaTime)
             ghostSound->StartSound(SoundTag::GhostScream, DX_PLAYTYPE_BACK);
         }
         //目標座標に近づいたら初動終了
-        if (abs(VSize(aimPos - objPos)) < 2.0f)
+        if (abs(VSize(aimPos - objPos)) < 1.0f)
         {
             isFirstMove = false;
         }
@@ -109,7 +109,7 @@ void Ghost::Update(float deltaTime)
         moveVec = VNorm(moveVec);
         objPos += moveVec * objSpeed * deltaTime;
         aimDir = moveVec;
-        objPos.y = 1.2f;
+        objPos.y = GHOST_MOVE_POS_Y;
     }
     MV1SetPosition(objHandle, objPos);                        //ポジション設定
 
