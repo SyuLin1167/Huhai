@@ -49,7 +49,7 @@ public:
     /// オブジェクト削除処理
     /// </summary>
     /// <param name="releaseObj">:削除オブジェクト</param>
-    static void DeleteObj(std::shared_ptr<ObjBase> releaseObj);
+    static void DeleteObj(std::shared_ptr<ObjBase>& releaseObj);
 
     /// <summary>
     /// 全オブジェクト削除処理

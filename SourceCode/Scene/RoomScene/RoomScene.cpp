@@ -78,7 +78,6 @@ SceneBase* RoomScene::UpdateScene(const float deltaTime)
             //シーン移行時の演出が終わったら
             if (!blendMode->NowFade())
             {
-
                 //管理クラス内の確保したデータ解放
                 ObjManager::DeleteAllObj();
 

@@ -33,6 +33,10 @@ public:
     /// </summary>
     void Draw() override;
 
+    /// <summary>
+    /// 消灯処理
+    /// </summary>
+    void LightOff();
 private:
     float intervalTime;     //インターバル
     float countTimer;       //カウント

@@ -83,14 +83,14 @@ void Ghost::Update(float deltaTime)
             ghostAnim->StartAnim(animType);
 
             //ライト設置
-            ObjManager::GetFirstObj(ObjTag::Light)->SetAlive(false);
+            ObjManager::GetFirstObj(ObjTag::Light)->SetVisible(false);
             lightHandle = CreatePointLightHandle(objPos, LIGHT_RANGE, 0.0f, 0.0f, LIGHT_ATTEN2);
             SetLightDifColorHandle(lightHandle, LIGHT_COLOR);
 
             ghostSound->StartSound(SoundTag::GhostScream, DX_PLAYTYPE_BACK);
         }
         //目標座標に近づいたら初動終了
-        if (abs(VSize(aimPos - objPos)) < 1.0f)
+        if (abs(VSize(aimPos - objPos)) < 2.0f)
         {
             isFirstMove = false;
         }

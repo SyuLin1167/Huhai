@@ -15,8 +15,9 @@ FpsCamera::FpsCamera()
     , cameraYaw(0)
     , cameraPitch(-1)
 {
-    objDir = VGet(0, 10, 0);
+    objDir = VGet(5, 0, 0);
     SetCameraNearFar(CameraNear, CameraFar);                                    //カメラの描画範囲設定
+    SetMousePoint(SCREEN_CENTER_WIDTH, SCREEN_CENTER_HEIGHT);
     SetMouseDispFlag(false);                                                    //マウスは非表示
 }
 

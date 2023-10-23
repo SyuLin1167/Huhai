@@ -64,6 +64,8 @@ void BlinkingLight::Update(const float deltaTime)
 
         //パラメーターによる距離減衰
         AttenByParam();
+
+        LightOff();
 }
 
 /// <summary>
@@ -73,4 +75,16 @@ void BlinkingLight::Draw()
 {
     //モデル描画
     MV1DrawModel(objHandle);
+}
+
+/// <summary>
+/// 消灯処理
+/// </summary>
+void BlinkingLight::LightOff()
+{
+    if (!isVisible)
+    {
+        //ライト削除
+        DeleteLightHandle(lightHandle);
+    }
 }

@@ -60,11 +60,11 @@ void ObjManager::UpdateAllObj(const float deltaTime)
             obj->Update(deltaTime);
         }
     }
-    singleton->OnDeadObj();
 
     //ブルーム用画面
     singleton->bloom->SetColoerScreen();
 
+    singleton->OnDeadObj();
 }
 
 /// <summary>
@@ -113,7 +113,7 @@ void ObjManager::OnDeadObj()
 /// オブジェクト削除処理
 /// </summary>
 /// <param name="deleteObj">:削除オブジェクト</param>
-void ObjManager::DeleteObj(std::shared_ptr<ObjBase> deleteObj)
+void ObjManager::DeleteObj(std::shared_ptr<ObjBase>& deleteObj)
 {
     //削除オブジェクトのタグ取得
     ObjTag tag = deleteObj->GetTag();
@@ -121,7 +121,6 @@ void ObjManager::DeleteObj(std::shared_ptr<ObjBase> deleteObj)
     //オブジェクトを検索
     auto endObj = singleton->object[tag].end();
     auto findObj = std::find(singleton->object[tag].begin(), endObj, deleteObj);
-    assert(findObj == endObj);
 
     //見つかったら末尾に移動させて削除
     if (findObj != endObj)
@@ -142,7 +141,6 @@ void ObjManager::DeleteAllObj()
         if (!singleton->object[tag].empty())
         {
             singleton->object[tag].clear();
-            singleton->object[tag].shrink_to_fit();
         }
     }
 }
