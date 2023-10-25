@@ -3,7 +3,7 @@
 #include"../SceneBase/SceneBase.h"
 
 /// <summary>
-/// EscapeSceneクラス
+/// 脱出のシーン
 /// </summary>
 class EscapeScene :public SceneBase
 {

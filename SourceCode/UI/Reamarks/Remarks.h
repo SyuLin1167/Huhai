@@ -9,7 +9,7 @@ constexpr int BUFWIDTH = 50;        //表示制限行
 constexpr int BUFHEIGHT = 20;       //表示制限列
 
 /// <summary>
-/// Remarksクラス
+/// セリフ
 /// </summary>
 class Remarks :public UIBase
 {

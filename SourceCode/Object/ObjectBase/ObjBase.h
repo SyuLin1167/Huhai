@@ -7,7 +7,7 @@
 #include"../../Collision/CollisionType.h"
 
 /// <summary>
-/// ObjBaseクラス
+/// オブジェクトの基底クラス
 /// </summary>
 class ObjBase
 {

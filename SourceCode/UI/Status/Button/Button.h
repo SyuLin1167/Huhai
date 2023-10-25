@@ -4,7 +4,7 @@
 #include"../../Status/Base/StatusBase.h"
 
 /// <summary>
-/// Buttonクラス
+/// ボタン表示のステータス
 /// </summary>
 class Button:public StatusBase
 {

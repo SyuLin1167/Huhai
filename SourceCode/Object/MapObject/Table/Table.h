@@ -6,7 +6,7 @@
 constexpr int TableNum = 19;
 
 /// <summary>
-/// Tableクラス
+/// 机オブジェクト
 /// </summary>
 class Table :public ObjBase
 {

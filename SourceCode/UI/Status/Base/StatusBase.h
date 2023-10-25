@@ -8,7 +8,7 @@ constexpr auto killingFont = "KillingFont";    //フォント名
 constexpr auto msGothic = "ＭＳ　ゴシック";    //フォント名
 
 /// <summary>
-/// StatusBaseクラス
+/// ステータスの基底クラス
 /// </summary>
 class StatusBase :public UIBase
 {

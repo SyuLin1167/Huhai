@@ -3,7 +3,7 @@
 #include"../GameSetting/GameSetting.h"
 
 /// <summary>
-/// BlendModeクラス
+/// スクリーンのブレンド
 /// </summary>
 class BlendMode
 {

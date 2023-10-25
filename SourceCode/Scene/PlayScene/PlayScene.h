@@ -3,7 +3,7 @@
 #include"../SceneBase/SceneBase.h"
 
 /// <summary>
-/// PlaySceneクラス
+/// プレイのシーン
 /// </summary>
 class PlayScene :public SceneBase
 {

@@ -5,7 +5,7 @@
 #include"../LightBase/LightBase.h"
 
 /// <summary>
-/// BrinkingLightクラス
+/// 点滅するライト
 /// </summary>
 class BlinkingLight :public LightBase
 {

@@ -5,7 +5,7 @@
 #include"../../UI/UIBase/UIBase.h"
 
 /// <summary>
-/// Selectクラス
+/// ボタンの選択
 /// </summary>
 class Select :public UIBase
 {

@@ -4,7 +4,7 @@
 #include"../../ObjectBase/ObjBase.h"
 
 /// <summary>
-/// Chairクラス
+/// 椅子オブジェクト
 /// </summary>
 class Chair :public ObjBase
 {

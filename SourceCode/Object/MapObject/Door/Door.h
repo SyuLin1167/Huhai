@@ -5,7 +5,7 @@
 #include"../../ObjectBase/ObjBase.h"
 
 /// <summary>
-/// Doorクラス
+/// ドアオブジェクト
 /// </summary>
 class Door :public ObjBase
 {

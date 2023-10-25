@@ -9,7 +9,7 @@ constexpr float CameraFar = 400.0f;      //カメラの描画範囲(遠)
 constexpr float CameraPosY = 22.5f;      //カメラの高さ
 
 /// <summary>
-/// FpsCameraクラス
+/// 一人称カメラ
 /// </summary>
 class FpsCamera :public ObjBase
 {

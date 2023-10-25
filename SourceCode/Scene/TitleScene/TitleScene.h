@@ -4,7 +4,7 @@
 #include "../../UI/Select/SelectType.h"
 
 /// <summary>
-/// TitleSceneクラス
+/// タイトルのシーン
 /// </summary>
 class TitleScene :public SceneBase
 {

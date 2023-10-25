@@ -1,7 +1,7 @@
 #pragma once
 
 /// <summary>
-/// PointLIghtShaderクラス
+/// ポイントライトのシェーダー
 /// </summary>
 class PointLightShader
 {

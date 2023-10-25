@@ -4,7 +4,7 @@
 #include"../Base/StatusBase.h"
 
 /// <summary>
-/// ParamBottonクラス
+/// パラメーター表所のステータス
 /// </summary>
 class ParamButton :public StatusBase
 {

@@ -4,9 +4,9 @@
 #include"../Math/Math.h"
 
 
-    /// <summary>
-    /// 線分構造体
-    /// </summary>
+/// <summary>
+/// 線分構造体
+/// </summary>
 struct Line
 {
     /// <summary>
@@ -33,9 +33,9 @@ struct Line
     VECTOR worldEnd;                    //線分のワールド座標終点
 };
 
-    /// <summary>
-    /// 球体構造体
-    /// </summary>
+/// <summary>
+/// 球体構造体
+/// </summary>
 struct Sphere
 {
     /// <summary>
@@ -61,9 +61,9 @@ struct Sphere
     float Radius;                       //球体の半径
 };
 
-    /// <summary>
-    /// カプセル構造体
-    /// </summary>
+/// <summary>
+/// カプセル構造体
+/// </summary>
 struct Capsule
 {
     /// <summary>

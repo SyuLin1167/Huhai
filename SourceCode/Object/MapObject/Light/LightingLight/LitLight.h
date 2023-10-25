@@ -3,7 +3,7 @@
 #include"../LightBase/LightBase.h"
 
 /// <summary>
-/// LitLightクラス
+/// 点灯するライト
 /// </summary>
 class LitLight :public LightBase
 {

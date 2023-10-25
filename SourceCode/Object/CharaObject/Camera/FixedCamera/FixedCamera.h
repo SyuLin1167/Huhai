@@ -2,7 +2,7 @@
 #include"../../../ObjectBase/ObjBase.h"
 
 /// <summary>
-/// FixedCameraƒNƒ‰ƒX
+/// ŒÅ’èƒJƒƒ‰
 /// </summary>
 class FixedCamera :public ObjBase
 {

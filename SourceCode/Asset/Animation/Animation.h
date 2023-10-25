@@ -5,7 +5,7 @@
 #include<vector>
 
 /// <summary>
-/// Animationクラス
+/// モデルのアニメーション管理
 /// </summary>
 class Animation
 {

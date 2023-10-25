@@ -8,7 +8,7 @@
 #include"../ObjectBase/ObjTag.h"
 
 /// <summary>
-/// ObjManagerクラス
+/// オブジェクトの管理
 /// </summary>
 class ObjManager final
 {

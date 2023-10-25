@@ -3,7 +3,7 @@
 #include"../../Object/ObjectBase/ObjBase.h"
 
 /// <summary>
-/// UIBaseクラス
+/// UIの基底クラス
 /// </summary>
 class UIBase:public ObjBase
 {

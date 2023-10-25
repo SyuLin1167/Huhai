@@ -6,7 +6,7 @@
 #include"../../../../Asset/AssetManager/AssetManager.h"
 
 /// <summary>
-/// LightBaseクラス
+/// ライト基底クラス
 /// </summary>
 class LightBase :public ObjBase
 {

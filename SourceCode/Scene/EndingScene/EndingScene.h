@@ -3,7 +3,7 @@
 #include"../SceneBase/SceneBase.h"
 
 /// <summary>
-/// EndingSceneクラス
+/// エンディング
 /// </summary>
 class EndingScene :public SceneBase
 {

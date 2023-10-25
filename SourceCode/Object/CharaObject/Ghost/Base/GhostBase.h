@@ -6,7 +6,7 @@
 #include"../../../../Asset/Sound/Sound.h"
 
 /// <summary>
-/// GhostBaseクラス
+/// 幽霊の基底クラス
 /// </summary>
 class GhostBase :public ObjBase
 {

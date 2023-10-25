@@ -3,7 +3,7 @@
 #include"../../ObjectBase/ObjBase.h"
 
 /// <summary>
-/// Bedクラス
+/// ベッドオブジェクト
 /// </summary>
 class Bed :public ObjBase
 {

@@ -2,7 +2,7 @@
 #include"../LightBase/LightBase.h"
 
 /// <summary>
-/// FlashLightƒNƒ‰ƒX
+/// ‰ù’†“d“”
 /// </summary>
 class FlashLight :public LightBase
 {

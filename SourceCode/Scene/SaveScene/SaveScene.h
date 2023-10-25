@@ -3,7 +3,7 @@
 #include"../SceneBase/SceneBase.h"
 
 /// <summary>
-/// SaveScene
+/// シーンのセーブ
 /// </summary>
 class SaveScene
 {

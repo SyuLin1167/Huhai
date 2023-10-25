@@ -9,7 +9,7 @@ constexpr int SCREEN_CENTER_WIDTH = SCREEN_WIDTH / 2;       //スクリーン中心幅
 constexpr int SCREEN_CENTER_HEIGHT = SCREEN_HEIGHT / 2;     //スクリーン中心高さ
 
 /// <summary>
-/// GameSettingクラス
+/// ゲームの初期設定
 /// </summary>
 class GameSetting
 {

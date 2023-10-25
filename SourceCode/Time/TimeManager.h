@@ -2,7 +2,7 @@
 #include <DxLib.h>
 
 /// <summary>
-/// TimeManagerƒNƒ‰ƒX
+/// ŠÔ‚ÌŠÇ—
 /// </summary>
 class TimeManager
 {

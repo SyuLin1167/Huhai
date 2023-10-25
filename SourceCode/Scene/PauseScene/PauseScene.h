@@ -6,7 +6,7 @@
 constexpr auto GAME_SCENE = "../Assets/BackGround/GameScene.png" ;
 
 /// <summary>
-/// PauseSceneƒNƒ‰ƒX
+/// ˆê’â~
 /// </summary>
 class PauseScene:public SceneBase
 {

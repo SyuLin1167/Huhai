@@ -4,7 +4,7 @@
 #include"../../ObjectBase/ObjBase.h"
 
 /// <summary>
-/// Manクラス
+/// 男性オブジェクト
 /// </summary>
 class Man :public ObjBase
 {

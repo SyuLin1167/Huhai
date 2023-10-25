@@ -4,7 +4,7 @@
 #include"../Base/StatusBase.h"
 
 /// <summary>
-/// TitleButtonクラス
+/// タイトルに戻るボタン
 /// </summary>
 class TitleButton :public StatusBase
 {

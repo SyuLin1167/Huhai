@@ -6,7 +6,7 @@
 #include"SoundTag.h"
 
 /// <summary>
-/// Soundクラス
+/// サウンドの管理
 /// </summary>
 class Sound
 {

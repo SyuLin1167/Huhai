@@ -5,7 +5,7 @@
 #include"../../ObjectBase/ObjBase.h"
 
 /// <summary>
-/// Playerクラス
+/// プレイヤーオブジェクト
 /// </summary>
 class Player :public ObjBase
 {

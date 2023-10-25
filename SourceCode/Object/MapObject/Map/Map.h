@@ -6,7 +6,7 @@
 #include"../../ObjectBase/ObjBase.h"
 
 /// <summary>
-/// Mapクラス
+/// マップオブジェクト
 /// </summary>
 class Map :public ObjBase
 {

@@ -3,7 +3,7 @@
 #include"../Base/GhostBase.h"
 
 /// <summary>
-/// GhostWalkGimクラス
+/// 幽霊が歩くギミック
 /// </summary>
 class GhostWalkGim :public GhostBase
 {

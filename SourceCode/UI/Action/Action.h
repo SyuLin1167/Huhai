@@ -3,7 +3,7 @@
 #include"../../UI/UIBase/UIBase.h"
 
 /// <summary>
-/// Actionクラス
+/// 行動するためのアイコン
 /// </summary>
 class Action :public UIBase
 {

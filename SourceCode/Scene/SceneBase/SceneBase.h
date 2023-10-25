@@ -7,7 +7,7 @@
 #include"../../Asset/Sound/Sound.h"
 
 /// <summary>
-/// SceneBaseクラス
+/// シーンの基底クラス
 /// </summary>
 class SceneBase
 {

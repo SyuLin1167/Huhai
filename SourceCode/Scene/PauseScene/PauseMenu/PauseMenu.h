@@ -6,7 +6,7 @@
 #include"ButtonName.h"
 
 /// <summary>
-/// PauseMenuƒNƒ‰ƒX
+/// ƒQ[ƒ€‚ÌÚ×İ’è
 /// </summary>
 class PauseMenu
 {

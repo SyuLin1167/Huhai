@@ -3,7 +3,7 @@
 #include "../../GameSetting/GameSetting.h"
 
 /// <summary>
-/// Bloomクラス
+/// ブルーム
 /// </summary>
 class Bloom
 {

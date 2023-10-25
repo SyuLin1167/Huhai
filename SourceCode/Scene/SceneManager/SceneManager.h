@@ -8,7 +8,7 @@
 #include"../../Shade/PointLight/PointLightShader.h"
 
 /// <summary>
-/// SceneManagerクラス
+/// シーンの管理
 /// </summary>
 class SceneManager
 {

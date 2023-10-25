@@ -4,7 +4,7 @@
 
 
 /// <summary>
-/// Ghostクラス
+/// 幽霊オブジェクト
 /// </summary>
 class Ghost :public GhostBase
 {

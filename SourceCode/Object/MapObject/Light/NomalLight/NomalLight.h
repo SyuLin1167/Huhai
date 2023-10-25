@@ -2,7 +2,9 @@
 
 #include"../LightBase/LightBase.h"
 
-/*NomalLightクラス*/
+/// <summary>
+/// 通常のライト
+/// </summary>
 class NomalLight :public LightBase
 {
 public:
