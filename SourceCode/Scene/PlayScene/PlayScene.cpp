@@ -18,12 +18,11 @@
 #include"../EscapeScene/EscapeScene.h"
 #include"../SaveScene/SaveScene.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 PlayScene::PlayScene()
     :SceneBase()
 {
+    sceneName = "play";
+
     //カメラ生成
     ObjManager::AddObj(new FpsCamera);
 
@@ -34,19 +33,19 @@ PlayScene::PlayScene()
     ObjManager::AddObj(new Furniture(Furniture::FurName::Stage));
 
     //ドア生成
-    ObjManager::AddObj(new Door("play"));
-    ObjManager::AddObj(new Door("play", "1"));
-    ObjManager::AddObj(new Door("play", "2"));
+    ObjManager::AddObj(new Door(sceneName));
+    ObjManager::AddObj(new Door(sceneName, "1"));
+    ObjManager::AddObj(new Door(sceneName, "2"));
 
     //イス生成
     ObjManager::AddObj(new Chair);
 
     //照明生成
-    ObjManager::AddObj(new NomalLight("play"));
-    ObjManager::AddObj(new LitLight("play","1"));
-    ObjManager::AddObj(new LitLight("play", "2"));
-    ObjManager::AddObj(new NomalLight("play", "3"));
-    ObjManager::AddObj(new NomalLight("play", "4"));
+    ObjManager::AddObj(new NomalLight(sceneName));
+    ObjManager::AddObj(new LitLight(sceneName,"1"));
+    ObjManager::AddObj(new LitLight(sceneName, "2"));
+    ObjManager::AddObj(new NomalLight(sceneName, "3"));
+    ObjManager::AddObj(new NomalLight(sceneName, "4"));
 
     //プレイヤー生成
     ObjManager::AddObj(new Player);
@@ -59,9 +58,6 @@ PlayScene::PlayScene()
     ObjManager::AddObj(new Remarks(TextType::Stage));
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 PlayScene::~PlayScene()
 {
     //管理クラス内の確保したデータ解放
@@ -69,11 +65,6 @@ PlayScene::~PlayScene()
     ObjManager::DeleteAllObj();
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
-/// <returns>次のフレームのシーン</returns>
 SceneBase* PlayScene::UpdateScene(const float deltaTime)
 {
     //オブジェクト更新
@@ -111,9 +102,6 @@ SceneBase* PlayScene::UpdateScene(const float deltaTime)
     return this;
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void PlayScene::DrawScene()
 {
     //オブジェクト描画

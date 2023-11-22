@@ -1,8 +1,5 @@
 #include "TimeManager.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 TimeManager::TimeManager()
     : deltaTime(0)
 {
@@ -10,18 +7,11 @@ TimeManager::TimeManager()
     prevTime = nowTime;
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 TimeManager::~TimeManager()
 {
     //処理なし
 }
 
-/// <summary>
-/// DeltaTime取得処理
-/// </summary>
-/// <returns></returns>
 const float TimeManager::DeltaTime()
 {
     //フレームレート算出

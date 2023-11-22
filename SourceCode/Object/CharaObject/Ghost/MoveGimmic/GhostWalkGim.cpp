@@ -4,9 +4,6 @@
 #include"../../../MapObject/Door/Door.h"
 #include"../../Man/Man.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 GhostWalkGim::GhostWalkGim()
     :GhostBase()
 {
@@ -20,18 +17,11 @@ GhostWalkGim::GhostWalkGim()
     colSphere.worldCenter = objPos;
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 GhostWalkGim::~GhostWalkGim()
 {
     //処理なし
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
 void GhostWalkGim::Update(const float deltaTime)
 {
     //アニメーション時間再生
@@ -57,19 +47,12 @@ void GhostWalkGim::Update(const float deltaTime)
     ColUpdate();
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void GhostWalkGim::Draw()
 {
     //モデル描画
     MV1DrawModel(objHandle);
 }
 
-/// <summary>
-/// 当たり判定処理
-/// </summary>
-/// <param name="other">:オブジェクト</param>
 void GhostWalkGim::OnCollisionEnter(const ObjBase* other)
 {
     ObjTag tag = other->GetTag();

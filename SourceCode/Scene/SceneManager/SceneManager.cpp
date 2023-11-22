@@ -7,10 +7,6 @@
 #include"../PauseScene/PauseMenu/PauseMenu.h"
 #include "../SaveScene/SaveScene.h"
 
-
-/// <summary>
-/// コンストラクタ
-/// </summary>
 SceneManager::SceneManager()
     :pause(new PauseScene)
     , gameSetting(new GameSetting)
@@ -20,18 +16,11 @@ SceneManager::SceneManager()
     nowScreen = MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 SceneManager::~SceneManager()
 {
     //処理なし
 }
 
-/// <summary>
-/// 初期化処理
-/// </summary>
-/// <returns></returns>
 int SceneManager::Init()
 {
     //ゲームのセッティング
@@ -54,9 +43,6 @@ int SceneManager::Init()
     return 0;
 }
 
-/// <summary>
-/// 後処理
-/// </summary>
 void SceneManager::Finalize()
 {
     //シーン解放
@@ -66,18 +52,12 @@ void SceneManager::Finalize()
     }
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
 void SceneManager::UpdateScene()
 {
     //シーンの更新処理
     storageScene = nowScene.top()->UpdateScene(timeMgr->DeltaTime());
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void SceneManager::DrawScene()
 {
     //現在のシーンを描画
@@ -86,9 +66,6 @@ void SceneManager::DrawScene()
     ScreenFlip();
 }
 
-/// <summary>
-/// シーン切り替え
-/// </summary>
 void SceneManager::SwitchScene()
 {
     if (nowScene.top() != storageScene)
@@ -100,9 +77,6 @@ void SceneManager::SwitchScene()
     }
 }
 
-/// <summary>
-/// ポーズメニュー処理
-/// </summary>
 void SceneManager::CheckPauseMenu()
 {
     //ポーズメニュー
@@ -137,9 +111,6 @@ void SceneManager::CheckPauseMenu()
     }
 }
 
-/// <summary>
-/// ゲームループ
-/// </summary>
 void SceneManager::GameLoop()
 {
     //ウィンドウが閉じられるまでループする

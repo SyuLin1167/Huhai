@@ -3,9 +3,6 @@
 #include"../../Object/CharaObject/Camera/FpsCamera/FpsCamera.h"
 #include"../../Scene/PauseScene/PauseMenu/PauseMenu.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 Bloom::Bloom()
     :ColorScreen(MakeScreen(SCREEN_WIDTH, SCREEN_HEIGHT, false))
     , HighBrightScreen(MakeScreen(SCREEN_WIDTH, SCREEN_HEIGHT, false))
@@ -15,18 +12,11 @@ Bloom::Bloom()
     SetBackgroundColor(0, 0, 0);
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 Bloom::~Bloom()
 {
     //処理なし
 }
 
-
-/// <summary>
-/// スクリーンセット
-/// </summary>
 void Bloom::SetColoerScreen()
 {
     if (PauseMenu::HasStatus("Bloom"))
@@ -36,9 +26,6 @@ void Bloom::SetColoerScreen()
     SetCameraNearFar(CameraNear, CameraFar);
 }
 
-/// <summary>
-/// 描画準備
-/// </summary>
 void Bloom::SetBloomGraph() 
 {
     if (PauseMenu::HasStatus("Bloom"))
@@ -54,9 +41,6 @@ void Bloom::SetBloomGraph()
     }
 }
 
-/// <summary>
-/// 描画更新処理
-/// </summary>
 void Bloom::Draw()
 {
     if (PauseMenu::HasStatus("Bloom"))

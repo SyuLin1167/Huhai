@@ -10,12 +10,11 @@
 #include "../TitleScene/TitleScene.h"
 #include"../SaveScene/SaveScene.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 EndingScene::EndingScene()
     :SceneBase()
 {
+    sceneName = "ending";
+
     //カメラ生成
     ObjManager::AddObj(new FixedCamera);
 
@@ -25,25 +24,17 @@ EndingScene::EndingScene()
     //家具生成
     ObjManager::AddObj(new Furniture(Furniture::FurName::Room));
     //照明生成
-    ObjManager::AddObj(new NomalLight("EndingScene"));
+    ObjManager::AddObj(new NomalLight(sceneName));
 
     //台詞生成
     ObjManager::AddObj(new Remarks(TextType::GameClear));
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 EndingScene::~EndingScene()
 {
     //処理なし
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
-/// <returns>次フレームのシーン</returns>
 SceneBase* EndingScene::UpdateScene(const float deltaTime)
 {
     //オブジェクト更新
@@ -68,9 +59,6 @@ SceneBase* EndingScene::UpdateScene(const float deltaTime)
     return this;
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void EndingScene::DrawScene()
 {
     //オブジェクト描画

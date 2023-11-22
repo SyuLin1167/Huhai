@@ -1,9 +1,6 @@
 #include "PauseScene.h"
 #include"PauseMenu/PauseMenu.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 PauseScene::PauseScene()
     :SceneBase()
 {
@@ -14,17 +11,11 @@ PauseScene::PauseScene()
     PauseMenu::ResetTitleButton();
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 PauseScene::~PauseScene()
 {
     //処理なし
 }
 
-/// <summary>
-/// ポーズメニュー初期化処理
-/// </summary>
 void PauseScene::InitPauesMenu()
 {
     //ゲーム画面保存
@@ -33,20 +24,12 @@ void PauseScene::InitPauesMenu()
     PauseMenu::ResetTitleButton();
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
-/// <returns>次のフレームのシーン</returns>
 SceneBase* PauseScene::UpdateScene(const float deltaTime)
 {
     PauseMenu::Update(deltaTime);
     return this;
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void PauseScene::DrawScene()
 {
     //ゲーム画面描画

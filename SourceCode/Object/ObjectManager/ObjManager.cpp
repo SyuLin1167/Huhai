@@ -3,12 +3,8 @@
 #include"../../Shade/Bloom/Bloom.h"
 #include "ObjManager.h"
 
-//実態へのポインタ定義
 std::unique_ptr<ObjManager> ObjManager::singleton = nullptr;
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 ObjManager::ObjManager()
     :object()
     , bloom(new Bloom)
@@ -16,17 +12,11 @@ ObjManager::ObjManager()
     //処理なし
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 ObjManager::~ObjManager()
 {
     DeleteAllObj();
 }
 
-/// <summary>
-/// 初期化処理
-/// </summary>
 void ObjManager::Init()
 {
     //インスタンス生成
@@ -36,20 +26,12 @@ void ObjManager::Init()
     }
 }
 
-/// <summary>
-/// オブジェクト追加処理
-/// </summary>
-/// <param name="newObj">:追加オブジェクト</param>
 void ObjManager::AddObj(ObjBase* newObj)
 {
     ObjTag tag = newObj->GetTag();
     singleton->object[tag].emplace_back(newObj);
 }
 
-/// <summary>
-/// 全オブジェクト更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
 void ObjManager::UpdateAllObj(const float deltaTime)
 {
     //全タグ分更新処理をまとめて行う
@@ -67,9 +49,6 @@ void ObjManager::UpdateAllObj(const float deltaTime)
     singleton->OnDeadObj();
 }
 
-/// <summary>
-/// 全オブジェクト描画処理
-/// </summary>
 void ObjManager::DrawAllObj()
 {
     //全タグ分描画処理をまとめて行う
@@ -90,9 +69,6 @@ void ObjManager::DrawAllObj()
     singleton->bloom->Draw();
 }
 
-/// <summary>
-///オブジェクト死亡処理
-/// </summary>
 void ObjManager::OnDeadObj()
 {
     //全タグ分死亡オブジェクトを探して削除
@@ -109,10 +85,6 @@ void ObjManager::OnDeadObj()
     }
 }
 
-/// <summary>
-/// オブジェクト削除処理
-/// </summary>
-/// <param name="deleteObj">:削除オブジェクト</param>
 void ObjManager::DeleteObj(std::shared_ptr<ObjBase>& deleteObj)
 {
     //削除オブジェクトのタグ取得
@@ -130,9 +102,6 @@ void ObjManager::DeleteObj(std::shared_ptr<ObjBase>& deleteObj)
     }
 }
 
-/// <summary>
-/// 全オブジェクト削除処理
-/// </summary>
 void ObjManager::DeleteAllObj()
 {
     //空じゃなかったらオブジェクト削除
@@ -145,9 +114,6 @@ void ObjManager::DeleteAllObj()
     }
 }
 
-/// <summary>
-/// 当たり判定処理
-/// </summary>
 void ObjManager::OnCollision()
 {
     //当たり判定の組み合わせ
@@ -182,11 +148,6 @@ void ObjManager::OnCollision()
     }
 }
 
-/// <summary>
-/// タグの先頭オブジェクト取得
-/// </summary>
-/// <param name="tag">:オブジェクトタグ</param>
-/// <returns>オブジェクト</returns>
 ObjBase* ObjManager::GetFirstObj(ObjTag tag)
 {
     //オブジェクトの数が0だったらnullptrを返す
@@ -199,13 +160,6 @@ ObjBase* ObjManager::GetFirstObj(ObjTag tag)
     return singleton->object[tag][0].get();
 }
 
-
-/// <summary>
-/// タグの指定オブジェクト取得
-/// </summary>
-/// <param name="tag">:タグ</param>
-/// <param name="tagNum">:オブジェクト番号</param>
-/// <returns>:オブジェクト</returns>
 ObjBase* ObjManager::GetObj(ObjTag tag, int tagNum)
 {
     //オブジェクトの数が指定数より少なかったらnullptrを返す

@@ -1,9 +1,6 @@
 #include "PointLightShader.h"
 #include<DxLib.h>
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 PointLightShader::PointLightShader()
 {
     //シェーダー読み込み
@@ -16,9 +13,6 @@ PointLightShader::PointLightShader()
     SetUsePixelShader(PSHandle);
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 PointLightShader::~PointLightShader()
 {
     //シェーダーの後処理

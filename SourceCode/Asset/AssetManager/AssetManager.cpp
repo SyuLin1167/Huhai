@@ -1,30 +1,19 @@
 #include "AssetManager.h"
 
-
-//実態へのポインタ定義
 std::unique_ptr<AssetManager> AssetManager::singleton = nullptr;
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 AssetManager::AssetManager()
 {
     SetEnableXAudioFlag(TRUE);
     Set3DSoundOneMetre(10.0f);
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 AssetManager::~AssetManager()
 {
     //全アセット削除
     ReleaseAllAsset();
 }
 
-/// <summary>
-/// 初期化処理
-/// </summary>
 void AssetManager::Init()
 {
     //インスタンス生成
@@ -34,11 +23,6 @@ void AssetManager::Init()
     }
 }
 
-/// <summary>
-/// グラフ取得
-/// </summary>
-/// <param name="fileName">:ファイル名</param>
-/// <returns>:複製したグラフID</returns>
 int AssetManager::GetGraph(std::string fileName)
 {
     int meshID = 0;
@@ -62,12 +46,6 @@ int AssetManager::GetGraph(std::string fileName)
     return singleton->graphMap[fileName];
 }
 
-
-/// <summary>
-/// メッシュ取得
-/// </summary>
-/// <param name="fileName">:ファイル名</param>
-/// <returns>複製したメッシュID</returns>
 int AssetManager::GetMesh(std::string fileName)
 {
     int meshID = 0;
@@ -93,11 +71,6 @@ int AssetManager::GetMesh(std::string fileName)
     return meshID;
 }
 
-/// <summary>
-/// アニメーション取得
-/// </summary>
-/// <param name="fileName">:ファイル名</param>
-/// <returns>アニメーションID</returns>
 int AssetManager::GetAnim(std::string fileName)
 {
     int animID = 0;
@@ -121,11 +94,6 @@ int AssetManager::GetAnim(std::string fileName)
     return singleton->animMap[fileName];
 }
 
-/// <summary>
-/// サウンド取得
-/// </summary>
-/// <param name="fileName">:ファイル名</param>
-/// <returns>複製したサウンドID</returns>
 int AssetManager::GetSound(std::string fileName)
 {
     int meshID = 0;
@@ -152,10 +120,6 @@ int AssetManager::GetSound(std::string fileName)
     return meshID;
 }
 
-/// <summary>
-/// メッシュ削除
-/// </summary>
-/// <param name="meshID">:メッシュID</param>
 void AssetManager::ReleaseMesh(int meshID)
 {
     //複製したメッシュ内検索
@@ -173,8 +137,6 @@ void AssetManager::ReleaseMesh(int meshID)
     std::iter_swap(iter, singleton->dupMesh.end() - 1);
     singleton->dupMesh.pop_back();
 }
-
-// 全アセット削除 //
 
 void AssetManager::ReleaseAllAsset()
 {

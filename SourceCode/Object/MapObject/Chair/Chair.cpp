@@ -5,9 +5,6 @@
 #include"../../../Asset/Animation/Animation.h"
 #include"../../../Asset/Sound/Sound.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 Chair::Chair()
     :ObjBase(ObjTag::Furniture)
     , chairSound(new Sound)
@@ -39,18 +36,11 @@ Chair::Chair()
     chairSound->AddSound("../Assets/Sound/FallingChairSE.mp3", SoundTag::FallingChair, true, true);
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 Chair::~Chair()
 {
     //処理なし
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
 void Chair::Update(const float deltaTime)
 {
     //アニメーション時間再生
@@ -81,9 +71,6 @@ void Chair::Update(const float deltaTime)
     chairSound->Doppler(SoundTag::FallingChair, objPos);
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void Chair::Draw()
 {
     //モデル描画

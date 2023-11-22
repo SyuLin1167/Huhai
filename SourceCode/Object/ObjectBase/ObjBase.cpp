@@ -1,16 +1,12 @@
 #include "ObjBase.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
-/// <param name="tag">:オブジェクトタグ</param>
 ObjBase::ObjBase(ObjTag tag)
     :objTag(tag)
     , rotateNow(false)
-    , aimDir{ 0,0,0 }
+    , aimDir(VGet(0, 0, 0))
     , objHandle(-1)
-    , objPos(VGet(0,0,0))
-    , objDir(VGet(1.0f, 0.0f, 0.0f))
+    , objPos(VGet(0, 0, 0))
+    , objDir(VGet(1.0f, 0, 0))
     , objScale(VGet(0.1f, 0.1f, 0.1f))
     , objSpeed(20.0f)
     , isVisible(true)
@@ -24,17 +20,11 @@ ObjBase::ObjBase(ObjTag tag)
     //処理なし
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 ObjBase::~ObjBase()
 {
     //処理なし
 }
 
-/// <summary>
-/// 回転処理
-/// </summary>
 void ObjBase::Rotate()
 {
     if (rotateNow)
@@ -69,9 +59,6 @@ void ObjBase::Rotate()
     }
 }
 
-/// <summary>
-/// 当たり判定更新処理
-/// </summary>
 void ObjBase::ColUpdate()
 {
     //全当たり判定更新

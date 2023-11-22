@@ -2,10 +2,6 @@
 
 int UIBase::Key[256] = {};
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
-/// <param name="tag">:タグ名</param>
 UIBase::UIBase(ObjTag tag)
     :ObjBase(tag)
     , mouseX(0)
@@ -17,19 +13,11 @@ UIBase::UIBase(ObjTag tag)
     //処理なし
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 UIBase::~UIBase()
 {
     //処理なし
 }
 
-/// <summary>
-/// クリック可能状態
-/// </summary>
-/// <param name="colwidth">:当たり判定幅</param>
-/// <param name="colheight">:当たり判定高さ</param>
 void UIBase::CanClick(const int colwidth,const int colheight)
 {
     //マウスカーソル座標取得
@@ -48,9 +36,6 @@ void UIBase::CanClick(const int colwidth,const int colheight)
     }
 }
 
-/// <summary>
-/// クリック処理
-/// </summary>
 void UIBase::MouseClick()
 {
     //クリック可能だったら
@@ -75,11 +60,6 @@ void UIBase::MouseClick()
     }
 }
 
-/// <summary>
-/// キー入力状態取得
-/// </summary>
-/// <param name="keyName">:キー名</param>
-/// <returns>キー入力状態</returns>
 int UIBase::KeyStatus(int keyName)
 {
     GetHitKeyStateAllEx(Key);

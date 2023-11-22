@@ -5,12 +5,8 @@
 #include"../../../Scene/TitleScene/TitleScene.h"
 #include"../../../UI/Status/ParamButton/ParamButton.h"
 
-//実態へのポインタ定義
 std::unique_ptr<PauseMenu> PauseMenu::singleton = nullptr;
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 PauseMenu::PauseMenu()
 {
     //フォントの読み込み
@@ -31,17 +27,11 @@ PauseMenu::PauseMenu()
     AddFontResourceEx("../Assets/Font/KillingFont.otf", FR_PRIVATE, NULL);
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 PauseMenu::~PauseMenu()
 {
     //処理なし
 }
 
-/// <summary>
-/// 初期化処理
-/// </summary>
 void PauseMenu::CreateInstance()
 {
     //インスタンス生成
@@ -51,10 +41,6 @@ void PauseMenu::CreateInstance()
     }
 }
 
-/// <summary>
-/// ボタン追加処理
-/// </summary>
-/// <param name="name">:登録名</param>
 void PauseMenu::AddButton(std::string name)
 {
     auto iter = buttonData.find(name);
@@ -64,11 +50,6 @@ void PauseMenu::AddButton(std::string name)
     }
 }
 
-/// <summary>
-/// パラメーター追加処理
-/// </summary>
-/// <param name="name">:登録名</param>
-/// <param name="value">:パラメーター初期値</param>
 void PauseMenu::AddParam(std::string name,int value)
 {
     auto iter = paramData.find(name);
@@ -78,10 +59,6 @@ void PauseMenu::AddParam(std::string name,int value)
     }
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-    /// <param name="deltaTime">:デルタタイム</param>
 void PauseMenu::Update(const float deltaTime)
 {
     //ボタン更新
@@ -96,11 +73,6 @@ void PauseMenu::Update(const float deltaTime)
     singleton->titleButton->Update(deltaTime);
 }
 
-/// <summary>
-/// ステータス状態
-/// </summary>
-/// <param name="name">:ボタン名</param>
-/// <returns>オン:true|オフ:false</returns>
 bool PauseMenu::HasStatus(std::string name)
 {
     if (singleton)
@@ -111,10 +83,6 @@ bool PauseMenu::HasStatus(std::string name)
     return false;
 }
 
-/// <summary>
-/// タイトル移動
-/// </summary>
-/// <returns>移動する:true|しない:false</returns>
 bool PauseMenu::BackToTitle()
 {
     if (singleton->titleButton)
@@ -125,9 +93,6 @@ bool PauseMenu::BackToTitle()
     return false;
 }
 
-/// <summary>
-/// タイトルボタンリセット
-/// </summary>
 void PauseMenu::ResetTitleButton()
 {
     //タイトルボタン追加
@@ -140,11 +105,6 @@ void PauseMenu::ResetTitleButton()
     singleton->titleButton->ChangeToFalse();
 }
 
-/// <summary>
-/// パラメーター取得
-/// </summary>
-/// <param name="name">:パラメーター名</param>
-/// <returns>:パラメーター</returns>
 int PauseMenu::Parameter(std::string name)
 {
     if (singleton.get())
@@ -155,9 +115,6 @@ int PauseMenu::Parameter(std::string name)
     return -1;
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void PauseMenu::Draw()
 {
     //ボタン描画

@@ -7,9 +7,6 @@
 #include"../../../UI/Reamarks/Remarks.h"
 #include"../../../Asset/Sound/Sound.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 Man::Man()
     :ObjBase(ObjTag::Man)
     , isSpeak(false)
@@ -37,18 +34,11 @@ Man::Man()
     ObjManager::AddObj(new Action(objPos + VGet(0, 0, 5)));
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 Man::~Man()
 {
     //処理なし
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
 void Man::Update(const float deltaTime)
 {
     //アニメーション時間再生
@@ -103,9 +93,6 @@ void Man::Update(const float deltaTime)
     manSound->Doppler(SoundTag::BodyFall, objPos);
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void Man::Draw()
 {
     MV1DrawModel(objHandle);

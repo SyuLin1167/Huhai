@@ -1,11 +1,6 @@
 #include "BlinkingLight.h"
 #include"../../../../Shade/Bloom/Bloom.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
-/// <param name="scene">:シーン名</param>
-/// <param name="num">:オブジェクト番号</param>
 BlinkingLight::BlinkingLight(std::string scene, std::string num)
     :LightBase(scene,num)
     , intervalTime(0.0f)
@@ -15,19 +10,11 @@ BlinkingLight::BlinkingLight(std::string scene, std::string num)
     //処理なし
 }
 
-
-/// <summary>
-/// デストラクタ
-/// </summary>
 BlinkingLight::~BlinkingLight()
 {
     //処理なし
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
 void BlinkingLight::Update(const float deltaTime)
 {
         //カウントがインターバルを超えるたびに乱数を生成
@@ -68,18 +55,12 @@ void BlinkingLight::Update(const float deltaTime)
         LightOff();
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void BlinkingLight::Draw()
 {
     //モデル描画
     MV1DrawModel(objHandle);
 }
 
-/// <summary>
-/// 消灯処理
-/// </summary>
 void BlinkingLight::LightOff()
 {
     if (!isVisible)

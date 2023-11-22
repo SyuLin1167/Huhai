@@ -57,10 +57,10 @@ private:
     void Move(float deltaTime);
 
 
-    VECTOR UP;                                      //正面
-    VECTOR DOWN;                                    //後方
-    VECTOR RIGHT;                                   //右
-    VECTOR LEFT;                                    //左
+    VECTOR Up;                                      //正面
+    VECTOR Down;                                    //後方
+    VECTOR Right;                                   //右
+    VECTOR Left;                                    //左
 
     VECTOR inputVec;                                //合成ベクトル
     VECTOR inputVel;                                //速度ベクトル

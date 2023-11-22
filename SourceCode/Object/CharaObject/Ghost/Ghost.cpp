@@ -2,9 +2,6 @@
 #include"../Player/Player.h"
 #include"../../MapObject/Light/FlashLight/FlashLight.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 Ghost::Ghost()
     :GhostBase()
     , moveCount(7.0f)
@@ -37,9 +34,6 @@ Ghost::Ghost()
     ghostSound->StartSound(SoundTag::Escape, DX_PLAYTYPE_LOOP);
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 Ghost::~Ghost()
 {
     //ライト削除
@@ -52,10 +46,6 @@ Ghost::~Ghost()
     }
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
 void Ghost::Update(float deltaTime)
 {
     //アニメーション時間再生
@@ -127,19 +117,12 @@ void Ghost::Update(float deltaTime)
     ghostSound->Doppler(SoundTag::Escape, objPos);
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void Ghost::Draw()
 {
     //モデル描画
     MV1DrawModel(objHandle);
 }
 
-/// <summary>
-/// 当たり判定処理
-/// </summary>
-/// <param name="other">:オブジェクト</param>
 void Ghost::OnCollisionEnter(const ObjBase* other)
 {
     ObjTag tag = other->GetTag();

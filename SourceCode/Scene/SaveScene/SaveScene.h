@@ -35,7 +35,7 @@ private:
     /// </summary>
     SaveScene();
 
-    static std::unique_ptr<SaveScene> saveScene;        //自身の実態
+    static std::unique_ptr<SaveScene> singleton;        //自身の実態
     std::unique_ptr<SceneBase> scene;                   //セーブシーン
 };
 

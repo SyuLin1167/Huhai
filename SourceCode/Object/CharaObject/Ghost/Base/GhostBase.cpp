@@ -3,9 +3,6 @@
 #include"../../../ObjectManager/ObjManager.h"
 #include"../../../../Asset/AssetManager/AssetManager.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 GhostBase::GhostBase()
     :ObjBase(ObjTag::Ghost)
     , isMove(false)
@@ -32,9 +29,6 @@ GhostBase::GhostBase()
     ghostSound->AddSound("../Assets/Sound/EscapeBgm.mp3", SoundTag::Escape, true, false);
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 GhostBase::~GhostBase()
 {
     //処理なし

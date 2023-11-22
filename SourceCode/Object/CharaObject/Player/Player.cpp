@@ -4,16 +4,13 @@
 #include"../../../Scene/PauseScene/PauseMenu/PauseMenu.h"
 #include"../../../Asset/Sound/Sound.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 Player::Player()
     :ObjBase(ObjTag::Player)
     , canMove(true)
-    , UP(VGet(0,0,0))
-    , DOWN(VGet(0,0,0))
-    , LEFT(VGet(0,0,0))
-    , RIGHT(VGet(0,0,0))
+    , Up(VGet(0,0,0))
+    , Down(VGet(0,0,0))
+    , Left(VGet(0,0,0))
+    , Right(VGet(0,0,0))
     , inputVec(VGet(0,0,0))
     , inputVel(VGet(0,0,0))
     , walkStep(0.0f)
@@ -32,18 +29,11 @@ Player::Player()
     plySound->AddSound("../Assets/Sound/PlayerWalkSE.mp3", SoundTag::PlayerWalk, false, true);
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 Player::~Player()
 {
     //処理なし
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
 void Player::Update(const float deltaTime)
 {
     //カメラの向き取得
@@ -71,10 +61,10 @@ void Player::Update(const float deltaTime)
     }
 
     //カメラの向きに合わせて移動方向決定
-    UP = camFront;
-    DOWN = VScale(UP, -1.0f);
-    RIGHT = VCross(VGet(0, 1, 0), camFront);
-    LEFT = VScale(RIGHT, -1.0f);
+    Up = camFront;
+    Down = VScale(Up, -1.0f);
+    Right = VCross(VGet(0, 1, 0), camFront);
+    Left = VScale(Right, -1.0f);
     objDir = camFront;
 
     //動作中は操作可能
@@ -97,9 +87,6 @@ void Player::Update(const float deltaTime)
     ColUpdate();
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void Player::Draw()
 {
     //処理なし
@@ -139,10 +126,6 @@ void Player::OnCollisionEnter(const ObjBase* other)
     }
 }
 
-/// <summary>
-/// 球体の衝突時処理
-/// </summary>
-/// <param name="colmodel">:当たり判定モデル</param>
 void Player::CollHitSphere(int colmodel)
 {
     //球体がモデルの当たったら押し戻す
@@ -157,10 +140,6 @@ void Player::CollHitSphere(int colmodel)
 
 }
 
-/// <summary>
-/// 線分の衝突時処理
-/// </summary>
-/// <param name="colmodel">:当たり判定モデル</param>
 void Player::ColHitLine(int colmodel)
 {
     //線分がモデルに当たったら足元の座標に合わせる
@@ -172,10 +151,6 @@ void Player::ColHitLine(int colmodel)
     }
 }
 
-/// <summary>
-/// 移動処理
-/// </summary>
-/// <param name="deltaTime">:フレームレート</param>
 void Player::Move(float deltaTime)
 {
     //通常は未入力
@@ -184,25 +159,25 @@ void Player::Move(float deltaTime)
     //Aキー入力で左に移動
     if (CheckHitKey(KEY_INPUT_A))
     {
-        inputVec += LEFT;
+        inputVec += Left;
         inputKey = true;
     }
     //Dキー入力で右に移動
     if (CheckHitKey(KEY_INPUT_D))
     {
-        inputVec += RIGHT;
+        inputVec += Right;
         inputKey = true;
     }
     //Wキー入力で前に移動
     if (CheckHitKey(KEY_INPUT_W))
     {
-        inputVec += UP;
+        inputVec += Up;
         inputKey = true;
     }
     //Sキー入力で後ろに移動
     if (CheckHitKey(KEY_INPUT_S))
     {
-        inputVec += DOWN;
+        inputVec += Down;
         inputKey = true;
     }
 

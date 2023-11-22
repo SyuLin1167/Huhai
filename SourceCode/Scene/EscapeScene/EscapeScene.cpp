@@ -16,12 +16,11 @@
 #include"../TitleScene/TitleScene.h"
 #include"../RoomScene/RoomScene.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 EscapeScene::EscapeScene()
     :SceneBase()
 {
+    sceneName = "escape";
+
     //カメラ生成
     ObjManager::AddObj(new FpsCamera);
 
@@ -31,11 +30,11 @@ EscapeScene::EscapeScene()
     ObjManager::AddObj(new Map(Map::MapTag::GOAL));
 
     //ドア生成
-    class Door* door = new Door("escape");
+    class Door* door = new Door(sceneName);
     ObjManager::AddObj(door);
     door->MoveAnim(Door::AnimType::OPEN);
-    ObjManager::AddObj(new Door("escape", "1"));
-    ObjManager::AddObj(new Door("escape", "2"));
+    ObjManager::AddObj(new Door(sceneName, "1"));
+    ObjManager::AddObj(new Door(sceneName, "2"));
 
     //机生成
     for (int i = 0; i < TableNum; i++)
@@ -58,19 +57,11 @@ EscapeScene::EscapeScene()
     sound->AddSound("../Assets/Sound/GameOverSE.mp3", SoundTag::GameOver);
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 EscapeScene::~EscapeScene()
 {
     //処理なし
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
-/// <returns>次フレームのシーン</returns>
 SceneBase* EscapeScene::UpdateScene(const float deltaTime)
 {
     //オブジェクト更新
@@ -125,9 +116,6 @@ SceneBase* EscapeScene::UpdateScene(const float deltaTime)
     return this;
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void EscapeScene::DrawScene()
 {
     //オブジェクト描画

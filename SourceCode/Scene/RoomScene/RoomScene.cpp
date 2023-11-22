@@ -13,12 +13,11 @@
 #include "../PlayScene/PlayScene.h"
 #include"../SaveScene/SaveScene.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 RoomScene::RoomScene()
     :SceneBase()
 {
+    sceneName = "room";
+
     //サウンド生成
     sound->AddSound("../Assets/Sound/InDoorSE.mp3", SoundTag::InDoor);
     sound->StartSound(SoundTag::InDoor, DX_PLAYTYPE_LOOP);
@@ -36,7 +35,7 @@ RoomScene::RoomScene()
     ObjManager::AddObj(new Bed);
 
     //照明生成
-    ObjManager::AddObj(new NomalLight("room"));
+    ObjManager::AddObj(new NomalLight(sceneName));
 
     //プレイヤー生成
     ObjManager::AddObj(new Player);
@@ -45,19 +44,11 @@ RoomScene::RoomScene()
     ObjManager::AddObj(new Remarks(TextType::Opening));
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 RoomScene::~RoomScene()
 {
     //処理なし
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
-/// <returns>次フレームのシーン</returns>
 SceneBase* RoomScene::UpdateScene(const float deltaTime)
 {
     //オブジェクト更新
@@ -103,9 +94,6 @@ SceneBase* RoomScene::UpdateScene(const float deltaTime)
     return this;
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void RoomScene::DrawScene()
 {
     //オブジェクト描画

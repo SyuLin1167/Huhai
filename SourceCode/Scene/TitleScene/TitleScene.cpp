@@ -11,12 +11,11 @@
 #include "../RoomScene/RoomScene.h"
 #include "../SaveScene/SaveScene.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 TitleScene::TitleScene()
     :SceneBase()
 {
+    sceneName = "title";
+
     //タイトルロゴ生成
     bgHandle = AssetManager::GetGraph("../Assets/BackGround/Title.png");
     bgX = TITLE_POS_X;
@@ -34,12 +33,12 @@ TitleScene::TitleScene()
     ObjManager::AddObj(new Map(Map::MapTag::TITLE));
 
     //ドア生成
-    door = new Door("title");
+    door = new Door(sceneName);
     ObjManager::AddObj(door);
 
     //ライト生成
-    ObjManager::AddObj(new BlinkingLight("title"));
-    ObjManager::AddObj(new NomalLight("title", "1"));
+    ObjManager::AddObj(new BlinkingLight(sceneName));
+    ObjManager::AddObj(new NomalLight(sceneName, "1"));
 
     //選択ボタン生成
     for (auto type : selectTypeAll)
@@ -51,9 +50,6 @@ TitleScene::TitleScene()
     screenGraph = MakeGraph(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 TitleScene::~TitleScene()
 {
     //画像ハンドル削除
@@ -63,11 +59,6 @@ TitleScene::~TitleScene()
     }
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
-/// <returns>次のフレームのシーン</returns>
 SceneBase* TitleScene::UpdateScene(const float deltaTime)
 {
     //マウスポインター表示
@@ -132,9 +123,6 @@ SceneBase* TitleScene::UpdateScene(const float deltaTime)
     return this;
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void TitleScene::DrawScene()
 {
     //オブジェクト描画

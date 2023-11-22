@@ -5,9 +5,6 @@
 #include"../../CharaObject/Camera/FixedCamera/FixedCamera.h"
 #include"../../../UI/Action/Action.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 Bed::Bed()
     :ObjBase(ObjTag::Furniture)
 {
@@ -26,18 +23,11 @@ Bed::Bed()
     ObjManager::AddObj(new Action(objPos));
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 Bed::~Bed()
 {
     //処理なし
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
 void Bed::Update(const float deltaTime)
 {
     //アクションボタンが押されたら就寝する
@@ -73,9 +63,6 @@ void Bed::Update(const float deltaTime)
     }
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void Bed::Draw()
 {
     //モデル描画

@@ -1,12 +1,6 @@
 #include "ParamButton.h"
 #include"../../../BlendMode/BlendMode.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
-/// <param name="name">:ボタン名</param>
-/// <param name="num">:ボタン番号</param>
-/// <param name="value">:パラメーター初期値</param>
 ParamButton::ParamButton(std::string name, int num, int value)
     :StatusBase(name)
     , paramMin(0)
@@ -25,29 +19,17 @@ ParamButton::ParamButton(std::string name, int num, int value)
     paramButtonBlend = new BlendMode;
 }
 
-/// <summary>
-/// 最小値最大値設定
-/// </summary>
-/// <param name="min"></param>
-/// <param name="max"></param>
 void ParamButton::ParamMinMax(int min, int max)
 {
     paramMin = min;
     paramMax = max;
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 ParamButton::~ParamButton()
 {
     //処理なし
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
 void ParamButton::Update(const float deltaTime)
 {
     //マウス入力処理
@@ -87,9 +69,6 @@ void ParamButton::Update(const float deltaTime)
     isInput = false;
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void ParamButton::Draw()
 {
     //パラメーター名描画

@@ -5,10 +5,6 @@
 #include "Table.h"
 #include"../../../Asset/AssetManager/AssetManager.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
-/// <param name="objNum">:オブジェクト番号</param>
 Table::Table(const int objNum)
     :ObjBase(ObjTag::Furniture)
 {
@@ -47,27 +43,17 @@ Table::Table(const int objNum)
     MV1SetRotationXYZ(colModel, VGet(0.0f, objDir.y / PI_DEGREE * DX_PI_F, 0.0f));            //モデルの向き設定
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 Table::~Table()
 {
     //処理なし
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
 void Table::Update(const float delataTime)
 {
     //当たり判定更新
     ColUpdate();
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void Table::Draw()
 {
     //モデル描画

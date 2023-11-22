@@ -2,27 +2,17 @@
 #include <DxLib.h>
 #include"../Scene/SceneBase/SceneBase.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 GameSetting::GameSetting()
 {
     //処理なし
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 GameSetting::~GameSetting()
 {
     //Dxライブラリの後処理
     DxLib_End();
 }
 
-/// <summary>
-/// 初期化処理
-/// </summary>
-/// <returns>初期化できたかどうか</returns>
 int GameSetting::Init()
 {
     //ログの非表示

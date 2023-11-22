@@ -35,6 +35,8 @@ public:
     virtual void DrawScene() = 0;
 
 protected:
+    const char* sceneName;      //ƒV[ƒ“–¼
+
     int bgHandle;       //”wŒi‰æ‘œƒnƒ“ƒhƒ‹
     int bgX;            //”wŒiÀ•WX
     int bgY;            //”wŒiÀ•WY

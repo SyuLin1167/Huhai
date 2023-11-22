@@ -1,8 +1,5 @@
 #include "FlashLight.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 FlashLight::FlashLight()
     :LightBase()
 {
@@ -14,19 +11,12 @@ FlashLight::FlashLight()
     isVisible = false;
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 FlashLight::~FlashLight()
 {
     //ライト削除
     DeleteLightHandle(lightHandle);
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
 void FlashLight::Update(const float deltaTime)
 {
     //カメラの方向にライトを当てる
@@ -39,9 +29,6 @@ void FlashLight::Update(const float deltaTime)
     AttenByParam();
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void FlashLight::Draw()
 {
     //処理なし

@@ -1,10 +1,5 @@
 #include "Button.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
-/// <param name="name">:ボタン名</param>
-/// <param name="num">:ボタン番号</param>
 Button::Button(std::string name, int num)
     :StatusBase(name)
 {
@@ -17,26 +12,16 @@ Button::Button(std::string name, int num)
     isInput = true;
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 Button::~Button()
 {
     //処理なし
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
 void Button::Update(const float deltaTime)
 {
     ProcessInput();
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void Button::Draw()
 {
     //ボタン名描画

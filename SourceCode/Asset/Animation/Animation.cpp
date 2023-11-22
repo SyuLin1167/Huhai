@@ -1,10 +1,6 @@
 #include "Animation.h"
 #include"../AssetManager/AssetManager.h"
 
-/// <summary>
-/// コンストラク
-/// </summary>
-/// <param name="modelHandle">:モデルハンドル</param>
 Animation::Animation(int modelHandle)
     :modelHandle(modelHandle)
     , nowAnimType(-1)
@@ -13,22 +9,12 @@ Animation::Animation(int modelHandle)
 {
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 Animation::~Animation()
 {
     //データ削除
     animData.clear();
 }
 
-/// <summary>
-/// 追加処理
-/// </summary>
-/// <param name="fileName">:ファイル名</param>
-/// <param name="animSpeed">:再生速度(デフォルト・30fps)</param>
-/// <param name="loopState">:ループ状態(デフォルト・ループさせる)</param>
-/// <returns>animData配列の添え字番号</returns>
 int Animation::AddAnimation(std::string fileName, float animSpeed, bool loopState)
 {
     //アニメーションデータ設定
@@ -61,10 +47,6 @@ int Animation::AddAnimation(std::string fileName, float animSpeed, bool loopStat
     return static_cast<int>(animData.size() - 1);
 }
 
-/// <summary>
-/// アニメーション時間経過
-/// </summary>
-/// <param name="deltaTime">:フレームレート</param>
 void Animation::AddAnimTime(float deltaTime)
 {
     //現在時間に現在のアニメーションフレームを加算
@@ -81,10 +63,6 @@ void Animation::AddAnimTime(float deltaTime)
     MV1SetAttachAnimTime(modelHandle, attachedIndex, nowAnimTime);
 }
 
-/// <summary>
-/// 再生処理
-/// </summary>
-/// <param name="animId">:アニメーションID</param>
 void Animation::StartAnim(int animID)
 {
     //以前のアニメーションと違っていたら新しい方に差し替える
@@ -105,20 +83,12 @@ void Animation::StartAnim(int animID)
     MV1SetAttachAnimTime(modelHandle, attachedIndex, nowAnimTime);
 }
 
-
-/// <summary>
-/// 停止処理
-/// </summary>
 void Animation::StopAnim()
 {
     //アニメーション時刻を総再生時間にする
     nowAnimTime = animData[nowAnimType].totalTime;
 }
 
-/// <summary>
-/// 再生状態
-/// </summary>
-/// <returns>再生中:true|停止中:false</returns>
 bool Animation::IsPlaying()
 {
     //ループ再生不可で、時刻が総再生時間を超えたら停止中にする
@@ -131,9 +101,6 @@ bool Animation::IsPlaying()
     return true;
 }
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
 Animation::AnimData::AnimData()
     :handle(-1)
     , index(-1)
@@ -141,6 +108,7 @@ Animation::AnimData::AnimData()
     , speed(0.0f)
     , isLoop(false)
 {
+    //処理なし
 }
 
 

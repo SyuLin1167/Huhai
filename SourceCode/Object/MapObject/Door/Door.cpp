@@ -10,11 +10,6 @@
 #include"../../../Asset/Sound/Sound.h"
 #include"../../../UI/Action/Action.h"
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
-/// <param name="scene">:シーン名</param>
-/// <param name="num">:オブジェクト番号</param>
 Door::Door(std::string scene, std::string num)
     :ObjBase(ObjTag::Furniture)
     , animType(IDLE)
@@ -74,18 +69,11 @@ Door::Door(std::string scene, std::string num)
     ObjManager::AddObj(action);
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
 Door::~Door()
 {
     //処理なし
 }
 
-/// <summary>
-/// 更新処理
-/// </summary>
-/// <param name="deltaTime">:デルタタイム</param>
 void Door::Update(const float deltaTime)
 {
     //アニメーション時間再生
@@ -131,10 +119,6 @@ void Door::Update(const float deltaTime)
     doorSound->Doppler(SoundTag::DoorClose, objPos);
 }
 
-/// <summary>
-/// アニメーション処理
-/// </summary>
-/// <param name="animtype">:アニメーションタイプ</param>
 void Door::MoveAnim(int animtype)
 {
     //指定したアニメーションを再生する
@@ -154,9 +138,6 @@ void Door::MoveAnim(int animtype)
     }
 }
 
-/// <summary>
-/// 描画処理
-/// </summary>
 void Door::Draw()
 {
     //モデル描画
